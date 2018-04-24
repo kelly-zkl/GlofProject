@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-search-bar" style="background:#66CC99">
+      <image src="../../../images/icon_intro.png" style="width:20px;height:20px;margin:8px 8px 8px 0"/>
+      <view style="color:#fff;font-size:14px;display:inline-block;height:36px;line-height:36px;text-align: center">
+        <view style="margin-right:30rpx">深圳</view>
+      </view>
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <navigator url="" class="weui-cell weui-cell_access" 
+          hover-class="weui-cell_active">
+          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__bd weui-cell_primary">申请加入教练</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>  
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" class="weui-media-box weui-media-box_appmsg"
+          hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">昵称/姓名</view>
+            <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+<view class="page">
+  <view class="page__bd">
+    <view style="background:#fff;padding:30rpx;text-align:center">
+      <image src="../../../images/pic_160.png" class="team-icon"></image>
+    </view>
+    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">球队名称</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">所在城市</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">成立日期</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">队员要求</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">球队口号</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">球队介绍</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">允许陌生人申请加入</view>
+          <view class="weui-cell__ft"><switch></switch></view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
+      <button class="weui-btn" type="primary" style="background:#66CC99">创建球队</button>
+    </view>
+  </view>
+</view>

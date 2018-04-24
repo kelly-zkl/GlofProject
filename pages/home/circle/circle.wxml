@@ -1,0 +1,139 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-flex" style="background:#fff;padding:30rpx 0px">
+      <navigator url="/pages/team/dynamics/dynamics" class="weui-flex__item">
+        <image class="weui-grid__icon zan-badge" src="../../../images/pic_160.png">
+          <view class="zan-badge__count"></view>
+        </image>
+        <view class="weui-grid__label" style="color:#999">球友动态</view>
+      </navigator>
+      <navigator url="/pages/team/message/message" class="weui-flex__item">
+        <image class="weui-grid__icon zan-badge" src="../../../images/pic_160.png">
+          <view class="zan-badge__count"></view>
+        </image>
+        <view class="weui-grid__label" style="color:#999">我的消息</view>
+      </navigator>
+    </view>
+    <view class="weui-tab" style="margin-top:10px">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
+            bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+              <navigator url="/pages/team/createTeam/createTeam" class="weui-cell weui-cell_access" 
+                hover-class="weui-cell_active">
+                <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+                <view class="weui-cell__bd weui-cell_primary">创建球队</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </navigator>
+              <navigator url="/pages/search/searchTeam/searchTeam?tab=1" class="weui-cell weui-cell_access"
+                hover-class="weui-cell_active">
+                <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+                <view class="weui-cell__bd weui-cell_primary">搜索球队</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </navigator>
+            </view>
+          </view>
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">我创建的球队</view>
+            <view class="weui-panel__bd">
+              <navigator url="/pages/team/myTeam/myTeam" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
+                </view>
+                <view class="weui-cell__ft text-size-13">成员：88人</view>
+              </navigator>
+            </view>
+          </view>
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">我加入的球队</view>
+            <view class="weui-panel__bd">
+              <navigator url="/pages/team/myTeam/myTeam" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
+                </view>
+                <view class="weui-cell__ft text-size-13">成员：88人</view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+              <navigator url="/pages/search/searchTeam/searchTeam?tab=0" class="weui-cell weui-cell_access" 
+                hover-class="weui-cell_active">
+                <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+                <view class="weui-cell__bd weui-cell_primary">搜索好友</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </navigator>
+            </view>
+          </view>
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
+                class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                </view>
+                <view class="weui-cell__ft text-size-13">已关注</view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
+                class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                </view>
+                <view class="weui-cell__ft text-size-13">已关注</view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
+                class="weui-media-box weui-media-box_appmsg">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                </view>
+                <view class="weui-cell__ft text-size-13">已关注</view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

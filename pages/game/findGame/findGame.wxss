@@ -1,0 +1,21 @@
+
+.weui-cell{
+    padding: 12px 15px 12px 35px
+}
+.weui-search-bar__cancel-btn{
+  color: #fff;
+  font-size: 14px;
+  line-height:32px
+}
+.weui-search-bar{
+  border-top: none;
+  border-bottom: none
+}
+.weui-search-bar__input{
+  height:32px;
+  line-height:32px;
+  text-align: center
+}
+.weui-search-bar__label{line-height:32px}
+.weui-icon-clear{padding:9px 8px}
+.weui-icon-search_in-box{top:9px}

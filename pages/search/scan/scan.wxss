@@ -1,0 +1,4 @@
+/* pages/search/scan/scan.wxss */
+page{
+  background: #000
+}

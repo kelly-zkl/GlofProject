@@ -1,0 +1,28 @@
+
+.weui-btn{
+  position: absolute;
+  top: 55px;
+  right: 30rpx;
+  height: 90rpx;
+  background: #66CC99;
+  border: 8rpx #fff solid;
+  border-radius: 45rpx;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  padding: auto 30rpx;
+}
+
+.weui-media-box__thumb.d1{
+  width: 40px;
+  height: 40px;
+}
+.weui-media-box__info.d1{
+  margin-top:0;padding-bottom:0;
+}
+.weui-media-box__hd_in-appmsg.d1{margin-right:.4em;width:40px;height:40px;line-height:40px;text-align:center}
+.weui-panel__ft{
+  margin: 0;
+  padding-top: 20rpx;
+}
+.weui-media-box.d1{padding-bottom:0}

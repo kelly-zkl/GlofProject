@@ -1,0 +1,157 @@
+/**app.wxss**/
+@import 'weui.wxss';
+@import 'tag.wxss';
+
+page{
+  background: #EfEfEf
+}
+
+.weui-cells:after,.weui-cells:before{display: none}
+
+.weui-navbar__item.weui-bar__item_on{color:#66CC99}
+.weui-navbar__slider{background-color:#66CC99}
+.weui-navbar{border-bottom: 1rpx solid #E5E5E5} 
+
+.weui-cell__ft_in-access:after{
+  border-color:#66CC99
+}
+.weui-cell:before{
+  height: 1rpx;
+  left: 0;
+  border-color: #E5E5E5
+}
+
+.weui-footer_fixed-bottom{
+  bottom: 0
+}
+
+.weui-cell_input{
+  height:50px;
+  min-height:50px;
+  line-height:50px
+}
+
+.weui-media-box__thumb{
+  width: 60px;
+  height: 60px;
+  border-radius: 10rpx;
+  vertical-align:center
+}
+
+.weui-navbar{
+  background: #fff;
+}
+
+.weui-panel:before{
+  display: none
+}
+
+.zan-tag + .zan-tag,.zan-tag:first-child{
+  margin-right: 10px;
+}
+.zan-tag:last-child{
+  margin-right: 0px;
+}
+
+.icon-size{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-top: .3em
+}
+
+.text-size-12{
+  font-size: 12px;
+}
+
+.text-size-13{
+  font-size: 13px;
+}
+
+.text-size-14{
+  font-size: 14px;
+}
+
+.text-size-15{
+  font-size: 15px;
+}
+
+.text-size-16{
+  font-size: 16px;
+}
+
+.text-size-17{
+  font-size: 17px;
+}
+
+.text-size-18{
+  font-size: 18px;
+}
+
+.text-size-20{
+  font-size: 20px;
+}
+.ing{
+  height: 40rpx;
+  width: 140rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  border: 1px #66CC99 solid;
+  color: #66CC99;
+  font-size: 12px;
+  text-align: center
+}
+.start-soon{
+  height: 40rpx;
+  width: 140rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  border: 1px #FF9900 solid;
+  color: #FF9900;
+  font-size: 12px;
+  text-align: center
+}
+.appointment{
+  height: 40rpx;
+  width: 140rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  border: 1px #3399FF solid;
+  color: #3399FF;
+  font-size: 12px;
+  text-align: center
+}
+.end{
+  height: 40rpx;
+  width: 140rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  border: 1px #ccc solid;
+  color: #999;
+  font-size: 12px;
+  text-align: center
+}
+.tip-join{
+  position: absolute;
+  height: 40rpx;
+  width: 60px;
+  bottom: 10px;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  background: #FF9900;
+  color: #fff;
+  font-size: 12px;
+  text-align: center
+}
+.tip-follow{
+  position: absolute;
+  height: 40rpx;
+  width: 60px;
+  bottom: 10px;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  background: #43CBB3;
+  color: #fff;
+  font-size: 12px;
+  text-align: center
+}

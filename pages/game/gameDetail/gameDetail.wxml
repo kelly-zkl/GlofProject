@@ -1,0 +1,54 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-flex" style="background:#66CC99">
+      <view style="padding-left:30rpx">
+        <image src="../../../images/icon_intro.png" style="width:20px;height:20px"/>
+        <image src="../../../images/icon_intro.png" style="width:20px;height:20px;padding-left:30rpx"/>
+      </view>
+      <view class="weui-flex__item text-size-14">
+        <view style="color:#fff;text-align:center">比赛名称</view>
+      </view>
+      <view style="padding-right:30rpx">
+        <image style="width:20px;height:20px;padding-right:30rpx"/>
+        <image src="../../../images/icon_intro.png" style="width:20px;height:20px"/>
+      </view>
+    </view>
+    <view class="weui-panel weui-panel_access" style="background:#66CC99;margin:0px">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_appmsg">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="color:#fff">
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">地址</view>
+            <view class="weui-media-box__desc text-size-13" style="color:#fff">日期</view>
+            <view class="weui-media-box__info" style="color:#fff">天气</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
+            bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}"></view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}"></view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}"></view>
+      </view>
+    </view>
+  </view>
+  <view class="zan-popup {{ showPopup ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask"></view>
+    <view class="zan-popup__container" style="background:none">
+      <button class="btn follow" bindtap="followGame">关注赛事</button>
+      <button class="btn join" bindtap="joinGame">加入比赛</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+/* pages/game/gameDetail/gameDetail.wxss */
+.btn{
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+}
+.btn.follow{
+  background: #66CC99
+}
+
+.btn.join{
+  background: #FFAD14;
+  margin-top: 50rpx;
+}

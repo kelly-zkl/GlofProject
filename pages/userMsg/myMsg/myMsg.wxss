@@ -1,0 +1,12 @@
+/* pages/userMsg/myMsg/myMsg.wxss */
+@import '../../../template/model/model.wxss';
+
+.area{
+  height:100px;
+  min-height:100px;
+  line-height:100px
+}
+.popup-example--bottom .zan-popup__container {
+  left: 0;
+  right: 0;
+}

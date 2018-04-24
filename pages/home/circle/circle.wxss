@@ -1,0 +1,17 @@
+
+.weui-grid__icon{
+  display:block;
+  width:60px;
+  height:60px;
+  padding: 10px;
+  margin:0 auto
+}
+.zan-badge__count{
+  position:absolute;
+  top:0px;
+  right:12px;
+}
+
+.weui-grid__label{
+  margin-top: 0;
+}

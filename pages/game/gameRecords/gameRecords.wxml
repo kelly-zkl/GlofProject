@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
+            bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/pic_160.png"/>
+                  <view class="tip-join">已参赛</view>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
+                  <view class="weui-media-box__info" style="color:#999">23：00</view>
+                </view>
+                <view class="weui-cell__ft">
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title weui-media-box__title_in-text end">深圳小聚</view>
+                    <view class="weui-media-box__desc">2.8Km</view>
+                    <view class="weui-media-box__info" style="color:#999">23人关注</view>
+                  </view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/pic_160.png"/>
+                  <view class="tip-follow">已关注</view>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
+                  <view class="weui-media-box__info" style="color:#999">23：00</view>
+                </view>
+                <view class="weui-cell__ft">
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title weui-media-box__title_in-text end">深圳小聚</view>
+                    <view class="weui-media-box__desc">2.8Km</view>
+                    <view class="weui-media-box__info" style="color:#999">23人关注</view>
+                  </view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

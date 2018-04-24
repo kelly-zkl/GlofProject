@@ -1,0 +1,78 @@
+{
+  "pages":[
+    "pages/home/glof/glof",
+    "pages/home/square/square",
+    "pages/home/circle/circle",
+    "pages/home/user/user",
+    "pages/userMsg/myMsg/myMsg",
+    "pages/userMsg/myPrivacy/myPrivacy",
+    "pages/userMsg/personalPage/personalPage",
+    "pages/userMsg/myWallet/myWallet",
+    "pages/userMsg/helpDoc/helpDoc",
+    "pages/userMsg/aboutGlof/aboutGlof",
+    "pages/userMsg/myPhotos/myPhotos",
+    "pages/search/searchTeam/searchTeam",
+    "pages/search/scan/scan",
+    "pages/team/createTeam/createTeam",
+    "pages/team/dynamics/dynamics",
+    "pages/team/message/message",
+    "pages/team/chatDetail/chatDetail",
+    "pages/team/teamDetail/teamDetail",
+    "pages/team/myTeam/myTeam",
+    "pages/game/createGame/createGame",
+    "pages/game/findGame/findGame",
+    "pages/game/codeEnter/codeEnter",
+    "pages/game/gameDetail/gameDetail",
+    "pages/game/gameResult/gameResult",
+    "pages/game/gameRecords/gameRecords",
+    "pages/court/courts/courts",
+    "pages/court/courtRecords/courtRecords",
+    "pages/court/courtDetail/courtDetail",
+    "pages/coach/coachs/coachs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#66CC99",
+    "navigationBarTitleText": "GOLF",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#66CC99",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath":"pages/home/glof/glof",
+        "text":"GOLF",
+        "iconPath":"images/icon_intro.png",
+        "selectedIconPath":"images/icon_intro.png"
+      },
+      {
+        "pagePath": "pages/home/square/square",
+        "text": "广场",
+        "iconPath": "images/icon_intro.png",
+        "selectedIconPath": "images/icon_intro.png"
+      },
+      {
+        "pagePath": "pages/home/circle/circle",
+        "text": "圈子",
+        "iconPath": "images/icon_intro.png",
+        "selectedIconPath": "images/icon_intro.png"
+      },
+      {
+        "pagePath": "pages/home/user/user",
+        "text": "我的",
+        "iconPath": "images/icon_intro.png",
+        "selectedIconPath": "images/icon_intro.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

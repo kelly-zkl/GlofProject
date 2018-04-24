@@ -1,0 +1,19 @@
+.weui-media-box__thumb{
+  width: 60px;
+  height: 60px;
+  border-radius: 10rpx;
+  vertical-align:center
+}
+
+.weui-panel:before{
+  display: none
+}
+.weui-flex{
+  background:#ffffff;
+}
+.weui-flex__item{
+  border-right: 1rpx solid #E5E5E5
+}
+.weui-flex__item:last-child{
+  border-right: none
+}

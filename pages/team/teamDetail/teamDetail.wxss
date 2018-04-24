@@ -1,0 +1,13 @@
+/* pages/team/teamDetail/teamDetail.wxss */
+.team-info{
+  padding: 30rpx 30rpx 0 50rpx;
+  font-size: 14px;
+  color: #333;
+}
+.weui-grid__icon{
+   width: 180rpx;
+   height: 180rpx;
+}
+.btn{
+  color:#66CC99;
+}

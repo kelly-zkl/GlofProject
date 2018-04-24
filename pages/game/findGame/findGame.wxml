@@ -1,0 +1,109 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-search-bar" style="background:#66CC99">
+      <image src="../../../images/icon_intro.png" style="width:20px;height:20px;margin:8px 8px 8px 0"/>
+      <view style="color:#fff;font-size:14px;display:inline-block;height:36px;line-height:36px;text-align: center">
+        <view style="margin-right:30rpx">深圳</view>
+      </view>
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
+            bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
+                  <view class="weui-media-box__info" style="color:#999">23：00</view>
+                </view>
+                <view class="weui-cell__ft">
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title weui-media-box__title_in-text ing">进行中</view>
+                    <view class="weui-media-box__desc">2.8Km</view>
+                    <view class="weui-media-box__info" style="color:#999">23人关注</view>
+                  </view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+         <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
+                  <view class="weui-media-box__info" style="color:#999">23：00</view>
+                </view>
+                <view class="weui-cell__ft">
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title weui-media-box__title_in-text start-soon">即将开始</view>
+                    <view class="weui-media-box__desc">2.8Km</view>
+                    <view class="weui-media-box__info" style="color:#999">23人关注</view>
+                  </view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+          <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__bd">
+              <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
+                hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
+                  <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
+                  <view class="weui-media-box__info" style="color:#999">23：00</view>
+                </view>
+                <view class="weui-cell__ft">
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title weui-media-box__title_in-text appointment">约球</view>
+                    <view class="weui-media-box__desc">2.8Km</view>
+                    <view class="weui-media-box__info" style="color:#999">23人关注</view>
+                  </view>
+                </view>
+              </navigator>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,28 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">手机号码公开</view>
+        <view class="weui-cell__ft"><switch></switch></view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">最新成绩公开</view>
+        <view class="weui-cell__ft"><switch></switch></view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">允许通过微信名搜到我</view>
+        <view class="weui-cell__ft"><switch></switch></view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">允许通过昵称搜到我</view>
+        <view class="weui-cell__ft"><switch></switch></view>
+      </view>
+    </view>
+  </view>
+</view>
