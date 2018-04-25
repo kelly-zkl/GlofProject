@@ -1,0 +1,68 @@
+<view class="page">
+  <view class="page__bd" style="margin-bottom:100px">
+    <view class="text-area">
+      <textarea placeholder="想说点什么？" auto-focus style="height:100%;width:100%" maxlength="200" 
+        bindinput="bindChange" bindconfirm="bindChange"/>
+    </view>
+    <view class="weui-cells" style="margin-top:0;border-bottom: 1rpx #e5e5e5 solid">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:key="*this">
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    <!-- <view class="weui-uploader__file-content">
+                      <icon type="warn" size="23" color="#F43530"></icon>
+                    </view>
+                    <view class="weui-uploader__file-content">50%</view> -->
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box" wx:if="{{files.length<9}}">
+                <view class="weui-uploader__input" bindtap="togglePopup"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title text-size-14">
+      <navigator hover-class="weui-cell_active" class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd weui-cell_primary">关联赛事</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <view class="weui-cell">
+        <view class="weui-cell__bd weui-cell_primary">隐私设置</view>
+        <view class="weui-cell__ft"><switch color="#66CC99" bindchange="privacySet" checked="{{check}}"></switch></view>
+      </view>
+      <navigator hover-class="weui-cell_active" class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd weui-cell_primary">同步到球队主页</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx;background:#fff">
+    <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="postDynamic">发表</button>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="togglePopup"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access" id="1" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择图片</view>
+        </view>
+        <view class="weui-cell weui-cell_access" id="2" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄图片</view>
+        </view>
+        <view class="weui-cell weui-cell_access" id="3" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择视频</view>
+        </view>
+        <view class="weui-cell weui-cell_access" id="4" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄视频</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

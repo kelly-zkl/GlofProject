@@ -28,9 +28,9 @@ App({
                         http.postRequest({
                           url: "user/wxLogin",
                           msg: "登录中....",
-                          params: { encryptedData: encryptedData, iv: iv, sessionId: res.data.data},
+                          params: { encryptedData: encryptedData, iv: iv, sessionId: res.data},
                           success: res => {
-                            this.globalData.userInfo = res.data.data
+                            this.globalData.userInfo = res.data
 
                             if (this.userInfoReadyCallback) {
                               this.userInfoReadyCallback(res)

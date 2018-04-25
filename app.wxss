@@ -53,6 +53,11 @@ page{
   margin-right: 0px;
 }
 
+.popup-example--bottom .zan-popup__container {
+  left: 0;
+  right: 0;
+}
+
 .icon-size{
   width: 20px;
   height: 20px;

@@ -10,6 +10,7 @@ var requestHandler = {
 }
 const request = (method, requestHandler, isShowLoading) => {
   var param = requestHandler.params;
+  console.log(param);
   isShowLoading && wx.showLoading && wx.showLoading({ title: requestHandler.msg})  
   return new Promise((resolve, reject) => {
     wx.request({
@@ -22,15 +23,15 @@ const request = (method, requestHandler, isShowLoading) => {
       success: function (res) {//请求成功
         isShowLoading && wx.hideLoading && wx.hideLoading();
         console.log(res.data);
-        requestHandler.success(res);
-        resolve(res);
+        requestHandler.success(res.data);
+        resolve(res.data);
       },
       fail:function(err){//请求失败
         console.log(err);
         isShowLoading && wx.hideLoading && wx.hideLoading();
         wx.showToast({
           title: '网络请求失败',
-          icon: 'info',
+          icon: 'none',
           duration: 1500
         });
         reject(new Error('Network request failed'));
@@ -50,26 +51,36 @@ const postRequest = (requestHandler, isShowLoading) => {
 /**
  * 上传文件
  * */
-const uploadFile = (url,path,param) =>{
+const uploadFile = (path, requestHandler) =>{
   wx.showLoading({ title: '正在上传...', })
-  const uploadTask = wx.uploadFile({
-    url: url,
-    filePath: path,
-    name: 'file',
-    formData: param,
-    success: function (res) {
-      wx.hideLoading();
-      var data = res.data
-    },
-    fail: function (err) {
-      console.log(err);
-      wx.hideLoading();
-      wx.showToast({
-        title: '上传失败',
-        icon: 'success',
-        duration: 1500
-      });
-    }
+  return new Promise((resolve, reject) => {
+    const uploadTask = wx.uploadFile({
+      url: baseUrl + "attachFile/upload",
+      filePath: path,
+      name: 'file',
+      formData: requestHandler.param,
+      success: function (res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '上传成功',
+          icon: 'success',
+          duration: 1500
+        });
+        console.log(res.data);
+        requestHandler.success(JSON.parse(res.data));
+        resolve(JSON.parse(res.data));
+      },
+      fail: function (err) {
+        console.log(err);
+        wx.hideLoading();
+        wx.showToast({
+          title: '上传失败',
+          icon: 'none',
+          duration: 1500
+        });
+        reject(new Error('Network request failed'));
+      }
+    })
   })
 }
 

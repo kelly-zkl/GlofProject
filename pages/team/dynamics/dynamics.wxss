@@ -22,7 +22,10 @@
 }
 .weui-media-box__hd_in-appmsg.d1{margin-right:.4em;width:40px;height:40px;line-height:40px;text-align:center}
 .weui-panel__ft{
-  margin: 0;
-  padding-top: 20rpx;
+  margin: 0 0 0 48px;
+  padding-top: 10rpx;
 }
 .weui-media-box.d1{padding-bottom:0}
+.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+.weui-uploader__img{display:block;width:84px;height:84px}
+.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}

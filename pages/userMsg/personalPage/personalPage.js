@@ -1,3 +1,4 @@
+var http = require("../../../http.js");
 const app = getApp();
 var base64 = require("../../../images/base64");
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
@@ -11,13 +12,18 @@ Page({
     sliderLeft: 0,
     userInfo: {},
     person:0,
+    createId:"",
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    dynamics:[],
+    page:1,
+    size:10
   },
   onLoad: function (options) {
     var that = this;
     that.setData({
-      person:options.tab
+      person:options.tab,
+      createId:options.id
     });
     wx.setNavigationBarTitle({
       title: that.data.person == 0 ? "我的主页" :"球友主页"
@@ -31,39 +37,37 @@ Page({
       }
     });
     if (app.globalData.userInfo) {
-      this.setData({
+      that.setData({
         icon20: base64.icon20,
         icon60: base64.icon60,
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+        userInfo: app.globalData.userInfo
       })
     }
   },
-  getUserInfo: function (e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  onShow:function(e){
+    this.getDynamics();
+  },
+  getDynamics: function (e) {
+    var that = this;
+    http.postRequest({
+      url: "userPost/homePage",
+      params: {
+        creatorId: that.data.createId, page: that.data.page, size: that.data.size,
+        belongType: "user", uid: app.globalData.userInfo.id
+      },
+      msg: "加载中....",
+      success: res => {
+        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        this.setData({
+          dynamics : res.data.content
+        })
+      }
+    }, true);
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
     })
   },
   tabClick: function (e) {
@@ -71,5 +75,10 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+  },
+  gotoPost:function(){
+    wx.navigateTo({
+      url: '/pages/userMsg/sendDynamic/sendDynamic?type=user',
+    })
   }
 })

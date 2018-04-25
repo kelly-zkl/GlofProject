@@ -10,7 +10,7 @@
     "pages/userMsg/myWallet/myWallet",
     "pages/userMsg/helpDoc/helpDoc",
     "pages/userMsg/aboutGlof/aboutGlof",
-    "pages/userMsg/myPhotos/myPhotos",
+    "pages/userMsg/sendDynamic/sendDynamic",
     "pages/search/searchTeam/searchTeam",
     "pages/search/scan/scan",
     "pages/team/createTeam/createTeam",
