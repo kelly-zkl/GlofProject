@@ -44,33 +44,35 @@
           </view>
           <view class="weui-panel weui-panel_access">
             <view class="weui-panel__hd">我创建的球队</view>
-            <view class="weui-panel__bd">
-              <navigator url="/pages/team/myTeam/myTeam" class="weui-media-box weui-media-box_appmsg"
-                hover-class="weui-cell_active">
+            <view class="weui-panel__bd" wx:for="{{myteams}}" wx:key="*this">
+              <navigator url="/pages/team/myTeam/myTeam?id={{item.groupId}}" hover-class="weui-cell_active"
+                class="weui-media-box weui-media-box_appmsg" style='border-bottom: 1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
-                  <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+                  {{item.groupName}}</view>
+                  <view class="weui-media-box__desc text-size-13">{{"地区："+item.province+"-"+item.city}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">成员：88人</view>
+                <view class="weui-cell__ft text-size-13">{{"成员："+item.memberNumber+"人"}}</view>
               </navigator>
             </view>
           </view>
           <view class="weui-panel weui-panel_access">
             <view class="weui-panel__hd">我加入的球队</view>
-            <view class="weui-panel__bd">
-              <navigator url="/pages/team/myTeam/myTeam" class="weui-media-box weui-media-box_appmsg"
-                hover-class="weui-cell_active">
+            <view class="weui-panel__bd" wx:for="{{joinsteams}}" wx:key="*this">
+              <navigator url="/pages/team/myTeam/myTeam?id={{item.groupId}}" hover-class="weui-cell_active"
+                class="weui-media-box weui-media-box_appmsg" style='border-bottom: 1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
-                  <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+                  {{item.groupName}}</view>
+                  <view class="weui-media-box__desc text-size-13">{{"地区："+item.province+"-"+item.city}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">成员：88人</view>
+                <view class="weui-cell__ft text-size-13">{{"成员："+item.memberNumber+"人"}}</view>
               </navigator>
             </view>
           </view>
@@ -87,48 +89,54 @@
             </view>
           </view>
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd">
-              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
-                class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-panel__bd" wx:for="{{follows}}" wx:key="*this">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
+                class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">已关注</view>
+                 <view class="weui-cell__ft text-size-13">
+                  {{item.followedId ? "已关注" : item.followedId && item.beFollowedId ? "相互关注" : ""}}
+                 </view> 
               </navigator>
             </view>
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd">
-              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
-                class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-panel__bd" wx:for="{{fans}}" wx:key="*this">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
+                class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">已关注</view>
+                 <view class="weui-cell__ft text-size-13">
+                  {{item.followedId ? "已关注" : item.followedId && item.beFollowedId ? "相互关注" : ""}}
+                 </view> 
               </navigator>
             </view>
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd">
-              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
-                class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-panel__bd" wx:for="{{teamMembers}}" wx:key="*this">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
+                class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">已关注</view>
+                 <view class="weui-cell__ft text-size-13">
+                  {{item.followedId ? "已关注" : item.followedId && item.beFollowedId ? "相互关注" : ""}}
+                 </view> 
               </navigator>
             </view>
           </view>

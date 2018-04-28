@@ -123,7 +123,7 @@ Page({
   //发表动态
   postDynamic:function(e){
     var that = this;
-    if (!that.data.content & !that.data.files) {
+    if (!that.data.content && !that.data.files) {
       wx.showToast({title: '请输入动态',icon: 'none',duration: 1500});
       return;
     }

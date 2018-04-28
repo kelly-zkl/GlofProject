@@ -1,18 +1,5 @@
 <view class="page">
   <view class="page__bd">
-    <view class="weui-panel weui-panel_access" style="background:#66CC99">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_appmsg">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}"/>
-          </view>
-          <view class="weui-media-box__bd text-size-14">
-            <view class="weui-media-box__title" style="color:#fff">{{userInfo.name}}</view>
-            <view class="weui-media-box__desc" style="color:#fff">{{userInfo.selfIntroduce}}</view>
-          </view>
-        </view>
-      </view>
-    </view>
     <view wx:for="{{dynamics}}" wx:key="*this" wx:for-item="item">
       <view class="weui-panel weui-panel_access d1" style="padding:30rpx;margin-top:1rpx">
         <view class="weui-panel__bd d1">
@@ -121,7 +108,4 @@
       </view>
     </view>
   </view>
-  <button class="weui-btn send" bindtap="gotoPost">
-      <icon type="success" size="20" color="white" style="margin-right:10rpx"/>发动态
-  </button>
 </view>

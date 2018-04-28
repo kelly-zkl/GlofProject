@@ -3,21 +3,24 @@
     <view class="weui-panel weui-panel_access" style="background:#66CC99">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_appmsg">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
+            <image class="weui-media-box__thumb t" src="{{team.thumbUrl}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="color:#fff">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">球队名称</view>
-            <view class="weui-media-box__desc text-size-13" style="color:#fff">地址</view>
-            <view class="weui-media-box__info" style="color:#fff">成员:11人</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+              {{team.groupName}}</view>
+            <view class="weui-media-box__desc text-size-13" style="color:#fff">
+              {{"地址："+team.province+"-"+team.city}}</view>
+            <view class="weui-media-box__info text-size-13" style="color:#fff;margin-top:5px">
+              {{"成员："+team.memberNumber+"人"}}</view>
           </view>
         </view>
       </view>
     </view>
-    <view class="team-info">成立时间：</view>
-    <view class="team-info">球队口号：</view>
-    <view class="team-info">球队介绍：</view>
-    <view class="team-info">组成成员：</view>
+    <view class="team-info">成立时间：{{team.createTime}}</view>
+    <view class="team-info">球队口号：{{team.slogan}}</view>
+    <view class="team-info">球队介绍：{{team.intro}}</view>
+    <view class="team-info">组成成员：{{team.memberNumber}}</view>
     <view class="team-info">球队二维码：
       <view class="weui-flex">
         <view class="weui-flex__item">
@@ -27,7 +30,7 @@
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99">申请加入</button>
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="joinTeam">申请加入</button>
     </view>
   </view>
 </view>

@@ -1,6 +1,8 @@
 /* pages/team/createTeam/createTeam.wxss */
+@import '../../../template/model/model.wxss';
+
 .team-icon{
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 80rpx;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 }

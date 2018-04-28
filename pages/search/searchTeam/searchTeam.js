@@ -1,4 +1,6 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var http = require("../../../http.js");
+var app = getApp();
 
 Page({
   data: {
@@ -7,7 +9,9 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    users:[],
+    teams:[]
   },
   onLoad: function (options) {
     this.setData({
@@ -49,5 +53,40 @@ Page({
     this.setData({
       inputVal: e.detail.value
     });
+    if (e.detail.value.length > 0){
+      if (this.data.activeIndex == 0) {
+        this.getUsers();
+      } else {
+        this.getTeams();
+      }
+    }
+  },
+  //用户搜索
+  getUsers: function (e) {
+    var that = this;
+    http.postRequest({
+      url: "user/query",
+      params: {keyword: that.data.inputVal},
+      success: res => {
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        this.setData({
+          users: res.data.content
+        })
+      }
+    }, false);
+  },
+  //搜索球队
+  getTeams: function (e) {
+    var that = this;
+    http.postRequest({
+      url: "group/query",
+      params: { keyword: that.data.inputVal, uid: app.globalData.userInfo.id },
+      success: res => {
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        that.setData({
+          teams: res.data.content
+        })
+      }
+    }, false);
   }
 });

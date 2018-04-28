@@ -3,25 +3,33 @@
     <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
       <view class="weui-cell">
         <view class="weui-cell__bd">手机号码公开</view>
-        <view class="weui-cell__ft"><switch></switch></view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="phoneSet" checked="{{userInfo.phonePublic}}"></switch>
+        </view>
       </view>
     </view>
     <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
       <view class="weui-cell">
         <view class="weui-cell__bd">最新成绩公开</view>
-        <view class="weui-cell__ft"><switch></switch></view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="scoreSet" checked="{{userInfo.gradePublic}}"></switch>
+        </view>
       </view>
     </view>
     <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
       <view class="weui-cell">
         <view class="weui-cell__bd">允许通过微信名搜到我</view>
-        <view class="weui-cell__ft"><switch></switch></view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="wxnameSet" checked="{{userInfo.wxNamePublic}}"></switch>
+        </view>
       </view>
     </view>
     <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:10rpx">
       <view class="weui-cell">
         <view class="weui-cell__bd">允许通过昵称搜到我</view>
-        <view class="weui-cell__ft"><switch></switch></view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="nicknameSet" checked="{{userInfo.namePublic}}"></switch>
+        </view>
       </view>
     </view>
   </view>

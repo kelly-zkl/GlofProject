@@ -30,7 +30,7 @@ const request = (method, requestHandler, isShowLoading) => {
         console.log(err);
         isShowLoading && wx.hideLoading && wx.hideLoading();
         wx.showToast({
-          title: '网络请求失败',
+          title: '网络请求失败' + err.errMsg,
           icon: 'none',
           duration: 1500
         });

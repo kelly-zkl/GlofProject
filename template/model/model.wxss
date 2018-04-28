@@ -1,18 +1,4 @@
 /* model.wxss */
-.infoText{
-    margin-top: 20rpx;
-    text-align: center;
-    width: 100%;
-    justify-content: center; 
-}
-
-.centerText{
-  margin-top: 100rpx;
-  width: 100%;
-  text-align: center;
-}
-
-/* --------------分割线------------- */
 
 picker-view{
   background-color: white;
@@ -21,6 +7,12 @@ picker-view{
   height: 380rpx;
   bottom: 0;
   position: fixed;
+}
+
+.pick-select-view{
+  height: 40px !important;
+  color: #66CC99 !important;
+  font-size: 26px !important;
 }
 
 picker-view-column view{
@@ -41,6 +33,7 @@ picker-view-column view{
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10000
 }
 .animation-element {
   display: flex;
@@ -60,7 +53,6 @@ picker-view-column view{
   align-items:center;
 }
 
-
 .animation-element text{
   color: #66CC99;
   display: inline-flex;  
@@ -69,12 +61,13 @@ picker-view-column view{
   height: 50rpx;
   text-align: center;
   line-height: 50rpx;
-  font-size: 34rpx;
+  font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .left-bt{
   left: 30rpx;
+  color: #999
 }
 .right-bt {
   right: 30rpx;

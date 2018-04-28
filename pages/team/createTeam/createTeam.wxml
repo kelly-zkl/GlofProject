@@ -1,50 +1,89 @@
 <view class="page">
   <view class="page__bd">
-    <view style="background:#fff;padding:30rpx;text-align:center">
-      <image src="../../../images/pic_160.png" class="team-icon"></image>
+    <view style="background:#fff;padding:20rpx;text-align:center">
+      <image src="{{thumbUrl}}" mode="aspectFill" bindtap="togglePopup" class="team-icon"></image>
     </view>
-    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
-      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd">球队名称</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd weui-cell_primary">所在城市</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd weui-cell_primary">成立日期</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:30rpx">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">球队名称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入球队名称" confirm-type="done" bindinput="inputName"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input" bindtap="showArea" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在城市</view>
+        </view>
+        <view class="weui-cell__bd">{{province}} {{city}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+      <view class="weui-cell weui-cell_input" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <view class="weui-label">成立日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" start="1970-01-01" end="{{date}}" value="{{date}}" bindchange="bindDateChange">
+            <view class="picker">{{date}}</view>
+          </picker>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:30rpx">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">队员要求</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入队员要求" confirm-type="done" bindinput="inputClaim"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">球队口号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入球队口号" confirm-type="done" bindinput="inputSlogan"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">球队介绍</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入球队介绍" confirm-type="done" bindinput="inputIntro"/>
+        </view>
       </view>
     </view>
     <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd">队员要求</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd weui-cell_primary">球队口号</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd weui-cell_primary">球队介绍</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-      </view>
-    </view>
-    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
-      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell weui-cell_access">
           <view class="weui-cell__bd">允许陌生人申请加入</view>
-          <view class="weui-cell__ft"><switch></switch></view>
+          <view class="weui-cell__ft">
+            <switch color="#66CC99" bindchange="joinSet" checked="{{allowSJoin}}"></switch>
+          </view>
         </view>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99">创建球队</button>
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="createTeam">创建球队</button>
+    </view>
+  </view>
+  <import src="../../../template/model/model.wxml"/>
+  <template is="areaData" data="{{...item}}"/>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="togglePopup"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access" id="1" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择图片</view>
+        </view>
+        <view class="weui-cell weui-cell_access" id="2" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄图片</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

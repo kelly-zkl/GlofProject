@@ -23,3 +23,4 @@
 .weui-search-bar__cancel-btn,.weui-search-bar__label{line-height:36px;}
 .weui-icon-clear{padding:11px 8px}
 .weui-icon-search_in-box{top:11px}
+.line{border-top: 1rpx #e5e5e5 solid}

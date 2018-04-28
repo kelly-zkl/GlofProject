@@ -6,7 +6,8 @@
           <view class="weui-label">昵称/姓名</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入昵称/姓名" confirm-type="done"/>
+          <input class="weui-input" placeholder="请输入昵称/姓名" confirm-type="done" value="{{userInfo.name}}"
+              bindinput="inputName"/>
         </view>
       </view>
       <view class="weui-cell weui-cell_input" bindtap="toggleSexPopup">
@@ -22,7 +23,8 @@
           <view class="weui-label">手机号</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入手机号" type="number" maxlength="11" confirm-type="done"/>
+          <input class="weui-input" placeholder="请输入手机号" type="number" maxlength="11" confirm-type="done"
+              value="{{userInfo.phone}}" bindinput="inputPhone"/>
         </view>
       </view>
     </view>
@@ -41,7 +43,8 @@
           <view class="weui-label">球龄</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入球龄" type="number" maxlength="2" confirm-type="done"/>
+          <input class="weui-input" placeholder="请输入球龄" type="number" maxlength="2" confirm-type="done"
+              value="{{userInfo.golfAge}}" bindinput="inputAge"/>
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -49,7 +52,8 @@
           <view class="weui-label">差点</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入差点" type="number" maxlength="2" confirm-type="done"/>
+          <input class="weui-input" placeholder="请输入差点" type="number" maxlength="2" confirm-type="done"
+              value="{{userInfo.golfHandicap}}" bindinput="inputCap"/>
         </view>
       </view>
     </view>
@@ -57,22 +61,24 @@
     <view class="weui-cells weui-cells_after-title text-size-14" style="border-bottom:1rpx #e5e5e5 solid">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入个人简介" style="height: 3.3em" />
+          <textarea class="weui-textarea" placeholder="请输入个人简介" style="height: 3.3em" 
+            value="{{selfIntroduce}}" bindinput="inputIntroduce"/>
         </view>
       </view>
     </view>
-    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-bottom:30rpx">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">个人标签</view>
+    <view style="padding:20rpx 30rpx 30rpx 30rpx;background:#fff;margin-bottom:80px">
+      <view class="text-size-14">个人标签</view>
+      <view style="display:inline-block;box-sizing:border-box;position:relative">
+        <view class="zan-tag zan-tag--primary zan-tag--plain" wx:for="{{tags}}" wx:key="*this" 
+          wx:if="{{tags.length>0}}">{{item}}
         </view>
-        <view class="weui-cell__bd">
-        </view>
-        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        <input wx:if="{{showInput}}" class="weui-input t" confirm-type="done" bindconfirm="inputTag"
+          maxlength="8"/>
+        <view class="view t" size="mini" wx:else bindtap="showInput">添加标签</view>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99">保存</button>
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="saveUserInfo">保存</button>
     </view>
   </view>
   <import src="../../../template/model/model.wxml"/>

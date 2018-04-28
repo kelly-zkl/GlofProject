@@ -2,8 +2,8 @@
   <view class="page__bd">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <navigator url="/pages/userMsg/myMsg/myMsg" class="weui-media-box weui-media-box_appmsg"
-          hover-class="weui-cell_active">
+        <navigator url="/pages/userMsg/myMsg/myMsg?id={{userInfo.id}}"
+          hover-class="weui-cell_active" class="weui-media-box weui-media-box_appmsg">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}"/>
           </view>
@@ -17,19 +17,19 @@
     </view>
     <view class="weui-flex">
       <view class="weui-flex__item">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.golfAge || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">球龄</view>
       </view>
       <view class="weui-flex__item">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.golfHandicap || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">差点</view>
       </view>
       <view class="weui-flex__item">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.bestScore || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">最好成绩</view>
       </view>
       <view class="weui-flex__item">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.averScore || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">平均成绩</view>
       </view>
     </view>
@@ -77,8 +77,8 @@
     </view>
     <view class="weui-cells weui-cells_after-title" style="margin:30rpx 0">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="/pages/userMsg/myPrivacy/myPrivacy" class="weui-cell weui-cell_access"
-          hover-class="weui-cell_active">
+        <navigator url="/pages/userMsg/myPrivacy/myPrivacy?&id={{userInfo.id}}"
+          hover-class="weui-cell_active"  class="weui-cell weui-cell_access">
           <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
           <view class="weui-cell__bd weui-cell_primary"><view>隐私设置</view></view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>

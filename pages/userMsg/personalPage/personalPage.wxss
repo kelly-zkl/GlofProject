@@ -28,7 +28,6 @@
 .weui-media-box.d1{padding-bottom:0}
 .weui-flex.p1{
   background:#ffffff;
-  border-bottom: 1rpx solid #E5E5E5;
   border-top: 1rpx solid #E5E5E5;
 }
 .weui-flex__item.p1{
@@ -40,3 +39,26 @@
 .weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
 .weui-uploader__img{display:block;width:84px;height:84px}
 .weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+
+.text-blue{color:#2C7AD6}
+.weui-btn{
+  height: 60rpx;
+  line-height: 60rpx;
+  background: #fff;
+  border-radius: 30rpx;
+  border: 3rpx solid #66CC99;
+  color: #66CC99;
+  font-size: 13px;
+  text-align: center;
+  padding: auto 30rpx;
+}
+.weui-cell__bd.re{
+  text-align: left;
+}
+.reply{
+  display: inline-block;
+  box-sizing:border-box;
+}
+.weui-panel__ft.text-size-13{
+  margin: 0
+}

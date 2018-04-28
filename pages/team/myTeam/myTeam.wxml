@@ -3,14 +3,17 @@
     <view class="weui-panel weui-panel_access" style="background:#66CC99">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_appmsg">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../../images/pic_160.png"/>
-            <view class="tip-join">33人</view>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
+            <image class="weui-media-box__thumb t" src="{{team.thumbUrl}}"/>
+            <view class="tip-join">{{team.memberNumber+"人"}}</view>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="color:#fff">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">球队名称</view>
-            <view class="weui-media-box__desc" style="color:#fff">地址</view>
-            <view class="weui-media-box__info" style="color:#fff">球队口号:口号口号口号</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-15">
+            {{team.groupName}}</view>
+            <view class="weui-media-box__desc text-size-13" style="color:#fff">
+            {{"地区："+team.province+"-"+team.city}}</view>
+            <view class="weui-media-box__info text-size-13" style="color:#fff;margin-top:5px">
+            {{"球队口号："+team.slogan}}</view>
           </view>
           <view class="weui-cell__ft">
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
@@ -120,22 +123,22 @@
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
-          <view style="padding: 30rpx;font-size:14px">
-            <view class="weui-flex">
+          <view style="font-size:15px">
+            <view class="weui-flex c">
               <view class="placeholder">成立日期</view>
-              <view class="weui-flex__item">2017-12-12</view>
+              <view class="weui-flex__item c">{{team.createTime}}</view>
             </view>
-            <view class="weui-flex">
+            <view class="weui-flex c">
               <view class="placeholder">队员要求</view>
-              <view class="weui-flex__item">要求要求</view>
+              <view class="weui-flex__item c">{{team.claim}}</view>
             </view>
-            <view class="weui-flex">
+            <view class="weui-flex c">
               <view class="placeholder">球队口号</view>
-              <view class="weui-flex__item">口号口号</view>
+              <view class="weui-flex__item c">{{team.slogan}}</view>
             </view>
-            <view class="weui-flex">
+            <view class="weui-flex c">
               <view class="placeholder">球队介绍</view>
-              <view class="weui-flex__item">介绍介绍</view>
+              <view class="weui-flex__item c">{{team.intro}}</view>
             </view>
           </view>
         </view>

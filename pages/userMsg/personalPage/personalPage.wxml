@@ -11,51 +11,44 @@
             <view class="weui-media-box__desc">{{userInfo.city}} {{userInfo.province}}</view>
           </view>
           <view class="weui-cell__ft" hidden="{{person != 0}}" bindtap="gotoPost">
-            <image src="{{icon20}}" class="icon-size"/>
+           <button class="weui-btn" bindtap="gotoPost">
+              <icon type="add" size="20" color="white" style="margin-right:10rpx"/>发动态
+            </button>
           </view>
           <view class="weui-cell__ft" hidden="{{person != 1}}">
-            <image src="../../../images/icon_intro.png" class="icon-size"/>
-            <image src="../../../images/pic_160.png" class="icon-size"/>
+            <image src="../../../images/icon_intro.png" class="icon-size" bindtap="followPerson"
+              wx:if="{{!userInfo.followedId}}"/>
+            <image src="../../../images/pic_160.png" class="icon-size" bindtap="unfollowPerson"
+              wx:else/>
+            <image src="../../../images/icon_intro.png" class="icon-size" bindtap="chatPage"/>
           </view>
         </view>
       </view>
     </view>
-    <view class="msg-info">个人简介个人简介个人简介个人简介个人简介个人简介</view>
+    <view class="msg-info" wx:if="{{userInfo.selfIntroduce.length > 0}}">{{userInfo.selfIntroduce}}</view>
     <view class="weui-flex p1">
       <view class="weui-flex__item p1">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.golfAge || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">球龄</view>
       </view>
       <view class="weui-flex__item p1">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.golfHandicap || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">差点</view>
       </view>
       <view class="weui-flex__item p1">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.bestScore || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">最好成绩</view>
       </view>
       <view class="weui-flex__item p1">
-        <view class="weui-grid__label" style="margin-top:30rpx">2</view>
+        <view class="weui-grid__label" style="margin-top:30rpx">{{userInfo.averScore || "--"}}</view>
         <view class="weui-grid__label" style="color:#999;margin-top:0px;margin-bottom:30rpx">平均成绩</view>
       </view>
     </view>
-    <view style="padding:20rpx 30rpx 30rpx 30rpx;background:#fff">
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签1</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签2</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签3</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签4</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签5</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签6</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签7</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签8</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签9</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签10</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签11</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签12</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签13</view>
-      <view class="zan-tag zan-tag--primary zan-tag--plain">标签14</view>
+    <view style="padding:20rpx 30rpx 30rpx 30rpx;background:#fff;border-top: 1rpx solid #E5E5E5;" 
+      wx:if="{{userInfo.tags.length > 0}}">
+      <view class="zan-tag zan-tag--primary zan-tag--plain" wx:for="{{userInfo.tags}}" wx:key="*this">{{item}}</view>
     </view>
-    <view wx:for="{{dynamics}}" wx:key="*this">
+    <view wx:for="{{dynamics}}" wx:key="*this" wx:for-item="item">
       <view class="weui-panel weui-panel_access d1" style="padding:30rpx;margin-top:1rpx">
         <view class="weui-panel__bd d1">
           <view class="weui-media-box weui-media-box_appmsg d1"  style="padding:0">
@@ -75,13 +68,43 @@
             <view class="weui-uploader">
               <view class="weui-uploader__bd">
                 <view class="weui-uploader__files" id="uploaderFiles">
-                  <block wx:for="{{item.attach}}" wx:key="*this">
-                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  <block wx:for="{{item.attach}}" wx:key="*this" wx:for-item="pic">
+                    <view class="weui-uploader__file" bindtap="previewImage" id="{{pic}}" data-urls="{{item.attach}}">
+                      <image class="weui-uploader__img" src="{{pic}}" mode="aspectFill" />
                     </view>
                   </block>
                 </view>
               </view>
+            </view>
+          </view>
+          <view class="weui-flex" style="background:#fff">
+            <view class="weui-flex__item">
+              <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.groupId}}"
+                bindtap="gotoTeam" id="{{item.groupId}}">{{"#"+item.groupName+"# "}}
+              </view>
+              <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
+                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
+                wx:key="*this">{{"#"+game.relateId+"# "}}
+              </view>
+            </view>
+            <view class="weui-flex__item" wx:if="{{item.creatorId == userId}}">
+              <view class="weui-grid__label" style="color:#2C7AD6;text-align:right" id="{{item.id}}"
+                bindtap="deleteDyna">删除</view>
+            </view>
+          </view>
+          <view class="weui-panel__ft text-size-13 d1" wx:show="{{item.replyPosts.length > 0}}">
+            <view class="weui-cell__bd re" wx:for="{{item.replyPosts}}" wx:key="*this" wx:for-item="reply"
+              id="{{item.id}}" data-reply-Id="{{reply.replyPostId}}" data-uid="{{item.creatorId}}" 
+              catchtap="pressReply">
+              <view catchtap="gotoPer" class="text-size-13 text-blue reply" id="{{reply.creatorId}}">
+                {{reply.creatorName}}
+              </view>
+              <view wx:if="{{reply.beReplyPostCreatorId}}" class="text-size-13 reply">回复</view>
+              <view wx:if="{{reply.beReplyPostCreatorId}}" class="text-size-13 text-blue reply" 
+                catchtap="gotoPer" id="{{reply.beReplyPostCreatorId}}">
+                {{reply.beReplyPostCreatorName}}
+              </view>
+              <view class="text-size-13 reply">{{"： "+reply.content}}</view>
             </view>
           </view>
           <view class="weui-flex" style="background:#fff;padding-top:20rpx">
@@ -89,12 +112,47 @@
               <view class="weui-grid__label" style="color:#999">打赏</view>
             </view>
             <view class="weui-flex__item">
-              <view class="weui-grid__label" style="color:#999">评论</view>
+              <view class="weui-grid__label" style="color:#999" id="{{item.id}}"
+                data-uid="{{item.creatorId}}" catchtap="pressReply">
+              {{item.commentNumber ? "评论("+item.commentNumber+")" : "评论"}}
+              </view>
             </view>
             <view class="weui-flex__item">
-              <view class="weui-grid__label" style="color:#999">点赞</view>
+              <view class="weui-grid__label" style="color:#66CC99" wx:if="{{item.voted}}" 
+                catchtap="userVote" id="{{item.id}}" data-voted="false">
+              {{item.likerNumber ? "点赞("+item.likerNumber+")" : "点赞"}}
+              </view>
+              <view class="weui-grid__label" style="color:#999" wx:else catchtap="userVote"
+                id="{{item.id}}" data-voted="true">
+              {{item.likerNumber ? "点赞("+item.likerNumber+")" : "点赞"}}
+              </view>
             </view>
           </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showReply ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleReply"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cell weui-cell_input text-size-14">
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入回复内容" bindconfirm="createReply"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showDelete ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleDelete"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access" id="1" bindtap="deleteChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx;color:#EB3941">
+            删除
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_access" id="2" bindtap="deleteChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>
       </view>
     </view>

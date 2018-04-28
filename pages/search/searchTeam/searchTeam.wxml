@@ -30,37 +30,53 @@
         </view>
         <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
           <view class="weui-panel weui-panel_access" wx:if="{{activeIndex == 0}}">
-            <view class="weui-panel__bd">
-              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" hover-class="weui-cell_active"
-                class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-panel__bd" wx:for="{{users}}" wx:key="*this">
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
+                class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">张强</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">已关注</view>
+                <!-- <view class="weui-cell__ft text-size-13">已关注</view> -->
               </navigator>
             </view>
           </view>
           <view class="weui-panel weui-panel_access" wx:if="{{activeIndex == 1}}">
-            <view class="weui-panel__bd">
-              <navigator url="/pages/team/teamDetail/teamDetail" class="weui-media-box weui-media-box_appmsg"
-                hover-class="weui-cell_active">
+            <view class="weui-panel__bd" wx:for="{{teams}}" wx:key="*this">
+              <navigator url="/pages/team/myTeam/myTeam?id={{item.groupId}}" wx:if="{{item.joined}}"
+                hover-class="weui-cell_active" class="weui-media-box weui-media-box_appmsg line">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                  <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
-                  <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+                    {{item.groupName}}</view>
+                  <view class="weui-media-box__desc text-size-13">
+                    {{"地区："+item.province+"-"+item.city}}</view>
                 </view>
-                <view class="weui-cell__ft text-size-13">成员：88人</view>
+                <view class="weui-cell__ft text-size-13">成员：{{item.memberNumber}}人</view>
+              </navigator>
+              <navigator url="/pages/team/teamDetail/teamDetail?id={{item.groupId}}" wx:else
+                hover-class="weui-cell_active" class="weui-media-box weui-media-box_appmsg line">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+                    {{item.groupName}}</view>
+                  <view class="weui-media-box__desc text-size-13">
+                    {{"地区："+item.province+"-"+item.city}}</view>
+                </view>
+                <view class="weui-cell__ft text-size-13">成员：{{item.memberNumber}}人</view>
               </navigator>
             </view>
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          <view class="weui-cells weui-cells_after-title" wx:if="{{inputVal.length == 0}}" style="margin-bottom:30rpx">
+          <view class="weui-cells weui-cells_after-title" wx:if="{{inputVal.length == 0 && users.length == 0}}"
+           style="margin-bottom:30rpx">
             <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
               <navigator url="/pages/search/scan/scan" class="weui-cell weui-cell_access"
                 hover-class="weui-cell_active">
@@ -84,7 +100,8 @@
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          <view class="weui-panel weui-panel_access" wx:if="{{inputVal.length == 0}}" style="margin-bottom:30rpx">
+          <view class="weui-panel weui-panel_access" wx:if="{{inputVal.length == 0 && teams.length == 0}}"
+           style="margin-bottom:30rpx">
             <view class="weui-panel__hd">搜索指定的内容</view>
             <view class="weui-panel__bd">
               <view class="weui-flex" style="background:#fff;padding:20rpx 0px">
