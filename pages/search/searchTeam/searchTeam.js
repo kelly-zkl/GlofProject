@@ -88,5 +88,17 @@ Page({
         })
       }
     }, false);
-  }
+  },
+  //扫一扫
+  scan: function (e) {
+    wx.scanCode({
+      success: (res) => {
+        console.log("扫码结果" + res);
+
+      },
+      fail: (res) => {
+        console.log("扫码失败" + res);
+      }
+    })
+  },
 });

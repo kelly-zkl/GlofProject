@@ -8,6 +8,10 @@ Page({
     sliderLeft: 0
   },
   onLoad: function () {
+    wx.setTabBarBadge({
+      index: 2,
+      text: '8'
+    })
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -23,5 +27,17 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
-  }
+  },
+  //扫一扫
+  scan: function (e) {
+    wx.scanCode({
+      success: (res) => {
+        console.log("扫码结果" + res);
+
+      },
+      fail: (res) => {
+        console.log("扫码失败" + res);
+      }
+    })
+  },
 });

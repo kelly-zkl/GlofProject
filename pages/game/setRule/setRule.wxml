@@ -1,0 +1,29 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view style='color:#66CC99;font-size:15px;padding:20rpx 30rpx'>选择参与PK的球员</view>
+    <checkbox-group bindchange="checkboxChange" class="weui-flex" style="padding:30rpx 0px">
+      <view class="weui-flex__item">
+        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+        <view class="weui-grid__label">用户1</view>
+        <checkbox class="weui-check" color="#66CC99"/>
+      </view>
+      <view class="weui-flex__item">
+        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+        <view class="weui-grid__label">用户2</view>
+        <checkbox class="weui-check"/>
+      </view>
+      <view class="weui-flex__item">
+        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+        <view class="weui-grid__label">用户3</view>
+        <checkbox class="weui-check"/>
+      </view>
+      <view class="weui-flex__item">
+        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+        <view class="weui-grid__label">用户4</view>
+        <checkbox class="weui-check"/>
+      </view>
+    </checkbox-group>
+    <view style='color:#66CC99;font-size:15px;padding:20rpx 30rpx'>选择PK游戏规则</view>
+    
+  </view>
+</view>

@@ -78,12 +78,11 @@
           <view class="weui-cells weui-cells_after-title" wx:if="{{inputVal.length == 0 && users.length == 0}}"
            style="margin-bottom:30rpx">
             <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-              <navigator url="/pages/search/scan/scan" class="weui-cell weui-cell_access"
-                hover-class="weui-cell_active">
+              <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='scan'>
                 <view class="weui-cell__hd"><image src="../../../images/icon_intro.png" class="icon-size"/></view>
                 <view class="weui-cell__bd weui-cell_primary"><view>微信扫一扫</view></view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-              </navigator>
+              </view>
               <navigator url="" class="weui-cell weui-cell_access"
                 hover-class="weui-cell_active">
                 <view class="weui-cell__hd"><image src="../../../images/icon_intro.png" class="icon-size"/></view>

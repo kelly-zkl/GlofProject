@@ -4,7 +4,6 @@ var http = require("http.js");
 //app.js
 App({
   onLaunch: function () {
-    wx.clearStorage();
     var that = this;
     //获取用户信息
     wx.getStorage({

@@ -17,7 +17,6 @@ page{
 }
 .weui-cell:before{
   height: 1rpx;
-  left: 0;
   border-color: #E5E5E5
 }
 
