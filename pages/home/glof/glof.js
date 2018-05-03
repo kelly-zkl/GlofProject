@@ -8,9 +8,8 @@ Page({
     sliderLeft: 0
   },
   onLoad: function () {
-    wx.setTabBarBadge({
-      index: 2,
-      text: '8'
+    wx.showTabBarRedDot({
+      index: 2
     })
     var that = this;
     wx.getSystemInfo({
