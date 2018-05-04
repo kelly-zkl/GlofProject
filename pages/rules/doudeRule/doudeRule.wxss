@@ -1,0 +1,26 @@
+
+.weui-cell{
+  height:30px;
+  min-height:30px;
+  line-height:30px
+}
+
+.radio-group{
+  border: 1rpx #66CC99 solid;
+  border-radius: 10rpx;
+}
+label{
+  height: 40px;
+  padding: 10rpx 20rpx;
+  color: #66CC99;
+  border-right: 1rpx #66CC99 solid
+}
+label:last-child{
+   border-right: none
+}
+label.active{
+  height: 40px;
+  padding: 10rpx 20rpx;
+  color: #fff; 
+  background: #66CC99;
+}

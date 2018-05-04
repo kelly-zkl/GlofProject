@@ -5,25 +5,34 @@
       <view class="weui-flex__item">
         <image class="weui-grid__icon" src="../../../images/pic_160.png" />
         <view class="weui-grid__label">用户1</view>
-        <checkbox class="weui-check" color="#66CC99"/>
+        <checkbox class="weui-check" color="#66CC99" checked='true'/>
       </view>
       <view class="weui-flex__item">
         <image class="weui-grid__icon" src="../../../images/pic_160.png" />
         <view class="weui-grid__label">用户2</view>
-        <checkbox class="weui-check"/>
+        <checkbox class="weui-check" color="#66CC99" checked='true'/>
       </view>
       <view class="weui-flex__item">
         <image class="weui-grid__icon" src="../../../images/pic_160.png" />
         <view class="weui-grid__label">用户3</view>
-        <checkbox class="weui-check"/>
+        <checkbox class="weui-check" color="#66CC99" checked='true'/>
       </view>
       <view class="weui-flex__item">
         <image class="weui-grid__icon" src="../../../images/pic_160.png" />
         <view class="weui-grid__label">用户4</view>
-        <checkbox class="weui-check"/>
+        <checkbox class="weui-check" color="#66CC99" checked='true'/>
       </view>
     </checkbox-group>
     <view style='color:#66CC99;font-size:15px;padding:20rpx 30rpx'>选择PK游戏规则</view>
-    
+    <view class="weui-cells weui-cells_in-small-appmsg" wx:for="{{rules}}" wx:key="*this">
+      <navigator url="{{item.path}}" class="weui-cell weui-cell_access" wx:if="{{item.show}}">
+        <view class="weui-cell__hd">
+          <image src="{{item.url}}"/>
+        </view>
+        <view class="weui-cell__bd weui-cell_primary">
+          <view>{{item.name}}</view>
+        </view>
+      </navigator>
+    </view>
   </view>
 </view>

@@ -1,0 +1,9 @@
+<view class='page'>
+  <view class='page__bd'>
+    
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" 
+    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='saveSet'>保存设置</button>
+  </view>
+</view>

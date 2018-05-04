@@ -24,7 +24,7 @@ Page({
   //添加PK规则
   gotoSet:function(){
     wx.navigateTo({
-      url: '/pages/game/setRule/setRule',
+      url: '/pages/rules/setRule/setRule',
     })
   }
 })

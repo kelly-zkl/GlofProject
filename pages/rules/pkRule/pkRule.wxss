@@ -1,0 +1,16 @@
+.weui-cell{
+  height:30px;
+  min-height:30px;
+  line-height:30px;
+  padding:auto 15px;
+}
+.weui-panel{background: #EfEfEf;margin-top: 30rpx}
+.weui-media-box{
+  background: #fff;
+  margin: 0 30rpx 20rpx 30rpx;
+  border-radius: 10rpx
+}
+.weui-media-box__title{
+  color: #66CC99
+}
+.weui-media-box:before,.weui-panel:after,.weui-panel:before{display: none}

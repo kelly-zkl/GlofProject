@@ -1,0 +1,75 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="weui-cell" style='background:#fff;padding: 30rpx'>
+      <view class="weui-cell__bd" style='color:#66CC99'>斗地主</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">分类</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="douChange" style="height: 58px !import">
+            <label class="{{radioType==0?'active':''}}">斗第一名
+              <radio value="0"  hidden="true"></radio>
+            </label>
+            <label class="{{radioType==1?'active':''}}">斗第二名
+              <radio value="1"  hidden="true"></radio>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">顶洞</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="dingChange">
+            <label class="{{radioDing==0?'active':''}}">顶洞过
+              <radio value="0"  hidden="true"></radio>
+            </label>
+            <label class="{{radioDing==1?'active':''}}">顶洞+1
+              <radio value="1"  hidden="true"></radio>
+            </label>
+            <label class="{{radioDing==2?'active':''}}">顶洞翻倍
+              <radio value="2"  hidden="true"></radio>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">收顶洞</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="shouChange">
+            <label class="{{radioShou==0?'active':''}}">赢洞全收
+              <radio value="0"  hidden="true"></radio>
+            </label>
+            <label class="{{radioShou==1?'active':''}}">帕鸟鹰全收
+              <radio value="1"  hidden="true"></radio>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">包洞</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="baoChange">
+            <label class="{{radioBao==0?'active':''}}">不包洞
+              <radio value="0"  hidden="true"></radio>
+            </label>
+            <label class="{{radioBao==1?'active':''}}">双帕包洞
+              <radio value="1"  hidden="true"></radio>
+            </label>
+            <label class="{{radioBao==2?'active':''}}">双帕+1
+              <radio value="2"  hidden="true"></radio>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">避开地雷</view>
+        <view class="weui-cell__ft"><switch color='#66CC99'></switch></view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" 
+    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='saveSet'>保存设置</button>
+  </view>
+</view>

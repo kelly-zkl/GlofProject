@@ -35,7 +35,7 @@ Page({
       showPopup: !this.data.showPopup
     });
     wx.navigateTo({
-      url: '/pages/game/pkRule/pkRule',
+      url: '/pages/rules/pkRule/pkRule',
     })
   },
   joinGame() {//加入比赛

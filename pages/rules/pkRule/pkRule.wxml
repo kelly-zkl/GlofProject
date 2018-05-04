@@ -22,8 +22,17 @@
         </view>
       </view>
     </view>
+    <view class="weui-panel weui-panel_access" style='margin-bottom:80px'>
+      <view class="weui-panel__bd" wx:for="[1,2,3,4,5,6,7,8]" wx:key="*this">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title  text-size-14">比洞</view>
+          <view class="weui-media-box__desc">4人比洞 让洞  顶洞过</view>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
+  <view class="weui-footer weui-footer_fixed-bottom" 
+    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
     <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='gotoSet'>添加PK规则</button>
   </view>
 </view>
