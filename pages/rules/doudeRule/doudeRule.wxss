@@ -5,22 +5,34 @@
   line-height:30px
 }
 
-.radio-group{
-  border: 1rpx #66CC99 solid;
-  border-radius: 10rpx;
+.tui-gallery-list{
+  position: relative;
+  height:24px;
+  line-height: 24px;
+  text-align: center;
 }
-label{
-  height: 40px;
-  padding: 10rpx 20rpx;
-  color: #66CC99;
-  border-right: 1rpx #66CC99 solid
+.tui-number-group{
+  display: table;
+  table-layout: fixed;
+  height:24px;
+  line-height: 24px;
+  text-align: center;
+  width: 140px;
+  border-radius: 14px;
+  border: 1px solid #66CC99;
+  overflow: hidden;
+  color: #66CC99
 }
-label:last-child{
-   border-right: none
+.tui-number-cell{
+  display: table-cell;
+  height:24px;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 0;
+  font-size: 14px;
 }
-label.active{
-  height: 40px;
-  padding: 10rpx 20rpx;
-  color: #fff; 
-  background: #66CC99;
+.tui-number-cell.in{
+  height:24px;
+  text-align: center;
+  line-height: 24px;
 }

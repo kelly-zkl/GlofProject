@@ -50,16 +50,16 @@
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access" id="1" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择图片</view>
         </view>
-        <view class="weui-cell weui-cell_access" id="2" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄图片</view>
         </view>
-        <view class="weui-cell weui-cell_access" id="3" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择视频</view>
         </view>
-        <view class="weui-cell weui-cell_access" id="4" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄视频</view>
         </view>
       </view>

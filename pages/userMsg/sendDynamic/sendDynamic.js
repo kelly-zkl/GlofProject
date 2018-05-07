@@ -38,29 +38,13 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1){
-      that.setData({
-        picType: ["album", "camera"],
-        showPopup: false
-      });
-      that.chooseImage();
+      
     } else if (id == 2){
-      that.setData({
-        picType: ["camera"],
-        showPopup: false
-      });
-      that.chooseImage();
+      
     } else if (id == 3){
-      that.setData({
-        picType: ["album", "camera"],
-        showPopup: false
-      });
-      that.chooseVideo();
+      
     } else if (id == 4) {
-      that.setData({
-        picType: ["camera"],
-        showPopup: false
-      });
-      that.chooseVideo();
+      
     }
   },
   //隐私设置

@@ -1,0 +1,60 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">费用</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入费用" confirm-type="done" bindinput="inputName"
+              type='number'/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">奖项</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入奖项" confirm-type="done" bindinput="inputName"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">赛事规则</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入赛事规则" confirm-type="done" bindinput="inputName"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">PK规则</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入PK规则" confirm-type="done" bindinput="inputName"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">联系人</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入联系人" confirm-type="done" bindinput="inputName"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">备注</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入备注" confirm-type="done" bindinput="inputName"/>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='inviteGame'>发起约球</button> 
+    </view>
+  </view>
+</view>

@@ -1,1 +1,48 @@
 /* pages/game/createGame/createGame.wxss */
+
+.tui-picker-content{
+  padding: 0;
+  text-align: left;
+}
+.tui-picker-detail{
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 14px;
+  padding: 0 10px;
+  overflow: hidden;
+}
+
+.tui-gallery-list{
+  color: #555;
+  font-size: 35rpx;
+  position: relative;
+}
+.tui-number-group{
+  display: table;
+  table-layout: fixed;
+  width: 300rpx;
+  text-align: center;
+  border-radius: 4px;
+  border: 1rpx solid #bbb;
+  overflow: hidden;
+}
+.tui-number-cell{
+  display: table-cell;
+  height:30px;
+  line-height: 30px;
+  border-radius: 0;
+  text-align: center;
+  font-size: 18px;
+}
+.tui-number-cell.in{
+  height:30px;
+  line-height: 30px;
+  font-size: 14px;
+  text-align: center;
+  border-left: 1rpx solid #bbb;
+  border-right: 1rpx solid #bbb;
+}
+
+.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+.weui-uploader__img{display:block;width:84px;height:84px}
+.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}

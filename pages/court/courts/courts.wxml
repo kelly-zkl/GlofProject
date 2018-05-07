@@ -8,7 +8,8 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" 
+            focus="{{inputShowed}}" bindinput="inputTyping" />
           <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
             <icon type="clear" size="14"></icon>
           </view>
@@ -21,18 +22,22 @@
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>  
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <navigator url="/pages/court/courtDetail/courtDetail" class="weui-media-box weui-media-box_appmsg"
-          hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+      <view class="weui-panel__bd" wx:for="{{courts}}" wx:key='*this'>
+        <navigator url="/pages/court/courtDetail/courtDetail?id={{item.courtId}}" 
+          style='border-bottom:1rpx #e5e5e5 solid'
+          class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
+            <image class="weui-media-box__thumb t" 
+            src="{{item.thumbs.length > 0 ? item.thumbs[0] :'../../../images/pic_160.png'}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">球场名称</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.courtName}}</view>
             <view class="weui-media-box__desc text-size-14">果岭速度7</view>
-            <view class="weui-media-box__info" style="color:#999">地区：广东-深圳</view>
+            <view class="weui-media-box__info" style="color:#999">地区：{{item.province+'-'+item.city}}</view>
           </view>
-          <view class="weui-cell__ft text-size-13">2.8Km</view>
+          <view class="weui-cell__ft text-size-13">
+          {{item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km'}}
+          </view>
         </navigator>
       </view>
     </view>

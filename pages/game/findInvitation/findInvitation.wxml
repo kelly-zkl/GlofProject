@@ -82,7 +82,7 @@
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='createGame'>新建比赛</button> 
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='inviteGame'>发起约球</button> 
     </view>
   </view>
 </view>

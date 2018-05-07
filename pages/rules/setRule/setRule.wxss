@@ -9,8 +9,8 @@ page{
 
 .weui-check{
   position: absolute;
-  top: -15px;
-  left: 10px
+  top: -18%;
+  left: 10%
 }
 
 .weui-cell{
@@ -33,7 +33,7 @@ page{
 }
 
 .weui-cell__hd image{
-  margin-top: 4px;
+  margin-top: 5px;
   width: 60px;height: 60px;
-  border-radius: 10rpx 0 0 10rpx;
+  border-radius: 8rpx 0 0 8rpx;
 }

@@ -50,10 +50,10 @@ Page({
       inputVal: e.detail.value
     });
   },
-  //新建比赛
-  createGame:function(e){
+  //发起约球
+  inviteGame: function (e) {
     wx.navigateTo({
-      url: '/pages/game/createGame/createGame',
+      url: '/pages/game/invitationGame/invitationGame',
     })
   }
 });

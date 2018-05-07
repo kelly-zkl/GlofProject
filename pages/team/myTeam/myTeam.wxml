@@ -16,7 +16,7 @@
             {{"球队口号："+team.slogan}}</view>
           </view>
           <view class="weui-cell__ft">
-            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" bindtap="togglePopup">
               <view class="weui-media-box__title weui-media-box__title_in-text btn-manager">管理</view>
               <view class="weui-media-box__desc"></view>
               <view class="weui-media-box__info"></view>
@@ -141,6 +141,25 @@
               <view class="weui-flex__item c">{{team.intro}}</view>
             </view>
           </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="togglePopup"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改球队信息</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">卸任队长</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出球队</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>
       </view>
     </view>

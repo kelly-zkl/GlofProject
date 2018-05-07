@@ -59,7 +59,7 @@
               </navigator>
             </view>
           </view>
-          <view class="weui-panel weui-panel_access">
+          <view class="weui-panel weui-panel_access" wx:if="{{joinsteams.length > 0}}">
             <view class="weui-panel__hd">我加入的球队</view>
             <view class="weui-panel__bd" wx:for="{{joinsteams}}" wx:key="*this">
               <navigator url="/pages/team/myTeam/myTeam?id={{item.groupId}}" hover-class="weui-cell_active"

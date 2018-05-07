@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    number1:1,
     radioType:0,
     radioDing:0,
     radioShou:0,
@@ -23,22 +24,22 @@ Page({
   },
   douChange:function(e){
     this.setData({
-      radioType: e.detail.value
+      radioType: e.currentTarget.dataset.id
     }) 
   },
   dingChange: function (e) {
     this.setData({
-      radioDing: e.detail.value
+      radioDing: e.currentTarget.dataset.id
     }) 
   },
   shouChange: function (e) {
     this.setData({
-      radioShou: e.detail.value
+      radioShou: e.currentTarget.dataset.id
     })
   },
   baoChange: function (e) {
     this.setData({
-      radioBao: e.detail.value
+      radioBao: e.currentTarget.dataset.id
     })
   }
 })

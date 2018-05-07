@@ -16,3 +16,14 @@
 .weui-search-bar__label{line-height:32px;}
 .weui-icon-clear{padding:9px 8px}
 .weui-icon-search_in-box{top:9px}
+
+.weui-media-box__hd_in-appmsg.t{
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  margin-right:.4em;
+}
+.weui-media-box__thumb.t{
+  width: 80px;
+  height: 80px;
+}

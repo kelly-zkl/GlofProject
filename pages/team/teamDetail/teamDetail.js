@@ -69,6 +69,11 @@ Page({
             msg: "加载中....",
             success: res => {
               wx.showToast({ title: '申请成功,待审核', icon: 'none', duration: 1500 });
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 2
+                })
+              }, 1500)
             }
           }, true);
         }

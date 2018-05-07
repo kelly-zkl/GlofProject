@@ -1,44 +1,116 @@
+
 <view class="page">
   <view class="page__bd">
-
     <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd">名称</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd weui-cell_primary">人数</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access">4</view>
-        </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">名称</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入赛事名称" confirm-type="done" bindinput="inputName"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">人数</view>
+          </view>
+          <view class="weui-cell__bd" style='text-align:right'>
+            <view class="tui-gallery-list" style='text-align:right'>
+              <view class="tui-number-group">
+                <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
+                <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
+                  data-min="1" data-max="100"></input>
+                <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'>+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_access">
           <view class="weui-cell__bd weui-cell_primary">球员</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells" style="margin-top:0;border-bottom: 1rpx #e5e5e5 solid">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:key="*this">
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box" wx:if="{{files.length<9}}">
+                <view class="weui-uploader__input" bindtap="togglePopup"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:30rpx">
+      <view class="weui-cell weui-cell_input" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <view class="weui-label">时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view class="tui-picker-content">
+            <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" 
+              bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+              <view class="tui-picker-detail">{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
     </view>
     <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__bd weui-cell_primary">时间</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
-      </view>
-    </view>
-    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
-      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <navigator url="" class="weui-cell weui-cell_input" hover-class="weui-cell_active">
           <view class="weui-cell__bd">球场</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          <view class="weui-cell__ft weui-cell__ft_in-access text-size-14" style="color:#333">
+            观澜湖高尔夫球会   前场：A  后场：C
+          </view>
         </navigator>
-        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell weui-cell_access">
           <view class="weui-cell__bd weui-cell_primary">私密比赛</view>
-          <view class="weui-cell__ft"><switch></switch></view>
-        </navigator>
+          <view class="weui-cell__ft">
+            <switch color="#66CC99" bindchange="privacySet" checked="{{privacy}}"></switch>
+          </view>
+        </view>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99">创建比赛</button>
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='createGame'>创建比赛</button> 
+    </view>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="togglePopup"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">同队球友</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">互相关注的球友</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">历史同赛的球友</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">邀请通讯录好友</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">手动录入</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

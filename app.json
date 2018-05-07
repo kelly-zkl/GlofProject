@@ -24,6 +24,8 @@
     "pages/game/gameDetail/gameDetail",
     "pages/game/gameResult/gameResult",
     "pages/game/gameRecords/gameRecords",
+    "pages/game/invitationGame/invitationGame",
+    "pages/game/findInvitation/findInvitation",
     "pages/rules/pkRule/pkRule",
     "pages/rules/setRule/setRule",
     "pages/rules/rodRule/rodRule",
