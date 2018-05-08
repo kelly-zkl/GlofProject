@@ -1,6 +1,142 @@
 <view class='page'>
-  <view class='page__bd'>
-
+  <view class='page__bd' style='margin-bottom:90px'>
+    <view class="weui-cell" style='background:#fff;padding: 30rpx'>
+      <view class="weui-cell__bd" style='color:#66CC99'>2分头尾肉</view>
+      <view class="weui-cell__ft" style='text-align:right'>
+        <view class="tui-gallery-list" style='text-align:right'>
+          <view class="tui-number-group">
+            <view class="tui-number-cell" bindtap="nextNum">基本单位</view>
+            <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
+              data-min="1"></input>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">分组</view>
+        <view class="weui-cell__ft">
+          <view class="tui-tabbar-group">
+            <text class="tui-tabbar-cell {{radioGroup == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="groupChange" >固拉</text>
+            <text class="tui-tabbar-cell {{radioGroup == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="groupChange" >乱拉</text>
+          </view>
+        </view>
+      </view>
+      <view class="weui-label text-size-12" style="padding-left:30rpx;color:#aaa">拖动头像进行分组</view>
+      <view class="weui-flex" style="padding:30rpx 0px">
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户1</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户2</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户3</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户4</view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">PK计分方式</view>
+        <view class="weui-cell__ft">{{count}}分</view>
+      </view>
+      <view class="tui-tabbar-group box" style='width:100%;text-align:center'>
+        <text class="tui-tabbar-cell box {{good ? 'tui-active' : ''}}"
+          data-id="0" bindtap="scoreChange">较好成绩</text>
+        <text class="tui-tabbar-cell box {{poor ? 'tui-active' : ''}}"
+          data-id="1" bindtap="scoreChange">较差成绩</text>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">让分</view>
+        <view class="weui-cell__ft">
+          <switch color='#66CC99' bindchange="handicapSet" checked="{{handicap}}"></switch>
+        </view>
+      </view>
+      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
+        <view class="weui-flex__item"></view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户1</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户2</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户3</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户4</view>
+        </view>
+      </view>
+      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">包洞</view>
+        <view class="weui-cell__ft">
+          <view class="tui-tabbar-group">
+            <text class="tui-tabbar-cell {{radioBao == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="baoChange">不包洞</text>
+            <text class="tui-tabbar-cell {{radioBao == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="baoChange">双帕包洞</text>
+              <text class="tui-tabbar-cell {{radioBao == 2 ? 'tui-active' : ''}}"
+              data-id="2" bindtap="baoChange">双帕+1</text>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">平头/平尾</view>
+        <view class="weui-cell__ft">
+          <view class="tui-tabbar-group">
+            <text class="tui-tabbar-cell {{radioDing == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="dingChange">顶平过</text>
+            <text class="tui-tabbar-cell {{radioDing == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="dingChange">下洞+1</text>
+              <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
+              data-id="2" bindtap="dingChange">下洞翻倍</text>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">收锅里肉</view>
+        <view class="weui-cell__ft">
+          <view class="tui-tabbar-group">
+            <text class="tui-tabbar-cell {{radioShou == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="shouChange">赢洞全收</text>
+            <text class="tui-tabbar-cell {{radioShou == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="shouChange">帕鸟鹰全收</text>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">避开地雷</view>
+        <view class="weui-cell__ft">
+          <switch color='#66CC99' bindchange="avoidSet" checked="{{avoid}}"></switch>
+        </view>
+      </view>
+    </view>
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" 
     style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">

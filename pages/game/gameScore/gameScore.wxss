@@ -1,25 +1,6 @@
-/* pages/game/gameDetail/gameDetail.wxss */
-.btn{
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  border-radius: 50%;
-  text-align: center;
-  color: #fff;
-  font-size: 16px;
-}
-.btn.follow{
-  background: #66CC99
-}
-
-.btn.join{
-  background: #FFAD14;
-  margin-top: 50rpx;
-}
-
 .tui-tabbar-group{
   border: 1rpx #66CC99 solid;
-  border-radius: 3px;
+  border-radius: 30rpx;
   overflow: hidden;
   display: inline-block;
   color: #66CC99;

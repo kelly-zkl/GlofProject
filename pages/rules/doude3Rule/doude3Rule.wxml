@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd'>
+  <view class='page__bd' style='margin-bottom:90px'>
     <view class="weui-cell" style='background:#fff;padding: 30rpx'>
       <view class="weui-cell__bd" style='color:#66CC99'>斗地主（3+1）</view>
       <view class="weui-cell__ft" style='text-align:right'>
@@ -39,17 +39,17 @@
         <view class="weui-flex__item">
           <image class="weui-grid__icon" src="../../../images/pic_160.png" />
           <view class="weui-grid__label">用户2</view>
-          <radio class="weui-check" color="#66CC99" checked='true'/>
+          <radio class="weui-check" color="#66CC99"/>
         </view>
         <view class="weui-flex__item">
           <image class="weui-grid__icon" src="../../../images/pic_160.png" />
           <view class="weui-grid__label">用户3</view>
-          <radio class="weui-check" color="#66CC99" checked='true'/>
+          <radio class="weui-check" color="#66CC99"/>
         </view>
         <view class="weui-flex__item">
           <image class="weui-grid__icon" src="../../../images/pic_160.png" />
           <view class="weui-grid__label">用户4</view>
-          <radio class="weui-check" color="#66CC99" checked='true'/>
+          <radio class="weui-check" color="#66CC99"/>
         </view>
       </radio-group>
       <view class="weui-cell text-size-14">

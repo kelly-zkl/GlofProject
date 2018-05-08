@@ -1,0 +1,28 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class='weui-flex' style='padding:30rpx'>
+      <view hidden='true'>
+        <image src="../../../images/pic_160.png" style="width:60rpx;height:60rpx"/>
+      </view>
+      <view class="weui-flex__item" style='text-align:center'>
+        <view class="tui-tabbar-group">
+          <text class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
+            data-id="0" bindtap="douChange">记分卡</text>
+          <text class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
+            data-id="1" bindtap="douChange">PK成绩单</text>
+        </view>
+      </view>
+      <navigator url='/pages/rules/pkRule/pkRule' hidden='{{radioType == 0}}'>
+        <view style='color:#FF9900;border:1rpx #FF9900 solid'>+PK规则</view>
+      </navigator>
+    </view>
+    <view class="weui-tab__panel">
+      <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+      
+      </view>
+      <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+        
+      </view>
+    </view>
+  </view>
+</view>

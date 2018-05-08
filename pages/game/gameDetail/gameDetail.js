@@ -1,46 +1,86 @@
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+
 
 Page({
   data: {
+    radioType:1,
     showPopup: true,
-    tabs: ["赛事", "互动区","照片墙"],
-    activeIndex: 0,
-    sliderOffset: 0,
-    sliderLeft: 0
+    groupId:''
   },
-  onLoad: function () {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        });
-      }
-    });
+  onLoad: function (options) {
+    // var that = this;
+    // that.setData({
+    //   groupId: options.id
+    // });
   },
-  tabClick: function (e) {
+  onShow:function(){
     this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
-    });
-  },
-  togglePopup() {
-    this.setData({
-      showPopup: !this.data.showPopup
-    });
-  },
-  followGame() {//关注比赛
-    this.setData({
-      showPopup: !this.data.showPopup
-    });
-    wx.navigateTo({
-      url: '/pages/rules/pkRule/pkRule',
+      radioType: 1
     })
   },
-  joinGame() {//加入比赛
+  //PK规则、积分卡、主页面
+  douChange: function (e) {
+    this.setData({
+      radioType: e.currentTarget.dataset.id
+    })
+    if (e.currentTarget.dataset.id == 0){//PK规则
+      wx.navigateTo({
+        url: '/pages/rules/pkRule/pkRule',
+      })
+    } else if (e.currentTarget.dataset.id == 2){//记分卡
+      wx.navigateTo({
+        url: '/pages/game/gameScore/gameScore',
+      })
+    }
+  },
+  //关注比赛/加入比赛
+  togglePopup:function(e) {
     this.setData({
       showPopup: !this.data.showPopup
     });
+  },
+  //关注比赛
+  followGame:function(e) {
+    // var that = this;
+    // http.postRequest({
+    //   url: "user/addFollower",
+    //   params: { beFollowedId: that.data.groupId, beFollowedType: "match", uid: app.globalData.userInfo.id },
+    //   msg: "加载中...",
+    //   success: res => {
+    //     wx.showToast({ title: '关注成功', icon: 'info', duration: 1500 })
+    //     this.setData({
+    //       showPopup: !this.data.showPopup
+    //     });
+    //   }
+    // }, true);
+  },
+  //取消关注比赛
+  unFollowGame:function(e) {
+    var that = this;
+    http.postRequest({
+      url: "user/cancelFollower",
+      params: {
+        id: that.data.userInfo.followedId, uid: app.globalData.userInfo.id,
+        beFollowedType: "match"
+      },
+      msg: "加载中...",
+      success: res => {
+        wx.showToast({ title: '已取消关注', icon: 'info', duration: 1500 })
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1500)
+      }
+    }, true);
+  },
+  //加入比赛
+  joinGame:function(e) {
+    this.setData({
+      showPopup: !this.data.showPopup
+    });
+  },
+  //退出比赛
+  quitGame:function(e){
+
   }
 });

@@ -27,20 +27,25 @@
         </view>
       </view>
     </view>
-    <view class="weui-tab">
-      <view class="weui-navbar">
-        <block wx:for="{{tabs}}" wx:key="*this">
-          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
-            bindtap="tabClick">
-            <view class="weui-navbar__title">{{item}}</view>
+    <view class="weui-footer weui-footer_fixed-bottom" 
+      style="padding:30rpx 30rpx 20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+      <view class='weui-flex'>
+        <navigator url='/pages/game/gameChat/gameChat'>
+          <image src="../../../images/pic_160.png" style="width:60rpx;height:60rpx"/>
+        </navigator>
+        <view class="weui-flex__item" style='text-align:center'>
+          <view class="tui-tabbar-group">
+            <text class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="douChange">PK规则</text>
+            <text class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="douChange">. . .</text>
+            <text class="tui-tabbar-cell {{radioType == 2 ? 'tui-active' : ''}}"
+              data-id="2" bindtap="douChange">记分卡</text>
           </view>
-        </block>
-        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-      </view>
-      <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}"></view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}"></view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}"></view>
+        </view>
+        <navigator url='/pages/game/gameDynamic/gameDynamic'>
+          <image src="../../../images/icon_intro.png" style="width:60rpx;height:60rpx"/>
+        </navigator>
       </view>
     </view>
   </view>

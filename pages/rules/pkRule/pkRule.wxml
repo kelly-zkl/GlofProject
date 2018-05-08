@@ -2,7 +2,7 @@
   <view class="page__pd">
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell weui-cell_access">
           <view class="weui-cell__bd weui-cell_primary">PK公开</view>
           <view class="weui-cell__ft">
             <switch color="#66CC99" bindchange="pkSet" checked="{{pkPublic}}"></switch>

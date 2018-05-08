@@ -1,0 +1,42 @@
+
+.weui-btn.send{
+  position: absolute;
+  bottom: 30rpx;
+  right: 30rpx;
+  height: 90rpx;
+  background: #66CC99;
+  border: 8rpx #fff solid;
+  border-radius: 45rpx;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  padding: auto 30rpx;
+}
+
+.weui-media-box__thumb.d1{
+  width: 40px;
+  height: 40px;
+}
+.weui-media-box__info.d1{
+  margin-top:0;padding-bottom:0;
+}
+.weui-media-box__hd_in-appmsg.d1{margin-right:.4em;width:40px;height:40px;line-height:40px;text-align:center}
+.weui-panel__ft{
+  margin: 0 0 0 48px;
+  padding-top: 10rpx;
+}
+.weui-media-box.d1{padding-bottom:0}
+.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+.weui-uploader__img{display:block;width:84px;height:84px}
+.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+.weui-cell__bd.re{
+  text-align: left;
+}
+.text-blue{color:#2C7AD6}
+.reply{
+  display: inline-block;
+  box-sizing:border-box;
+}
+.weui-panel__ft.text-size-13{
+  margin: 0
+}

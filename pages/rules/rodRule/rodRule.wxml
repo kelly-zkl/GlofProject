@@ -1,6 +1,65 @@
 <view class='page'>
   <view class='page__bd'>
-    
+    <view class="weui-cell" style='background:#fff;padding: 30rpx'>
+      <view class="weui-cell__bd" style='color:#66CC99'>比杆</view>
+      <view class="weui-cell__ft" style='text-align:right'>
+        <view class="tui-gallery-list" style='text-align:right'>
+          <view class="tui-number-group">
+            <view class="tui-number-cell" bindtap="nextNum">基本单位</view>
+            <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
+              data-min="1"></input>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">让分</view>
+        <view class="weui-cell__ft">
+          <switch color='#66CC99' bindchange="handicapSet" checked="{{handicap}}"></switch>
+        </view>
+      </view>
+      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
+        <view class="weui-flex__item"></view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户1</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户2</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户3</view>
+        </view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
+          <view class="weui-grid__label">用户4</view>
+        </view>
+      </view>
+      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+        <view class="weui-flex__item">
+          <view class="weui-grid__label">0</view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">避开地雷</view>
+        <view class="weui-cell__ft">
+          <switch color='#66CC99' bindchange="avoidSet" checked="{{avoid}}"></switch>
+        </view>
+      </view>
+    </view>
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" 
     style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">

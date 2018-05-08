@@ -7,32 +7,33 @@
 
 .tui-gallery-list{
   position: relative;
-  height:24px;
-  line-height: 24px;
+  height:30px;
+  line-height: 30px;
   text-align: center;
 }
 .tui-number-group{
   display: table;
   table-layout: fixed;
-  height:24px;
-  line-height: 24px;
+  height:30px;
+  line-height: 30px;
   text-align: center;
   width: 140px;
-  border-radius: 14px;
+  border-radius: 17px;
   border: 1px solid #66CC99;
   overflow: hidden;
   color: #66CC99
 }
 .tui-number-cell{
   display: table-cell;
-  height:24px;
+  height:30px;
   text-align: center;
-  line-height: 24px;
+  line-height: 30px;
   border-radius: 0;
   font-size: 14px;
 }
 .tui-number-cell.in{
-  height:24px;
+  height:30px;
   text-align: center;
-  line-height: 24px;
+  line-height: 30px;
+  min-height: 30px;
 }
