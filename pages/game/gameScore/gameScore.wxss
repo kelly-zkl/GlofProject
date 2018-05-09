@@ -1,8 +1,13 @@
+
+page{
+  background: #fff
+}
+
 .tui-tabbar-group{
+  display: inline-block;
   border: 1rpx #66CC99 solid;
   border-radius: 30rpx;
-  overflow: hidden;
-  display: inline-block;
+  text-align: center;
   color: #66CC99;
 }
 .tui-tabbar-cell{
@@ -10,9 +15,98 @@
   height: 60rpx;
   line-height: 60rpx;
   font-size: 14px;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
   text-align: center;
 }
 .tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}
-.tui-tabbar-cell.tui-active{background-color: #66CC99;color: #fff;}
+.tui-tabbar-cell.tui-active{background: #66CC99;color: #fff;}
+
+.pk-rule{
+  color:#FF9900;
+  border:1rpx #FF9900 solid;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 8rpx;
+  font-size: 14px;
+  width: 100rpx;
+}
+
+.weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto}
+
+.tag{
+  color: #fff;
+  font-size: 14px;
+  width: 80rpx;
+  text-align: center;
+  white-space: pre-line;
+  line-height:30rpx;
+}
+.tag.hole{
+  background: #66CC99;
+  padding-top: 15rpx
+}
+.tag.rar{
+  background: #66CCFF;
+  padding-top: 30rpx
+}
+
+.cell{
+  color:#fff;font-size:14px;text-align:center
+}
+
+.tui-gallery-list{
+  color: #555;
+  font-size: 35rpx;
+  position: relative;
+  margin-top: 10px;
+}
+.tui-number-group{
+  display: table;
+  table-layout: fixed;
+  width: 270rpx;
+  text-align: center;
+  border-radius: 4px;
+  border: 1rpx solid #bbb;
+  overflow: hidden;
+}
+.tui-number-cell{
+  display: table-cell;
+  height:30px;
+  line-height: 30px;
+  border-radius: 0;
+  text-align: center;
+  font-size: 18px;
+}
+.tui-number-cell.in{
+  height:30px;
+  line-height: 30px;
+  font-size: 14px;
+  text-align: center;
+  border-left: 1rpx solid #bbb;
+  border-right: 1rpx solid #bbb;
+}
+
+.hole-on{
+  border-right: 4rpx solid #66CC99;
+  border-left: 4rpx solid #66CC99;
+  text-align: center
+}
+.hole-off{
+  border-right: none;
+  border-left: none;
+  text-align: center
+}
+.weui-grid__label.hole-on{
+  color: #66CC99;
+  font-size: 16px;
+  border-right: none;
+  border-left: none;
+}
+.weui-grid__label.hole-off{
+  color: #bbb;
+  font-size: 13px;
+  border-right: none;
+  border-left: none;
+}

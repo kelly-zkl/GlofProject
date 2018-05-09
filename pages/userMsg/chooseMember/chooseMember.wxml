@@ -1,0 +1,18 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="weui-panel__bd" wx:for="{{members}}" wx:key="*this">
+      <checkbox-group bindchange="checkboxChange" class="weui-media-box weui-media-box_appmsg line" 
+        style='background:#fff;border-bottom:1rpx solid #e5e5e5'>
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
+        </view>
+        <view class="weui-cell__ft text-size-13">
+          <checkbox checked="true"/>
+        </view> 
+      </checkbox-group>
+    </view>
+  </view>
+</view>

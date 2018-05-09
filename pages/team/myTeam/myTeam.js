@@ -38,7 +38,7 @@ Page({
       activeIndex: e.currentTarget.id
     });
   },
-  //选择上传图片
+  //球队管理
   togglePopup() {
     this.setData({
       showPopup: !this.data.showPopup

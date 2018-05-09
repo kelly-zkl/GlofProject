@@ -11,6 +11,7 @@
     "pages/userMsg/helpDoc/helpDoc",
     "pages/userMsg/aboutGlof/aboutGlof",
     "pages/userMsg/sendDynamic/sendDynamic",
+    "pages/userMsg/chooseMember/chooseMember",
     "pages/search/searchTeam/searchTeam",
     "pages/team/createTeam/createTeam",
     "pages/team/dynamics/dynamics",
@@ -42,6 +43,7 @@
     "pages/court/courts/courts",
     "pages/court/courtRecords/courtRecords",
     "pages/court/courtDetail/courtDetail",
+    "pages/court/chooseCourt/chooseCourt",
     "pages/coach/coachs/coachs"
   ],
   "window":{

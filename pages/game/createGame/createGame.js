@@ -86,15 +86,25 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1) {
-      
+      wx.navigateTo({
+        url: '/pages/userMsg/chooseMember/chooseMember?id=1',
+      })
     } else if (id == 2) {
-      
+      wx.navigateTo({
+        url: '/pages/userMsg/chooseMember/chooseMember?id=2',
+      })
     } else if (id == 3) {
-     
+      wx.navigateTo({
+        url: '/pages/userMsg/chooseMember/chooseMember?id=3',
+      })
     } else if (id == 4) {
-     
+      wx.navigateTo({
+        url: '/pages/userMsg/chooseMember/chooseMember?id=4',
+      })
     } else if (id == 5) {
-
+      wx.navigateTo({
+        url: '/pages/userMsg/chooseMember/chooseMember?id=5',
+      })
     }
     this.setData({
       showPopup: false
@@ -124,18 +134,19 @@ Page({
   //创建比赛
   createGame:function(e){
     var that = this;
-    if (!that.data.gameName || !that.data.dateTime || !that.data.number1 || !that.data.files ||
-      that.data.thumbUrl == "../../../images/pic_160.png" || !that.data.claim ||
-      !that.data.intro || !that.data.date) {
-      wx.showToast({ title: '请完善赛事信息', icon: 'none', duration: 1500 });
-      return;
-    }
+    // if (!that.data.gameName || !that.data.dateTimeArray || !that.data.number1 || !that.data.files ||
+    //   !that.data.dateTime || !that.data.courtId || !that.data.backCourt || !that.data.frontCourt) {
+    //   wx.showToast({ title: '请完善赛事信息', icon: 'none', duration: 1500 });
+    //   return;
+    // }
+    var timeStap = new Date(that.data.dateTimeArray[0][that.data.dateTime[0]] + '-' + that.data.dateTimeArray[1][that.data.dateTime[1]] + '-' + that.data.dateTimeArray[2][that.data.dateTime[2]] + ' ' + that.data.dateTimeArray[3][that.data.dateTime[3]] + ':' +that.data.dateTimeArray[4][that.data.dateTime[4]]).getTime();
+    var players = [{ "userId": "5ae0471ad77c2a61c6e25503"}];
     http.postRequest({
-      url: "group/create",
+      url: "match/create",
       params: {
-        slogan: that.data.slogan, province: that.data.province, city: that.data.city, setupTime: that.data.date,
-        groupName: that.data.groupName, thumbUrl: that.data.thumbUrl, claim: that.data.claim,
-        intro: that.data.intro, allowSJoin: that.data.allowSJoin, uid: app.globalData.userInfo.id
+        playerLimit: that.data.number1, players: players, matchName: that.data.gameName, 
+        startTime: timeStap, courtId: '5ae2f1776212ed31b8dbd161', frontCourt: 'F区', 
+        backCourt: 'E区', uid: app.globalData.userInfo.id
       },
       msg: '创建中...',
       success: res => {

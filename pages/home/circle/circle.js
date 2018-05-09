@@ -107,7 +107,7 @@ Page({
   getTeamMembers: function (e) {
     var that = this;
     http.postRequest({
-      url: "userWatch/query",
+      url: "user/following",
       params: {
         beWatchType: "user", uid: app.globalData.userInfo.id
       },
