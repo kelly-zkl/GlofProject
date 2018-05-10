@@ -5,32 +5,32 @@ page{
 
 .tui-tabbar-group{
   display: inline-block;
-  border: 1rpx #66CC99 solid;
-  border-radius: 30rpx;
+  border: 1px #66CC99 solid;
+  border-radius: 15px;
   text-align: center;
   color: #66CC99;
 }
 .tui-tabbar-cell{
   display: inline-block;
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 30px;
+  line-height: 30px;
   font-size: 14px;
-  padding-left: 30rpx;
-  padding-right: 30rpx;
+  padding-left: 15px;
+  padding-right: 15px;
   text-align: center;
 }
-.tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}
+.tui-tabbar-cell:not(:last-child){border-right: 1px solid #66CC99;}
 .tui-tabbar-cell.tui-active{background: #66CC99;color: #fff;}
 
 .pk-rule{
   color:#FF9900;
-  border:1rpx #FF9900 solid;
+  border:1px #FF9900 solid;
   text-align: center;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 8rpx;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
   font-size: 14px;
-  width: 100rpx;
+  width: 50px;
 }
 
 .weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto}
@@ -38,18 +38,18 @@ page{
 .tag{
   color: #fff;
   font-size: 14px;
-  width: 80rpx;
+  width: 40px;
   text-align: center;
   white-space: pre-line;
-  line-height:30rpx;
+  line-height:15px;
 }
 .tag.hole{
   background: #66CC99;
-  padding-top: 15rpx
+  padding-top: 7px
 }
 .tag.rar{
   background: #66CCFF;
-  padding-top: 30rpx
+  padding-top: 15px
 }
 
 .cell{
@@ -65,10 +65,10 @@ page{
 .tui-number-group{
   display: table;
   table-layout: fixed;
-  width: 270rpx;
+  width: 135px;
   text-align: center;
   border-radius: 4px;
-  border: 1rpx solid #bbb;
+  border: 1px solid #bbb;
   overflow: hidden;
 }
 .tui-number-cell{
@@ -89,8 +89,8 @@ page{
 }
 
 .hole-on{
-  border-right: 4rpx solid #66CC99;
-  border-left: 4rpx solid #66CC99;
+  border-right: 3px solid #66CC99;
+  border-left: 3px solid #66CC99;
   text-align: center
 }
 .hole-off{

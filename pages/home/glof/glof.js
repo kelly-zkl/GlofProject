@@ -1,11 +1,17 @@
+var base64 = require("../../../images/base64");
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var http = require("../../../http.js");
+var util = require('../../../utils/util.js'); 
+const app = getApp();
 
 Page({
   data: {
     tabs: ["附近赛事", "我的赛事"],
     activeIndex: 0,
     sliderOffset: 0,
-    sliderLeft: 0
+    sliderLeft: 0,
+    longitude:'',
+    latitude:''
   },
   onLoad: function () {
     wx.showTabBarRedDot({
@@ -21,11 +27,48 @@ Page({
       }
     });
   },
+  onShow:function(e){
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+        that.getGames();
+      },
+      fail: function () {
+        wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
+        that.getGames();
+      }
+    })
+  },
+  //标签页 附近赛事--我的赛事
   tabClick: function (e) {
+    var that = this;
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+    if (e.currentTarget.id == 0) {//附近赛事
+      wx.getLocation({
+        type: 'wgs84',
+        success: function (res) {
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude
+          });
+          that.getGames();
+        },
+        fail: function () {
+          wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
+          that.getGames();
+        }
+      })
+    } else if (e.currentTarget.id == 0) {//我的赛事
+
+    }
   },
   //扫一扫
   scan: function (e) {
@@ -39,4 +82,24 @@ Page({
       }
     })
   },
+  //获取赛事列表
+  getGames:function(e){
+    var that = this;
+    http.postRequest({
+      url: "match/query",
+      params: {
+        lng: that.data.longitude, lat: that.data.latitude, page: 1, size: 10, uid: app.globalData.userInfo.id
+      },
+      msg: "加载中....",
+      success: res => {
+        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.startTime), '-',true)
+        })
+        that.setData({
+          games: res.data.content
+        })
+      }
+    }, true);
+  }
 });

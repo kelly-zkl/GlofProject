@@ -187,25 +187,37 @@ button::after{
 }
 .tip-join{
   position: absolute;
-  height: 40rpx;
-  width: 60px;
-  bottom: 10px;
-  line-height: 40rpx;
-  border-radius: 20rpx;
+  height: 46rpx;
+  width: 80px;
+  bottom: 23rpx;
+  line-height: 46rpx;
+  border-radius: 23rpx;
   background: #FF9900;
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   text-align: center
 }
 .tip-follow{
   position: absolute;
-  height: 40rpx;
-  width: 60px;
-  bottom: 10px;
-  line-height: 40rpx;
-  border-radius: 20rpx;
+  height: 46rpx;
+  width: 80px;
+  bottom: 23rpx;
+  line-height: 46rpx;
+  border-radius: 23rpx;
   background: #43CBB3;
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   text-align: center
+}
+
+/**球队和赛事的图片icon，大小为80px*/
+.weui-media-box__hd_in-appmsg.t{
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  margin-right:.4em;
+}
+.weui-media-box__thumb.t{
+  width: 80px;
+  height: 80px;
 }

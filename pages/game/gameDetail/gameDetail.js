@@ -1,24 +1,34 @@
 const app = getApp();
 var base64 = require("../../../images/base64");
 var http = require("../../../http.js");
+var util = require('../../../utils/util.js'); 
 
 Page({
   data: {
-    holes: [{ name: 'C1', role: 3 }, { name: 'C2', role: 3 }, { name: 'C3', role: 3 }, { name: 'C4', role: 3 }],
     radioType:1,
     showJoin: true,
     gameId:'',
     showPopup: false,
-    number1: 4,
     disabled1: false,
     disabled2: false,
-    activeHole: 'C1'
+    activeHole: 0,
+    scrowWidth:0
   },
   onLoad: function (options) {
-    // var that = this;
-    // that.setData({
-    //   gameId: options.id
-    // });
+    var that = this;
+    that.setData({
+      gameId: options.id
+    });
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          scrowWidth: ((res.windowWidth - 121)*100 / res.windowWidth)+'%'
+        });
+        // console.log(res.windowHeight);
+        // console.log(that.data.scrowWidth);
+      }
+    });
+    that.gameDetail();
   },
   onShow:function(){
     this.setData({
@@ -42,60 +52,84 @@ Page({
   },
   //选择洞
   holeChange: function (e) {
-    console.log();
+    console.log(e);
     this.setData({
-      activeHole: e.currentTarget.id
+      activeHole: e.currentTarget.dataset.id
     });
   },
   //设置分数
-  togglePopup() {
-    this.setData({
-      showPopup: !this.data.showPopup
-    });
+  togglePopup(e) {
+    // if (this.data.gameDetail.joined == 1) {//参赛
+      this.setData({
+        showPopup: !this.data.showPopup,
+        activeHole: e.currentTarget.dataset.idx
+      });
+    // }else{//未关注、未参赛
+    //   this.setData({
+    //     showJoin: false
+    //   });
+    // }
   },
   popuChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
-
   },
   //分数
-  prevNum() {
+  prevNum(e) {//加1
+    var num = e.currentTarget.dataset.num;
+    var idx = e.currentTarget.dataset.idx;
+    num = num +1;
+    this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
-      number1: this.data.number1 >= 100 ? 100 : this.data.number1 + 1
+      gameDetail: this.data.gameDetail
     });
-    this.setData({
-      disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 100 ? false : true
-    });
+    // this.setData({
+    //   disabled1: num !== 1 ? false : true,
+    //   disabled2: num !== 100 ? false : true
+    // });
   },
-  nextNum() {
+  nextNum(e) {//减1
+    var num = e.currentTarget.dataset.num;
+    var idx = e.currentTarget.dataset.idx;
+    num = num -1;
+    this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
-      number1: this.data.number1 <= 1 ? 1 : this.data.number1 - 1
+      gameDetail: this.data.gameDetail
     });
-    this.setData({
-      disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 100 ? false : true
-    });
+    // this.setData({
+    //   disabled1: num !== 1 ? false : true,
+    //   disabled2: num !== 100 ? false : true
+    // });
   },
   numberChange: function (e) {
-    this.setData({
-      number1: parseInt(e.detail.value) >= 100 ? 100 : parseInt(e.detail.value) <= 1 ? 1 : parseInt(e.detail.value)
-    });
-    this.setData({
-      disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 100 ? false : true
-    });
+    var num = e.detail.value;
+    var idx = e.currentTarget.dataset.idx;
+    this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
+    // this.setData({
+    //   disabled1: num !== 1 ? false : true,
+    //   disabled2: num !== 100 ? false : true
+    // });
   },
   //保存设置的分数
   saveScore: function (e) {
     var that = this;
+    var user = [];
+    that.data.gameDetail.players.map(function (item,index) {
+      var num = { userId: item.userId, pole: that.data.gameDetail.userEPoles[that.data.activeHole][index]};
+      user.push(num);
+    })
     http.postRequest({
       url: "match/updatePole",
-      params: { matchId: that.data.gameId, index: 0, uid: app.globalData.userInfo.id,
-        playerPoles: [{ userId: '', pole:0}]},
+      params: {
+        matchId: that.data.gameId, index: that.data.activeHole, uid: app.globalData.userInfo.id,
+        players: user},
       msg: "加载中...",
       success: res => {
-        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 })
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        this.setData({
+          showJoin: false
+        });
+        that.gameDetail();
       }
     }, true);
   },
@@ -108,8 +142,9 @@ Page({
       msg: "加载中...",
       success: res => {
         wx.showToast({ title: '关注成功', icon: 'info', duration: 1500 })
+        that.gameDetail();
         this.setData({
-          showJoin: !this.data.showJoin
+          showJoin: false
         });
       }
     }, true);
@@ -147,13 +182,13 @@ Page({
   joinGame:function(e) {
     var that = this;
     http.postRequest({
-      url: "match / join",
+      url: "match/join",
       params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
       msg: "加载中...",
       success: res => {
         wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
         this.setData({
-          showJoin: !this.data.showJoin
+          showJoin: true
         });
       }
     }, true);
@@ -184,5 +219,26 @@ Page({
         }
       }
     })
+  },
+  //比赛详情
+  gameDetail: function (e) {
+    var that = this;
+    http.postRequest({
+      url: "match/detail",
+      params: {matchId: that.data.gameId, uid: app.globalData.userInfo.id},
+      msg: "加载中...",
+      success: res => {
+        // wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
+        res.data.timeStr = util.formatTime(new Date(res.data.startTime), '-', true);
+        if (res.data.joined == 1 || res.data.followerId){
+          this.setData({
+            showJoin: false
+          });
+        }
+        this.setData({
+          gameDetail: res.data
+        });
+      }
+    }, false);
   }
 });

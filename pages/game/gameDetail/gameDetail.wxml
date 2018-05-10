@@ -6,7 +6,7 @@
         <image src="../../../images/icon_intro.png" style="width:20px;height:20px;padding-left:30rpx"/>
       </view>
       <view class="weui-flex__item text-size-14">
-        <view style="color:#fff;text-align:center">比赛名称</view>
+        <view style="color:#fff;text-align:center">{{gameDetail.matchName}}</view>
       </view>
       <view style="padding-right:30rpx">
         <image style="width:20px;height:20px;padding-right:30rpx"/>
@@ -20,93 +20,55 @@
             <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="color:#fff">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">地址</view>
-            <view class="weui-media-box__desc text-size-13" style="color:#fff">日期</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+              {{gameDetail.courtName}}</view>
+            <view class="weui-media-box__desc text-size-13" style="color:#fff">{{gameDetail.timeStr}}</view>
             <view class="weui-media-box__info" style="color:#fff">天气</view>
+          </view>
+          <view class='weui-cell__ft'>
+            <view class="weui-media-box__title view-status {{gameDetail.followerId?'view-follow':gameDetail.joined==1?'view-join':''}}">
+              {{gameDetail.followerId?'已关注':gameDetail.joined==1?'已参赛':''}}
+            </view>
           </view>
         </view>
       </view>
     </view>
-    <view class='weui-flex'>
-      <view style="width: 120rpx; height: 120rpx;border-right:1rpx #e5e5e5 solid">
-        <view class="weui-grid__label">球洞</view>
-        <view class="weui-grid__label">球杆</view>
+    <view class='weui-flex' >
+      <view style="width: 60px;display: inline-block;border-right:1rpx #e5e5e5 solid;text-align:center">
+        <view style='height: 120rpx;text-align:center'>
+          <view class="weui-grid__label">球洞</view>
+          <view class="weui-grid__label">球杆</view>
+        </view>
+        <block wx:for='{{gameDetail.players}}' wx:key='*this'>
+          <view style="height: 60px;background:#fff;text-align:center">
+            <image class="weui-grid__icon s" src="{{item.avatarUrl}}"/>
+            <view class="text-size-12" style='color:#888'>{{item.name}}</view> 
+          </view>
+        </block>
       </view>
-      <scroll-view scroll-x="true" class='weui-flex__item'
-        style="white-space: nowrap; display: flex;width:440px">
-        <view style="width: 120rpx; height: 120rpx; display: inline-block;border-right:1rpx #e5e5e5 solid"
-          wx:for='{{holes}}' wx:key="{{item}}">
-          <view class="weui-grid__label">{{item.name}}</view>
-          <view class="weui-grid__label">{{item.role}}</view>
+      <scroll-view scroll-x class="weui-flex__item"
+        style="white-space: nowrap; display: flex;width:{{scrowWidth}};position: absolute;left: 61px;">
+        <view style="width: 120rpx; display: inline-block;border-right:1rpx #e5e5e5 solid"
+          wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx">
+          <view style='height: 120rpx;text-align:center'>
+            <view class="weui-grid__label">{{item.zname}}</view>
+            <view class="weui-grid__label">{{item.par}}</view>
+          </view>
+          <block wx:for='{{gameDetail.userEPoles[idx]}}' wx:key='*this'>
+            <view class="weui-grid__label label" style='background:#fff' bindtap='togglePopup' data-idx='{{idx}}'>
+              {{item}}
+            </view>
+          </block>
         </view>
       </scroll-view>
-      <view style="width: 120rpx; height: 120rpx">
-        <view class="weui-grid__label">总分</view>
-        <view class="weui-grid__label">72</view>
-      </view>
-    </view>
-    <view class='weui-flex' style='background:#fff'>
-      <view style="width: 120rpx; height: 120rpx;border-right:1rpx #e5e5e5 solid">
-        <image class="weui-grid__icon s" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label text-size-12" style='color:#999'>用户1</view>
-      </view>
-      <scroll-view scroll-x="true" class='weui-flex__item'
-        style="white-space: nowrap; display: flex;width:440px">
-        <view style="width: 120rpx; height: 120rpx; display: inline-block;border-right:1rpx #e5e5e5 solid"
-          wx:for='{{holes}}' wx:key="{{item}}" bindtap='togglePopup'>
-          <view class="weui-grid__label">{{item.role}}</view>
+      <view style="width: 60px; display: inline-block;text-align:center;position: absolute;right: 0">
+        <view style='height: 120rpx;text-align:center'>
+          <view class="weui-grid__label">总分</view>
+          <view class="weui-grid__label">{{gameDetail.totalPole}}</view>
         </view>
-      </scroll-view>
-      <view style="width: 120rpx; height: 120rpx">
-        <view class="weui-grid__label">0</view>
-      </view>
-    </view>
-    <view class='weui-flex' style='background:#fff'>
-      <view style="width: 120rpx; height: 120rpx;border-right:1rpx #e5e5e5 solid">
-        <image class="weui-grid__icon s" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label text-size-12" style='color:#999'>用户2</view>
-      </view>
-      <scroll-view scroll-x="true" class='weui-flex__item'
-        style="white-space: nowrap; display: flex;width:440px">
-        <view style="width: 120rpx; height: 120rpx; display: inline-block;border-right:1rpx #e5e5e5 solid"
-          wx:for='{{holes}}' wx:key="{{item}}" bindtap='togglePopup'>
-          <view class="weui-grid__label">{{item.role}}</view>
-        </view>
-      </scroll-view>
-      <view style="width: 120rpx; height: 120rpx">
-        <view class="weui-grid__label">72</view>
-      </view>
-    </view>
-    <view class='weui-flex' style='background:#fff'>
-      <view style="width: 120rpx; height: 120rpx;border-right:1rpx #e5e5e5 solid">
-        <image class="weui-grid__icon s" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label text-size-12" style='color:#999'>用户3</view>
-      </view>
-      <scroll-view scroll-x="true" class='weui-flex__item'
-        style="white-space: nowrap; display: flex;width:440px">
-        <view style="width: 120rpx; height: 120rpx; display: inline-block;border-right:1rpx #e5e5e5 solid"
-          wx:for='{{holes}}' wx:key="{{item}}" bindtap='togglePopup'>
-          <view class="weui-grid__label">{{item.role}}</view>
-        </view>
-      </scroll-view>
-      <view style="width: 120rpx; height: 120rpx">
-        <view class="weui-grid__label">72</view>
-      </view>
-    </view>
-    <view class='weui-flex' style='background:#fff'>
-      <view style="width: 120rpx; height: 120rpx;border-right:1rpx #e5e5e5 solid">
-        <image class="weui-grid__icon s" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label text-size-12" style='color:#999'>用户4</view>
-      </view>
-      <scroll-view scroll-x="true" class='weui-flex__item'
-        style="white-space: nowrap; display: flex;width:440px">
-        <view style="width: 120rpx; height: 120rpx; display: inline-block;border-right:1rpx #e5e5e5 solid"
-          wx:for='{{holes}}' wx:key="{{item}}" bindtap='togglePopup'>
-          <view class="weui-grid__label">{{item.role}}</view>
-        </view>
-      </scroll-view>
-      <view style="width: 120rpx; height: 120rpx">
-        <view class="weui-grid__label">72</view>
+        <block wx:for='{{gameDetail.userTPoles}}' wx:key='*this'>
+          <view class="weui-grid__label label" style='background:#fff'>{{item}}</view>
+        </block>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" 
@@ -131,7 +93,7 @@
       </view>
     </view>
   </view>
-  <view class="zan-popup {{ showJoin ? 'zan-popup--show' : ''}}">
+  <view class="zan-popup {{showJoin ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask"></view>
     <view class="zan-popup__container" style="background:none">
       <button class="btn follow" bindtap="followGame">关注赛事</button>
@@ -143,97 +105,38 @@
     <view class="zan-popup__container">
       <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex;padding:20rpx 0 0 0" >
         <view style="width: 120rpx; height: 120rpx; display: inline-block"
-          wx:for='{{holes}}' wx:key="{{item}}" id='{{item.name}}' bindtap='holeChange' 
-          class="{{activeHole == item.name ? 'hole-on' : 'hole-off'}}">
-          <view class="weui-grid__label {{activeHole == item.name ? 'hole-on' : 'hole-off'}}">{{item.name}}</view>
-          <view class="weui-grid__label {{activeHole == item.name ? 'hole-on' : 'hole-off'}}">{{item.role}}</view>
+          wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx" data-id='{{idx}}' bindtap='holeChange'
+          class="{{activeHole == idx ? 'hole-on' : 'hole-off'}}">
+          <view class="weui-grid__label {{activeHole == idx ? 'hole-on' : 'hole-off'}}">{{item.zname}}</view>
+          <view class="weui-grid__label {{activeHole == idx ? 'hole-on' : 'hole-off'}}">{{item.par}}</view>
         </view>
       </scroll-view>
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access line">
-          <view class='weui-flex' style='width:100%;padding:15rpx 0'>
-            <view class="weui-flex__item">
-              <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-            </view>
-            <view class="text-size-14" style='line-height:50px;text-align:center'>用户1</view>
-            <view class="weui-flex__item" style='text-align:center'>
-              <view class="text-size-14" style='line-height:50px;text-align:center'>总杆</view>
-            </view>
-            <view class="weui-flex__item" style='text-align:right'>
-              <view class="tui-gallery-list">
-                <view class="tui-number-group">
-                  <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
-                  <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
-                    data-min="1" data-max="100"></input>
-                  <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'>+</view>
+        <block wx:for='{{gameDetail.players}}' wx:key='*this' wx:for-index="index">
+          <view class="weui-cell weui-cell_access line">
+            <view class='weui-flex' style='width:100%;padding:15rpx 0'>
+              <view class="weui-flex__item">
+                <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+              </view>
+              <view class="text-size-14" style='line-height:50px;text-align:center'>{{item.name}}</view>
+              <view class="weui-flex__item" style='text-align:center'>
+                <view class="text-size-14" style='line-height:50px;text-align:center'>总杆</view>
+              </view>
+              <view class="weui-flex__item" style='text-align:right'>
+                <view class="tui-gallery-list">
+                  <view class="tui-number-group">
+                    <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'
+                    data-num='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'>-</view>
+                    <input class="tui-number-cell in" type="number" bindblur='numberChange'
+                    value='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'></input>
+                    <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'
+                      data-num='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'>+</view>
+                  </view>
                 </view>
               </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cell weui-cell_access line">
-          <view class='weui-flex' style='width:100%;padding:15rpx 0'>
-            <view class="weui-flex__item">
-              <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-            </view>
-            <view class="text-size-14" style='line-height:50px;text-align:center'>用户2</view>
-            <view class="weui-flex__item" style='text-align:center'>
-              <view class="text-size-14" style='line-height:50px;text-align:center'>总杆</view>
-            </view>
-            <view class="weui-flex__item" style='text-align:right'>
-              <view class="tui-gallery-list">
-                <view class="tui-number-group">
-                  <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
-                  <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
-                    data-min="1" data-max="100"></input>
-                  <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'>+</view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_access line">
-          <view class='weui-flex' style='width:100%;padding:15rpx 0'>
-            <view class="weui-flex__item">
-              <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-            </view>
-            <view class="text-size-14" style='line-height:50px;text-align:center'>用户4</view>
-            <view class="weui-flex__item" style='text-align:center'>
-              <view class="text-size-14" style='line-height:50px;text-align:center'>总杆</view>
-            </view>
-            <view class="weui-flex__item" style='text-align:right'>
-              <view class="tui-gallery-list">
-                <view class="tui-number-group">
-                  <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
-                  <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
-                    data-min="1" data-max="100"></input>
-                  <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'>+</view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="weui-cell weui-cell_access line">
-          <view class='weui-flex' style='width:100%;padding:15rpx 0'>
-            <view class="weui-flex__item">
-              <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-            </view>
-            <view class="text-size-14" style='line-height:50px;text-align:center'>用户3</view>
-            <view class="weui-flex__item" style='text-align:center'>
-              <view class="text-size-14" style='line-height:50px;text-align:center'>总杆</view>
-            </view>
-            <view class="weui-flex__item" style='text-align:right'>
-              <view class="tui-gallery-list">
-                <view class="tui-number-group">
-                  <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
-                  <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
-                    data-min="1" data-max="100"></input>
-                  <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'>+</view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
+        </block>
         <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
           <button class="weui-btn" type="primary" style="width:100%;background:#66CC99"
            bindtap="saveScore">保存</button>

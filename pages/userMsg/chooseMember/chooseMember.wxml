@@ -10,7 +10,7 @@
           <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
         </view>
         <view class="weui-cell__ft text-size-13">
-          <checkbox checked="true"/>
+          <checkbox class="weui-check" checked="true"/>
         </view> 
       </checkbox-group>
     </view>

@@ -30,6 +30,7 @@
     "pages/game/gameChat/gameChat",
     "pages/game/gameDynamic/gameDynamic",
     "pages/game/gameScore/gameScore",
+    "pages/game/managerMember/managerMember",
     "pages/rules/pkRule/pkRule",
     "pages/rules/setRule/setRule",
     "pages/rules/rodRule/rodRule",

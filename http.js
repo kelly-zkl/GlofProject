@@ -23,7 +23,15 @@ const request = (method, requestHandler, isShowLoading) => {
       success: function (res) {//请求成功
         isShowLoading && wx.hideLoading && wx.hideLoading();
         console.log(res.data);
-        requestHandler.success(res.data);
+        if (res.data.code == '000000'){
+          requestHandler.success(res.data);
+        }else{
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 1500
+          });
+        }
         resolve(res.data);
       },
       fail:function(err){//请求失败

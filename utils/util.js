@@ -1,4 +1,4 @@
-const formatTime = (date,formate) => {
+const formatTime = (date,formate,toMin) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -6,7 +6,11 @@ const formatTime = (date,formate) => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join(formate) + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  if (toMin){
+    return [year, month, day].map(formatNumber).join(formate) + ' ' + [hour, minute].map(formatNumber).join(':')
+  }else{
+    return [year, month, day].map(formatNumber).join(formate) + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  }
 }
 
 const formatNumber = n => {

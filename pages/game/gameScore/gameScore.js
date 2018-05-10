@@ -16,14 +16,24 @@ Page({
     number1: 4,
     disabled1: false,
     disabled2: false,
-    activeHole:'C1'
+    activeHole:'C1',
+    scrowHeight:0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          scrowHeight: res.windowHeight -160
+        });
+        console.log(res.windowHeight);
+        console.log(that.data.scrowHeight);
+      }
+    });
   },
   //PK规则、积分卡
   douChange: function (e) {
