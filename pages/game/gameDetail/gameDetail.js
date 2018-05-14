@@ -28,12 +28,12 @@ Page({
         // console.log(that.data.scrowWidth);
       }
     });
-    that.gameDetail();
   },
   onShow:function(){
     this.setData({
       radioType: 1
     })
+    this.gameDetail();
   },
   //PK规则、积分卡、主页面
   douChange: function (e) {
@@ -46,7 +46,7 @@ Page({
       })
     } else if (e.currentTarget.dataset.id == 2){//记分卡
       wx.navigateTo({
-        url: '/pages/game/gameScore/gameScore',
+        url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,
       })
     }
   },
@@ -127,7 +127,7 @@ Page({
       success: res => {
         wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
         this.setData({
-          showJoin: false
+          showPopup: false
         });
         that.gameDetail();
       }

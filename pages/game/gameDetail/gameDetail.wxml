@@ -80,9 +80,9 @@
         <view class="weui-flex__item" style='text-align:center'>
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="douChange">PK规则</text>
+              data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">PK规则</text>
             <text class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="douChange">. . .</text>
+              data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">. . .</text>
             <text class="tui-tabbar-cell {{radioType == 2 ? 'tui-active' : ''}}"
               data-id="2" bindtap="douChange">记分卡</text>
           </view>
@@ -100,6 +100,7 @@
       <button class="btn join" bindtap="joinGame">加入比赛</button>
     </view>
   </view>
+  
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">

@@ -30,7 +30,7 @@ Page({
     this.getUserInfo();
     this.getDynamics();
   },
-  //获取球友动态
+  //获取赛事动态
   getDynamics: function (e) {
     var that = this;
     http.postRequest({
