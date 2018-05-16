@@ -1,0 +1,30 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:30rpx">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">私密模式</view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="privateSet" checked="{{privateSet}}"></switch>
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">禁止他人进入比赛</view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="forbidJoinSet" checked="{{forbidJoin}}"></switch>
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">禁止他人关注比赛</view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="forbidFollowSet" checked="{{forbidFollow}}"></switch>
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">允许关注者发讨论区</view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="talkSet" checked="{{talk}}"></switch>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

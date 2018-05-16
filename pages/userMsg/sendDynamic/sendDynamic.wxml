@@ -12,7 +12,8 @@
               <view class="weui-uploader__files" id="uploaderFiles">
                 <block wx:for="{{files}}" wx:key="*this">
                   <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" 
+                      style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
                     <!-- <view class="weui-uploader__file-content">
                       <icon type="warn" size="23" color="#F43530"></icon>
                     </view>
@@ -20,7 +21,8 @@
                   </view>
                 </block>
               </view>
-              <view class="weui-uploader__input-box" wx:if="{{files.length<9}}">
+              <view class="weui-uploader__input-box" wx:if="{{files.length<9}}" 
+                style="width:{{upWidth}};height:{{upWidth}}">
                 <view class="weui-uploader__input" bindtap="togglePopup"></view>
               </view>
             </view>

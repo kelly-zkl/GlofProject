@@ -16,7 +16,9 @@ Page({
       relateType: "match"
     }],
     picType:[],
-    belongType:""
+    belongType:"",
+    imageWidth:'0px',
+    upWidth:'0px'
   },
 
   /**
@@ -28,7 +30,17 @@ Page({
     that.setData({
       belongType: options.type,
     });
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          imageWidth: ((res.windowWidth - 38) / 3)+'px',
+          upWidth: (((res.windowWidth - 38) / 3)-2)+'px'
+        });
+        console.log(that.data.imageWidth);
+      }
+    });
   },
+
   togglePopup() {
     this.setData({
       showPopup: !this.data.showPopup
@@ -38,13 +50,29 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1){
-      
+      that.setData({
+        picType: ['album', 'camera'],
+        showPopup: false
+      });
+      that.chooseImage();
     } else if (id == 2){
-      
+      that.setData({
+        picType: ['camera'],
+        showPopup: false
+      });
+      that.chooseImage();
     } else if (id == 3){
-      
+      that.setData({
+        picType: ['album', 'camera'],
+        showPopup: false
+      });
+      that.chooseVideo();
     } else if (id == 4) {
-      
+      that.setData({
+        picType: ['camera'],
+        showPopup: false
+      });
+      that.chooseVideo();
     }
   },
   //隐私设置

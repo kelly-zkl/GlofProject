@@ -19,3 +19,8 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.weui-grid__icon.img{
+  width: 45px;
+  height: 45px
+}

@@ -44,3 +44,10 @@
 .tip-join{
   width: 80px;
 }
+
+.text-manager{
+  text-align:right;
+  font-size:14px;
+  color:#66CC99;
+  padding:30rpx 30rpx 0 0;
+}

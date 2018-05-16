@@ -1,0 +1,8 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+    </view>
+    <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+    </view>
+  </view>
+</view>

@@ -60,12 +60,12 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    // if (this.data.gameDetail.joined == 1) {//参赛
+    if (this.data.gameDetail.joined == 1) {//参赛
       this.setData({
         showPopup: !this.data.showPopup,
         activeHole: e.currentTarget.dataset.idx
       });
-    // }
+    }
   },
   popuChange: function (e) {
     var that = this;

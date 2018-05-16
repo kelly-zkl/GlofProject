@@ -1,5 +1,38 @@
 <view class="page">
   <view class="page__bd">
-    使用帮助
+    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <navigator url="" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">个人赛事</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">团体赛事</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">球队</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">查找队友</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">约球</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">PK规则</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>
   </view>
 </view>

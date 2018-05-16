@@ -1,0 +1,20 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class='weui-flex' style='background:#66CC99'>
+      <view class='weui-flex__item title'>时间</view>
+      <view class='weui-flex__item title'>目标球手</view>
+      <view class='weui-flex__item title'>洞</view>
+      <view class='weui-flex__item title'>记杆</view>
+      <view class='weui-flex__item title'>填写人</view>
+    </view>
+    <block wx:for="012345" wx:key="*this" wx:for-index="idx">
+      <view class='weui-flex' style='{{idx%2==0?"background:#fff":"background:#F6F6F6"}}'>
+        <view class='weui-flex__item content'>时间</view>
+        <view class='weui-flex__item content'>目标球手</view>
+        <view class='weui-flex__item content'>洞</view>
+        <view class='weui-flex__item content'>记杆</view>
+        <view class='weui-flex__item content'>填写人</view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/home/glof/glof",
     "pages/home/square/square",
     "pages/home/circle/circle",
@@ -45,13 +45,28 @@
     "pages/court/courtRecords/courtRecords",
     "pages/court/courtDetail/courtDetail",
     "pages/court/chooseCourt/chooseCourt",
-    "pages/coach/coachs/coachs"
+    "pages/coach/coachs/coachs",
+    "pages/userMsg/feedBack/feedBack",
+    "pages/team/systemMsg/systemMsg",
+    "pages/team/teamMsg/teamMsg",
+    "pages/team/relationGame/relationGame",
+    "pages/team/sendMsg/sendMsg",
+    "pages/team/importGameMem/importGameMem",
+    "pages/game/setGroup/setGroup",
+    "pages/game/createGroup/createGroup",
+    "pages/game/redBlueGame/redBlueGame",
+    "pages/game/groupList/groupList",
+    "pages/game/groupScore/groupScore",
+    "pages/game/groupGame/groupGame",
+    "pages/game/writeScoreList/writeScoreList",
+    "pages/game/modifyTee/modifyTee",
+    "pages/game/gameAuthority/gameAuthority"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#66CC99",
     "navigationBarTitleText": "GOLF",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999999",
@@ -60,10 +75,10 @@
     "position": "bottom",
     "list": [
       {
-        "pagePath":"pages/home/glof/glof",
-        "text":"GOLF",
-        "iconPath":"images/icon_intro.png",
-        "selectedIconPath":"images/icon_intro.png"
+        "pagePath": "pages/home/glof/glof",
+        "text": "GOLF",
+        "iconPath": "images/icon_intro.png",
+        "selectedIconPath": "images/icon_intro.png"
       },
       {
         "pagePath": "pages/home/square/square",

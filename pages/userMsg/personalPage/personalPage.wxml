@@ -10,7 +10,7 @@
             <view class="weui-media-box__title">{{userInfo.name}}</view>
             <view class="weui-media-box__desc">{{userInfo.province}} {{userInfo.city}}</view>
           </view>
-          <view class="weui-cell__ft" hidden="{{person != 0}}" bindtap="gotoPost">
+          <view class="weui-cell__ft" hidden="{{person != 0}}">
            <button class="weui-btn" bindtap="gotoPost">
               <icon type="add" size="20" color="white" style="margin-right:10rpx"/>发动态
             </button>

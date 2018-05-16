@@ -75,11 +75,25 @@
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-        成员
+          <view class='text-manager' bindtap='showManager'>管理成员</view>
+          <view wx:for="123456" wx:key="*this" style='margin-top:30rpx;border-top:1rpx solid #e5e5e5'>
+            <view class='weui-flex' bindtap='toggleMember'>
+              <view class='weui-flex__item'>
+                <image class="weui-grid__icon s" src="{{item.avatarUrl}}"/>
+                <view class="text-size-12" style='color:#888'>{{item.name}}</view>
+              </view>
+              <view class='weui-flex__item'>男/女</view>
+              <view class='weui-flex__item'>0</view>
+              <view class='weui-flex__item'>0</view>
+              <view class='weui-flex__item'>
+                <view class="weui-grid__label">{{item.zname}}</view>
+                <view class="weui-grid__label">{{item.zname}}</view>
+              </view>
+            </view>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__hd">我加入的</view>
             <view class="weui-panel__bd">
               <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
                 hover-class="weui-cell_active">
@@ -94,26 +108,6 @@
                 <view class="weui-cell__ft">
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                     <view class="weui-media-box__title weui-media-box__title_in-text start-soon">即将开始</view>
-                    <view class="weui-media-box__desc">2.8Km</view>
-                    <view class="weui-media-box__info" style="color:#999">23人关注</view>
-                  </view>
-                </view>
-              </navigator>
-            </view>
-            <view class="weui-panel__bd">
-              <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
-                hover-class="weui-cell_active">
-                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
-                </view>
-                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
-                  <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
-                  <view class="weui-media-box__info" style="color:#999">23：00</view>
-                </view>
-                <view class="weui-cell__ft">
-                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title weui-media-box__title_in-text ing">进行中</view>
                     <view class="weui-media-box__desc">2.8Km</view>
                     <view class="weui-media-box__info" style="color:#999">23人关注</view>
                   </view>
@@ -159,6 +153,63 @@
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showMember ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleMember"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:left;padding:20rpx">队员姓名</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改正式差点</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设为队长</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="4" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设为秘书</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="5" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设为管理员</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">踢出球队</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="7" bindtap="memberChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showManager ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleManager"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">邀请球友加入球队</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">导入比赛成员</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">群发消息</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="4" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">计算参考差点</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">
+          同步参考差点-正式差点</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出球队</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>
       </view>

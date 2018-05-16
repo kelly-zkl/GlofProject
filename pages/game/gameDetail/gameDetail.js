@@ -59,16 +59,16 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    // if (this.data.gameDetail.joined == 1) {//参赛
+    if (this.data.gameDetail.joined == 1) {//参赛
       this.setData({
         showPopup: !this.data.showPopup,
         activeHole: e.currentTarget.dataset.idx
       });
-    // }else{//未关注、未参赛
-    //   this.setData({
-    //     showJoin: false
-    //   });
-    // }
+    } else {//未关注、未参赛
+      this.setData({
+        showJoin: false
+      });
+    }
   },
   popuChange: function (e) {
     var that = this;

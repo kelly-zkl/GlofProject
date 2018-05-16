@@ -62,6 +62,71 @@ Page({
       });
     }
   },
+  //球员管理
+  toggleMember() {
+    this.setData({
+      showMember: !this.data.showMember
+    });
+  },
+  memberChange: function (e) {
+    var that = this;
+    var id = e.currentTarget.id;
+    if (id == 2) {//修改正式差点
+
+    } else if (id == 3) {//设为队长
+      
+    } else if (id == 4) {//设为秘书
+
+    } else if (id == 5) {//设为管理员
+
+    } else if (id == 6) {//踢出球队
+
+    } else if (id == 7) {//取消
+      that.setData({
+        showMember: false
+      });
+    }
+  },
+  //管理成员
+  toggleManager() {
+    this.setData({
+      showManager: !this.data.showManager
+    });
+  },
+  memberChange: function (e) {
+    var that = this;
+    var id = e.currentTarget.id;
+    if (id == 1) {//邀请球友加入球队
+
+    }else if (id == 2) {//导入比赛成员
+      that.setData({
+        showManager: false
+      });
+      wx.navigateTo({
+        url: '/pages/team/importGameMem/importGameMem',
+      })
+    } else if (id == 3) {//群发消息
+      that.setData({
+        showManager: false
+      });
+      wx.navigateTo({
+        url: '/pages/team/sendMsg/sendMsg',
+      })
+    } else if (id == 4) {//计算参考差点
+
+    } else if (id == 5) {//同步参考差点-正式差点
+
+    } else if (id == 6) {//退出球队
+      that.setData({
+        showManager: false
+      });
+      that.quitTeam();
+    } else if (id == 7) {//取消
+      that.setData({
+        showManager: false
+      });
+    }
+  },
   //获取球队详情
   getGroupDetail:function(e){
     var that = this;

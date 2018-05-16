@@ -1,5 +1,17 @@
 <view class="page">
   <view class="page__bd">
-    关于Glof
+    <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
+      <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
+        <view class="weui-cell weui-cell_access weui-cell_input">
+          <view class="weui-cell__bd weui-cell_primary">当前版本</view>
+          <view class="weui-cell__ft">V1.0.1</view>
+        </view>
+        <navigator url="/pages/userMsg/feedBack/feedBack" class="weui-cell weui-cell_access weui-cell_input"
+          hover-class="weui-cell_active">
+          <view class="weui-cell__bd weui-cell_primary">意见反馈</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+    </view>
   </view>
 </view>
