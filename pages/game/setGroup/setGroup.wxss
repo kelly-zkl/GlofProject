@@ -1,1 +1,115 @@
-/* pages/game/setGroup/setGroup.wxss */
+
+.view-radio{
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 0 30rpx 20rpx 30rpx;
+  color: #66CC99;
+  padding-left:30rpx;
+  border: 1rpx #66CC99 solid;
+  border-radius: 8rpx;
+  font-size: 14px
+}
+.radio-active{
+  background: #66CC99;
+  color: #fff
+}
+
+.weui-grid__icon.img{width: 60px;height: 60px}
+
+
+.tui-tabbar-group{
+  border: none;
+  border-radius: 8rpx;
+  overflow: hidden;
+  display: inline-block
+}
+.tui-tabbar-red{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+  border: 1rpx #FF3300 solid;
+  color: #FF3300;
+  border-radius: 8rpx 0 0 8rpx;
+}
+.tui-tabbar-red.red-active{background-color: #FF3300;color: #fff;}
+
+.tui-tabbar-white{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+  border-top: 1rpx #CCCCCC solid;
+  border-bottom: 1rpx #CCCCCC solid;
+  border-right: 1rpx #CCCCCC solid;
+  color: #CCCCCC;
+}
+.tui-tabbar-white.white-active{background-color: #CCCCCC;color: #fff;}
+
+.tui-tabbar-blue{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+  border-top: 1rpx #0099FF solid;
+  border-bottom: 1rpx #0099FF solid;
+  border-right: 1rpx #0099FF solid;
+  color: #0099FF;
+}
+.tui-tabbar-blue.blue-active{background-color: #0099FF;color: #fff;}
+
+.tui-tabbar-black{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+  border-top: 1rpx #333333 solid;
+  border-bottom: 1rpx #333333 solid;
+  border-right: 1rpx #333333 solid;
+  color: #333333;
+}
+.tui-tabbar-black.black-active{background-color: #333333;color: #fff;}
+
+.tui-tabbar-golden{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+  border-top: 1rpx #CC9900 solid;
+  border-bottom: 1rpx #CC9900 solid;
+  border-right: 1rpx #CC9900 solid;
+  color: #CC9900;
+  border-radius: 0 8rpx 8rpx 0;
+}
+.tui-tabbar-golden.golden-active{background-color: #CC9900;color: #fff;}
+
+.tui-tabbar-blue1{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  text-align: center;
+  border-top: 1rpx #0099FF solid;
+  border-bottom: 1rpx #0099FF solid;
+  border-right: 1rpx #0099FF solid;
+  color: #0099FF;
+  border-radius: 0 8rpx 8rpx 0;
+}
+.tui-tabbar-blue1.blue-active1{background-color: #0099FF;color: #fff;}

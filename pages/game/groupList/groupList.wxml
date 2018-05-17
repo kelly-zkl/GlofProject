@@ -1,2 +1,153 @@
-<!--pages/game/groupList/groupList.wxml-->
-<text>pages/game/groupList/groupList.wxml</text>
+<view class='page'>
+  <view class='page__bd'>
+   <view class='weui-flex' style='background:#fff;padding-top:10px'>
+      <view class="weui-flex__item" style='text-align:center'>
+        <view class="tui-tabbar-group">
+          <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
+            data-id="0" bindtap="douChange">荣誉榜</view>
+          <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
+            data-id="1" bindtap="douChange">红蓝游戏榜</view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-tab__panel" style='padding-top:0'>
+      <view class="weui-tab__content" hidden="{{radioType != 0}}" 
+        style='background:#fff;margin-top:10px;padding:30rpx'>
+        <view style='border:1rpx #e5e5e5 solid;padding:30rpx'>
+          <view class='weui-flex'>
+            <view class='weui-flex__item'>
+              <view class='weui-grid__label' style='color:#219022'>参赛人数：8人</view>
+            </view>
+            <view class='weui-flex__item'>
+              <view class='weui-grid__label' style='color:#219022'>完成记分：5人</view>
+            </view>
+          </view>
+          <view class='weui-flex'>
+            <view class='weui-flex__item'>
+              <view class='weui-grid__label' style='color:#219022'>老鹰数量：2个</view>
+            </view>
+            <view class='weui-flex__item'>
+              <view class='weui-grid__label' style='color:#219022'>小鸟数量：0个</view>
+            </view>
+          </view>
+        </view>
+        <view class='weui-grid__label' style='color:#219022;padding:30rpx 0 15rpx 0'>总杆排名（前10名）</view>
+        <view class='weui-flex list'>
+          <view class='weui-flex__item title'>排名</view>
+          <view class='weui-flex__item title'>姓名</view>
+          <view class='weui-flex__item title'>总杆</view>
+          <view class='weui-flex__item title'>鸟</view>
+          <view class='weui-flex__item title'>PAR</view>
+        </view>
+        <block wx:for="012345" wx:key="*this" wx:for-index="idx">
+          <view class='weui-flex list' style='{{idx%2==0?"background:#E6F3F9":"background:#fff"}}'>
+            <view class='weui-flex__item content'>{{item}}</view>
+            <view class='weui-flex__item content'>目标球手</view>
+            <view class='weui-flex__item content'>洞</view>
+            <view class='weui-flex__item content'>记杆</view>
+            <view class='weui-flex__item content'>填写人</view>
+          </view>
+        </block>
+        <view class='weui-grid__label' style='color:#219022;padding:30rpx 0 15rpx 0'>打鸟排名</view>
+        <view class='weui-flex list'>
+          <view class='weui-flex__item title'>排名</view>
+          <view class='weui-flex__item title'>姓名</view>
+          <view class='weui-flex__item title'>鸟</view>
+          <view class='weui-flex__item title'>鹰</view>
+        </view>
+        <block wx:for="012345" wx:key="*this" wx:for-index="idx">
+          <view class='weui-flex list' style='{{idx%2==0?"background:#E6F3F9":"background:#fff"}}'>
+            <view class='weui-flex__item content'>{{item}}</view>
+            <view class='weui-flex__item content'>目标球手</view>
+            <view class='weui-flex__item content'>洞</view>
+            <view class='weui-flex__item content'>记杆</view>
+          </view>
+        </block>
+        <view class='weui-grid__label' style='color:#219022;padding:30rpx 0 15rpx 0'>打PAR排名</view>
+        <view class='weui-flex list'>
+          <view class='weui-flex__item title'>排名</view>
+          <view class='weui-flex__item title'>姓名</view>
+          <view class='weui-flex__item title'>PAR</view>
+          <view class='weui-flex__item title'>鸟</view>
+        </view>
+        <block wx:for="012345" wx:key="*this" wx:for-index="idx">
+          <view class='weui-flex list' style='{{idx%2==0?"background:#E6F3F9":"background:#fff"}}'>
+            <view class='weui-flex__item content'>{{item}}</view>
+            <view class='weui-flex__item content'>目标球手</view>
+            <view class='weui-flex__item content'>洞</view>
+            <view class='weui-flex__item content'>记杆</view>
+          </view>
+        </block>
+      </view>
+      
+      <view class="weui-tab__content" hidden="{{radioType != 1}}" style='background:#fff;margin-top:0;padding:30rpx'>
+        <view class='weui-grid__label' style='color:#66CC99;font-size:16px;font-weight:900'>莱德杯 - 四人四球</view>
+        <view class='weui-flex' style='margin-top:30rpx'>
+          <view class='weui-flex__item' style='margin-left:30rpx'>
+            <view class='weui-grid__label' style='color:#EA3323;font-weight:900'>0.5</view>
+            <view class='weui-grid__label' style='border:2px solid #EA3323'></view>
+            <view class='weui-grid__label' style='color:#EA3323;font-weight:900'>北方队</view>
+          </view>
+          <view class='weui-flex__item' style='text-align:center'>
+            <image class="weui-grid__icon" src="../../../images/pic_160.png" style='width:50px;height:50px'/>
+          </view>
+          <view class='weui-flex__item' style='margin-right:30rpx'>
+            <view class='weui-grid__label' style='color:#4F39F7;font-weight:900'>0.5</view>
+            <view class='weui-grid__label' style='border:2px solid #4F39F7'></view>
+            <view class='weui-grid__label' style='color:#4F39F7;font-weight:900'>南方队</view>
+          </view>
+        </view>
+        <view class='weui-flex' style='margin-top:30rpx'>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label' style='color:#219022'>参赛人数：8人</view>
+          </view>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label' style='color:#219022'>完成记分：5人</view>
+          </view>
+        </view>
+        <view class='weui-flex'>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label' style='color:#219022'>红队人数：8人</view>
+          </view>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label' style='color:#219022'>蓝队人数：4人</view>
+          </view>
+        </view>
+
+        <block wx:for="12345" wx:key="*this">
+          <view style='color:#999;font-size:12px;margin-top:30rpx'>第{{item}}组 已完成18洞</view>
+          <view style='text-align:center;border:1rpx #e5e5e5 solid'>
+            <view class='weui-flex' style='text-align:center;height:50rpx'>
+              <view style='width:30rpx;height:30rpx;background:#EA3323;margin-top:10rpx;margin-left:15rpx'></view>
+              <view class='weui-flex__item' style='disply:inline-block;text-align:center'>
+                <image class="weui-grid__icon img" src="../../../images/pic_160.png" />
+                <view class="weui-grid__label img">李总</view>
+              </view>
+              <view class='weui-flex__item' style='disply:inline-block;text-align:center'>
+                <image class="weui-grid__icon img" src="../../../images/pic_160.png" />
+                <view class="weui-grid__label img">李总</view>
+              </view>
+              <view class='weui-flex__item' style='disply:inline-block;text-align:center'>
+                <view class="weui-grid__label img" style='color:#EA3323'>得0.5分</view>
+              </view>
+            </view>
+            <view class='weui-flex' style='text-align:center;height:50rpx;border-top:1rpx #e5e5e5 solid'>
+              <view style='width:30rpx;height:30rpx;background:#1D00F5;margin-top:10rpx;margin-left:15rpx'></view>
+              <view class='weui-flex__item' style='disply:inline-block;text-align:center'>
+                <image class="weui-grid__icon img" src="../../../images/pic_160.png" />
+                <view class="weui-grid__label img">李总</view>
+              </view>
+              <view class='weui-flex__item' style='disply:inline-block;text-align:center'>
+                <image class="weui-grid__icon img" src="../../../images/pic_160.png" />
+                <view class="weui-grid__label img">李总</view>
+              </view>
+              <view class='weui-flex__item' style='disply:inline-block;text-align:center'>
+                <view class="weui-grid__label img" style='color:#1D00F5'>得0.5分</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

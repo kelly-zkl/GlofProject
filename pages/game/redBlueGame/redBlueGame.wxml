@@ -1,2 +1,42 @@
-<!--pages/game/redBlueGame/redBlueGame.wxml-->
-<text>pages/game/redBlueGame/redBlueGame.wxml</text>
+<view class='page'>
+  <view class='page__bd' style='background:#fff;padding-bottom:30rpx;margin-bottom:80px'>
+    <view class="weui-cells weui-cells_after-title text-size-14" style='paddint-top:30rpx'>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">红蓝游戏</view>
+        <view class="weui-cell__ft">
+          <switch color="#66CC99" bindchange="phoneSet" checked="{{userInfo.phonePublic}}"></switch>
+        </view>
+      </view>
+    </view>
+    <view class='weui-label text-size-14' style='padding:30rpx'>游戏规则</view>
+    <view class='view-radio {{radioType==0?"radio-active":""}}' bindtap='selectRule' data-id="0">
+      莱德杯 - 四人两球</view>
+    <view class='view-radio {{radioType==1?"radio-active":""}}' bindtap='selectRule' data-id="1">
+      莱德杯 - 四人四球</view>
+    <view class='view-radio {{radioType==2?"radio-active":""}}' bindtap='selectRule' data-id="2">
+      莱德杯 - 个人对抗</view>
+    <view class='view-radio {{radioType==3?"radio-active":""}}' bindtap='selectRule' data-id="3">
+      团体总杆对抗</view>
+
+    <view class='weui-label text-size-14' style='padding:40rpx 30rpx 30rpx 30rpx'>红蓝组名称</view>
+    <view class='weui-flex'>
+      <view class='weui-flex__item' style='text-align:center'>
+        <view class="weui-grid__label red-group">红队</view>
+        <input class='weui-input text-size-14' placeholder='编辑名称' maxlength='5' bindinput='redName'
+          style='margin-left: 80rpx'></input>
+      </view>
+      <view class='weui-flex__item' style='text-align:center'>
+        <view class="weui-grid__label vs" style=''>VS</view>
+      </view>
+      <view class='weui-flex__item' style='text-align:center'>
+        <view class="weui-grid__label blue-group">蓝队</view>
+        <input class='weui-input text-size-14' placeholder='编辑名称' maxlength='5' bindinput='blueName'
+         style='margin-right: 80rpx'></input>
+      </view>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom" 
+      style="background:#fff;padding:30rpx;border-top:1rpx #e5e5e5 solid">
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='createGroup'>保存设置</button>
+    </view>
+  </view>
+</view>

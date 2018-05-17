@@ -1,1 +1,53 @@
-/* pages/game/groupList/groupList.wxss */
+.tui-tabbar-group{
+  display: inline-block;
+  border: 1px #66CC99 solid;
+  border-radius: 15px;
+  text-align: center;
+  color: #66CC99;
+}
+.tui-tabbar-cell{
+  display: inline-block;
+  height: 30px;
+  width: 80px;
+  line-height: 30px;
+  font-size: 14px;
+  text-align: center;
+}
+.tui-tabbar-cell:first-child{border-right: 1px solid #66CC99;}
+.tui-tabbar-cell.tui-active{background: #66CC99;color: #fff;}
+
+.list{
+  background:#12D447;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 35rpx;
+}
+.weui-flex__item.title{
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 14px;
+  color: #fff
+}
+.weui-flex__item.content{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 14px;
+  color: #343434;
+  text-align: center
+}
+
+.weui-grid__icon.img{
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
+  margin: 10rpx 0
+}
+.weui-grid__label.img{
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  display: inline-block;
+  color:#333;
+  margin: 0 0 0 20rpx
+}

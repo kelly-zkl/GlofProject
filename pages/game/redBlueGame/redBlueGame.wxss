@@ -1,1 +1,38 @@
-/* pages/game/redBlueGame/redBlueGame.wxss */
+.view-radio{
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 0 30rpx 20rpx 30rpx;
+  color: #66CC99;
+  padding-left:30rpx;
+  border: 1rpx #66CC99 solid;
+  border-radius: 8rpx;
+  font-size: 14px
+}
+.radio-active{
+  background: #66CC99;
+  color: #fff
+}
+
+.red-group{
+  height: 120rpx;
+  margin-left: 80rpx;
+  line-height: 120rpx;
+  border: 1rpx #FF3300 solid;
+  border-radius: 10rpx;
+  color: #FF3300
+} 
+.blue-group{
+  height: 120rpx;
+  margin-right: 80rpx;
+  line-height: 120rpx;
+  border: 1rpx #0099FF solid;
+  border-radius: 10rpx;
+  color: #0099FF
+}
+.vs{
+  color:#999;
+  height:120rpx;
+  line-height:120rpx;
+  font-size: 20px;
+  font-weight: bold
+}

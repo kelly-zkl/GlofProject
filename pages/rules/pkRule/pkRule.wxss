@@ -14,3 +14,38 @@
   color: #66CC99
 }
 .weui-media-box:before,.weui-panel:after,.weui-panel:before{display: none}
+
+.popup-width {
+  background: #fff;
+  border-radius: 4px;
+  padding: 30rpx;
+}
+.weui-flex__item.cell{
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 35rpx;
+  border: 1rpx #ccc solid;
+  font-size: 14px;
+  color: #ccc;
+  margin: 15rpx;
+  text-align: center
+}
+.weui-flex__item.cell.active{
+  background: #66CC99;
+  color: #fff;
+}
+
+.weui-button{
+  width: 80%;
+  margin-left: 10%;
+  height: 80rpx;
+  line-height: 80rpx;
+  min-height: 80rpx;
+  background: #66CC99;
+  border-radius: 40rpx;
+  margin-top: 30rpx;
+  font-size: 16px;
+  color: #fff;
+  text-align: center
+}

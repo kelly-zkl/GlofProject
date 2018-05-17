@@ -1,2 +1,55 @@
-<!--pages/game/setGroup/setGroup.wxml-->
-<text>pages/game/setGroup/setGroup.wxml</text>
+<view class='page'>
+  <view class='page__bd' style='background:#fff;padding-bottom:30rpx;margin-bottom:80px'>
+    <view class='weui-flex' style='padding-top:30rpx'>
+      <view class='weui-flex__item' style='text-align:left'>
+        <image class="weui-grid__icon img" src="../../../images/pic_160.png" />
+        <view class="weui-grid__label" style="color:#999">微信昵称</view>
+      </view>
+      <view class='weui-flex__item' style='text-align:right;padding-right:30rpx'>
+        <view class="weui-grid__label" style="color:#333;text-align:right">红蓝游戏</view>
+        <view class="tui-tabbar-group" style='margin-top:20rpx'>
+          <view class="tui-tabbar-red {{gameType == 0 ? 'red-active' : ''}}"
+            data-id="0" bindtap="gameChange">红队</view>
+          <view class="tui-tabbar-blue1 {{gameType == 1 ? 'blue-active1' : ''}}"
+            data-id="1" bindtap="gameChange">蓝队</view>
+        </view>
+      </view>
+    </view>
+    <view class='weui-label text-size-14' style='padding:60rpx 30rpx 30rpx 30rpx'>选择球场</view>
+    <view class='view-radio {{radioType==0?"radio-active":""}}' bindtap='selectCourt' data-id="0">
+      主场：球场名称</view>
+    <view class='view-radio {{radioType==1?"radio-active":""}}' bindtap='selectCourt' data-id="1">
+      子场：球场名称</view>
+    <view class='view-radio {{radioType==2?"radio-active":""}}' bindtap='selectCourt' data-id="2">
+      子场：球场名称</view>
+
+    <view class='weui-label text-size-14' style='padding:40rpx 30rpx 30rpx 30rpx'>选择小组</view>
+    <view class='view-radio {{groupType==0?"radio-active":""}}' bindtap='selectGroup' data-id="0">
+      小组A</view>
+    <view class='view-radio {{groupType==1?"radio-active":""}}' bindtap='selectGroup' data-id="1">
+      小组B</view>
+    <view class='view-radio {{groupType==2?"radio-active":""}}' bindtap='selectGroup' data-id="2">
+      小组C</view>
+      
+    <view class='weui-label text-size-14' style='padding:40rpx 30rpx 30rpx 30rpx'>选择TEE台</view>
+    <view class="weui-flex__item" style='text-align:center;margin: 0 30px'>
+      <view class="tui-tabbar-group">
+        <view class="tui-tabbar-red {{teeType == 0 ? 'red-active' : ''}}"
+          data-id="0" bindtap="douChange">红</view>
+        <view class="tui-tabbar-white {{teeType == 1 ? 'white-active' : ''}}"
+          data-id="1" bindtap="douChange">白</view>
+        <view class="tui-tabbar-blue {{teeType == 2 ? 'blue-active' : ''}}"
+          data-id="2" bindtap="douChange">蓝</view>
+        <view class="tui-tabbar-black {{teeType == 3 ? 'black-active' : ''}}"
+          data-id="3" bindtap="douChange">黑</view>
+        <view class="tui-tabbar-golden {{teeType == 4 ? 'golden-active' : ''}}"
+          data-id="4" bindtap="douChange">金</view>
+      </view>
+    </view>
+
+    <view class="weui-footer weui-footer_fixed-bottom" 
+      style="background:#fff;padding:30rpx;border-top:1rpx #e5e5e5 solid">
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='save'>保存设置</button>
+    </view>
+  </view>
+</view>

@@ -89,7 +89,7 @@
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
-      <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex;padding:20rpx 0 0 0" >
+      <scroll-view scroll-x="true" style="white-space: nowrap; display: flex;padding:20rpx 0 0 0" >
         <view style="width: 120rpx; height: 120rpx; display: inline-block"
           wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx" data-id='{{idx}}' bindtap='holeChange'
           class="{{activeHole == idx ? 'hole-on' : 'hole-off'}}">

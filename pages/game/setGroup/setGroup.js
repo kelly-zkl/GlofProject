@@ -14,53 +14,32 @@ Page({
   onLoad: function (options) {
   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  //红蓝游戏
+  gameChange:function(e){
+    this.setData({
+      gameType: e.currentTarget.dataset.id
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  //选择球场
+  selectCourt: function (e) {
+    this.setData({
+      radioType: e.currentTarget.dataset.id
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  //选择小组
+  selectGroup: function (e) {
+    this.setData({
+      groupType: e.currentTarget.dataset.id
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  //选择TEE台
+  douChange: function (e) {
+    this.setData({
+      teeType: e.currentTarget.dataset.id
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  //保存设置
+  save:function(){
+    
   }
 })

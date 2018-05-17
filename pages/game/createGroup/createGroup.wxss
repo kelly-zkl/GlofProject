@@ -1,1 +1,17 @@
-/* pages/game/createGroup/createGroup.wxss */
+
+.view-radio{
+  height: 70rpx;
+  line-height: 70rpx;
+  margin: 0 30rpx 20rpx 30rpx;
+  color: #66CC99;
+  padding-left:30rpx;
+  border: 1rpx #66CC99 solid;
+  border-radius: 8rpx;
+  font-size: 14px
+}
+.radio-active{
+  background: #66CC99;
+  color: #fff
+}
+
+.weui-grid__icon.img{width: 60px;height: 60px}

@@ -42,7 +42,7 @@ Page({
     })
     if (e.currentTarget.dataset.id == 0){//PK规则
       wx.navigateTo({
-        url: '/pages/rules/pkRule/pkRule',
+        url: '/pages/rules/pkRule/pkRule?id=' + this.data.gameId,
       })
     } else if (e.currentTarget.dataset.id == 2){//记分卡
       wx.navigateTo({
@@ -187,8 +187,9 @@ Page({
       msg: "加载中...",
       success: res => {
         wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
+        that.gameDetail();
         this.setData({
-          showJoin: true
+          showJoin: false
         });
       }
     }, true);

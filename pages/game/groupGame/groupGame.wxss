@@ -1,1 +1,116 @@
-/* pages/game/groupGame/groupGame.wxss */
+/* pages/game/gameDetail/gameDetail.wxss */
+.btn{
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+}
+.btn.follow{
+  background: #66CC99
+}
+
+.btn.join{
+  background: #FFAD14;
+  margin-top: 50rpx;
+}
+
+.tui-tabbar-group{
+  border: 1rpx #66CC99 solid;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  color: #66CC99;
+}
+.tui-tabbar-cell{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  text-align: center;
+}
+.tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}
+.tui-tabbar-cell.tui-active{background-color: #66CC99;color: #fff;}
+
+.weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto}
+.weui-grid__icon.s{display:block;width:30px;height:30px;margin:0 auto;padding-top: 5px}
+.text-size-12{font-size: 12px;color: #888;text-align: center;margin: 0;padding:0}
+
+/**分数框*/
+.tui-gallery-list{
+  color: #555;
+  font-size: 35rpx;
+  position: relative;
+  margin-top: 10px;
+}
+.tui-number-group{
+  display: table;
+  table-layout: fixed;
+  width: 270rpx;
+  text-align: center;
+  border-radius: 4px;
+  border: 1rpx solid #bbb;
+  overflow: hidden;
+}
+.tui-number-cell{
+  display: table-cell;
+  height:30px;
+  line-height: 30px;
+  border-radius: 0;
+  text-align: center;
+  font-size: 18px;
+}
+.tui-number-cell.in{
+  height:30px;
+  line-height: 30px;
+  font-size: 14px;
+  text-align: center;
+  border-left: 1rpx solid #bbb;
+  border-right: 1rpx solid #bbb;
+}
+
+/**选定洞设置分数*/
+.hole-on{
+  border-right: 3px solid #66CC99;
+  border-left: 3px solid #66CC99;
+  text-align: center
+}
+.hole-off{
+  border-right: none;
+  border-left: none;
+  text-align: center
+}
+.weui-grid__label.hole-on{
+  color: #66CC99;
+  font-size: 16px;
+  border-right: none;
+  border-left: none;
+}
+.weui-grid__label.hole-off{
+  color: #bbb;
+  font-size: 13px;
+  border-right: none;
+  border-left: none;
+}
+
+/**18个洞横向滚动*/
+.hole-scrow{
+  white-space: nowrap; 
+  display: flex;
+  position: absolute;
+  left: 120rpx;
+  right: 120rpx;
+  width: 100%
+}
+
+.weui-grid__label.label{margin-top:0;display:block;text-align:center;color:#343434;font-size:14px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height: 60px}
+
+.view-status{
+   width:150rpx;height:50rpx;background:#fff;border-radius:25rpx;font-size:13px;text-align:center;line-height: 50rpx
+}
+.view-join{color:#FF9900}
+.view-follow{color:#43CBB3}
