@@ -6,7 +6,7 @@
         <view class="tui-gallery-list" style='text-align:right'>
           <view class="tui-number-group">
             <view class="tui-number-cell" bindtap="nextNum">基本单位</view>
-            <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
+            <input class="tui-number-cell in" type="number" value='{{number1}}' bindinput='numberChange'
               data-min="1"></input>
           </view>
         </view>
@@ -21,37 +21,20 @@
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item"></view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户1</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户2</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户3</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户4</view>
-        </view>
+        <block wx:for="{{gameDetail.players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+            <view class="weui-grid__label">{{item.name}}</view>
+          </view>
+        </block>
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
+        <block wx:for="{{gameDetail.players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <input class='weui-input score' type="number" bindinput='scoreChange'></input>
+          </view>
+        </block>
       </view>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">避开地雷</view>

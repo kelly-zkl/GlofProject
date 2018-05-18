@@ -52,7 +52,7 @@ Page({
   //添加PK规则
   gotoSet:function(){
     wx.navigateTo({
-      url: '/pages/rules/setRule/setRule',
+      url: '/pages/rules/setRule/setRule?id=' + this.data.gameId,
     })
   },
   //设置起始洞、地雷、让洞

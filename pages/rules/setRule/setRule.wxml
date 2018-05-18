@@ -2,26 +2,13 @@
   <view class='page__bd'>
     <view style='color:#66CC99;font-size:15px;padding:20rpx 30rpx'>选择参与PK的球员</view>
     <checkbox-group bindchange="checkboxChange" class="weui-flex" style="padding:30rpx 0px">
-      <view class="weui-flex__item">
-        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label">用户1</view>
-        <checkbox class="weui-check" color="#66CC99" checked='true'/>
-      </view>
-      <view class="weui-flex__item">
-        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label">用户2</view>
-        <checkbox class="weui-check" color="#66CC99" checked='true'/>
-      </view>
-      <view class="weui-flex__item">
-        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label">用户3</view>
-        <checkbox class="weui-check" color="#66CC99" checked='true'/>
-      </view>
-      <view class="weui-flex__item">
-        <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-        <view class="weui-grid__label">用户4</view>
-        <checkbox class="weui-check" color="#66CC99" checked='true'/>
-      </view>
+      <block wx:for="{{gameDetail.players}}" wx:key="*this" wx:for-index="idx">
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+          <view class="weui-grid__label">{{item.name}}</view>
+          <checkbox class="weui-check" color="#66CC99" checked='true' style='left:{{leftPosition}}'/>
+        </view>
+      </block>
     </checkbox-group>
     <view style='color:#66CC99;font-size:15px;padding:20rpx 30rpx'>选择PK游戏规则</view>
     <view class="weui-cells weui-cells_in-small-appmsg" wx:for="{{rules}}" wx:key="*this">
