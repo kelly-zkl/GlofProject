@@ -69,8 +69,8 @@
     <view style="padding:20rpx 30rpx 30rpx 30rpx;background:#fff;margin-bottom:80px">
       <view class="text-size-14">个人标签</view>
       <view style="display:inline-block;box-sizing:border-box;position:relative">
-        <view class="zan-tag zan-tag--primary zan-tag--plain" wx:for="{{tags}}" wx:key="*this" 
-          wx:if="{{tags.length>0}}">{{item}}
+        <view wx:for="{{tags}}" wx:key="*this" wx:for-index="idx" wx:if="{{tags.length>0}}"
+     class="zan-tag zan-tag--primary zan-tag--plain {{idx%3==0?'green':idx%3==1?'yellow':'blue'}}">{{item}}
         </view>
         <input wx:if="{{showInput}}" class="weui-input t" confirm-type="done" bindconfirm="inputTag"
           maxlength="8"/>

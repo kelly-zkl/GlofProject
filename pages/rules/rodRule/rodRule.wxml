@@ -32,7 +32,7 @@
         <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
         <block wx:for="{{gameDetail.players}}" wx:key="*this">
           <view class="weui-flex__item">
-            <input class='weui-input score' type="number" bindinput='scoreChange'></input>
+            <input class='weui-input score' type="number" bindinput='scoreChange' maxlength='3'></input>
           </view>
         </block>
       </view>

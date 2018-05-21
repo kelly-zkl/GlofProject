@@ -30,3 +30,10 @@
 .weui-input,.zan-tag,.view.t{
   margin-top: 10rpx;
 }
+input .wx-input::focus{margin-bottom: 0}
+.zan-tag.zan-tag--primary.zan-tag--plain.green{color:#43CBB3;}
+.green.zan-tag--primary::after{border-color:#43CBB3}
+.zan-tag.zan-tag--primary.zan-tag--plain.yellow{color:#F48484;}
+.yellow.zan-tag--primary::after{border-color:#F48484}
+.zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#5C80CB;}
+.blue.zan-tag--primary::after{border-color:#5C80CB}

@@ -46,7 +46,8 @@
     </view>
     <view style="padding:20rpx 30rpx 30rpx 30rpx;background:#fff;border-top: 1rpx solid #E5E5E5;" 
       wx:if="{{userInfo.tags.length > 0}}">
-      <view class="zan-tag zan-tag--primary zan-tag--plain" wx:for="{{userInfo.tags}}" wx:key="*this">{{item}}</view>
+      <view  wx:for="{{userInfo.tags}}" wx:key="*this" wx:for-index="idx"
+     class="zan-tag zan-tag--primary zan-tag--plain {{idx%3==0?'green':idx%3==1?'yellow':'blue'}}">{{item}}</view>
     </view>
     <view wx:for="{{dynamics}}" wx:key="*this" wx:for-item="item">
       <view class="weui-panel weui-panel_access d1" style="padding:30rpx;margin-top:1rpx">
