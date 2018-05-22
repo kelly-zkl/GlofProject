@@ -1,4 +1,8 @@
 /* pages/team/myTeam/myTeam.wxss */
+
+page{
+  background: #fff
+}
 .btn-manager{
   height: 56rpx;
   width: 120rpx;
@@ -39,15 +43,113 @@
 .weui-flex.c{
   background: #fff;
   border-bottom: 1rpx #e5e5e5 solid;
-  padding: 30rpx;
+  padding: 20rpx 30rpx;
 }
 .tip-join{
   width: 80px;
 }
 
 .text-manager{
-  text-align:right;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align:center;
   font-size:14px;
   color:#66CC99;
-  padding:30rpx 30rpx 0 0;
+}
+
+.tui-tabbar-group{
+  display: inline-block;
+  border: 1px #66CC99 solid;
+  border-radius: 15px;
+  text-align: center;
+  color: #66CC99;
+}
+.tui-tabbar-cell{
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  font-size: 13px;
+  text-align: center;
+}
+.tui-tabbar-cell:first-child{border-right: 1px solid #66CC99;}
+.tui-tabbar-cell.tui-active{background: #66CC99;color: #fff;}
+
+.weui-grid__icon.s{
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 10rpx
+}
+.weui-flex__item.title{
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 14px;
+  color:#343434
+}
+.weui-flex__item.content{
+  height: 60px;
+  line-height: 60px;
+  font-size: 14px;
+  color: #343434;
+  text-align: center
+}
+.team-manager{
+  color: #FF3300
+}
+.team-captain{
+  background: #FFCC00;
+  color: #fff;
+  font-size: 12px;
+  margin: auto 15rpx;
+}
+.team-secretary{
+  background: #66CCCC;
+  color: #fff;
+  margin: auto 15rpx;
+  font-size: 12px
+}
+
+.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+.weui-uploader__img{display:block;width:84px;height:84px}
+.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+
+.popup-example--center {
+  border-radius: 4px;
+  width: 70%;
+}
+.popup-width{
+  padding-top: 20rpx
+}
+.weui-flex.score{
+  border-radius:0 0 4px 4px;
+}
+.score.weui-input{
+  border:1px #e5e5e5 solid;
+  border-radius:5px;
+  height:40px;
+  min-height:40px;
+  line-height:40px;
+  margin: 20rpx 30rpx;
+  padding-left: 30rpx;
+  font-size: 14px;
+  color: #333;
+}
+.weui-grid__label.score{
+  margin-top: 0;
+  padding: 20rpx 0
+}
+
+.weui-btn.send{
+  position: fixed;
+  bottom: 20rpx;
+  left: 30rpx;
+  height: 90rpx;
+  background: #66CC99;
+  border: 8rpx #fff solid;
+  border-radius: 45rpx;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  padding: auto 30rpx;
 }

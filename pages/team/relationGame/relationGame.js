@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    games: [{ selected: false }, { selected: false },{ selected: false },{ selected: false },{ selected: false },
+      { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    selectedAllStatus: false
   },
 
   /**
@@ -14,53 +16,41 @@ Page({
   onLoad: function (options) {
   
   },
+  //选择比赛
+  bindCheckbox: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var selected = this.data.games[index].selected;
+    var games = this.data.games;
+    if (!selected) {
+      // this.setData({
+      // });
+    } else {
+      // this.setData({
+      // });
+    }
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+    games[index].selected = !selected;
+
+    this.setData({
+      games: games
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  //全选 全不选
+  bindSelectAll:function(e) {
+    var selectedAllStatus = this.data.selectedAllStatus;
+    selectedAllStatus = !selectedAllStatus;
+    var games = this.data.games;
+    (games).map(function (item) {
+        item.selected = selectedAllStatus
+    })
+    
+    this.setData({
+      games: games,
+      selectedAllStatus: selectedAllStatus
+    });
   },
+  //确定关联比赛
+  chooseGame:function(){
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
   }
 })

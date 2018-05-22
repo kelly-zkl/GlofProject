@@ -110,7 +110,7 @@ button::after{
 /*  重写 checkbox 样式  */
 /* 未选中的 背景样式 */
 checkbox .wx-checkbox-input{
-   border-radius: 50%;/* 圆角 */
+   border-radius: 4px;/* 圆角 */
    width: 26px; /* 背景的宽 */
    height: 26px; /* 背景的高 */
    border: 2px #66CC99 solid;
@@ -122,7 +122,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked{
 }
 /* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
 checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
-   border-radius: 50%;/* 圆角 */
+   border-radius: 4px;/* 圆角 */
    width: 26px;/* 选中后对勾大小，不要超过背景的尺寸 */
    height: 26px;/* 选中后对勾大小，不要超过背景的尺寸 */
    line-height: 26px;

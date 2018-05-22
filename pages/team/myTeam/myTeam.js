@@ -13,15 +13,21 @@ Page({
     showPopup: false,
     showReply: false,
     showDelete: false,
+    showModify:false,
+    showRefer:false,
+    showSync:false,
     dynamics: [],
+    imageWidth: '0px',
     page: 1,
-    size: 10
+    size: 10,
+    radioType: 0
   },
   onLoad: function (options) {
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
+          imageWidth: ((res.windowWidth - 42) / 4) + 'px',//weui-cell的padding:10px 15px
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
@@ -43,6 +49,12 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+  },
+  //成员详情、成员头像
+  douChange: function (e) {
+    this.setData({
+      radioType: e.currentTarget.dataset.id
+    })
   },
   //获取动态列表
   getDynamics: function (e) {
@@ -68,6 +80,12 @@ Page({
       url: '/pages/userMsg/sendDynamic/sendDynamic?type=user',
     })
   },
+  //跳转到关联比赛页面
+  relationGame: function () {
+    wx.navigateTo({
+      url: '/pages/team/relationGame/relationGame',
+    })
+  },
   //跳转到个人主页
   gotoPer: function (e) {
     if (e.currentTarget.id != app.globalData.userInfo.id) {//本人的动态
@@ -87,6 +105,27 @@ Page({
     wx.navigateTo({
       url: '/pages/team/teamDetail/teamDetail?id=' + e.currentTarget.id,
     })
+  },
+  //修改正式差点
+  toggleModify() {
+    this.setData({
+      showMember:false,
+      showModify: !this.data.showModify
+    });
+  },
+  //计算参考差点
+  toggleRefer() {
+    this.setData({
+      showManager: false,
+      showRefer: !this.data.showRefer
+    });
+  },
+  //同步参考差点 => 正式差点
+  toggleSync() {
+    this.setData({
+      showManager: false,
+      showSync: !this.data.showSync
+    });
   },
   //球队管理
   togglePopup() {
@@ -112,7 +151,7 @@ Page({
       });
     }
   },
-  //球员管理
+  //球员详情
   toggleMember() {
     this.setData({
       showMember: !this.data.showMember
@@ -143,7 +182,7 @@ Page({
       showManager: !this.data.showManager
     });
   },
-  memberChange: function (e) {
+  managerChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1) {//邀请球友加入球队
@@ -162,10 +201,6 @@ Page({
       wx.navigateTo({
         url: '/pages/team/sendMsg/sendMsg',
       })
-    } else if (id == 4) {//计算参考差点
-
-    } else if (id == 5) {//同步参考差点-正式差点
-
     } else if (id == 6) {//退出球队
       that.setData({
         showManager: false

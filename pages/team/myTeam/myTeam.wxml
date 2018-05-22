@@ -36,7 +36,7 @@
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}" style='margin-bottom:70px'>
           <view wx:for="{{dynamics}}" wx:key="*this" wx:for-item="item">
             <view class="weui-panel weui-panel_access d1" style="padding:30rpx;margin-top:1rpx">
               <view class="weui-panel__bd d1">
@@ -124,28 +124,71 @@
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          <view class='text-manager' bindtap='showManager'>管理成员</view>
-          <view wx:for="123456" wx:key="*this" style='margin-top:30rpx;border-top:1rpx solid #e5e5e5'>
-            <view class='weui-flex' bindtap='toggleMember'>
-              <view class='weui-flex__item'>
-                <image class="weui-grid__icon s" src="{{item.avatarUrl}}"/>
-                <view class="text-size-12" style='color:#888'>{{item.name}}</view>
+          <view class='weui-flex' style='margin-top:20rpx'>
+            <view class='text-manager'></view>
+            <view class='weui-flex__item' style='text-align:center'>
+              <view class="tui-tabbar-group">
+                <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
+                  data-id="0" bindtap="douChange">成员详情</view>
+                <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
+                  data-id="1" bindtap="douChange">成员头像</view>
               </view>
-              <view class='weui-flex__item'>男/女</view>
-              <view class='weui-flex__item'>0</view>
-              <view class='weui-flex__item'>0</view>
-              <view class='weui-flex__item'>
-                <view class="weui-grid__label">{{item.zname}}</view>
-                <view class="weui-grid__label">{{item.zname}}</view>
+            </view>
+            <view class='text-manager' bindtap='toggleManager'>管理成员</view>
+          </view>
+          <view wx:if="{{radioType == 0}}">
+            <view class='weui-flex' style='border-top:1rpx solid #e5e5e5;background:#EEE'>
+              <view class='weui-flex__item title'>成员 </view>
+              <view class='weui-flex__item title'>性别</view>
+              <view class='weui-flex__item title'>正式差点</view>
+              <view class='weui-flex__item title'>参考差点</view>
+              <view class='weui-flex__item title'>备注</view>
+            </view>
+            <view wx:for="123456" wx:key="*this" style='border-top:1rpx solid #e5e5e5'>
+              <view class='weui-flex' bindtap='toggleMember'>
+                <view class='weui-flex__item'>
+                  <image class="weui-grid__icon s" src="../../../images/pic_160.png"/>
+                  <view class="text-size-12" style='color:#888;text-align:center'>微信昵称</view>
+                </view>
+                <view class='weui-flex__item content'>男/女</view>
+                <view class='weui-flex__item content'>0</view>
+                <view class='weui-flex__item content'>0</view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label {{index%2==0?'team-manager':''}}">管理员</view>
+                  <view wx:if="{{index%3!=1}}"
+                  class="weui-grid__label {{index%3==0?'team-captain':index%3==2?'team-secretary':''}}">
+                    {{index%3==0?'队长':index%3==2?'秘书':''}}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view wx:if="{{radioType == 1}}">
+            <view class="weui-cells" style="margin-top:0">
+              <view class="weui-cell" style='padding-top:0'>
+                <view class="weui-cell__bd">
+                  <view class="weui-uploader">
+                    <view class="weui-uploader__bd">
+                      <view class="weui-uploader__files">
+                        <block wx:for="1234567890" wx:key="*this">
+                          <view class="weui-uploader__file" bindtap='toggleMember'>
+                            <image class="weui-uploader__img" src="../../../images/pic_160.png" 
+                              style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
+                          </view>
+                        </block>
+                      </view>
+                    </view>
+                  </view>
+                </view>
               </view>
             </view>
           </view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}" style='margin-bottom:70px'>
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd">
+            <view class="weui-panel__bd" wx:for='123456' wx:key='*this'>
               <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
-                hover-class="weui-cell_active">
+                hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                   <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
                 </view>
@@ -188,82 +231,92 @@
       </view>
     </view>
   </view>
+  <button class="weui-btn send" bindtap="gotoPost" wx:if="{{activeIndex == 0}}">
+    <icon type="success" size="20" color="white" style="margin-right:10rpx"/>发动态
+  </button>
+  <button class="weui-btn send" bindtap="relationGame" wx:if="{{activeIndex == 2}}">
+    <icon type="success" size="20" color="white" style="margin-right:10rpx"/>关联比赛
+  </button>
+  <!--管理-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
         <view class="weui-cell weui-cell_access line" id="1" bindtap="popuChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改球队信息</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">修改球队信息</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">卸任队长</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">卸任队长</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出球队</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">退出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">取消</view>
         </view>
       </view>
     </view>
   </view>
+  <!--成员详情-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showMember ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleMember"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
         <view class="weui-cell weui-cell_access line" id="1" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:left;padding:20rpx">队员姓名</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:left;padding:15rpx">队员姓名</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="2" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改正式差点</view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="toggleModify">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">修改正式差点</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="3" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设为队长</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为队长</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="4" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设为秘书</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为秘书</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="5" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设为管理员</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为管理员</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="6" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">踢出球队</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">踢出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="7" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">取消</view>
         </view>
       </view>
     </view>
   </view>
+  <!--管理成员-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showManager ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleManager"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
         <view class="weui-cell weui-cell_access line" id="1" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">邀请球友加入球队</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">邀请球友加入球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">导入比赛成员</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">导入比赛成员</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">群发消息</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">群发消息</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="4" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">计算参考差点</view>
+        <view class="weui-cell weui-cell_access line" bindtap="toggleRefer">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">计算参考差点</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">
+        <view class="weui-cell weui-cell_access line"bindtap="toggleSync">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">
           同步参考差点-正式差点</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出球队</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">退出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">取消</view>
         </view>
       </view>
     </view>
   </view>
+  <!--回复动态-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showReply ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleReply"></view>
     <view class="zan-popup__container">
@@ -274,6 +327,7 @@
       </view>
     </view>
   </view>
+  <!--删除回复-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showDelete ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleDelete"></view>
     <view class="zan-popup__container">
@@ -285,6 +339,61 @@
         </view>
         <view class="weui-cell weui-cell_access" id="2" bindtap="deleteChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--修改正式差点-->
+  <view class="zan-popup {{showModify ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleModify"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>修改正式差点</view>
+        <input class='weui-input score' type="number" maxlength="3"></input>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#333'>取消</view>
+          </view>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#75B5F1'>保存</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--计算参考差点-->
+  <view class="zan-popup {{showRefer ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleRefer"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>计算参考差点</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          以球队最近10场赛事为准计算参考差点。若没有参加队赛，则以个人平时最新记分来参考计算。
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#75B5F1'>开始计算</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--同步参考差点 => 正式差点-->
+  <view class="zan-popup {{showSync ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleSync"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>参考差点 -> 实际差点</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          用球队参考差点替换实际差点。没有参考差点时不会同步
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#333'>取消</view>
+          </view>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#75B5F1'>同步</view>
+          </view>
         </view>
       </view>
     </view>

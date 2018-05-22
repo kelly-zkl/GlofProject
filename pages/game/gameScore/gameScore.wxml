@@ -4,10 +4,10 @@
       <view style="width:50px;height:30px"></view>
       <view class="weui-flex__item" style='text-align:center'>
         <view class="tui-tabbar-group">
-          <text class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
-            data-id="0" bindtap="douChange">记分卡</text>
-          <text class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
-            data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">PK成绩单</text>
+          <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
+            data-id="0" bindtap="douChange">记分卡</view>
+          <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
+            data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">PK成绩单</view>
         </view>
       </view>
       <navigator url='/pages/rules/pkRule/pkRule' hidden='{{radioType == 0}}' wx:if="{{gameDetail.joined == 1}}">

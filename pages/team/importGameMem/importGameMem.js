@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeIndex:1
+    activeIndex:1,
+    games:[0,12,3,4,5,6,7,8,9],
+    members: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false },
+      { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    selectedAllStatus: false
   },
 
   /**
@@ -14,53 +18,43 @@ Page({
   onLoad: function (options) {
   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  //选择成员
+  changeIndex:function(e){
+    this.setData({
+      activeIndex: e.currentTarget.id
+    });
   },
+  //选择比赛
+  bindCheckbox: function (e) {
+    var index = parseInt(e.currentTarget.dataset.index);
+    var selected = this.data.members[index].selected;
+    var members = this.data.members;
+    if (!selected) {
+      // this.setData({
+      // });
+    } else {
+      // this.setData({
+      // });
+    }
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+    members[index].selected = !selected;
+
+    this.setData({
+      members: members
+    });
   },
+  //全选 全不选
+  bindSelectAll: function (e) {
+    var selectedAllStatus = this.data.selectedAllStatus;
+    selectedAllStatus = !selectedAllStatus;
+    var members = this.data.members;
+    (members).map(function (item) {
+      item.selected = selectedAllStatus
+    })
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+    this.setData({
+      members: members,
+      selectedAllStatus: selectedAllStatus
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -1,1 +1,9 @@
 /* pages/team/sendMsg/sendMsg.wxss */
+
+.text-area{
+  background: #fff;
+  padding: 30rpx;
+  height: 150rpx;
+  border-bottom: 1rpx #e5e5e5 solid;
+  font-size: 14px;
+}
