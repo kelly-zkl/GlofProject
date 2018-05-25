@@ -1,0 +1,7 @@
+/* pages/coach/coachDetail/coachDetail.wxss */
+
+@import '../../../template/model/model.wxss';
+
+.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+ .weui-uploader__img{display:block;width:84px;height:84px}
+.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}

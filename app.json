@@ -11,7 +11,6 @@
     "pages/userMsg/helpDoc/helpDoc",
     "pages/userMsg/aboutGlof/aboutGlof",
     "pages/userMsg/sendDynamic/sendDynamic",
-    "pages/userMsg/chooseMember/chooseMember",
     "pages/search/searchTeam/searchTeam",
     "pages/team/createTeam/createTeam",
     "pages/team/dynamics/dynamics",
@@ -44,8 +43,8 @@
     "pages/court/courts/courts",
     "pages/court/courtRecords/courtRecords",
     "pages/court/courtDetail/courtDetail",
-    "pages/court/chooseCourt/chooseCourt",
     "pages/coach/coachs/coachs",
+	  "pages/coach/coachApply/coachApply",
     "pages/userMsg/feedBack/feedBack",
     "pages/team/systemMsg/systemMsg",
     "pages/team/teamMsg/teamMsg",
@@ -60,7 +59,14 @@
     "pages/game/groupGame/groupGame",
     "pages/game/writeScoreList/writeScoreList",
     "pages/game/modifyTee/modifyTee",
-    "pages/game/gameAuthority/gameAuthority"
+    "pages/game/gameAuthority/gameAuthority",
+    "pages/choose/chooseCourt/chooseCourt",
+    "pages/choose/chooseGame/chooseGame",
+    "pages/choose/followMember/followMember",
+    "pages/choose/gameMember/gameMember",
+    "pages/choose/mulitGames/mulitGames",
+    "pages/choose/teamMember/teamMember",
+    "pages/choose/chooseTeam/teamMember"
   ],
   "window": {
     "backgroundTextStyle": "light",

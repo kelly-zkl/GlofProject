@@ -78,8 +78,8 @@ button::after{
   height: 60rpx;
   line-height: 60rpx;
   font-size: 14px;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
   text-align: center;
 }
 .tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}

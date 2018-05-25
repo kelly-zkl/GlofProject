@@ -68,3 +68,45 @@
 .yellow.zan-tag--primary::after{border-color:#F48484}
 .zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#5C80CB;}
 .blue.zan-tag--primary::after{border-color:#5C80CB}
+
+/**教练的类型等级*/
+.view-amateur{
+  background:#6C9;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}
+.profession-junior{
+  background:#6CF;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}
+.profession-middle{
+  background:#F90;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}
+.profession-senior{
+  background:#F60;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}

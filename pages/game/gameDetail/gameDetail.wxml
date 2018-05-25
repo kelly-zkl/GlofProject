@@ -10,7 +10,7 @@
       </view>
       <view style="padding-right:30rpx">
         <image style="width:20px;height:20px;padding-right:30rpx"/>
-        <image src="../../../images/icon_intro.png" style="width:20px;height:20px"/>
+        <image src="../../../images/icon_intro.png" style="width:20px;height:20px" bindtap='toggleManager'/>
       </view>
     </view>
     <view class="weui-panel weui-panel_access" style="background:#66CC99;margin:0px">
@@ -40,7 +40,7 @@
           <view class="weui-grid__label">球杆</view>
         </view>
         <block wx:for='{{gameDetail.players}}' wx:key='*this'>
-          <view style="height: 60px;background:#fff;text-align:center">
+          <view style="height: 60px;background:#fff;text-align:center" bindtap='toggleModify'>
             <image class="weui-grid__icon s" src="{{item.avatarUrl}}"/>
             <view class="text-size-12" style='color:#888'>{{item.name}}</view> 
           </view>
@@ -93,6 +93,7 @@
       </view>
     </view>
   </view>
+  <!--加入/关注比赛-->
   <view class="zan-popup {{showJoin ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask"></view>
     <view class="zan-popup__container" style="background:none">
@@ -100,7 +101,7 @@
       <button class="btn join" bindtap="joinGame">加入比赛</button>
     </view>
   </view>
-  
+  <!--记分-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
@@ -141,6 +142,95 @@
         <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
           <button class="weui-btn" type="primary" style="width:100%;background:#66CC99"
            bindtap="saveScore">保存</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--赛事管理-->
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{showManager ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleManager"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改赛事</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事权限</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事图片</view>
+        </view>
+         <view class="weui-cell weui-cell_access line" id="4" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">成绩填写记录</view>
+        </view> 
+        <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">重新开赛</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">结束赛事</view>
+        </view> 
+        <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出比赛</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" bindtap="managerChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--修改队友信息-->
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{showModify ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleModify"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="modifyChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改TEE台</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="modifyChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">查看球手主页</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="modifyChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">踢出赛事</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" bindtap="modifyChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--发红包/动态-->
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{showMore ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="toggleMore"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="moreChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">发红包</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="moreChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">发动态</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="moreChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">球童</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" bindtap="moreChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--赛事图标-->
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{showPic ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="togglePic"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="picChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">选择相册</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="picChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄图片</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" bindtap="picChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>
       </view>
     </view>

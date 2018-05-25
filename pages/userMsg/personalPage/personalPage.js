@@ -18,7 +18,8 @@ Page({
     dynamics:[],
     userId:"",
     page:1,
-    size:10
+    size:10,
+    idx:1
   },
   onLoad: function (options) {
     var that = this;

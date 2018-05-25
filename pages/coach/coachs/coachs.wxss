@@ -16,3 +16,44 @@
 .weui-search-bar__label{line-height:32px;}
 .weui-icon-clear{padding:9px 8px}
 .weui-icon-search_in-box{top:9px}
+
+.view-amateur{
+  background:#6C9;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}
+.profession-junior{
+  background:#6CF;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}
+.profession-middle{
+  background:#F90;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}
+.profession-senior{
+  background:#F60;
+  color:#fff;
+  display:inline-block;
+  font-size: 20rpx;
+  border-radius: 3px;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 20rpx;
+}

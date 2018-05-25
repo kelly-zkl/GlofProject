@@ -1,4 +1,4 @@
-// pages/coach/coachDetail/coachDetail.js
+// pages/choose/chooseTeam/teamMember.js
 Page({
 
   /**

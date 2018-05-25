@@ -22,7 +22,7 @@
     </view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="" class="weui-cell weui-cell_access" 
+        <navigator url="/pages/coach/coachApply/coachApply" class="weui-cell weui-cell_access" 
           hover-class="weui-cell_active">
           <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
           <view class="weui-cell__bd weui-cell_primary">申请加入教练</view>
@@ -31,14 +31,18 @@
       </view>
     </view>  
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
+      <view class="weui-panel__bd" wx:for="012345" wx:key="*this" wx:for-index="idx">
         <navigator url="/pages/userMsg/personalPage/personalPage?tab=1" class="weui-media-box weui-media-box_appmsg"
-          hover-class="weui-cell_active">
+          hover-class="weui-cell_active" style="border-bottom:1rpx #e5e5e5 solid">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">昵称/姓名</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+              <view style='display:inline-block'>昵称/姓名</view>
+              <view class="{{idx%4==0?'view-amateur':idx%4==1?'profession-junior':idx%4==2?'profession-middle':'profession-senior'}}">
+              {{idx%4==0?'业余':idx%4==1?'职业-初级':idx%4==2?'职业-中级':'职业-高级'}}</view>
+            </view>
             <view class="weui-media-box__desc text-size-13">地区：广东-深圳</view>
           </view>
         </navigator>

@@ -1,0 +1,8 @@
+/* pages/team/relationGame/relationGame.wxss */
+.my-sel{
+  width: 60px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+  margin-top: 10px;
+}

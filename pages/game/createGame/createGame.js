@@ -22,7 +22,8 @@ Page({
     disabled2: false,
     files: [],
     showPopup: false,
-    privacy:true
+    privacy:true,
+    showInput:false
   },
 
   /**
@@ -85,26 +86,24 @@ Page({
   popuChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
-    if (id == 1) {
+    if (id == 1) {//同队球友
       wx.navigateTo({
-        url: '/pages/userMsg/chooseMember/chooseMember?id=1',
+        url: '/pages/choose/chooseTeam/chooseTeam',
       })
-    } else if (id == 2) {
+    } else if (id == 2) {//我关注的球友
       wx.navigateTo({
-        url: '/pages/userMsg/chooseMember/chooseMember?id=2',
+        url: '/pages/choose/followMember/followMember',
       })
-    } else if (id == 3) {
+    } else if (id == 3) {//历史同赛的队友
       wx.navigateTo({
-        url: '/pages/userMsg/chooseMember/chooseMember?id=3',
+        url: '/pages/choose/gameMember/gameMember',
       })
-    } else if (id == 4) {
+    } else if (id == 4) {//邀请通讯录
       wx.navigateTo({
         url: '/pages/userMsg/chooseMember/chooseMember?id=4',
       })
-    } else if (id == 5) {
-      wx.navigateTo({
-        url: '/pages/userMsg/chooseMember/chooseMember?id=5',
-      })
+    } else if (id == 5) {//手动录入
+      that.toggleInput();
     }
     this.setData({
       showPopup: false
@@ -123,6 +122,12 @@ Page({
 
     this.setData({
       dateTimeArray: dateArr
+    });
+  },
+  //手动录入球员
+  toggleInput() {
+    this.setData({
+      showInput: !this.data.showInput
     });
   },
   //是否是私密比赛

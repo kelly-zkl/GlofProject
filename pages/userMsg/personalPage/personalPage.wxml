@@ -7,7 +7,12 @@
             <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">{{userInfo.name}}</view>
+            <view class="weui-media-box__title">
+              <view style='display:inline-block'>{{userInfo.name}}</view>
+              <image style='display:inline-block;width:15px;height:15px' src="../../../images/icon_intro.png"></image>
+              <view class="{{idx%4==0?'view-amateur':idx%4==1?'profession-junior':idx%4==2?'profession-middle':'profession-senior'}}">
+              {{idx%4==0?'业余':idx%4==1?'职业-初级':idx%4==2?'职业-中级':'职业-高级'}}</view>
+            </view>
             <view class="weui-media-box__desc">{{userInfo.province}} {{userInfo.city}}</view>
           </view>
           <view class="weui-cell__ft" hidden="{{person != 0}}">

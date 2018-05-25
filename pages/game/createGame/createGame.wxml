@@ -43,7 +43,7 @@
                   </view>
                 </block>
               </view>
-              <view class="weui-uploader__input-box" wx:if="{{files.length<9}}">
+              <view class="weui-uploader__input-box" wx:if="{{files.length<number1}}">
                 <view class="weui-uploader__input" bindtap="togglePopup"></view>
               </view>
             </view>
@@ -89,6 +89,7 @@
       <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='createGame'>创建比赛</button> 
     </view>
   </view>
+   <!--选择比赛队员-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
@@ -104,12 +105,33 @@
         </view>
         <!-- <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">邀请通讯录好友</view>
-        </view>
+        </view> -->
         <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">手动录入</view>
-        </view> -->
-        <view class="weui-cell weui-cell_access line" id="6" bindtap="popuChange">
+        </view> 
+        <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--手动录入-->
+  <view class="zan-popup {{showInput ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleInput"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>输入队友信息</view>
+        <view style='font-size:14px;color:#333;padding:30rpx 30rpx 0 30rpx'>队友姓名</view>
+        <input class='weui-input score' maxlength="10"></input>
+        <view style='font-size:14px;color:#333;padding:30rpx 30rpx 0 30rpx'>队友手机号</view>
+        <input class='weui-input score' type="phone" maxlength="11"></input>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid;margin-top:30rpx'>
+          <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#333'>取消</view>
+          </view>
+          <view class='weui-flex__item'>
+            <view class='weui-grid__label score' style='font-size:16px;color:#66CC99'>确认选择</view>
+          </view>
         </view>
       </view>
     </view>

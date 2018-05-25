@@ -9,6 +9,10 @@ Page({
     showJoin: true,
     gameId:'',
     showPopup: false,
+    showManager:false,
+    showModify:false,
+    showMore:false,
+    showPic:false,
     disabled1: false,
     disabled2: false,
     activeHole: 0,
@@ -35,6 +39,91 @@ Page({
     })
     this.gameDetail();
   },
+  //赛事设置管理
+  toggleManager: function () {
+    this.setData({
+      showManager: !this.data.showManager
+    });
+  },
+  managerChange: function () {
+    if (e.currentTarget.dataset.id == 1) {//修改赛事
+      // wx.navigateTo({
+      //   url: '/pages/game/modifyTee/modifyTee?id=' + this.data.gameId,
+      // })
+    } else if (e.currentTarget.dataset.id == 2) {//设置赛事权限
+      // wx.navigateTo({
+      //   url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,
+      // })
+    } else if (e.currentTarget.dataset.id == 3) {//设置赛事图片
+      this.togglePic();
+    } else if (e.currentTarget.dataset.id == 4) {//成绩填写记录
+      wx.navigateTo({
+        url: '/pages/game/writeScoreList/writeScoreList?id=' + this.data.gameId,
+      })
+    } else if (e.currentTarget.dataset.id == 5) {//重新开赛
+    } else if (e.currentTarget.dataset.id == 6) {//结束赛事
+    } else if (e.currentTarget.dataset.id == 7) {//退出比赛
+    }
+    this.setData({
+      showManager: false
+    })
+  },
+  //修改球手信息
+  toggleModify: function () {
+    this.setData({
+      showModify: !this.data.showModify
+    });
+  },
+  modifyChange: function () {
+    if (e.currentTarget.dataset.id == 1) {//修改TEE台
+      wx.navigateTo({
+        url: '/pages/game/modifyTee/modifyTee?id=' + this.data.gameId,
+      })
+    } else if (e.currentTarget.dataset.id == 2) {//查看球手主页
+      wx.navigateTo({
+        url: '//pages/userMsg/personalPage/personalPage?tab=1&id=' + this.data.gameId,
+      })
+    } else if (e.currentTarget.dataset.id == 3) {//踢出赛事
+    }
+    this.setData({
+      showModify: false
+    })
+  },
+  //发红包/动态
+  toggleMore: function () {
+    this.setData({
+      showMore: !this.data.showMore
+    });
+  },
+  moreChange: function () {
+    if (e.currentTarget.dataset.id == 1) {//发红包
+      
+    } else if (e.currentTarget.dataset.id == 2) {//发动态
+      wx.navigateTo({
+        url: '//pages/game/gameDynamic/gameDynamic?id=' + this.data.gameId,
+      })
+    } else if (e.currentTarget.dataset.id == 3){//球童
+    }
+    this.setData({
+      showMore: false
+    })
+  },
+  //赛事图片
+  togglePic:function(){
+    this.setData({
+      showPic: !this.data.showPic
+    });
+  },
+  picChange:function(){
+    if (e.currentTarget.dataset.id == 1) {//选择相册
+      
+    } else if (e.currentTarget.dataset.id == 2) {//拍摄图片
+      
+    }
+    this.setData({
+      showPic: false
+    })
+  },
   //PK规则、积分卡、主页面
   douChange: function (e) {
     this.setData({
@@ -48,6 +137,8 @@ Page({
       wx.navigateTo({
         url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,
       })
+    }else{
+      this.toggleMore();
     }
   },
   //选择洞

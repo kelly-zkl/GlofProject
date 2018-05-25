@@ -1,0 +1,85 @@
+<view class='page'>
+  <view class='page__bd' style='margin-bottom:80px'>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell text-size-14" style='margin-top:30rpx'>
+        <view class="weui-cell__bd">教练类型</view>
+        <view class="weui-cell__ft">
+          <view class="tui-tabbar-group">
+            <view class="tui-tabbar-cell {{coachType == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="typeChange">业余</view>
+            <view class="tui-tabbar-cell {{coachType == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="typeChange">职业</view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell text-size-14" wx:if="{{coachType == 1}}">
+        <view class="weui-cell__bd">级别</view>
+        <view class="weui-cell__ft">
+          <view class="tui-tabbar-group">
+            <view class="tui-tabbar-cell {{coachLev == 0 ? 'tui-active' : ''}}"
+              data-id="0" bindtap="levChange">初级</view>
+            <view class="tui-tabbar-cell {{coachLev == 1 ? 'tui-active' : ''}}"
+              data-id="1" bindtap="levChange">中级</view>
+              <view class="tui-tabbar-cell {{coachLev == 2 ? 'tui-active' : ''}}"
+              data-id="2" bindtap="levChange">高级</view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input text-size-14" bindtap="showArea">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所属球会</view>
+        </view>
+        <view class="weui-cell__bd"></view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style='font-size:14px;color:#333'>
+        {{province}} {{city}} {{county}}</view>
+      </view>
+      <view class="weui-cell weui-cell_input text-size-14" bindtap="showArea">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在地区</view>
+        </view>
+        <view class="weui-cell__bd"></view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style='font-size:14px;color:#333'>
+        {{province}} {{city}} {{county}}</view>
+      </view>
+      <view class="weui-cell text-size-14">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:key="*this">
+                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" 
+                      style="display:block;width:{{imageWidth}};height:{{imageHeight}}"/>
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box" wx:if="{{files.length<4}}" 
+                style="width:{{upWidth}};height:{{upHeight}}">
+                <view class="weui-uploader__input" bindtap="togglePopup"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" 
+    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="commit">提交审核</button>
+  </view>
+  <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPic ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" catchtap="togglePopup"></view>
+    <view class="zan-popup__container">
+      <view class="weui-cells weui-cells_after-title text-size-14">
+        <view class="weui-cell" id="1" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择图片</view>
+        </view>
+        <view class="weui-cell" id="2" bindtap="popuChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄图片</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <import src="../../../template/model/model.wxml"/>
+  <template is="areaData" data="{{...item}}"/>
+</view>

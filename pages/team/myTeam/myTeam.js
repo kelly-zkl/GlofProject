@@ -83,7 +83,7 @@ Page({
   //跳转到关联比赛页面
   relationGame: function () {
     wx.navigateTo({
-      url: '/pages/team/relationGame/relationGame',
+      url: '/pages/choose/mulitGames/mulitGames',
     })
   },
   //跳转到个人主页
@@ -188,29 +188,19 @@ Page({
     if (id == 1) {//邀请球友加入球队
 
     }else if (id == 2) {//导入比赛成员
-      that.setData({
-        showManager: false
-      });
       wx.navigateTo({
-        url: '/pages/team/importGameMem/importGameMem',
+        url: '/pages/choose/gameMember/gameMember',
       })
     } else if (id == 3) {//群发消息
-      that.setData({
-        showManager: false
-      });
       wx.navigateTo({
         url: '/pages/team/sendMsg/sendMsg',
       })
     } else if (id == 6) {//退出球队
-      that.setData({
-        showManager: false
-      });
       that.quitTeam();
-    } else if (id == 7) {//取消
-      that.setData({
-        showManager: false
-      });
     }
+    that.setData({
+      showManager: false
+    });
   },
   //获取球队详情
   getGroupDetail:function(e){

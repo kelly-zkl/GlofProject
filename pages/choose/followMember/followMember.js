@@ -20,14 +20,9 @@ Page({
       this.getFollows();
     } else if (options.id == 2) {//互相关注的球友
       this.getFans();
-    } else if (options.id == 3) {// 历史同赛的球友
-      this.getTeamMembers();
-    } else if (options.id == 4) {
-
-    } else if (options.id == 5) {
-
     }
   },
+
   //获取我的关注列表
   getFollows: function (e) {
     var that = this;
@@ -62,21 +57,4 @@ Page({
       }
     }, true);
   },
-  //获取我的同组同赛列表
-  getTeamMembers: function (e) {
-    var that = this;
-    http.postRequest({
-      url: "user/following",
-      params: {
-        beWatchType: "user", uid: app.globalData.userInfo.id
-      },
-      msg: "加载中....",
-      success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        that.setData({
-          members: res.data.content
-        })
-      }
-    }, true);
-  }
 })

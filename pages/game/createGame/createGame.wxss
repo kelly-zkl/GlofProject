@@ -46,3 +46,29 @@
 .weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
 .weui-uploader__img{display:block;width:84px;height:84px}
 .weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+
+.popup-example--center {
+  border-radius: 4px;
+  width: 80%;
+}
+.popup-width{
+  padding-top: 20rpx
+}
+.weui-flex.score{
+  border-radius:0 0 4px 4px;
+}
+.score.weui-input{
+  border:1px #e5e5e5 solid;
+  border-radius:5px;
+  height:40px;
+  min-height:40px;
+  line-height:40px;
+  margin: 20rpx 30rpx;
+  padding-left: 30rpx;
+  font-size: 14px;
+  color: #333;
+}
+.weui-grid__label.score{
+  margin-top: 0;
+  padding: 20rpx 0
+}
