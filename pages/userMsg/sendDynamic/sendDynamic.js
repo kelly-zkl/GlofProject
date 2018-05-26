@@ -10,11 +10,6 @@ Page({
     attach:[],
     showPopup:false,
     check:false,
-    syncGroupId:"",
-    relates : [{
-      relateId : "",
-      relateType: "match"
-    }],
     picType:[],
     belongType:"",
     imageWidth:'0px',
@@ -139,11 +134,18 @@ Page({
       wx.showToast({title: '请输入动态',icon: 'none',duration: 1500});
       return;
     }
+    var relates = [];
+    (that.data.chooseMembers).map(function (item) {
+      if (item.selected) {
+        relates.push({ relateId: item.id, relateType: "match" })
+      }
+    });
+    var syncGroupId = that.data.chooseTeam.id;
     http.postRequest({
       url: "userPost/create",
       params: {
-        content: that.data.content, relates: that.data.relates, attach: that.data.attach,
-        syncGroupId: that.data.syncGroupId, hidden: that.data.check, uid: app.globalData.userInfo.id,
+        content: that.data.content, relates: relates, attach: that.data.attach,
+        syncGroupId: syncGroupId, hidden: that.data.check, uid: app.globalData.userInfo.id,
         belongType: that.data.belongType},
       msg: "发表中....",
       success: res => {

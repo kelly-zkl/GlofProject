@@ -77,7 +77,7 @@ Page({
   //跳转到发动态页面
   gotoPost: function () {
     wx.navigateTo({
-      url: '/pages/userMsg/sendDynamic/sendDynamic?type=user',
+      url: '/pages/userMsg/sendDynamic/sendDynamic?type=group',
     })
   },
   //跳转到关联比赛页面

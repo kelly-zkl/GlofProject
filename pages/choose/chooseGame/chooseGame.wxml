@@ -2,7 +2,7 @@
   <view class='page__bd'>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd" wx:for='{{games}}' wx:key='*this'>
-        <view class="weui-media-box weui-media-box_appmsg" bindtap='changeIndex' id="2"
+        <view class="weui-media-box weui-media-box_appmsg" bindtap="bindCheckbox" data-index="{{index}}"
           hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
             <image class="weui-media-box__thumb t" src="../../../images/pic_160.png"/>

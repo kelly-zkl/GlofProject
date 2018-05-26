@@ -28,7 +28,7 @@
       </view>
       <view class='weui-flex__item'>
         <button class="weui-btn" type="primary" style="background:#66CC99" 
-        bindtap="joinTeam">确认选择</button>
+        bindtap="confirm">确认选择</button>
       </view>
     </view>
   </view>

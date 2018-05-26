@@ -2,6 +2,7 @@ var http = require("../../../http.js");
 const app = getApp();
 var base64 = require("../../../images/base64");
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var util = require('../../../utils/util.js'); 
 
 Page({
   data: {
@@ -60,6 +61,9 @@ Page({
       msg: "加载中....",
       success: res => {
         wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.createTime*1000), '-', true)
+        })
         this.setData({
           dynamics : res.data.content
         })

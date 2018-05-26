@@ -71,7 +71,7 @@ Page({
   //跳转到发动态页面
   gotoPost: function () {
     wx.navigateTo({
-      url: '/pages/userMsg/sendDynamic/sendDynamic?type=user',
+      url: '/pages/userMsg/sendDynamic/sendDynamic?type=match',
     })
   },
   //跳转到个人主页

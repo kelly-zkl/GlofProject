@@ -45,6 +45,20 @@ Page({
     this.setData({
       members: members
     });
+    this.judgeSelect();
+  },
+  //判断是不是全选
+  judgeSelect:function(){
+    var select = true;
+    (this.data.members).map(function (item) {
+      if (!item.selected){
+        select = false;
+        return;
+      }
+    })
+    this.setData({
+      selectedAllStatus: select
+    });
   },
   //全选 全不选
   bindSelectAll: function (e) {
@@ -60,4 +74,23 @@ Page({
       selectedAllStatus: selectedAllStatus
     });
   },
+  //确认选择球队球员
+  confirm: function () {
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];   //当前页面
+    var prevPage = pages[pages.length - 2];  //上2个页面
+
+    var memArr = [];
+    (this.data.members).map(function (item) {
+      if (item.selected) {
+        memArr.push(item)
+      }
+    })
+
+    //直接调用上2个页面的setData()方法，把数据存到上2个页面中去
+    prevPage.setData({
+      chooseMembers: memArr
+    })
+    wx.navigateBack()
+  }
 })

@@ -1,7 +1,7 @@
 /**
  * http请求
  * */
-const baseUrl = "http://192.168.31.30:8080/";
+const baseUrl = "http://121.42.13.131:8080/GlofApi/";
 var requestHandler = {
   url:"",
   params: {},

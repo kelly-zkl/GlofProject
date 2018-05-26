@@ -9,9 +9,9 @@
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-media-box__title">
               <view style='display:inline-block'>{{userInfo.name}}</view>
-              <image style='display:inline-block;width:15px;height:15px' src="../../../images/icon_intro.png"></image>
+              <!-- <image style='display:inline-block;width:15px;height:15px' src="../../../images/icon_intro.png"></image>
               <view class="{{idx%4==0?'view-amateur':idx%4==1?'profession-junior':idx%4==2?'profession-middle':'profession-senior'}}">
-              {{idx%4==0?'业余':idx%4==1?'职业-初级':idx%4==2?'职业-中级':'职业-高级'}}</view>
+              {{idx%4==0?'业余':idx%4==1?'职业-初级':idx%4==2?'职业-中级':'职业-高级'}}</view> -->
             </view>
             <view class="weui-media-box__desc">{{userInfo.province}} {{userInfo.city}}</view>
           </view>
@@ -63,7 +63,7 @@
             </view>
             <view class="weui-media-box__title weui-media-box__title_in-text d1"  style="margin-bottom:0">
               <view class="weui-media-box__title text-size-14 d1">{{item.creatorName}}</view>
-              <view class="weui-media-box__info text-size-12 d1" style="color:#999">{{item.createTime}}</view>
+              <view class="weui-media-box__info text-size-12 d1" style="color:#999">{{item.timeStr}}</view>
             </view>
           </view>
         </view>

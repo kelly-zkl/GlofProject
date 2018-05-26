@@ -80,5 +80,17 @@ Page({
         })
       }
     }, that.data.show);
+  },
+  //确定比赛
+  chooseCourt: function (item) {
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];   //当前页面
+    var prevPage = pages[pages.length - 2];  //上1个页面
+
+    //直接调用上1个页面的setData()方法，把数据存到上1个页面中去
+    prevPage.setData({
+      chooseGames: item
+    })
+    wx.navigateBack()
   }
 })
