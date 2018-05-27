@@ -144,8 +144,8 @@
               <view class='weui-flex__item title'>参考差点</view>
               <view class='weui-flex__item title'>备注</view>
             </view>
-            <view wx:for="123456" wx:key="*this" style='border-top:1rpx solid #e5e5e5'>
-              <view class='weui-flex' bindtap='toggleMember'>
+            <view wx:for="{{members}}" wx:key="*this" style='border-top:1rpx solid #e5e5e5'>
+              <view class='weui-flex' bindtap='toggleMember' id="{{item.userId}}">
                 <view class='weui-flex__item'>
                   <image class="weui-grid__icon s" src="../../../images/pic_160.png"/>
                   <view class="text-size-12" style='color:#888;text-align:center'>微信昵称</view>
@@ -171,7 +171,8 @@
                     <view class="weui-uploader__bd">
                       <view class="weui-uploader__files">
                         <block wx:for="1234567890" wx:key="*this">
-                          <view class="weui-uploader__file" bindtap='toggleMember'>
+                          <view class="weui-uploader__file" bindtap='toggleMember'
+                          id="{{item.userId}}">
                             <image class="weui-uploader__img" src="../../../images/pic_160.png" 
                               style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
                           </view>
@@ -186,7 +187,7 @@
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 2}}" style='margin-bottom:70px'>
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd" wx:for='123456' wx:key='*this'>
+            <view class="weui-panel__bd" wx:for='{{members}}' wx:key='*this'>
               <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
                 hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">

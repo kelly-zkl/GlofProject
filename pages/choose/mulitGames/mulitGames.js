@@ -9,8 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    games: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false },
-    { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    games: [],
     selectedAllStatus: false
   },
 
@@ -18,16 +17,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+        that.getGames();
+      },
+      fail: function () {
+        wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
+        that.getGames();
+      }
+    })
   },
   //赛事列表
   getGames: function (e) {
     var that = this;
     http.postRequest({
-      url: "court/query",
+      url: "match/query",
       params: {
-        page: that.data.page, size: that.data.size,
-        keyword: '', lng: that.data.longitude, lat: that.data.latitude
+        lng: that.data.longitude, lat: that.data.latitude, page: 1, size: 10, uid: app.globalData.userInfo.id
       },
       msg: "加载中....",
       success: res => {
@@ -100,7 +112,7 @@ Page({
 
     //直接调用上2个页面的setData()方法，把数据存到上2个页面中去
     prevPage.setData({
-      chooseGames: memArr
+      chooseGames: prevPage.data.chooseGames.concat(memArr)
     })
     wx.navigateBack()
   }

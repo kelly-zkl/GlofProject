@@ -5,10 +5,11 @@
         <view class="weui-media-box weui-media-box_appmsg line" bindtap="bindCheckbox" data-index="{{index}}"
           style='background:#fff;border-bottom:1rpx solid #e5e5e5'>
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../../images/pic_160.png"/>
+            <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">123153</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+            {{item.name}}</view>
           </view>
           <view class="weui-cell__ft"> 
             <icon wx:if="{{item.selected}}" type="success" size="20" color="#66CC99"/>
@@ -18,7 +19,7 @@
       </view>
     </view>
   </view>
-  <view class="weui-footer weui-footer_fixed-bottom" wx:if="{{activeIndex == 2}}"
+  <view class="weui-footer weui-footer_fixed-bottom"
     style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
     <view class='weui-flex'>
       <view class="my-sel" bindtap='bindSelectAll'>

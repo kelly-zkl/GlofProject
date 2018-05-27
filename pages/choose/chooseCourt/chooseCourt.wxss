@@ -1,1 +1,42 @@
-/* pages/court/chooseCourt/chooseCourt.wxss */
+
+.popup-example--center {
+  border-radius: 4px;
+  width: 80%;
+}
+.popup-width{
+  padding-top: 20rpx
+}
+.weui-flex.score{
+  border-radius:0 0 4px 4px;
+}
+.weui-grid__label.score{
+  margin-top: 0;
+  padding: 20rpx 0
+}
+
+.view-normal{
+  border: 1rpx #797979 solid;
+  background: #fff;
+  color: #333;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.view-checked{
+  border: none;
+  background: #66CC99;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.weui-flex__item.c{
+  margin-right: 20rpx;
+}
+.weui-flex__item.c:last-child{
+   margin-right: 0;
+}

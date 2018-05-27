@@ -1,7 +1,7 @@
 /**
  * http请求
  * */
-const baseUrl = "http://121.42.13.131:8080/GlofApi/";
+const baseUrl = "https://www.yaojia.com/GlofApi/";
 var requestHandler = {
   url:"",
   params: {},
@@ -122,3 +122,4 @@ module.exports = {
   uploadFile: uploadFile,
   downloadFile: downloadFile
 }
+    

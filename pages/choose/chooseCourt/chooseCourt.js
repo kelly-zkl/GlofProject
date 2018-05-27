@@ -11,6 +11,8 @@ Page({
    */
   data: {
     tabs: ["附近", "经常"],
+    showCourt:false,
+    showWeather:false,
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -18,6 +20,8 @@ Page({
     size: 10,
     latitude: '',
     longitude: '',
+    zoneNames: ['A区', 'B区', 'C区', 'D区'],
+    courts: []
   },
 
   /**
@@ -34,6 +38,9 @@ Page({
       }
     });
     that.myLocation();
+    that.setData({
+      num: options.type
+    });
   },
   tabClick: function (e) {
     var that = this;
@@ -81,16 +88,68 @@ Page({
       }
     }, that.data.show);
   },
-  //确定比赛
-  chooseCourt: function (item) {
-    var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1];   //当前页面
-    var prevPage = pages[pages.length - 2];  //上1个页面
-
-    //直接调用上1个页面的setData()方法，把数据存到上1个页面中去
-    prevPage.setData({
-      chooseGames: item
+  //一周天气情况：
+  toggleWeather:function(){
+    this.setData({
+      showWeather: !this.data.showWeather
     })
-    wx.navigateBack()
+  },
+  //场地弹框
+  toggleCourt:function(e){
+    this.setData({
+      showCourt: !this.data.showCourt,
+      index: e.currentTarget.id
+    })
+    this.setData({
+      courtName: this.data.courts[this.data.index].courtName,
+      zoneNames: this.data.courts[this.data.index].zoneNames
+    })
+  },
+  //选择上半场
+  chooseFront:function(e){
+    this.setData({
+      front: e.currentTarget.id
+    })
+  },
+  //选择下半场
+  chooseBack:function(e){
+    this.setData({
+      back: e.currentTarget.id
+    })
+  },
+  //确定球场
+  confirmSelect:function(e){
+    
+    if (e.currentTarget.id == 2){
+      var pages = getCurrentPages();
+      var currPage = pages[pages.length - 1];   //当前页面
+      var prevPage = pages[pages.length - 2];  //上1个页面
+
+      var param = { courtId: this.data.courts[this.data.index].courtId,
+        frontCourt: this.data.courts[this.data.index].zoneNames[this.data.front],
+        backCourt: this.data.courts[this.data.index].zoneNames[this.data.back],
+        courtName: this.data.courts[this.data.index].courtName}
+      //直接调用上1个页面的setData()方法，把数据存到上1个页面中去
+      if (this.data.num == 1){//主球场
+        prevPage.setData({
+          mainCourt: param
+        })
+      } else if (this.data.num == 2) {//子球场1
+        prevPage.setData({
+          minorCourt1: param
+        })
+      } else if (this.data.num == 3) {//子球场2
+        prevPage.setData({
+          minorCourt2: param
+        })
+      }
+
+      wx.navigateBack()
+    }
+    this.setData({
+      showCourt: false,
+      front: -1,
+      back: -1
+    })
   }
 })

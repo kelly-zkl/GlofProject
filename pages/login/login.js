@@ -1,23 +1,31 @@
 
-var http = require("http.js");
+var http = require("../../http.js");
+var app = getApp();
 
-//app.js
-App({
-  onLaunch: function () {
-    var that = this;
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     //获取用户信息
     wx.getStorage({
       key: 'user',
       success: function (res) {
-        that.globalData.userInfo = JSON.parse(res.data);
-        console.log(that.globalData.userInfo);
+        app.globalData.userInfo = JSON.parse(res.data);
+        wx.reLaunch({
+          url: '/pages/home/glof/glof',
+        })
       },
       fail: function (res) {//登录
-        console.log(res);
-        // that.login();
-        // wx.navigateTo({
-        //   url: '/pages/login/login',
-        // })
+        this.login();
       }
     })
   },
@@ -55,8 +63,8 @@ App({
                             if (this.userInfoReadyCallback) {
                               this.userInfoReadyCallback(res)
                             }
-
-                            wx.navigateTo({
+                           
+                            wx.reLaunch({
                               url: '/pages/home/glof/glof',
                             })
                           }
@@ -73,8 +81,5 @@ App({
         }
       }
     })
-  },
-  globalData: {
-    userInfo: {}
   }
 })

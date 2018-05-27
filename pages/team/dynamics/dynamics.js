@@ -53,7 +53,7 @@ Page({
     var that = this;
     http.postRequest({
       url: "user/detail",
-      params: { uid: app.globalData.userInfo.id },
+      params: { uid: app.globalData.userInfo.id, id: app.globalData.userInfo.id },
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         this.setData({

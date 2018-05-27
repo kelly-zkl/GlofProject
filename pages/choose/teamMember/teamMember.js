@@ -103,7 +103,7 @@ Page({
 
     //直接调用上2个页面的setData()方法，把数据存到上2个页面中去
     prevPage.setData({
-      chooseMembers: memArr
+      chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
     wx.navigateBack({
       delta: 2

@@ -3,7 +3,7 @@
     <view class="weui-panel weui-panel_access" wx:if="{{myteams.length > 0}}">
       <view class="weui-panel__hd">我创建的球队</view>
       <view class="weui-panel__bd" wx:for="{{myteams}}" wx:key="*this">
-        <navigator url="/pages/choose/teamMember/teamMember?id={{item.groupId}}" hover-class="weui-cell_active"
+        <view bindtap='gotoNext' data-tea="{{item}}" hover-class="weui-cell_active" 
           class="weui-media-box weui-media-box_appmsg" style='border-bottom: 1rpx #e5e5e5 solid'>
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
@@ -14,13 +14,13 @@
             <view class="weui-media-box__desc text-size-13">{{"地区："+item.province+"-"+item.city}}</view>
           </view>
           <view class="weui-cell__ft text-size-13">{{"成员："+item.memberNumber+"人"}}</view>
-        </navigator>
+        </view>
       </view>
     </view>
     <view class="weui-panel weui-panel_access" wx:if="{{joinsteams.length > 0}}">
       <view class="weui-panel__hd">我加入的球队</view>
       <view class="weui-panel__bd" wx:for="{{joinsteams}}" wx:key="*this">
-        <navigator url="/pages/choose/teamMember/teamMember?id={{item.groupId}}" hover-class="weui-cell_active"
+        <view bindtap='gotoNext' data-tea="{{item}}" hover-class="weui-cell_active"
           class="weui-media-box weui-media-box_appmsg" style='border-bottom: 1rpx #e5e5e5 solid'>
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
@@ -31,7 +31,7 @@
             <view class="weui-media-box__desc text-size-13">{{"地区："+item.province+"-"+item.city}}</view>
           </view>
           <view class="weui-cell__ft text-size-13">{{"成员："+item.memberNumber+"人"}}</view>
-        </navigator>
+        </view>
       </view>
     </view>
   </view>

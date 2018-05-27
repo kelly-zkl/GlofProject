@@ -14,7 +14,7 @@
     <view class="weui-tab__panel">
       <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
         <view class="weui-panel__bd" wx:for="{{courts}}" wx:key='*this'>
-          <view style='border-bottom:1rpx #e5e5e5 solid;background:#fff' class="weui-media-box weui-media-box_appmsg">
+          <view style='border-bottom:1rpx #e5e5e5 solid;background:#fff' class="weui-media-box weui-media-box_appmsg" bindtap='toggleCourt' id="{{index}}">
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
               <image class="weui-media-box__thumb t" 
               src="{{item.thumbs.length > 0 ? item.thumbs[0] :'../../../images/pic_160.png'}}"/>
@@ -27,7 +27,7 @@
             <view class="weui-cell__ft text-size-13">
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                 <view class="weui-media-box__title weui-media-box__title_in-text"
-                  style='color:#66CC99'>
+                  style='color:#66CC99' catchtap='toggleWeather'>
                   一周天气
                 </view>
                 <view class="weui-media-box__desc"></view>
@@ -40,6 +40,51 @@
         </view>
       </view>
       <view class="weui-tab__content" hidden="{{activeIndex != 1}}"></view>
+    </view>
+  </view>
+  <!--选择上下半场-->
+  <view class="zan-popup {{showCourt ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleCourt"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>{{courtName}}</view>
+        <view class='weui-grid__label' 
+        style='font-size:14px;color:#333;text-align:left;padding:0 30rpx'>上半场</view>
+        <view class='weui-flex' style='margin:30rpx'>
+          <block wx:for="{{zoneNames}}" wx:key="*this">
+            <view class='weui-flex__item c {{front==index?"view-checked":"view-normal"}}' 
+            bindtap='chooseFront' id="{{index}}">{{item}}</view>
+          </block>
+        </view>
+        <view class='weui-grid__label' 
+        style='font-size:14px;color:#333;text-align:left;padding:0 30rpx'>下半场</view>
+        <view class='weui-flex'style='margin:30rpx'>
+          <block wx:for="{{zoneNames}}" wx:key="*this">
+            <view class='weui-flex__item c {{back==index?"view-checked":"view-normal"}}' 
+            bindtap='chooseBack' id="{{index}}">{{item}}</view>
+          </block>
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid'
+           bindtap='confirmSelect' id="1">
+            <view class='weui-grid__label score' style='font-size:16px;color:#333'>取消</view>
+          </view>
+          <view class='weui-flex__item'  bindtap='confirmSelect' id="2">
+            <view class='weui-grid__label score'
+            style='font-size:16px;color:#75B5F1'>确认选择</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--查询一周天气情况-->
+  <view class="zan-popup {{showWeather ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleWeather"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>一周天气</view>
+        
+      </view>
     </view>
   </view>
 </view>

@@ -21,6 +21,7 @@ Page({
     disabled1: false,
     disabled2: false,
     files: [],
+    chooseMembers:[],
     showPopup: false,
     privacy:true,
     showInput:false
@@ -37,6 +38,7 @@ Page({
     var lastTime = obj.dateTime.pop();
 
     this.setData({
+      chooseMembers: [app.globalData.userInfo],
       dateTimeArray: obj.dateTimeArray,
       dateTime: obj.dateTime,
       date: util.getNowDate()
@@ -88,7 +90,7 @@ Page({
     var id = e.currentTarget.id;
     if (id == 1) {//同队球友
       wx.navigateTo({
-        url: '/pages/choose/chooseTeam/chooseTeam',
+        url: '/pages/choose/chooseTeam/chooseTeam?type=2',
       })
     } else if (id == 2) {//我关注的球友
       wx.navigateTo({
@@ -140,24 +142,27 @@ Page({
   createGame:function(e){
     var that = this;
     console.log(that.data.chooseMembers);
-    var playerPoles = [];
+    var playerPoles = [{ userId: app.globalData.userInfo.id}];
     (that.data.chooseMembers).map(function (item) {
       if (item.selected) {
-        playerPoles.push({ userId: item.userId})
+        playerPoles.push({ userId: item.id})
       }
     })
-    // if (!that.data.gameName || !that.data.dateTimeArray || !that.data.number1 || !that.data.files ||
-    //   !that.data.dateTime || !that.data.courtId || !that.data.backCourt || !that.data.frontCourt) {
-    //   wx.showToast({ title: '请完善赛事信息', icon: 'none', duration: 1500 });
-    //   return;
-    // }
+    var mainCourt = that.data.mainCourt;
+    var minorCourt1 = that.data.minorCourt1;
+    var minorCourt2 = that.data.minorCourt2;
+    if (!that.data.gameName || !that.data.dateTimeArray || !that.data.number1 || !that.data.files ||
+      !that.data.dateTime || !that.data.mainCourt) {
+      wx.showToast({ title: '请完善赛事信息', icon: 'none', duration: 1500 });
+      return;
+    }
     var timeStap = new Date(that.data.dateTimeArray[0][that.data.dateTime[0]] + '-' + that.data.dateTimeArray[1][that.data.dateTime[1]] + '-' + that.data.dateTimeArray[2][that.data.dateTime[2]] + ' ' + that.data.dateTimeArray[3][that.data.dateTime[3]] + ':' +that.data.dateTimeArray[4][that.data.dateTime[4]]).getTime();
     http.postRequest({
       url: "match/create",
       params: {
-        playerLimit: that.data.number1, playerPoles: playerPoles, matchName: that.data.gameName, 
-        startTime: timeStap, courtId: '5ae2f1776212ed31b8dbd161', frontCourt: 'F区', 
-        backCourt: 'E区', uid: app.globalData.userInfo.id
+        playerLimit: that.data.number1, players: playerPoles, matchName: that.data.gameName, startTime: timeStap, 
+        courtId: mainCourt.courtId, frontCourt: mainCourt.frontCourt, 
+        backCourt: mainCourt.backCourt, uid: app.globalData.userInfo.id
       },
       msg: '创建中...',
       success: res => {

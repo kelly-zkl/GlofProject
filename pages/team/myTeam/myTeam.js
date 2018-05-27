@@ -20,7 +20,8 @@ Page({
     imageWidth: '0px',
     page: 1,
     size: 10,
-    radioType: 0
+    radioType: 0,
+    members:[]
   },
   onLoad: function (options) {
     var that = this;
@@ -154,7 +155,8 @@ Page({
   //球员详情
   toggleMember() {
     this.setData({
-      showMember: !this.data.showMember
+      showMember: !this.data.showMember,
+      userId: e.currentTarget.id
     });
   },
   memberChange: function (e) {
@@ -163,11 +165,11 @@ Page({
     if (id == 2) {//修改正式差点
 
     } else if (id == 3) {//设为队长
-      
+      that.setPosition(false,'leader');
     } else if (id == 4) {//设为秘书
-
+      that.setPosition(false, 'secretary');
     } else if (id == 5) {//设为管理员
-
+      that.setPosition(true, 'admin');
     } else if (id == 6) {//踢出球队
 
     } else if (id == 7) {//取消
@@ -375,5 +377,19 @@ Page({
         this.getDynamics();
       }
     }, false);
+  },
+  //群主设置成员职位
+  setPosition: function (admin, tag){
+    http.postRequest({
+      url: "group/appoint",
+      params: {//标签 群主:admin 队长:leader 秘书:secretary 成员:member 临时成员:snap
+        groupId: that.data.groupId, uid: app.globalData.userInfo.id, userId: that.data.userId,
+        admin: admin, tag: tag
+      },
+      msg: "操作中...",
+      success: res => {
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 })
+      }
+    }, true);
   }
 });

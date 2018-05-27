@@ -16,11 +16,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id == 1) {//同队球友
+    // if (options.id == 1) {//同队球友
       this.getFollows();
-    } else if (options.id == 2) {//互相关注的球友
-      this.getFans();
-    }
+    // } else if (options.id == 2) {//互相关注的球友
+    //   this.getFans();
+    // }
   },
 
   //获取我的关注列表
@@ -118,7 +118,7 @@ Page({
 
     //直接调用上2个页面的setData()方法，把数据存到上2个页面中去
     prevPage.setData({
-      chooseMembers: memArr
+      chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
     wx.navigateBack()
   }

@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    pageNum:2
   },
 
   /**
@@ -18,6 +18,9 @@ Page({
    */
   onLoad: function (options) {
     this.getTeams();
+    this.setData({
+      pageNum: options.type
+    })
   },
 
   //获取我的球队列表
@@ -38,4 +41,22 @@ Page({
       }
     }, true);
   },
+  //选择球队/球友
+  gotoNext:function(e){
+    if (this.data.pageNum == 1){//球队
+      var pages = getCurrentPages();
+      var currPage = pages[pages.length - 1];   //当前页面
+      var prevPage = pages[pages.length - 2];  //上1个页面
+
+      //直接调用上2个页面的setData()方法，把数据存到上1个页面中去
+      prevPage.setData({
+        chooseTeam: e.currentTarget.dataset.tea
+      })
+      wx.navigateBack()
+    }else{//球友
+      wx:wx.navigateTo({
+        url: '/pages/choose/teamMember/teamMember?id=' + e.currentTarget.id
+      })
+    }
+  }
 })

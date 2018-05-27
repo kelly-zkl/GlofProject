@@ -37,13 +37,14 @@
           <view class="weui-uploader">
             <view class="weui-uploader__bd">
               <view class="weui-uploader__files" id="uploaderFiles">
-                <block wx:for="{{files}}" wx:key="*this">
-                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                <block wx:for="{{chooseMembers}}" wx:key="*this">
+                  <view class="weui-uploader__file">
+                    <image class="weui-uploader__img"
+                     src="{{item.avatarUrl}}" mode="aspectFill" />
                   </view>
                 </block>
               </view>
-              <view class="weui-uploader__input-box" wx:if="{{files.length<number1}}">
+              <view class="weui-uploader__input-box" wx:if="{{chooseMembers.length<number1}}">
                 <view class="weui-uploader__input" bindtap="togglePopup"></view>
               </view>
             </view>
@@ -70,11 +71,11 @@
     </view>
     <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="/pages/choose/chooseCourt/chooseCourt" class="weui-cell weui-cell_input" 
+        <navigator url="/pages/choose/chooseCourt/chooseCourt?type=1" class="weui-cell weui-cell_input" 
           hover-class="weui-cell_active">
           <view class="weui-cell__bd">球场</view>
           <view class="weui-cell__ft weui-cell__ft_in-access text-size-14" style="color:#333">
-            观澜湖高尔夫球会   前场：A  后场：C
+           {{mainCourt.courtName}} 前场：{{mainCourt.frontCourt}}  后场：{{mainCourt.backCourt}}
           </view>
         </navigator>
         <!-- <view class="weui-cell weui-cell_access">

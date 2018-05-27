@@ -89,7 +89,7 @@
                 bindtap="gotoTeam" id="{{item.groupId}}">{{"#"+item.groupName+"# "}}
               </view>
               <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
-                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
+                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateType}}"
                 wx:key="*this">{{"#"+game.relateId+"# "}}
               </view>
             </view>
@@ -143,7 +143,8 @@
     <view class="zan-popup__container">
       <view class="weui-cell weui-cell_input text-size-14">
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入回复内容" bindconfirm="createReply"/>
+          <input class="weui-input" placeholder="请输入回复内容" confirm-type="send"
+          bindconfirm="createReply"/>
         </view>
       </view>
     </view>

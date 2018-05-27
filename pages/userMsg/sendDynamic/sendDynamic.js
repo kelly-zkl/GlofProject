@@ -13,7 +13,8 @@ Page({
     picType:[],
     belongType:"",
     imageWidth:'0px',
-    upWidth:'0px'
+    upWidth:'0px',
+    chooseGames:[]
   },
 
   /**
@@ -130,17 +131,25 @@ Page({
   //发表动态
   postDynamic:function(e){
     var that = this;
+    var relates = [];
+    
+    if (that.data.chooseGames && that.data.chooseGames.length > 0){
+      (that.data.chooseGames).map(function (item) {
+        if (item.selected) {
+          relates.push({ relateId: item.matchId, relateType: "match" })
+        }
+      });
+    }
+    var syncGroupId='';
+    if (that.data.chooseTeam){
+      syncGroupId = that.data.chooseTeam.groupId;
+    }
+    
     if (!that.data.content && !that.data.files) {
       wx.showToast({title: '请输入动态',icon: 'none',duration: 1500});
       return;
     }
-    var relates = [];
-    (that.data.chooseMembers).map(function (item) {
-      if (item.selected) {
-        relates.push({ relateId: item.id, relateType: "match" })
-      }
-    });
-    var syncGroupId = that.data.chooseTeam.id;
+    
     http.postRequest({
       url: "userPost/create",
       params: {
