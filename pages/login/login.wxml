@@ -1,6 +1,6 @@
 <view class="page">
   <view class='page__bd' style='padding-top:50rpx'>
   <button open-type="getUserInfo" bindgetuserinfo="login" type="primary"
-  style='margin:50rpx' wx:if="{{canIUse}}">用户授权</button>
+  style='margin:50rpx' wx:if="{{canIUse}}">授权登录</button>
   </view>
 </view>

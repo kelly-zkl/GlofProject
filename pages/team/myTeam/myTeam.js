@@ -138,7 +138,9 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1) {//修改球队资料
-      
+      wx.navigateTo({
+        url: '/pages/team/modifyTeam/modifyTeam?id=' + team.groupId,
+      })
     } else if (id == 2) {//卸任队长
       
     } else if (id == 3) {//退出球队

@@ -15,6 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     //获取用户信息
     wx.getStorage({
       key: 'user',
@@ -25,7 +26,7 @@ Page({
         })
       },
       fail: function (res) {//登录
-        this.login();
+        that.login();
       }
     })
   },
