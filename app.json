@@ -85,26 +85,26 @@
       {
         "pagePath": "pages/home/glof/glof",
         "text": "GOLF",
-        "iconPath": "images/icon_intro.png",
-        "selectedIconPath": "images/icon_intro.png"
+        "iconPath": "images/icon_glof_normal.png",
+        "selectedIconPath": "images/icon_glof_selected.png"
       },
       {
         "pagePath": "pages/home/square/square",
         "text": "广场",
-        "iconPath": "images/icon_intro.png",
-        "selectedIconPath": "images/icon_intro.png"
+        "iconPath": "images/icon_square_normal.png",
+        "selectedIconPath": "images/icon_square_selected.png"
       },
       {
         "pagePath": "pages/home/circle/circle",
         "text": "圈子",
-        "iconPath": "images/icon_intro.png",
-        "selectedIconPath": "images/icon_intro.png"
+        "iconPath": "images/icon_circle_normal.png",
+        "selectedIconPath": "images/icon_circle_selected.png"
       },
       {
         "pagePath": "pages/home/user/user",
         "text": "我的",
-        "iconPath": "images/icon_intro.png",
-        "selectedIconPath": "images/icon_intro.png"
+        "iconPath": "images/icon_mine_normal.png",
+        "selectedIconPath": "images/icon_mine_selected.png"
       }
     ]
   },

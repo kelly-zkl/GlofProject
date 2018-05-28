@@ -37,7 +37,9 @@
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
         <navigator url="/pages/userMsg/personalPage/personalPage?tab=0&id={{userInfo.id}}" 
           class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_person_page.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">我的主页</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
@@ -47,19 +49,25 @@
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
         <navigator url="/pages/game/gameResult/gameResult" hover-class="weui-cell_active"
           class="weui-cell weui-cell_access">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_my_score.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">我的赛绩</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
         <navigator url="/pages/game/gameRecords/gameRecords" class="weui-cell weui-cell_access"
           hover-class="weui-cell_active">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_game_list.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">赛事记录</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
         <navigator url="/pages/court/courtRecords/courtRecords" class="weui-cell weui-cell_access"
           hover-class="weui-cell_active">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_court_list.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">球场记录</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
@@ -69,7 +77,9 @@
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
         <navigator url="/pages/userMsg/myWallet/myWallet" class="weui-cell weui-cell_access" 
           hover-class="weui-cell_active">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_wallet.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">我的钱包</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
@@ -79,19 +89,25 @@
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
         <navigator url="/pages/userMsg/myPrivacy/myPrivacy?&id={{userInfo.id}}"
           hover-class="weui-cell_active"  class="weui-cell weui-cell_access">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_setting.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary"><view>隐私设置</view></view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
         <navigator url="/pages/userMsg/helpDoc/helpDoc" class="weui-cell weui-cell_access"
           hover-class="weui-cell_active">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_help.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">使用帮助</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
         <navigator url="/pages/userMsg/aboutGlof/aboutGlof" class="weui-cell weui-cell_access"
           hover-class="weui-cell_active">
-          <view class="weui-cell__hd"><image src="{{icon20}}" class="icon-size"/></view>
+          <view class="weui-cell__hd">
+            <image src="../../../images/icon_about.png" class="icon-size"/>
+          </view>
           <view class="weui-cell__bd weui-cell_primary">关于GLOF</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
