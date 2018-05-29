@@ -22,18 +22,19 @@
   background:#fff;
   border: 2rpx solid #66CC99;
   color: #66CC99;
-  border-radius: 8rpx
+  border-radius: 8rpx;
+  vertical-align:middle
 }
 
-.zan-tag{display:inline-block;position:relative;box-sizing:border-box;line-height: 60rpx;border-radius: 30rpx;padding:0 30rpx;font-size:14px;background:#c9c9c9;text-align:center;color:#fff}
+.zan-tag{display:inline-block;position:relative;box-sizing:border-box;line-height: 60rpx;border-radius: 30rpx;padding:0 30rpx;font-size:14px;background:#c9c9c9;text-align:center;color:#fff;vertical-align:middle}
 .zan-tag::after{border-radius:60rpx}
 .weui-input,.zan-tag,.view.t{
   margin-top: 10rpx;
 }
 input .wx-input::focus{margin-bottom: 0}
-.zan-tag.zan-tag--primary.zan-tag--plain.green{color:#43CBB3;}
+.zan-tag.zan-tag--primary.zan-tag--plain.green{color:#43CBB3}
 .green.zan-tag--primary::after{border-color:#43CBB3}
-.zan-tag.zan-tag--primary.zan-tag--plain.yellow{color:#F48484;}
+.zan-tag.zan-tag--primary.zan-tag--plain.yellow{color:#F48484}
 .yellow.zan-tag--primary::after{border-color:#F48484}
-.zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#5C80CB;}
+.zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#5C80CB}
 .blue.zan-tag--primary::after{border-color:#5C80CB}

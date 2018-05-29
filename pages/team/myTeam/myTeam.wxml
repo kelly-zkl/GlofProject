@@ -145,19 +145,22 @@
               <view class='weui-flex__item title'>备注</view>
             </view>
             <view wx:for="{{members}}" wx:key="*this" style='border-top:1rpx solid #e5e5e5'>
-              <view class='weui-flex' bindtap='toggleMember' id="{{item.userId}}">
+              <view class='weui-flex' bindtap='toggleMember' id="{{item.user.id}}" data-name="{{item.user.name}}">
                 <view class='weui-flex__item'>
-                  <image class="weui-grid__icon s" src="../../../images/pic_160.png"/>
-                  <view class="text-size-12" style='color:#888;text-align:center'>微信昵称</view>
+                  <image class="weui-grid__icon s" src="{{item.user.avatarUrl}}"/>
+                  <view class="text-size-12" style='color:#888;text-align:center'>{{item.user.name}}</view>
                 </view>
-                <view class='weui-flex__item content'>男/女</view>
-                <view class='weui-flex__item content'>0</view>
-                <view class='weui-flex__item content'>0</view>
+                <view class='weui-flex__item content'>
+                {{item.user.gender==1?'男':item.user.gender==2?'女':'未知'}}
+                </view>
+                <view class='weui-flex__item content'>{{item.golfHandicap?item.golfHandicap:'--'}}</view>
+                <view class='weui-flex__item content'>{{item.golfRefHandicap?item.golfRefHandicap:'--'}}</view>
                 <view class='weui-flex__item'>
-                  <view class="weui-grid__label {{index%2==0?'team-manager':''}}">管理员</view>
-                  <view wx:if="{{index%3!=1}}"
-                  class="weui-grid__label {{index%3==0?'team-captain':index%3==2?'team-secretary':''}}">
-                    {{index%3==0?'队长':index%3==2?'秘书':''}}
+                  <view class="weui-grid__label {{item.admin?'team-manager':''}}">
+                  {{item.admin?'管理员':item.tag=='member'?'成员':'临时成员'}}</view>
+                  <view wx:if="{{item.admin}}"
+                  class="weui-grid__label {{item.tag=='leader'?'team-captain':item.tag=='secretary'?'team-secretary':item.tag=='admin'?'team-admin':''}}">
+                    {{item.tag=='leader'?'队长':item.tag=='secretary'?'秘书':item.tag=='admin'?'群主':''}}
                   </view>
                 </view>
               </view>
@@ -170,10 +173,10 @@
                   <view class="weui-uploader">
                     <view class="weui-uploader__bd">
                       <view class="weui-uploader__files">
-                        <block wx:for="1234567890" wx:key="*this">
+                        <block wx:for="{{members}}" wx:key="*this">
                           <view class="weui-uploader__file" bindtap='toggleMember'
-                          id="{{item.userId}}">
-                            <image class="weui-uploader__img" src="../../../images/pic_160.png" 
+                          id="{{item.user.id}}" data-name="{{item.user.name}}">
+                            <image class="weui-uploader__img" src="{{item.user.avatarUrl}}" 
                               style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
                           </view>
                         </block>
@@ -213,7 +216,7 @@
           <view style="font-size:15px">
             <view class="weui-flex c">
               <view class="placeholder">成立日期</view>
-              <view class="weui-flex__item c">{{team.createTime}}</view>
+              <view class="weui-flex__item c">{{team.setupTime}}</view>
             </view>
             <view class="weui-flex c">
               <view class="placeholder">队员要求</view>
@@ -233,20 +236,20 @@
     </view>
   </view>
   <button class="weui-btn send" bindtap="gotoPost" wx:if="{{activeIndex == 0}}">
-    <icon type="success" size="20" color="white" style="margin-right:10rpx"/>发动态
+    <image src="../../../images/icon_photo.png" style="width:26px;height:26px;margin-right:10rpx"/>发动态
   </button>
   <button class="weui-btn send" bindtap="relationGame" wx:if="{{activeIndex == 2}}">
-    <icon type="success" size="20" color="white" style="margin-right:10rpx"/>关联比赛
+    <image src="../../../images/icon_photo.png" style="width:26px;height:26px;margin-right:10rpx"/>关联比赛
   </button>
   <!--管理-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access line" id="1" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="popuChange" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">修改球队信息</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange" wx:if="{{team.user.tag == 'leader'}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">卸任队长</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
@@ -263,22 +266,22 @@
     <view class="zan-popup__mask" catchtap="toggleMember"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access line" id="1" bindtap="memberChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:left;padding:15rpx">队员姓名</view>
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="memberChange" data-id=''>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:left;padding:15rpx">{{userName}}</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="2" bindtap="toggleModify">
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="toggleModify" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">修改正式差点</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="3" bindtap="memberChange">
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="memberChange" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为队长</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="4" bindtap="memberChange">
+        <view class="weui-cell weui-cell_access line" id="4" bindtap="memberChange" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为秘书</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="5" bindtap="memberChange">
+        <view class="weui-cell weui-cell_access line" id="5" bindtap="memberChange" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为管理员</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="6" bindtap="memberChange">
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="memberChange" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">踢出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="7" bindtap="memberChange">

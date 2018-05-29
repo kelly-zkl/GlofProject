@@ -1,13 +1,13 @@
 <view class="page">
   <view class="page__bd">
-    <view class="weui-flex" style="background:#fff;padding:30rpx 0px">
-      <navigator url="/pages/team/dynamics/dynamics" class="weui-flex__item">
+    <view class="weui-flex" style="background:#fff">
+      <navigator url="/pages/team/dynamics/dynamics" class="weui-flex__item" style='padding:30rpx 0px'>
         <image class="weui-grid__icon zan-badge" src="../../../images/circle_dynamic.png">
           <view class="zan-badge__count"></view>
         </image>
         <view class="weui-grid__label" style="color:#999">球友动态</view>
       </navigator>
-      <navigator url="/pages/team/message/message" class="weui-flex__item">
+      <navigator url="/pages/team/message/message" class="weui-flex__item" style='padding:30rpx 0px'>
         <image class="weui-grid__icon zan-badge" src="../../../images/circle_message.png">
           <view class="zan-badge__count"></view>
         </image>
@@ -28,7 +28,7 @@
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-              <navigator url="/pages/team/createTeam/createTeam" class="weui-cell weui-cell_access" 
+              <navigator url="/pages/team/createTeam/createTeam?id=1" class="weui-cell weui-cell_access" 
                 hover-class="weui-cell_active">
                 <view class="weui-cell__hd"><image src="../../../images/icon_add_team.png" class="icon-size"/></view>
                 <view class="weui-cell__bd weui-cell_primary">创建球队</view>

@@ -7,8 +7,10 @@
             <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">
-              <view style='display:inline-block'>{{userInfo.name}}</view>
+            <view class="weui-media-box__title" style='display: flex;align-items: center'>
+              <view style='display:inline-block;margin-right:5px'>{{userInfo.name}}</view>
+              <image style='display:inline-block;width:18px;height:18px' 
+              src="{{userInfo.gender==1?male:userInfo.gender==2?female:''}}"></image>
               <!-- <image style='display:inline-block;width:15px;height:15px' src="../../../images/icon_intro.png"></image>
               <view class="{{idx%4==0?'view-amateur':idx%4==1?'profession-junior':idx%4==2?'profession-middle':'profession-senior'}}">
               {{idx%4==0?'业余':idx%4==1?'职业-初级':idx%4==2?'职业-中级':'职业-高级'}}</view> -->
@@ -21,11 +23,9 @@
             </button>
           </view>
           <view class="weui-cell__ft" hidden="{{person != 1}}">
-            <image src="../../../images/icon_intro.png" class="icon-size" bindtap="followPerson"
-              wx:if="{{!userInfo.followedId}}"/>
-            <image src="../../../images/pic_160.png" class="icon-size" bindtap="unfollowPerson"
-              wx:else/>
-            <image src="../../../images/icon_intro.png" class="icon-size" bindtap="chatPage"/>
+            <image src="{{!userInfo.followedId?'../../../images/icon_follow.png':'../../../images/icon_unfollow.png'}}" 
+            class="icon-size" bindtap="followPerson"/>
+            <image src="../../../images/icon_msg.png" class="icon-size" bindtap="chatPage"/>
           </view>
         </view>
       </view>

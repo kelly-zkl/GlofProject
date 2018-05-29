@@ -2,15 +2,15 @@
   <view class="page__bd">
     <view class="weui-flex" style="background:#66CC99">
       <view style="padding-left:30rpx">
-        <image src="../../../images/icon_intro.png" style="width:20px;height:20px"/>
-        <image src="../../../images/icon_intro.png" style="width:20px;height:20px;padding-left:30rpx"/>
+        <image src="../../../images/icon_game_code.png" style="width:26px;height:26px"/>
+        <image src="../../../images/icon_game_share.png" style="width:26px;height:26px;padding-left:30rpx"/>
       </view>
-      <view class="weui-flex__item text-size-14">
+      <view class="weui-flex__item text-size-15">
         <view style="color:#fff;text-align:center">{{gameDetail.matchName}}</view>
       </view>
       <view style="padding-right:30rpx">
-        <image style="width:20px;height:20px;padding-right:30rpx"/>
-        <image src="../../../images/icon_intro.png" style="width:20px;height:20px" bindtap='toggleManager'/>
+        <image style="width:26px;height:26px;padding-right:30rpx"/>
+        <image src="../../../images/icon_game_setting.png" style="width:26px;height:26px" bindtap='toggleManager'/>
       </view>
     </view>
     <view class="weui-panel weui-panel_access" style="background:#66CC99;margin:0px">
@@ -75,7 +75,7 @@
       style="padding:30rpx 30rpx 20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <view class='weui-flex'>
         <navigator url='/pages/game/gameChat/gameChat'>
-          <image src="../../../images/pic_160.png" style="width:60rpx;height:60rpx"/>
+          <image src="../../../images/icon_game_chat.png" style="width:60rpx;height:60rpx"/>
         </navigator>
         <view class="weui-flex__item" style='text-align:center'>
           <view class="tui-tabbar-group">
@@ -88,7 +88,7 @@
           </view>
         </view>
         <navigator url='/pages/game/gameDynamic/gameDynamic'>
-          <image src="../../../images/icon_intro.png" style="width:60rpx;height:60rpx"/>
+          <image src="../../../images/icon_game_dynamic.png" style="width:60rpx;height:60rpx"/>
         </navigator>
       </view>
     </view>

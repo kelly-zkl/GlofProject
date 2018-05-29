@@ -8,66 +8,67 @@
       </block>
     </swiper>
     <view class="weui-article" style="padding-bottom:80px">
-      <view class="weui-article__h1">观澜湖高尔夫球会</view>
+      <view class="weui-article__h1">{{court.courtName}}</view>
       <view class="weui-article__section">
         <view class="weui-article__section">
           <view class="weui-article__p" style="color:#999">
-            <view>电话：0755-34343434</view>
-            <view>费用：800元/时</view>
-            <view>地址：地址地址地址地址地址地址地址地址地</view>
+            <view>电话：{{court.phone}}</view>
+            <view>费用：{{court.priceDes}}</view>
+            <view>地址：{{court.province}} {{court.city}}</view>
           </view>
         </view>
         <view class="weui-article__section">
           <view class="weui-article__h3" style="color:#999">简介</view>
-          <view class="weui-article__p">
-            高地乡村俱乐部（Terrace Downs Resort）提供真正的一站式高尔夫球场和休闲度假胜地体验——将一系列豪华住宿和休闲活               动与新西兰风景最佳的 18 洞锦标赛球场汇聚一处。
-          </view>
+          <view class="weui-article__p">{{court.des}}</view>
         </view>
         <view class="weui-article__section">
           <view class="weui-article__h3" style="color:#999">球场信息</view>
           <view class="weui-article__p" style="border:1rpx #D9D9D9 solid;padding: 10rpx 30rpx">
             <view class="weui-flex">
               <view class="placeholder">球场模式</view>
-              <view class="weui-flex__item">山地球场</view>
+              <view class="weui-flex__item">{{court.courtMode}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">建立时间</view>
-              <view class="weui-flex__item">1990年</view>
+              <view class="weui-flex__item">{{court.setupTime}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">球场面积</view>
-              <view class="weui-flex__item">2000亩</view>
+              <view class="weui-flex__item">{{court.courtAcre}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">球道长度</view>
-              <view class="weui-flex__item">123456码</view>
+              <view class="weui-flex__item">{{court.courtLen}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">球道草种</view>
-              <view class="weui-flex__item">台湾草</view>
+              <view class="weui-flex__item">{{court.courtGrassK}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">果岭草种</view>
-              <view class="weui-flex__item">老莹草</view>
+              <view class="weui-flex__item">{{court.greenGrassK}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">果岭速度</view>
-              <view class="weui-flex__item">9</view>
+              <view class="weui-flex__item">{{court.speed}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">球洞总数</view>
-              <view class="weui-flex__item">36</view>
+              <view class="weui-flex__item">{{court.courtAcre}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">标准杆</view>
-              <view class="weui-flex__item">144</view>
+              <view class="weui-flex__item">{{court.parNumber}}</view>
             </view>
           </view>
         </view>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom">
-      <button class="weui-btn" type="primary" style="background:#66CC99">创建比赛</button>
+      <button class="weui-btn" type="primary" plain="true" bindtap='togglePopu'
+      style="color:6c9;display:inline-block;margin-right:20px;width:30%">一周天气</button>
+      <button class="weui-btn" type="primary" 
+      style="background:#6C9;display:inline-block;width:60%" bindtap='createGame'>创建比赛</button>
     </view>
   </view>
 </view>

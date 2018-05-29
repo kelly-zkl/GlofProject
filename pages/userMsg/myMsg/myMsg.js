@@ -40,7 +40,7 @@ Page({
       params: { uid: that.data.uid, id: that.data.uid},
       msg:'加载中...',
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'none', duration: 1500 });
+        wx.showToast({ title: '加载成功', icon: 'success', duration: 1500 });
         var sexItems = this.data.sexItems;
         for (var i = 0, len = sexItems.length; i < len; ++i) {
           sexItems[i].checked = sexItems[i].value == res.data.gender;

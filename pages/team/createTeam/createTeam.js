@@ -19,18 +19,52 @@ Page({
     showPopup: false,
     allowSJoin:true,
     date:"2017-09-01",
-    thumbUrl:"../../../images/pic_160.png"
+    thumbUrl:"../../../images/pic_160.png",
+    team:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      date: util.getNowDate()
+    var that = this;
+    that.setData({
+      date: util.getNowDate(),
+      groupId: options.id
     });  
+    wx.setNavigationBarTitle({
+      title: that.data.groupId == 1 ? "创建球队" : "修改球队信息"
+    })
+    if (that.data.groupId != 1){
+      that.getGroupDetail();
+    }
   },
-
+  //获取球队详情
+  getGroupDetail: function (e) {
+    var that = this;
+    http.postRequest({
+      url: "group/detail",
+      params: {
+        groupId: that.data.groupId, uid: app.globalData.userInfo.id
+      },
+      msg: "加载中....",
+      success: res => {
+        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        that.setData({
+          team: res.data,
+          groupName: res.data.groupName,
+          thumbUrl: res.data.thumbUrl,
+          date: res.data.setupTime,
+          claim: res.data.claim,
+          intro: res.data.intro,
+          slogan: res.data.slogan,
+          province: res.data.province,
+          city: res.data.city,
+          allowSJoin: res.data.allowSJoin
+        })
+      }
+    }, true);
+  },
   onReady: function (e) {
     var that = this;
     //请求数据
@@ -149,7 +183,7 @@ Page({
       allowSJoin: e.detail.value
     });
   },
-  //创建球队
+  //创建球队--修改球队信息
   createTeam:function(e){
     var that = this;
     if (!that.data.groupName || !that.data.slogan || !that.data.province || !that.data.city ||
@@ -158,20 +192,34 @@ Page({
       wx.showToast({ title: '请完善球队信息', icon: 'none', duration: 1500 });
       return;
     }
-    http.postRequest({
-      url: "group/create",
-      params: {
-        slogan: that.data.slogan, province: that.data.province, city: that.data.city, setupTime: that.data.date,
-        groupName: that.data.groupName, thumbUrl: that.data.thumbUrl, claim: that.data.claim,
-        intro: that.data.intro, allowSJoin: that.data.allowSJoin, uid: app.globalData.userInfo.id
-      },
-      msg: '创建中...',
-      success: res => {
-        wx.showToast({ title: '创建成功', icon: 'none', duration: 1500 })
-        wx.navigateBack({
-          delta: 1
-        })
-      }
-    }, true);
+    if (this.data.groupId == 1) {
+      http.postRequest({
+        url: "group/create",
+        params: {
+          slogan: that.data.slogan, province: that.data.province, city: that.data.city, setupTime: that.data.date,
+          groupName: that.data.groupName, thumbUrl: that.data.thumbUrl, claim: that.data.claim,
+          intro: that.data.intro, allowSJoin: that.data.allowSJoin, uid: app.globalData.userInfo.id
+        },
+        msg: '创建中...',
+        success: res => {
+          wx.showToast({ title: '创建成功', icon: 'none', duration: 1500 })
+          wx.navigateBack()
+        }
+      }, true);
+    }else{
+      http.postRequest({
+        url: "group/update",
+        params: {
+          slogan: that.data.slogan, province: that.data.province, city: that.data.city, setupTime: that.data.date,
+          groupName: that.data.groupName, thumbUrl: that.data.thumbUrl, claim: that.data.claim,
+          intro: that.data.intro, allowSJoin: that.data.allowSJoin, uid: app.globalData.userInfo.id, groupId: that.data.groupId
+        },
+        msg: '修改中...',
+        success: res => {
+          wx.showToast({ title: '修改成功', icon: 'none', duration: 1500 })
+          wx.navigateBack()
+        }
+      }, true);
+    }
   }
 })

@@ -28,7 +28,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          imageWidth: ((res.windowWidth - 42) / 4) + 'px',//weui-cell的padding:10px 15px
+          imageWidth: ((res.windowWidth - 50) / 4) + 'px',//weui-cell的padding:10px 15px
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
@@ -43,13 +43,29 @@ Page({
    */
   onShow: function () {
     this.getGroupDetail();
-    this.getDynamics();
+    
+    if (this.data.activeIndex == 0) {//动态
+      this.getDynamics();
+    } else if (this.data.activeIndex == 1) {//成员
+      this.getMembers();
+    } else if (this.data.activeIndex == 2) {//队赛
+      // this.getFans();
+    }
   },
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+    if (e.currentTarget.id == 0) {//动态
+      this.getDynamics();
+    } else if (e.currentTarget.id == 1) {//成员
+      this.getMembers();
+    } else if (e.currentTarget.id == 2) {//队赛
+      // this.getFans();
+    } else {//详情
+      this.getGroupDetail();
+    }
   },
   //成员详情、成员头像
   douChange: function (e) {
@@ -66,14 +82,14 @@ Page({
         belongId: that.data.groupId, page: that.data.page, size: that.data.size,
         belongType: "group", uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         this.setData({
           dynamics: res.data.content
         })
       }
-    }, true);
+    }, false);
   },
   //跳转到发动态页面
   gotoPost: function () {
@@ -139,46 +155,46 @@ Page({
     var id = e.currentTarget.id;
     if (id == 1) {//修改球队资料
       wx.navigateTo({
-        url: '/pages/team/modifyTeam/modifyTeam?id=' + team.groupId,
+        url: '/pages/team/createTeam/createTeam?id=' + this.data.team.groupId,
       })
     } else if (id == 2) {//卸任队长
-      
+      that.setPosition(false, 'member');
     } else if (id == 3) {//退出球队
-      that.setData({
-        showPopup: false
-      });
       that.quitTeam();
-    } else if (id == 4) {
-      that.setData({
-        showPopup: false
-      });
     }
+    that.setData({
+      showPopup: false
+    });
   },
   //球员详情
-  toggleMember() {
+  toggleMember(e) {
     this.setData({
       showMember: !this.data.showMember,
-      userId: e.currentTarget.id
+      userId: e.currentTarget.id,
+      userName:e.currentTarget.dataset.name
     });
   },
   memberChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
-    if (id == 2) {//修改正式差点
+    if (id == 1){//队员主页
+      wx.navigateTo({
+        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + that.data.userId,
+      })
+    } else if (id == 2) {//修改正式差点
 
     } else if (id == 3) {//设为队长
-      that.setPosition(false,'leader');
+      that.setPosition(true,'leader');
     } else if (id == 4) {//设为秘书
-      that.setPosition(false, 'secretary');
+      that.setPosition(true, 'secretary');
     } else if (id == 5) {//设为管理员
       that.setPosition(true, 'admin');
     } else if (id == 6) {//踢出球队
-
-    } else if (id == 7) {//取消
-      that.setData({
-        showMember: false
-      });
+      that.hackingTeam();
     }
+    that.setData({
+      showMember: false
+    });
   },
   //管理成员
   toggleManager() {
@@ -214,15 +230,39 @@ Page({
       params: {
         groupId: that.data.groupId, uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        res.data.createTime = util.formatTime(new Date(res.data.createTime*1000), '-');
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // res.data.createTime = util.formatTime(new Date(res.data.createTime*1000), '-');
         that.setData({
           team: res.data
         })
       }
-    }, true);
+    }, false);
+  },
+  //踢出球队
+  hackingTeam:function(){
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定要将该成员踢出球队？',
+      success: function (res) {
+        if (res.confirm) {
+          http.postRequest({
+            url: "group/hacking",
+            params: {
+              groupId: that.data.groupId, uid: app.globalData.userInfo.id, userId: that.data.userId
+            },
+            msg: "操作中...",
+            success: res => {
+              wx.showToast({ title: '操作成功', icon: 'info', duration: 1500 })
+              this.getMembers();
+            }
+          }, true);
+        } else if (res.cancel) {
+        }
+      }
+    })
   },
   //退出球队
   quitTeam:function(){
@@ -240,9 +280,7 @@ Page({
             msg: "操作中...",
             success: res => {
               wx.showToast({ title: '已退出该球队', icon: 'info', duration: 1500 })
-              wx.navigateBack({
-                delta: 1
-              })
+              wx.navigateBack()
             }
           }, true);
         } else if (res.cancel) {
@@ -393,5 +431,20 @@ Page({
         wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 })
       }
     }, true);
+  },
+  //获取球员列表
+  getMembers(){
+    var that = this;
+    http.postRequest({
+      url: "group/members",
+      params: {
+        groupId: that.data.groupId
+      },
+      success: res => {
+        that.setData({
+          members: res.data.content
+        })
+      }
+    }, false);
   }
 });

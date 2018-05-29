@@ -109,6 +109,6 @@
     </view>
   </view>
   <button class="weui-btn send" bindtap="gotoPost">
-      <icon type="success" size="20" color="white" style="margin-right:10rpx"/>发动态
+    <image src="../../../images/icon_photo.png" style="width:26px;height:26px;margin-right:10rpx"/>发动态
   </button>
 </view>

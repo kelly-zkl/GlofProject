@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd">
+  <view class="page__bd" style='magin-bottom:90px'>
     <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:30rpx">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
@@ -77,10 +77,11 @@
         <view class="view t" size="mini" wx:else bindtap="showInput">添加标签</view>
       </view>
     </view>
-    <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" 
+      style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="saveUserInfo">保存</button>
     </view>
-  </view>
   <import src="../../../template/model/model.wxml"/>
   <template is="areaData" data="{{...item}}"/>
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showSexPopup ? 'zan-popup--show' : ''}}">

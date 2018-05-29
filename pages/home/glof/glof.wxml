@@ -1,16 +1,16 @@
 <!--index.wxml-->
 <view class="page">
   <view class="page__bd">
-    <view class="weui-flex" style="background:#66CC99;padding:30rpx 0px">
-      <view class="weui-flex__item" bindtap='scan'>
+    <view class="weui-flex" style="background:#66CC99">
+      <navigator class="weui-flex__item" bindtap='scan' style='padding:30rpx 0px'>
         <image class="weui-grid__icon img" src="../../../images/icon_scan.png" />
         <view class="weui-grid__label" style="color:#fff">扫一扫</view>
-      </view>
-      <navigator url="/pages/game/codeEnter/codeEnter" class="weui-flex__item">
+      </navigator>
+      <navigator url="/pages/game/codeEnter/codeEnter" class="weui-flex__item" style='padding:30rpx 0px'>
         <image class="weui-grid__icon img" src="../../../images/icon_code.png" />
         <view class="weui-grid__label" style="color:#fff">比赛编码</view>
       </navigator>
-      <navigator url="/pages/game/createGame/createGame" class="weui-flex__item">
+      <navigator url="/pages/game/createGame/createGame" class="weui-flex__item" style='padding:30rpx 0px'>
         <image class="weui-grid__icon img" src="../../../images/icon_create_game.png" />
         <view class="weui-grid__label" style="color:#fff">创建比赛</view>
       </navigator>
@@ -34,8 +34,8 @@
                 hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
                   <image class="weui-media-box__thumb t" src="../../../images/pic_160.png"/>
-                  <view class="{{item.followerId?'tip-follow':item.joined==1?'tip-join':''}}">
-                    {{item.followerId?'已关注':item.joined==1?'已参赛':''}}
+                  <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':''}}">
+                    {{item.joined==1?'已参赛':item.followerId?'已关注':''}}
                   </view>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
@@ -50,8 +50,9 @@
                       {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : ''}}
                     </view>
                     <view class="weui-media-box__desc">
-                      {{item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km'}}</view>
-                    <view class="weui-media-box__info" style="color:#999">{{item.followerNum}}人关注</view>
+                      {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}
+                    </view>
+                    <view class="weui-media-box__info" style="color:#999">{{item.followerNum+'人关注'}}</view>
                   </view>
                 </view>
               </navigator>
@@ -60,14 +61,14 @@
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__bd" wx:for='{{games}}' wx:key='*this'>
+            <view class="weui-panel__bd" wx:for='{{myGames}}' wx:key='*this'>
               <navigator url="/pages/game/gameDetail/gameDetail?id={{item.matchId}}" 
                 class="weui-media-box weui-media-box_appmsg"
                 hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
                   <image class="weui-media-box__thumb t" src="../../../images/pic_160.png"/>
-                  <view class="{{item.followerId?'tip-follow':item.joined==1?'tip-join':''}}">
-                    {{item.followerId?'已关注':item.joined==1?'已参赛':''}}
+                  <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':''}}">
+                    {{item.joined==1?'已参赛':item.followerId?'已关注':''}}
                   </view>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
@@ -82,8 +83,9 @@
                       {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : ''}}
                     </view>
                     <view class="weui-media-box__desc">
-                      {{item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km'}}</view>
-                    <view class="weui-media-box__info" style="color:#999">{{item.followerNum}}人关注</view>
+                      {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}
+                    </view>
+                    <view class="weui-media-box__info" style="color:#999">{{item.followerNum+'人关注'}}</view>
                   </view>
                 </view>
               </navigator>

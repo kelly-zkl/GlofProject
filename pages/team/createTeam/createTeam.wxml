@@ -9,7 +9,8 @@
           <view class="weui-label">球队名称</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入球队名称" confirm-type="done" bindinput="inputName"/>
+          <input class="weui-input" placeholder="请输入球队名称" confirm-type="done"
+           bindinput="inputName" value='{{team.groupName}}'/>
         </view>
       </view>
       <view class="weui-cell weui-cell_input" bindtap="showArea" hover-class="weui-cell_active">
@@ -37,7 +38,8 @@
           <view class="weui-label">队员要求</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入队员要求" confirm-type="done" bindinput="inputClaim"/>
+          <input class="weui-input" placeholder="请输入队员要求" confirm-type="done" 
+          bindinput="inputClaim" value='{{team.claim}}'/>
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -45,7 +47,8 @@
           <view class="weui-label">球队口号</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入球队口号" confirm-type="done" bindinput="inputSlogan"/>
+          <input class="weui-input" placeholder="请输入球队口号" confirm-type="done" 
+          bindinput="inputSlogan" value='{{team.slogan}}'/>
         </view>
       </view>
       <view class="weui-cell weui-cell_input">
@@ -53,7 +56,8 @@
           <view class="weui-label">球队介绍</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入球队介绍" confirm-type="done" bindinput="inputIntro"/>
+          <input class="weui-input" placeholder="请输入球队介绍" confirm-type="done" 
+          bindinput="inputIntro" value='{{team.intro}}'/>
         </view>
       </view>
     </view>
@@ -68,7 +72,9 @@
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="createTeam">创建球队</button>
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="createTeam">
+      {{groupId==1?'创建球队':'确认修改'}}
+      </button>
     </view>
   </view>
   <import src="../../../template/model/model.wxml"/>

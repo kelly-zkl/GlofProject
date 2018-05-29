@@ -42,6 +42,8 @@ Page({
     that.setData({
       icon20: base64.icon20,
       icon60: base64.icon60,
+      male: '../../../images/icon_male.png',
+      female: '../../../images/icon_female.png',
       userId: app.globalData.userInfo.id
     })
   },

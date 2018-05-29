@@ -36,7 +36,7 @@
             <view class="weui-media-box__info" style="color:#999">地区：{{item.province+'-'+item.city}}</view>
           </view>
           <view class="weui-cell__ft text-size-13">
-          {{item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km'}}
+          {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':''}}
           </view>
         </navigator>
       </view>

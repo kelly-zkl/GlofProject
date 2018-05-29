@@ -107,9 +107,9 @@ Page({
   getTeamMembers: function (e) {
     var that = this;
     http.postRequest({
-      url: "user/following",
+      url: "user/historyRival",
       params: {
-        beWatchType: "user", uid: app.globalData.userInfo.id
+        page: 1, uid: app.globalData.userInfo.id, size:10
       },
       msg: "加载中....",
       success: res => {

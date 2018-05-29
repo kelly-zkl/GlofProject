@@ -29,6 +29,7 @@ Page({
   },
   onShow:function(e){
     var that = this;
+
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
@@ -36,11 +37,19 @@ Page({
           latitude: res.latitude,
           longitude: res.longitude
         });
-        that.getGames();
+        if (that.data.activeIndex == 0) {//附近赛事
+          that.getGames();
+        } else if (that.data.activeIndex == 1) {//我的赛事
+          that.getMyGames();
+        }
       },
       fail: function () {
         wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
-        that.getGames();
+        if (that.data.activeIndex == 0) {//附近赛事
+          that.getGames();
+        } else if (that.data.activeIndex == 1) {//我的赛事
+          that.getMyGames();
+        }
       }
     })
   },
@@ -51,24 +60,29 @@ Page({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
-    if (e.currentTarget.id == 0) {//附近赛事
-      wx.getLocation({
-        type: 'wgs84',
-        success: function (res) {
-          that.setData({
-            latitude: res.latitude,
-            longitude: res.longitude
-          });
-          that.getGames();
-        },
-        fail: function () {
-          wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
-          that.getGames();
-        }
-      })
-    } else if (e.currentTarget.id == 0) {//我的赛事
 
-    }
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+        if (e.currentTarget.id == 0) {//附近赛事
+          that.getGames();
+        } else if (e.currentTarget.id == 1) {//我的赛事
+          that.getMyGames();
+        }
+      },
+      fail: function () {
+        wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
+        if (e.currentTarget.id == 0) {//附近赛事
+          that.getGames();
+        } else if (e.currentTarget.id == 1) {//我的赛事
+          that.getMyGames();
+        }
+      }
+    })
   },
   //扫一扫
   scan: function (e) {
@@ -82,7 +96,7 @@ Page({
       }
     })
   },
-  //获取赛事列表
+  //获取附近赛事列表
   getGames:function(e){
     var that = this;
     http.postRequest({
@@ -98,6 +112,26 @@ Page({
         })
         that.setData({
           games: res.data.content
+        })
+      }
+    }, true);
+  },
+  //我的赛事列表
+  getMyGames:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/user/home",
+      params: {
+        page: 1, size: 10, uid: app.globalData.userInfo.id, lng: that.data.longitude, lat: that.data.latitude, 
+      },
+      msg: "加载中....",
+      success: res => {
+        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
+        })
+        that.setData({
+          myGames: res.data.content
         })
       }
     }, true);

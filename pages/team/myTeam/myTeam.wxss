@@ -109,10 +109,16 @@ page{
   margin: auto 15rpx;
   font-size: 12px
 }
+.team-admin{
+  background: #FF6600;
+  color: #fff;
+  margin: auto 15rpx;
+  font-size: 12px
+}
 
-.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+.weui-uploader__file{float:left;margin-right:8px;margin-bottom:8px}
 .weui-uploader__img{display:block;width:84px;height:84px}
-.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+.weui-uploader__input-box{margin-right:8px;margin-bottom:8px;width:82px;height:82px;}
 
 .popup-example--center {
   border-radius: 4px;
@@ -152,4 +158,6 @@ page{
   font-size: 14px;
   text-align: center;
   padding: auto 30rpx;
+  display: flex;
+  align-items: center
 }

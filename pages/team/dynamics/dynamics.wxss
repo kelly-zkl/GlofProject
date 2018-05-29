@@ -11,6 +11,8 @@
   font-size: 14px;
   text-align: center;
   padding: auto 30rpx;
+   display: flex;
+  align-items: center
 }
 
 .weui-media-box__thumb.d1{
