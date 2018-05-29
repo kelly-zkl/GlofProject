@@ -81,5 +81,19 @@ Page({
         });
       }
     }, false);
+  },
+  //虎丘规则列表
+  getRuleList:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/pkRuleList",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      msg: "加载中...",
+      success: res => {
+        this.setData({
+          rules: res.data.pk.pkMode
+        });
+      }
+    }, false);
   }
 })

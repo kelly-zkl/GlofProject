@@ -174,9 +174,7 @@ Page({
   //保存修改的用户信息
   saveUserInfo:function(e){
     var that = this;
-    if (!that.data.name || !that.data.phone || !that.data.golfAge || !that.data.golfHandicap || 
-      !that.data.tags || !that.data.selfIntroduce || !that.data.province || !that.data.city ||
-      !that.data.gender){
+    if (!that.data.name || !that.data.province || !that.data.city || !that.data.gender){
       wx.showToast({ title: '请完善用户信息', icon: 'none', duration: 1500 });
       return;
     }
@@ -185,7 +183,7 @@ Page({
       params: {
         name: that.data.name, phone: that.data.phone, golfAge: that.data.golfAge, 
         golfHandicap: that.data.golfHandicap, tags: that.data.tags, selfIntroduce: that.data.selfIntroduce,
-        province: that.data.province, city: that.data.city, gender: that.data.gender,uid: that.data.uid },
+        province: that.data.province, city: that.data.city, gender: that.data.gender,uid: that.data.uid},
       msg: '修改中...',
       success: res => {
         wx.showToast({ title: '修改成功', icon: 'info', duration: 1500 })

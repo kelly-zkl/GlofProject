@@ -67,7 +67,7 @@ Page({
           joinsteams: res.data.joinsGroup
         })
       }
-    }, true);
+    }, false);
   },
   //获取我的关注列表
   getFollows: function (e) {

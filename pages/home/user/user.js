@@ -11,6 +11,9 @@ Page({
       male: '../../../images/icon_male.png',
       female: '../../../images/icon_female.png'
     });
+    
+  },
+  onShow:function(){
     this.getUserInfo();
   },
   getUserInfo: function (e) {
