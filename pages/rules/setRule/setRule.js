@@ -56,15 +56,27 @@ Page({
         path: '/pages/rules/tigerRule/tigerRule?id=' + that.data.gameId, show: true
       }]
     });
+    this.gameDetail();
   },
   onShow:function(e){
-    this.gameDetail();
+    // this.gameDetail();
   },
   //选择PK的人数
   checkboxChange: function (e) {
+    var that = this;
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     var len = e.detail.value.length;
-    this.showList(len);
+    var arry = [];
+
+    if (len > 0){
+      (e.detail.value).map(function(item){
+        arry.push(that.data.users[item]);
+      })
+    }
+    that.setData({
+      players: JSON.stringify(arry)
+    })
+    that.showList(len);
   },
   showList:function(len){
     var arry = this.data.rules;
@@ -107,16 +119,19 @@ Page({
       msg: "加载中...",
       success: res => {
         that.setData({
-          gameDetail: res.data
+          gameDetail: res.data,
+          users: res.data.players,
+          players: JSON.stringify(res.data.players)
         });
         that.showList(that.data.gameDetail.players.length);
         wx.getSystemInfo({
           success: function (res) {
             that.setData({
-              leftPosition: (26 /(res.windowWidth / (that.data.gameDetail.players.length)/2)*100)+"%"
+              leftPosition: 50 - (3800 / (res.windowWidth / (that.data.gameDetail.players.length)))+'%'
             });
           }
         });
+        console.log(that.data.leftPosition);
       }
     }, false);
   }

@@ -108,14 +108,13 @@ Page({
         picType: ["album", "camera"],
         showPopup: false
       });
-      that.chooseImage();
     } else if (id == 2) {
       that.setData({
         picType: ["camera"],
         showPopup: false
       });
-      that.chooseImage();
     }
+    that.chooseImage();
   },
   chooseImage: function (e) {
     var that = this;

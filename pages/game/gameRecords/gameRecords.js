@@ -48,9 +48,9 @@ Page({
       params: {
         page: 1, size: 10, uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
@@ -58,7 +58,7 @@ Page({
           myGames: res.data.content
         })
       }
-    }, true);
+    }, false);
   },
   //我关注的赛事列表
   getFollowGames: function () {
@@ -68,9 +68,9 @@ Page({
       params: {
         page: 1, size: 10, uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
@@ -78,6 +78,6 @@ Page({
           myGames: res.data.content
         })
       }
-    }, true);
+    }, false);
   }
 });

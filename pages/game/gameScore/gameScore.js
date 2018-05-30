@@ -21,7 +21,8 @@ Page({
     disabled1: false,
     disabled2: false,
     activeHole:0,
-    scrowHeight:0
+    scrowHeight:0,
+    ruleIdx:0
   },
 
   /**
@@ -44,12 +45,15 @@ Page({
   },
   onShow:function(){
     this.gameDetail();
+    this.getRuleList();
   },
   //PK规则、积分卡
   douChange: function (e) {
     this.setData({
       radioType: e.currentTarget.dataset.id
     })
+    this.gameDetail();
+    this.getRuleList();
   },
   //选择洞
   holeChange:function(e){
@@ -70,7 +74,6 @@ Page({
   popuChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
-    
   },
   //分数
   prevNum(e) {//+1
@@ -133,6 +136,69 @@ Page({
         
         this.setData({
           gameDetail: res.data
+        });
+      }
+    }, false);
+  },
+  //选择规则
+  changeRule:function(e){
+    this.setData({
+      ruleIdx: e.currentTarget.id
+    })
+    this.getGameScore();
+  },
+  //获取规则列表
+  getRuleList: function () {
+    var that = this;
+    http.postRequest({
+      url: "match/pkRuleList",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      msg: "加载中...",
+      success: res => {
+        this.setData({
+          rules: res.data
+        });
+        this.getGameScore();
+      }
+    }, false);
+  },
+  //删除规则
+  deleteRule: function (e) {
+    var that = this;
+    var ruleIdx= e.currentTarget.id;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该规则？',
+      success: function (res) {
+        if (res.confirm) {
+          http.postRequest({
+            url: "match/pkRuleDel",
+            params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, 
+            pkRuleId: that.data.rules[ruleIdx].pkRuleId},
+            msg: "操作中...",
+            success: res => {
+              wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 });
+              that.getRuleList();
+            }
+          }, true);
+        }
+      }
+    })
+  },
+  //比赛成绩查询
+  getGameScore:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/grade",
+      params: {
+        matchId: that.data.gameId, uid: app.globalData.userInfo.id,
+        pkRuleId: that.data.rules[that.data.ruleIdx].pkRuleId
+      },
+      // msg: "操作中...",
+      success: res => {
+        // wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 });
+        this.setData({
+          score: res.data
         });
       }
     }, false);

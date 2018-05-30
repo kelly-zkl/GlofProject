@@ -16,11 +16,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if (options.id == 1) {//同队球友
+    if (options.type == 1) {//同队球友
+      // this.getFollows();
+    } else if (options.type == 2) {//互相关注的球友
       this.getFollows();
-    // } else if (options.id == 2) {//互相关注的球友
-    //   this.getFans();
-    // }
+    } else if (options.type == 3){//同赛球友
+      this.getGameMems();
+    }
+    wx.setNavigationBarTitle({
+      title: options.type == 1 ? "同队球友" : options.type == 2 ? "我关注的球友":"历史同赛的球友"
+    })
   },
 
   //获取我的关注列表
@@ -40,11 +45,11 @@ Page({
       }
     }, true);
   },
-  //获取我的粉丝列表
-  getFans: function (e) {
+  //获取我的同赛球友
+  getGameMems: function (e) {
     var that = this;
     http.postRequest({
-      url: "user/followers",
+      url: "user/historyRival",
       params: {
         uid: app.globalData.userInfo.id, page: 1, size: 10
       },

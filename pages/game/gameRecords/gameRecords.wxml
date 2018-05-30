@@ -18,7 +18,8 @@
                 class="weui-media-box weui-media-box_appmsg"
                 hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
-                  <image class="weui-media-box__thumb t" src="../../../images/pic_160.png"/>
+                  <image class="weui-media-box__thumb t" 
+                  src="{{item.icon? item.icon:'../../../images/icon_game.png'}}"/>
                   <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':''}}">
                     {{item.joined==1?'已参赛':item.followerId?'已关注':''}}
                   </view>
@@ -31,8 +32,8 @@
                 </view>
                 <view class="weui-cell__ft">
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'end' : ''}}">
-                      {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : ''}}
+                    <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ?'appointment' : 'end'}}">
+                      {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : '结束'}}
                     </view>
                     <view class="weui-media-box__desc">
                       {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}

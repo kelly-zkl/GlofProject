@@ -27,10 +27,9 @@
     </view>
     <view class="weui-panel weui-panel_access" style='margin-bottom:80px'>
       <view class="weui-panel__bd" wx:for="{{rules}}" wx:key="*this">
-        <view class="weui-media-box weui-media-box_text">
+        <view class="weui-media-box weui-media-box_text" bindlongtap='deleteRule' id="{{item.pkRuleId}}">
           <view class="weui-media-box__title  text-size-14">{{item.modeName}}</view>
-          <view class="weui-media-box__desc" wx:for="{{rules.tags}}" wx:key="*this" wx:for-item="tag">
-          {{tag}} </view>
+          <view class="weui-media-box__desc">{{item.tagDes}}</view>
         </view>
       </view>
     </view>

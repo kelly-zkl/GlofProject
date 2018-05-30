@@ -94,11 +94,12 @@ Page({
       })
     } else if (id == 2) {//我关注的球友
       wx.navigateTo({
-        url: '/pages/choose/followMember/followMember',
+        url: '/pages/choose/followMember/followMember?type=2'
       })
     } else if (id == 3) {//历史同赛的队友
       wx.navigateTo({
-        url: '/pages/choose/gameMember/gameMember',
+        // url: '/pages/choose/gameMember/gameMember',
+        url: '/pages/choose/followMember/followMember?type=3'
       })
     } else if (id == 4) {//邀请通讯录
       wx.navigateTo({
@@ -161,7 +162,7 @@ Page({
       url: "match/create",
       params: {
         playerLimit: that.data.number1, players: playerPoles, matchName: that.data.gameName, startTime: timeStap, 
-        courtId: mainCourt.courtId, frontCourt: mainCourt.frontCourt, 
+        courtId: mainCourt.courtId, frontCourt: mainCourt.frontCourt, icon: app.globalData.userInfo.avatarUrl,
         backCourt: mainCourt.backCourt, uid: app.globalData.userInfo.id
       },
       msg: '创建中...',

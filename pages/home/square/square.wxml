@@ -28,42 +28,51 @@
     <view style='color:#999;font-size:14px;padding:15rpx 20rpx'>约球</view>
     <scroll-view scroll-x class='ball-scrow'>
       <button class='ball-btn' bindtap='orderBall'>约球</button>
-      <block wx:for='{{cards}}' wx:key="*this">
+      <block wx:for='{{matchs}}' wx:key="*this">
         <view class="weui-panel weui-panel_access ball-card">
           <view class="weui-panel__bd">
-            <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg ball"
+            <navigator url="/pages/game/gameDetail/gameDetail?id={{item.matchId}}" class="weui-media-box weui-media-box_appmsg ball"
               hover-class="weui-cell_active">
               <view class="weui-media-box__hd weui-media-box__hd_in-appmsg ball">
-                <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+                <image class="weui-media-box__thumb" src="{{item.icon? item.icon:'../../../images/icon_game.png'}}"/>
               </view>
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                <view class="weui-media-box__title weui-media-box__title_in-text text-size-14 ball">深圳小聚</view>
-                <view class="weui-media-box__desc text-size-13 ball">深圳名商高尔夫球会</view>
-                <view class="weui-media-box__info" style="color:#999;margin-top:10rpx">23：00</view>
+                <view class="weui-media-box__title weui-media-box__title_in-text text-size-14 ball">{{item.matchName}}</view>
+                <view class="weui-media-box__desc text-size-13 ball">{{item.courtName}}</view>
+                <view class="weui-media-box__info" style="color:#999;margin-top:10rpx">{{item.timeStr}}</view>
               </view>
             </navigator>
           </view>
         </view>
       </block>
     </scroll-view>
-    <view style='color:#999;font-size:14px;padding:15rpx 20rpx'>今日赛事</view>
+    <view style='color:#999;font-size:14px;padding:15rpx 20rpx' wx:if="{{games.length>0}}">今日赛事</view>
     <view class="weui-panel weui-panel_access" style='margin-top:0'>
-      <view class="weui-panel__bd">
-        <navigator url="/pages/game/gameDetail/gameDetail" class="weui-media-box weui-media-box_appmsg"
-          hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../../images/icon_intro.png"/>
+      <view class="weui-panel__bd" wx:for='{{games}}' wx:key='*this'>
+        <navigator url="/pages/game/gameDetail/gameDetail?id={{item.matchId}}" 
+          class="weui-media-box weui-media-box_appmsg"
+          hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
+            <image class="weui-media-box__thumb t" src="{{item.icon? item.icon:'../../../images/icon_game.png'}}"/>
+            <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':''}}">
+              {{item.joined==1?'已参赛':item.followerId?'已关注':''}}
+            </view>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
-            <view class="weui-media-box__desc text-size-13">深圳名商高尔夫球会</view>
-            <view class="weui-media-box__info" style="color:#999">23：00</view>
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+              {{item.matchName}}</view>
+            <view class="weui-media-box__desc text-size-13">{{item.courtName}}</view>
+            <view class="weui-media-box__info" style="color:#999">{{item.timeStr}}</view>
           </view>
           <view class="weui-cell__ft">
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">深圳小聚</view>
-              <view class="weui-media-box__desc">2.8Km</view>
-              <view class="weui-media-box__info" style="color:#999">23人关注</view>
+              <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : 'end'}}">
+                {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : '结束'}}
+              </view>
+              <view class="weui-media-box__desc">
+                {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}
+              </view>
+              <view class="weui-media-box__info" style="color:#999">{{item.followerNum+'人关注'}}</view>
             </view>
           </view>
         </navigator>

@@ -5,7 +5,7 @@
         <view class="weui-media-box weui-media-box_appmsg" bindtap="bindCheckbox" data-index="{{index}}"
           hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
-            <image class="weui-media-box__thumb t" src="../../../images/pic_160.png"/>
+            <image class="weui-media-box__thumb t" src="{{item.icon?item.icon:'../../../images/icon_game.png'}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">

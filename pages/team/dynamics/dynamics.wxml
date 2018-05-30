@@ -22,7 +22,7 @@
             </view>
             <view class="weui-media-box__title weui-media-box__title_in-text d1"  style="margin-bottom:0">
               <view class="weui-media-box__title text-size-14 d1">{{item.creatorName}}</view>
-              <view class="weui-media-box__info text-size-12 d1" style="color:#999">{{item.createTime}}</view>
+              <view class="weui-media-box__info text-size-12 d1" style="color:#999">{{item.timeStr}}</view>
             </view>
           </view>
         </view>

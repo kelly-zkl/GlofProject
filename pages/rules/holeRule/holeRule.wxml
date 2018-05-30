@@ -21,82 +21,48 @@
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item"></view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户1</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户2</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户3</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户4</view>
-        </view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+            <view class="weui-grid__label">{{item.name}}</view>
+          </view>
+        </block>
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <input class='weui-input score' type="number" bindinput='scoreChange'
+             maxlength='5' id="{{index}}" value="{{item.score}}"></input>
+          </view>
+        </block>
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>三杆洞</view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <input class='weui-input score' type="number" bindinput='threeChange'
+             maxlength='5' id="{{index}}" value="{{item.three}}"></input>
+          </view>
+        </block>
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>四杆洞</view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <input class='weui-input score' type="number" bindinput='fourChange' 
+            maxlength='5' id="{{index}}" value="{{item.four}}"></input>
+          </view>
+        </block>
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>五杆洞</view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <input class='weui-input score' type="number" bindinput='fiveChange'
+             maxlength='5' id="{{index}}" value="{{item.five}}"></input>
+          </view>
+        </block>
       </view>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">顶洞</view>

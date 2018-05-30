@@ -16,12 +16,14 @@ Page({
     disabled1: false,
     disabled2: false,
     activeHole: 0,
-    scrowWidth:0
+    scrowWidth:0,
+    uid:''
   },
   onLoad: function (options) {
     var that = this;
     that.setData({
-      gameId: options.id
+      gameId: options.id,
+      uid: app.globalData.userInfo.id
     });
     wx.getSystemInfo({
       success: function (res) {
@@ -45,24 +47,26 @@ Page({
       showManager: !this.data.showManager
     });
   },
-  managerChange: function () {
-    if (e.currentTarget.dataset.id == 1) {//修改赛事
+  managerChange: function (e) {
+    if (e.currentTarget.id == 1) {//修改赛事
       // wx.navigateTo({
-      //   url: '/pages/game/modifyTee/modifyTee?id=' + this.data.gameId,
+      //   url: '/pages/game/createGame/createGame?id=' + this.data.gameId,
       // })
-    } else if (e.currentTarget.dataset.id == 2) {//设置赛事权限
+    } else if (e.currentTarget.id == 2) {//设置赛事权限
       // wx.navigateTo({
       //   url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,
       // })
-    } else if (e.currentTarget.dataset.id == 3) {//设置赛事图片
+    } else if (e.currentTarget.id == 3) {//设置赛事图片
       this.togglePic();
-    } else if (e.currentTarget.dataset.id == 4) {//成绩填写记录
+    } else if (e.currentTarget.id == 4) {//成绩填写记录
       wx.navigateTo({
         url: '/pages/game/writeScoreList/writeScoreList?id=' + this.data.gameId,
       })
-    } else if (e.currentTarget.dataset.id == 5) {//重新开赛
-    } else if (e.currentTarget.dataset.id == 6) {//结束赛事
-    } else if (e.currentTarget.dataset.id == 7) {//退出比赛
+    } else if (e.currentTarget.id == 5) {//重新开赛
+    } else if (e.currentTarget.id == 6) {//结束赛事
+      this.finishGame();
+    } else if (e.currentTarget.id == 7) {//退出比赛
+      this.quitGame();
     }
     this.setData({
       showManager: false
@@ -114,15 +118,58 @@ Page({
       showPic: !this.data.showPic
     });
   },
-  picChange:function(){
-    if (e.currentTarget.dataset.id == 1) {//选择相册
-      
-    } else if (e.currentTarget.dataset.id == 2) {//拍摄图片
-      
+  picChange:function(e){
+    var that = this;
+    var id = e.currentTarget.id;
+    if (id == 1) {
+      that.setData({
+        picType: ["album", "camera"],
+        showPic: false
+      });
+    } else if (id == 2) {
+      that.setData({
+        picType: ["camera"],
+        showPic: false
+      });
     }
-    this.setData({
-      showPic: false
+    that.chooseImage();
+  },
+  chooseImage: function (e) {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: that.data.picType, // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+
+        for (var i in tempFilePaths) {
+          http.uploadFile(tempFilePaths[i], {
+            success: function (res) {
+              console.log(res.data);
+              that.setData({
+                thumbUrl: res.data
+              });
+              that.modifyPic();
+            }
+          })
+        }
+      }
     })
+  },
+  //修改赛事图标
+  modifyPic:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/update",
+      params: {matchId: that.data.gameId, icon: that.data.thumbUrl, uid: app.globalData.userInfo.id},
+      msg: "操作中...",
+      success: res => {
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        that.gameDetail();
+      }
+    }, true);
   },
   //PK规则、积分卡、主页面
   douChange: function (e) {
@@ -287,7 +334,26 @@ Page({
   },
   //退出比赛
   quitGame:function(e){
-
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定要退出比赛？',
+      success: function (res) {
+        if (res.confirm) {
+          http.postRequest({
+            url: "match/exit",
+            params: {
+              matchId: that.data.gameId, uid: app.globalData.userInfo.id
+            },
+            msg: "操作中...",
+            success: res => {
+              wx.navigateBack()
+            }
+          }, true);
+        } else if (res.cancel) {
+        }
+      }
+    })
   },
   //结束比赛
   finishGame:function(e){

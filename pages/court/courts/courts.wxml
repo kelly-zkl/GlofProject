@@ -28,7 +28,7 @@
           class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
             <image class="weui-media-box__thumb t" 
-            src="{{item.thumbs.length > 0 ? item.thumbs[0] :'../../../images/pic_160.png'}}"/>
+            src="{{item.thumb?item.thumb:'../../../images/pic_160.png'}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.courtName}}</view>

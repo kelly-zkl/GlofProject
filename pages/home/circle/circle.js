@@ -59,9 +59,9 @@ Page({
       params: {
         page: 1, size:10,uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         that.setData({
           myteams: res.data.minesGroup,
           joinsteams: res.data.joinsGroup
@@ -79,12 +79,12 @@ Page({
       },
       msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         that.setData({
           follows: res.data.content
         })
       }
-    }, true);
+    }, false);
   },
   //获取我的粉丝列表
   getFans: function (e) {
@@ -94,14 +94,14 @@ Page({
       params: {
         uid: app.globalData.userInfo.id,page: 1,size: 10
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         that.setData({
           fans: res.data.content
         })
       }
-    }, true);
+    }, false);
   },
   //获取我的同组同赛列表
   getTeamMembers: function (e) {
@@ -111,13 +111,13 @@ Page({
       params: {
         page: 1, uid: app.globalData.userInfo.id, size:10
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         that.setData({
           teamMembers: res.data.content
         })
       }
-    }, true);
+    }, false);
   },
 });

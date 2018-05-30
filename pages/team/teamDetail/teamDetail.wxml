@@ -17,7 +17,7 @@
         </view>
       </view>
     </view>
-    <view class="team-info">成立时间：{{team.createTime}}</view>
+    <view class="team-info">成立时间：{{team.setupTime}}</view>
     <view class="team-info">球队口号：{{team.slogan}}</view>
     <view class="team-info">球队介绍：{{team.intro}}</view>
     <view class="team-info">组成成员：{{team.memberNumber}}</view>

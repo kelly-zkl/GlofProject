@@ -23,8 +23,9 @@
             </button>
           </view>
           <view class="weui-cell__ft" hidden="{{person != 1}}">
-            <image src="{{!userInfo.followedId?'../../../images/icon_follow.png':'../../../images/icon_unfollow.png'}}" 
-            class="icon-size" bindtap="followPerson"/>
+            <image src="../../../images/icon_follow.png" wx:if="{{userInfo.followedId}}"
+              class="icon-size" bindtap="unfollowPerson"/>
+            <image wx:else src="../../../images/icon_unfollow.png" class="icon-size" bindtap="followPerson"/>
             <image src="../../../images/icon_msg.png" class="icon-size" bindtap="chatPage"/>
           </view>
         </view>

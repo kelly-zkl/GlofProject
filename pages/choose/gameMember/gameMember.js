@@ -1,4 +1,8 @@
-// pages/team/importGameMem/importGameMem.js
+
+var http = require("../../../http.js");
+var util = require('../../../utils/util.js');
+const app = getApp();
+
 Page({
 
   /**
@@ -6,9 +10,8 @@ Page({
    */
   data: {
     activeIndex: 1,
-    games: [0, 12, 3, 4, 5, 6, 7, 8, 9],
-    members: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false },
-    { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    games: [],
+    members: [],
     selectedAllStatus: false
   },
 
@@ -16,25 +19,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getGames();
   },
   //赛事列表
   getGames: function (e) {
     var that = this;
     http.postRequest({
-      url: "court/query",
+      url: "match/user/home",
       params: {
-        page: that.data.page, size: that.data.size,
-        keyword: '', lng: that.data.longitude, lat: that.data.latitude
+        page: 1, size: 10, uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
-        this.setData({
-          games: res.data.content
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
+        })
+        that.setData({
+          games: res.data
         })
       }
-    }, that.data.show);
+    }, false);
+  },
+  //获取参赛选手
+  getMembers:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/players",
+      params: {
+        uid: app.globalData.userInfo.id, matchId: that.data.matchId
+      },
+      // msg: "加载中....",
+      success: res => {
+        // that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
+        this.setData({
+          members: res.data
+        })
+      }
+    }, false);
   },
   //选择成员
   changeIndex: function (e) {
@@ -44,6 +66,12 @@ Page({
     wx.setNavigationBarTitle({
       title: e.currentTarget.id == 1 ? "选择比赛" : "选择球员"
     })
+    if (e.currentTarget.id == 2){
+      this.setData({
+        matchId: e.currentTarget.dataset.id
+      });
+      this.getMembers();
+    }
   },
   //选择比赛
   bindCheckbox: function (e) {

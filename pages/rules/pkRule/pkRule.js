@@ -25,6 +25,7 @@ Page({
   },
   onShow: function () {
     this.gameDetail();
+    this.getRuleList();
   },
   //选择起始洞
   togglePopup(e) {
@@ -82,7 +83,7 @@ Page({
       }
     }, false);
   },
-  //虎丘规则列表
+  //获取规则列表
   getRuleList:function(){
     var that = this;
     http.postRequest({
@@ -91,9 +92,34 @@ Page({
       msg: "加载中...",
       success: res => {
         this.setData({
-          rules: res.data.pk.pkMode
+          rules: res.data
         });
       }
     }, false);
-  }
+  },
+  //删除规则
+  deleteRule: function (e) {
+    var that = this;
+    var ruleIdx = e.currentTarget.id;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该规则？',
+      success: function (res) {
+        if (res.confirm) {
+          http.postRequest({
+            url: "match/pkRuleDel",
+            params: {
+              matchId: that.data.gameId, uid: app.globalData.userInfo.id,
+              pkRuleId: ruleIdx
+            },
+            msg: "操作中...",
+            success: res => {
+              wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 });
+              that.getRuleList();
+            }
+          }, true);
+        }
+      }
+    })
+  },
 })

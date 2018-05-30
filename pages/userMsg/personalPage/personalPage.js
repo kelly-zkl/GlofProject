@@ -64,7 +64,7 @@ Page({
       success: res => {
         wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         (res.data.content || []).map(function (item) {
-          item.timeStr = util.formatTime(new Date(item.createTime*1000), '-', true)
+          item.timeStr = util.formatTime(new Date(item.createTime), '-', true)
         })
         this.setData({
           dynamics : res.data.content

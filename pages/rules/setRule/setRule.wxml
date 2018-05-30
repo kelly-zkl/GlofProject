@@ -6,13 +6,13 @@
         <view class="weui-flex__item">
           <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
           <view class="weui-grid__label">{{item.name}}</view>
-          <checkbox class="weui-check" checked='true' style='left:{{leftPosition}}'/>
+          <checkbox class="weui-check" checked='true' style='left:{{leftPosition}}' value="{{idx}}"/>
         </view>
       </block>
     </checkbox-group>
     <view style='color:#66CC99;font-size:15px;padding:20rpx 30rpx'>选择PK游戏规则</view>
     <view class="weui-cells weui-cells_in-small-appmsg" wx:for="{{rules}}" wx:key="*this">
-      <navigator url="{{item.path}}" class="weui-cell weui-cell_access" wx:if="{{item.show}}">
+      <navigator url="{{item.path+'&player='+players}}" class="weui-cell weui-cell_access" wx:if="{{item.show}}">
         <view class="weui-cell__hd">
           <image src="{{item.url}}"/>
         </view>

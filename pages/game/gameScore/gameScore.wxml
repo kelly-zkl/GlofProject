@@ -53,34 +53,53 @@
         </view>
       </view>
       <view class="weui-tab__content" hidden="{{radioType != 1}}" wx:if="{{gameDetail.joined == 1}}">
+        <scroll-view scroll-x class='ball-scrow'>
+          <block wx:for='{{rules}}' wx:key="*this">
+            <view class="weui-panel weui-panel_access ball-card {{ruleIdx==index?'ball-card-active':''}}" 
+            bindtap='changeRule' id="{{index}}">
+              <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_appmsg ball">
+                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title weui-media-box__title_in-text text-size-14 ball">
+                    {{item.modeName}}</view>
+                    <view class="weui-media-box__desc text-size-13 ball {{ruleIdx==index?'text-white':''}}">
+                    {{item.tagDes}}
+                    </view>
+                  </view>
+                  <view class="weui-cell__ft" wx:if="{{ruleIdx==index}}" bindtap='deleteRule' id="{{index}}">
+                    <icon type="cancel" size="25" color="#fff"/>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
         <view class='weui-flex' style='height:90px'>
           <text class='tag hole' space='ensp'>H\nO\nL\nE</text>
-          <block wx:for='{{gameDetail.players}}' wx:key='*this'>
+          <block wx:for='{{score.players}}' wx:key='*this'>
             <view class="weui-flex__item">
-              <image class="weui-grid__icon" src="{{item.avatarUrl}}" />
+              <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
               <view class="weui-grid__label" style='color:#888;font-size:12px'>{{item.name}}</view>
             </view>
           </block>
         </view>
-        <scroll-view scroll-y style="height: {{scrowHeight}};position:fixed;top:140px;left:0;bottom:40px;right:0">
+        <scroll-view scroll-y style="height: {{scrowHeight}};position:fixed;top:210px;left:0;bottom:40px;right:0">
           <view style="background:#fff;border-top:1rpx #e5e5e5 solid" 
-            wx:for='012345678901234567' wx:key='*this'>
+            wx:for='{{score.zones}}' wx:key="*this" wx:for-index="idx">
             <view class='weui-flex' style='height:40px;line-height:40px'>
-              <view class='cell' style='background:#66CC99;width:40px'>C{{item}}</view>
-              <view class="weui-flex__item cell">0</view>
-              <view class="weui-flex__item cell">0</view>
-              <view class="weui-flex__item cell">0</view>
-              <view class="weui-flex__item cell">0</view>
+              <view class='cell' style='background:#66CC99;width:40px'>{{item.zname}}</view>
+              <block wx:for='{{score.ueScores[idx]}}' wx:key='*this'>
+                <view class="weui-flex__item cell"style='color:#343434'>{{item}}</view>
+              </block>
             </view>
           </view>
         </scroll-view>
         <view class="weui-footer weui-footer_fixed-bottom" style="background:#66CC99;border-top:1rpx #fff solid">
           <view class='weui-flex' style='height:40px;line-height:40px'>
             <view class='cell' style='width:40px'>总分</view>
-            <view class="weui-flex__item cell">0</view>
-            <view class="weui-flex__item cell">0</view>
-            <view class="weui-flex__item cell">0</view>
-            <view class="weui-flex__item cell">0</view>
+            <block wx:for='{{score.utScores}}' wx:key='*this'>
+              <view class="weui-flex__item cell">{{item}}</view>
+            </block>
           </view>
         </view>
       </view>

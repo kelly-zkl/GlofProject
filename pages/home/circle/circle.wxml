@@ -49,7 +49,7 @@
               <navigator url="/pages/team/myTeam/myTeam?id={{item.groupId}}" hover-class="weui-cell_active"
                 class="weui-media-box weui-media-box_appmsg" style='border-bottom: 1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
+                  <image class="weui-media-box__thumb" src="{{item.thumbUrl?item.thumbUrl:'../../../images/icon_team.png'}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
@@ -66,7 +66,7 @@
               <navigator url="/pages/team/myTeam/myTeam?id={{item.groupId}}" hover-class="weui-cell_active"
                 class="weui-media-box weui-media-box_appmsg" style='border-bottom: 1rpx #e5e5e5 solid'>
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="{{item.thumbUrl}}"/>
+                  <image class="weui-media-box__thumb" src="{{item.thumbUrl?item.thumbUrl:'../../../images/icon_team.png'}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
@@ -94,7 +94,7 @@
               <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
                 class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
@@ -112,7 +112,7 @@
               <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
                 class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
@@ -130,7 +130,7 @@
               <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
                 class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                  <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
+                  <image class="weui-media-box__thumb" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
