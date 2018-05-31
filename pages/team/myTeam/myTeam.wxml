@@ -60,7 +60,7 @@
                         <block wx:for="{{item.attach}}" wx:key="*this" wx:for-item="pic">
                           <view class="weui-uploader__file" bindtap="previewImage" id="{{pic}}" 
                           data-urls="{{item.attach}}">
-                            <image class="weui-uploader__img" src="{{pic}}" mode="aspectFill" />
+                            <image class="weui-uploader__img" src="{{pic}}" mode="aspectFill" style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
                           </view>
                         </block>
                       </view>

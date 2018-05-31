@@ -15,7 +15,7 @@
           <view class="weui-cell__hd">
             <view class="weui-label">人数</view>
           </view>
-           <view class="weui-cell__bd"> 
+           <view class="weui-cell__bd">
             <view class="tui-gallery-list">
               <view class="tui-number-group">
                 <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
@@ -40,7 +40,7 @@
                 <block wx:for="{{chooseMembers}}" wx:key="*this">
                   <view class="weui-uploader__file">
                     <image class="weui-uploader__img"
-                     src="{{item.avatarUrl}}" mode="aspectFill" />
+                     src="{{item.avatarUrl}}" mode="aspectFill"/>
                   </view>
                 </block>
               </view>
@@ -74,10 +74,23 @@
         <navigator url="/pages/choose/chooseCourt/chooseCourt?type=1" class="weui-cell weui-cell_input" 
           hover-class="weui-cell_active">
           <view class="weui-cell__bd">球场</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access text-size-14" style="color:#333">
-           {{mainCourt.courtName}} 前场：{{mainCourt.frontCourt}}  后场：{{mainCourt.backCourt}}
-          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
+        <view class="weui-cell" wx:if="{{mainCourt}}" style='display:block'>
+          <view class="weui-flex" style='padding:10rpx 0'>
+            <view class="weui-flex__item">
+              <view class="weui-label" style='width:100%'>{{mainCourt.courtName}}</view>
+            </view>
+          </view>
+          <view class="weui-flex" style='padding:10rpx 0'>
+            <view class="weui-flex__item">
+              <view class="weui-label">前场：{{mainCourt.frontCourt}}</view>
+            </view>
+            <view class="weui-flex__item">
+              <view class="weui-label">后场：{{mainCourt.backCourt}}</view>
+            </view>
+          </view>
+        </view>
         <!-- <view class="weui-cell weui-cell_access">
           <view class="weui-cell__bd weui-cell_primary">私密比赛</view>
           <view class="weui-cell__ft">
@@ -107,9 +120,9 @@
         <!-- <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">邀请通讯录好友</view>
         </view> -->
-        <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
+        <!-- <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">手动录入</view>
-        </view> 
+        </view>  -->
         <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>

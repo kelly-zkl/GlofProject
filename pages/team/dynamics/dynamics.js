@@ -1,6 +1,7 @@
 const app = getApp();
 var base64 = require("../../../images/base64");
 var http = require("../../../http.js");
+var util = require('../../../utils/util.js'); 
 
 Page({
   data: {
@@ -8,23 +9,20 @@ Page({
     hasUserInfo: false,
     showReply: false,
     showDelete: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    imageWidth: '0px',
     dynamics: [],
-    userId: "",
     page: 1,
     size: 10
   },
   onLoad: function () {
     var that = this;
-    if (app.globalData.userInfo) {
-      that.setData({
-        icon20: base64.icon20,
-        icon60: base64.icon60,
-        userInfo: app.globalData.userInfo,
-        userId: app.globalData.userInfo.id,
-        hasUserInfo: true
-      })
-    }
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          imageWidth: ((res.windowWidth - 86) / 3) + 'px',
+        });
+      }
+    });
   },
   onShow: function (e) {
     this.getUserInfo();
@@ -39,9 +37,9 @@ Page({
         page: that.data.page, size: that.data.size,
         belongType: "user", uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.createTime), '-', true)
         })
@@ -49,7 +47,7 @@ Page({
           dynamics: res.data.content
         })
       }
-    }, true);
+    }, false);
   },
   //获取用户信息
   getUserInfo: function (e) {

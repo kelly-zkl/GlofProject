@@ -88,9 +88,9 @@
               data-id="2" bindtap="douChange">记分卡</view>
           </view>
         </view>
-        <navigator url='/pages/game/gameDynamic/gameDynamic'>
+        <view bindtap='moreChange' id="2" hover-class="weui-cell_active">
           <image src="../../../images/icon_game_dynamic.png" style="width:60rpx;height:60rpx"/>
-        </navigator>
+        </view>
       </view>
     </view>
   </view>

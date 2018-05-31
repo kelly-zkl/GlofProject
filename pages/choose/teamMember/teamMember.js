@@ -9,8 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    members: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false },
-    { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    members: [],
     selectedAllStatus: false
   },
 
@@ -18,19 +17,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.id == 1) {//同队球友
-      this.setData({
-        teamId: id
-      });
-    }
+    this.setData({
+      teamId: options.id
+    });
+
+    this.getTeamMembers();
   },
   //获取我的关注列表
   getTeamMembers: function (e) {
     var that = this;
     http.postRequest({
-      url: "user/following",
+      url: "group/members",
       params: {
-        beFollowedType: "user", uid: app.globalData.userInfo.id
+        groupId: that.data.teamId, uid: app.globalData.userInfo.id
       },
       msg: "加载中....",
       success: res => {
@@ -95,9 +94,10 @@ Page({
     var prevPage = pages[pages.length - 3];  //上2个页面
 
     var memArr = [];
+    
     (this.data.members).map(function (item) {
       if (item.selected){
-        memArr.push(item)
+       memArr.push(item.user)
       }
     })
 

@@ -10,3 +10,9 @@
 .weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
  .weui-uploader__img{display:block;width:84px;height:84px}
 .weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+
+.zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#007AFF}
+.blue.zan-tag--primary::after{border-color:#007AFF}
+.zan-tag::after{
+  border: none
+}

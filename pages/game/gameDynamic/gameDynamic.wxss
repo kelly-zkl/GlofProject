@@ -1,8 +1,8 @@
 
 .weui-btn.send{
-  position: absolute;
+  position: fixed;
   bottom: 30rpx;
-  right: 30rpx;
+  left: 30rpx;
   height: 90rpx;
   background: #66CC99;
   border: 8rpx #fff solid;

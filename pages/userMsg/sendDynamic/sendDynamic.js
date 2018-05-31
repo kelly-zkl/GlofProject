@@ -35,6 +35,15 @@ Page({
         console.log(that.data.imageWidth);
       }
     });
+    if (options.type == 'match'){
+      that.setData({
+        chooseGames: [{matchId: options.relateId, matchName: options.gameName}]
+      });
+    } else if (options.type == 'group'){
+      that.setData({
+        chooseTeam: {groupId: options.teamId, groupName: options.teanName}
+      });
+    }
   },
 
   togglePopup() {

@@ -30,6 +30,7 @@ Page({
         that.setData({
           imageWidth: ((res.windowWidth - 50) / 4) + 'px',//weui-cell的padding:10px 15px
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          imageWidth: ((res.windowWidth - 86) / 3) + 'px',
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
@@ -94,7 +95,7 @@ Page({
   //跳转到发动态页面
   gotoPost: function () {
     wx.navigateTo({
-      url: '/pages/userMsg/sendDynamic/sendDynamic?type=group',
+      url: '/pages/userMsg/sendDynamic/sendDynamic?type=group&teamId=' + this.data.team.groupId + '&teanName=' + this.data.team.groupName,
     })
   },
   //跳转到关联比赛页面

@@ -17,6 +17,7 @@ Page({
     person:0,
     createId:"",
     dynamics:[],
+    imageWidth: '0px',
     userId:"",
     page:1,
     size:10,
@@ -34,8 +35,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          imageWidth: ((res.windowWidth - 86) / 3) + 'px',
         });
       }
     });
@@ -60,9 +60,9 @@ Page({
         creatorId: that.data.createId, page: that.data.page, size: that.data.size,
         belongType: "user", uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.createTime), '-', true)
         })
@@ -70,7 +70,7 @@ Page({
           dynamics : res.data.content
         })
       }
-    }, true);
+    },false);
   },
   previewImage: function (e) {
     wx.previewImage({

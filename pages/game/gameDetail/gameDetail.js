@@ -85,7 +85,7 @@ Page({
       })
     } else if (e.currentTarget.dataset.id == 2) {//查看球手主页
       wx.navigateTo({
-        url: '//pages/userMsg/personalPage/personalPage?tab=1&id=' + this.data.gameId,
+        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + this.data.gameId,
       })
     } else if (e.currentTarget.dataset.id == 3) {//踢出赛事
     }
@@ -99,14 +99,14 @@ Page({
       showMore: !this.data.showMore
     });
   },
-  moreChange: function () {
-    if (e.currentTarget.dataset.id == 1) {//发红包
+  moreChange: function (e) {
+    if (e.currentTarget.id == 1) {//发红包
       
-    } else if (e.currentTarget.dataset.id == 2) {//发动态
+    } else if (e.currentTarget.id == 2) {//发动态
       wx.navigateTo({
-        url: '//pages/game/gameDynamic/gameDynamic?id=' + this.data.gameId,
+        url: '/pages/game/gameDynamic/gameDynamic?id=' + this.data.gameId + '&gameName=' + this.data.gameDetail.matchName
       })
-    } else if (e.currentTarget.dataset.id == 3){//球童
+    } else if (e.currentTarget.id == 3){//球童
     }
     this.setData({
       showMore: false

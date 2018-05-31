@@ -43,6 +43,7 @@ Page({
   },
   //选择球队/球友
   gotoNext:function(e){
+    console.log(e);
     if (this.data.pageNum == 1){//球队
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];   //当前页面

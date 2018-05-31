@@ -1,7 +1,7 @@
 <view class='page'>
   <view class='page__bd'>
-    <view class='weui-flex' style='padding:10px 15px'>
-      <view style="width:50px;height:30px"></view>
+    <view class='weui-flex' style='padding:15px 10px 7px 10px'>
+      <view style="width:50px"></view> 
       <view class="weui-flex__item" style='text-align:center'>
         <view class="tui-tabbar-group">
           <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
@@ -10,10 +10,11 @@
             data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">PK成绩单</view>
         </view>
       </view>
-      <navigator url='/pages/rules/pkRule/pkRule' hidden='{{radioType == 0}}' wx:if="{{gameDetail.joined == 1}}">
+      <navigator url='/pages/rules/pkRule/pkRule?id={{gameDetail.matchId}}' hidden='{{radioType == 0}}'
+       wx:if="{{gameDetail.joined == 1}}">
         <view class="pk-rule">+PK</view>
-      </navigator>
-      <view style="width:50px;height:30px" hidden='{{radioType == 1}}'></view>
+      </navigator> 
+       <view style="width:50px" hidden='{{radioType == 1}}'></view> 
     </view>
     <view class="weui-tab__panel" style='padding-top:0'>
       <view class="weui-tab__content" hidden="{{radioType != 0}}">
@@ -27,7 +28,8 @@
             </view>
           </block>
         </view>
-        <scroll-view scroll-y style="height: {{scrowHeight}};position:fixed;top:140px;left:0;bottom:40px;right:0">
+        <!-- top:140px -->
+        <scroll-view scroll-y class="score-y" style="height: {{scrowHeight}}">
           <view style="background:#fff;border-top:1rpx #e5e5e5 solid" 
             wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx">
             <view class='weui-flex' style='height:40px;line-height:40px'>
@@ -42,7 +44,7 @@
             </view>
           </view>
         </scroll-view>
-        <view class="weui-footer weui-footer_fixed-bottom" style="background:#66CC99;border-top:1rpx #fff solid">
+        <view class="weui-footer weui-footer_fixed-bottom" style="height:40px;background:#66CC99;border-top:1rpx #fff solid">
           <view class='weui-flex' style='height:40px;line-height:40px'>
             <view class='cell' style='width:40px'>总杆</view>
             <view class='cell' style='background:#66CCFF;width:40px'>{{gameDetail.totalPole}}</view>
@@ -74,7 +76,7 @@
             </view>
           </block>
         </scroll-view>
-        <view class='weui-flex' style='height:90px'>
+        <view class='weui-flex' style='height:90px' wx:if="{{rules.length>0}}">
           <text class='tag hole' space='ensp'>H\nO\nL\nE</text>
           <block wx:for='{{score.players}}' wx:key='*this'>
             <view class="weui-flex__item">
@@ -83,7 +85,8 @@
             </view>
           </block>
         </view>
-        <scroll-view scroll-y style="height: {{scrowHeight}};position:fixed;top:210px;left:0;bottom:40px;right:0">
+        <!-- top:210px -->
+        <scroll-view scroll-y class="score-y" style="height: {{scrowHeight}}" wx:if="{{rules.length>0}}">
           <view style="background:#fff;border-top:1rpx #e5e5e5 solid" 
             wx:for='{{score.zones}}' wx:key="*this" wx:for-index="idx">
             <view class='weui-flex' style='height:40px;line-height:40px'>
@@ -94,7 +97,8 @@
             </view>
           </view>
         </scroll-view>
-        <view class="weui-footer weui-footer_fixed-bottom" style="background:#66CC99;border-top:1rpx #fff solid">
+        <view class="weui-footer weui-footer_fixed-bottom" wx:if="{{rules.length>0}}"
+        style="height:40px;background:#66CC99;border-top:1rpx #fff solid">
           <view class='weui-flex' style='height:40px;line-height:40px'>
             <view class='cell' style='width:40px'>总分</view>
             <block wx:for='{{score.utScores}}' wx:key='*this'>
@@ -108,7 +112,7 @@
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
-      <scroll-view scroll-x="true" style="white-space: nowrap; display: flex;padding:20rpx 0 0 0" >
+      <scroll-view scroll-x="true" style="white-space: nowrap; display: flex;padding:20rpx 0 0 0">
         <view style="width: 120rpx; height: 120rpx; display: inline-block"
           wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx" data-id='{{idx}}' bindtap='holeChange'
           class="{{activeHole == idx ? 'hole-on' : 'hole-off'}}">

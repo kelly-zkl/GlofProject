@@ -1,6 +1,7 @@
 const app = getApp();
 var base64 = require("../../../images/base64");
 var http = require("../../../http.js");
+var util = require('../../../utils/util.js'); 
 
 Page({
   data: {
@@ -8,26 +9,27 @@ Page({
     hasUserInfo: false,
     showReply: false,
     showDelete: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     dynamics: [],
-    userId: "",
+    imageWidth: '0px',
     page: 1,
     size: 10
   },
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
-    if (app.globalData.userInfo) {
-      that.setData({
-        icon20: base64.icon20,
-        icon60: base64.icon60,
-        userInfo: app.globalData.userInfo,
-        userId: app.globalData.userInfo.id,
-        hasUserInfo: true
-      })
-    }
+
+    that.setData({
+      gameId: options.id,
+      gameName: options.gameName
+    })
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          imageWidth: ((res.windowWidth - 86) / 3) + 'px',
+        });
+      }
+    });
   },
   onShow: function (e) {
-    this.getUserInfo();
     this.getDynamics();
   },
   //获取赛事动态
@@ -36,32 +38,22 @@ Page({
     http.postRequest({
       url: "userPost/followingPage",
       params: {
-        page: that.data.page, size: that.data.size,
-        belongType: "user", uid: app.globalData.userInfo.id
+        page: that.data.page, size: that.data.size, belongId: that.data.gameId,
+        belongType: "match", uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({title: '加载成功', icon: 'info', duration: 1500});
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.createTime), '-', true)
+        })
         this.setData({
           dynamics: res.data.content
         })
       }
-    }, true);
-  },
-  //获取用户信息
-  getUserInfo: function (e) {
-    var that = this;
-    http.postRequest({
-      url: "user/detail",
-      params: { uid: app.globalData.userInfo.id },
-      success: res => {
-        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        this.setData({
-          userInfo: res.data
-        })
-      }
     }, false);
   },
+  
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
@@ -71,7 +63,7 @@ Page({
   //跳转到发动态页面
   gotoPost: function () {
     wx.navigateTo({
-      url: '/pages/userMsg/sendDynamic/sendDynamic?type=match',
+      url: '/pages/userMsg/sendDynamic/sendDynamic?type=match&relateId=' + this.data.gameId + '&gameName=' + this.data.gameName,
     })
   },
   //跳转到个人主页

@@ -22,7 +22,8 @@ Page({
     disabled2: false,
     activeHole:0,
     scrowHeight:0,
-    ruleIdx:0
+    ruleIdx:0,
+    rules:[]
   },
 
   /**
@@ -36,10 +37,12 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          scrowHeight: res.windowHeight -160
+          scrowHeight: res.windowHeight -155,
+          scoreHeight: res.windowHeight - 215
         });
         console.log(res.windowHeight);
         console.log(that.data.scrowHeight);
+        console.log(that.data.scoreHeight);
       }
     }); 
   },
@@ -158,7 +161,9 @@ Page({
         this.setData({
           rules: res.data
         });
-        this.getGameScore();
+        if (that.data.rules.length>0){
+          this.getGameScore();
+        }
       }
     }, false);
   },

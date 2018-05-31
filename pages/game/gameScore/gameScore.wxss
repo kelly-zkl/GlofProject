@@ -144,3 +144,8 @@ page{
 .weui-media-box__title_in-text.ball{margin-bottom:0}
 .weui-media-box.ball{padding:20rpx;position:relative}
 .weui-media-box__hd_in-appmsg{margin-right:.5em;width:130rpx;height:130rpx;line-height:130rpx;text-align:center}
+
+/**position:fixed;left:0;bottom:40px;right:0 position:absolute;left:0;bottom:40px;right:0*/
+.score-y{
+  margin-bottom: 40px;-webkit-overflow-scrolling: touch;width: 100%
+}

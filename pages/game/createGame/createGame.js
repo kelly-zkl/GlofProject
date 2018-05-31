@@ -53,11 +53,11 @@ Page({
   //人数
   prevNum() {
     this.setData({
-      number1: this.data.number1 >= 100 ? 100 : this.data.number1 + 1
+      number1: this.data.number1 >= 4 ? 4 : this.data.number1 + 1
     });
     this.setData({
       disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 100 ? false : true
+      disabled2: this.data.number1 !== 4 ? false : true
     });
   },
   nextNum() {
@@ -66,16 +66,16 @@ Page({
     });
     this.setData({
       disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 100 ? false : true
+      disabled2: this.data.number1 !== 4 ? false : true
     });
   },
   numberChange:function(e){
     this.setData({
-      number1: parseInt(e.detail.value) >= 100 ? 100 : parseInt(e.detail.value) <= 1 ? 1 : parseInt(e.detail.value)
+      number1: parseInt(e.detail.value) >= 4 ? 4 : parseInt(e.detail.value) <= 1 ? 1 : parseInt(e.detail.value)
     });
     this.setData({
       disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 100 ? false : true
+      disabled2: this.data.number1 !== 4 ? false : true
     });
   },
 
@@ -143,11 +143,10 @@ Page({
   createGame:function(e){
     var that = this;
     console.log(that.data.chooseMembers);
-    var playerPoles = [{ userId: app.globalData.userInfo.id}];
+    var playerPoles = [{userId: app.globalData.userInfo.id}];
+    var add = true;
     (that.data.chooseMembers).map(function (item) {
-      if (item.selected) {
-        playerPoles.push({ userId: item.id})
-      }
+      playerPoles.push({ userId: item.id })
     })
     var mainCourt = that.data.mainCourt;
     var minorCourt1 = that.data.minorCourt1;
