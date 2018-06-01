@@ -11,7 +11,12 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     longitude:'',
-    latitude:''
+    latitude:'',
+    refresh:false,
+    page:1,
+    myPage:1,
+    totalPage:1,
+    myTotalpage:2
   },
   onLoad: function () {
     wx.showTabBarRedDot({
@@ -102,16 +107,29 @@ Page({
     http.postRequest({
       url: "match/query",
       params: {
-        lng: that.data.longitude, lat: that.data.latitude, page: 1, size: 10, uid: app.globalData.userInfo.id
+        lng: that.data.longitude, lat: that.data.latitude, page: that.data.page, size: 10, uid: app.globalData.userInfo.id
       },
       // msg: "加载中....",
       success: res => {
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-',true)
         })
+        if (that.data.page <= 1) {
+          that.setData({
+            games: res.data.content
+          })
+        } else {
+          that.setData({
+            games: that.data.games.concat(res.data.content)
+          })
+        }
         that.setData({
-          games: res.data.content
+          totalPage: res.data.totalPages
         })
       }
     }, false);
@@ -122,18 +140,64 @@ Page({
     http.postRequest({
       url: "match/user/home",
       params: {
-        page: 1, size: 10, uid: app.globalData.userInfo.id, lng: that.data.longitude, lat: that.data.latitude, 
+        page: that.data.myPage, size: 10, uid: app.globalData.userInfo.id, lng: that.data.longitude, lat: that.data.latitude
       },
       // msg: "加载中....",
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        if (that.data.refresh){
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
-        that.setData({
-          myGames: res.data
-        })
+        if (that.data.myPage <= 1){
+          that.setData({
+            myGames: res.data
+          })
+        }else{
+          that.setData({
+            myGames: that.data.myGames.concat(res.data)
+          })
+        }
       }
     }, false);
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh:true
+    });
+    if (this.data.activeIndex == 0) {//附近赛事
+      this.setData({
+        page: 1
+      });
+      this.getGames();
+    } else if (this.data.activeIndex == 1) {//我的赛事
+      this.setData({
+        myPage: 1
+      });
+      this.getMyGames();
+    }
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    if (this.data.activeIndex == 0) {//附近赛事
+      this.setData({
+        page: this.data.page + 1
+      });
+      this.getGames();
+    } else if (this.data.activeIndex == 1) {//我的赛事
+      this.setData({
+        myPage: this.data.myPage + 1
+      });
+      this.getMyGames();
+    }
   }
 });

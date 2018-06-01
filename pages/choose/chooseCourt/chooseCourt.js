@@ -16,6 +16,7 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+    refresh: false,
     page: 1,
     size: 10,
     latitude: '',

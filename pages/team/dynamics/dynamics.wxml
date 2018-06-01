@@ -122,6 +122,6 @@
     </view>
   </view>
   <button class="weui-btn send" bindtap="gotoPost">
-    <image src="../../../images/icon_photo.png" style="width:26px;height:26px;margin-right:10rpx"/>发动态
+    <image src="../../../images/icon_photo.png" style="width:24px;height:24px;margin-right:10rpx"/>发动态
   </button>
 </view>

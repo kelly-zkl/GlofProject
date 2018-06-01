@@ -26,13 +26,35 @@ Page({
     })
     that.setData({
       gameId: options.id,
+      // ruleId: options.ruleId,
       players: arr
     })
+
+    // wx.setNavigationBarTitle({
+    //   title: this.data.ruleId == 1 ? "比杆" : "修改规则"
+    // })
+    // if (this.data.ruleId != 1) {
+    //   this.getPkDetail();
+    // }
   },
-  onShow: function () {
-    
+  //pk详情
+  getPkDetail:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/pkRuleDetail",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleId:that.data.ruleId },
+      msg: "加载中...",
+      success: res => {
+        
+        that.setData({
+          pkDetail: res.data,
+          number1: res.data.pkRuleDTL.graUnit,
+          avoid: res.data.pkRuleDTL.ups,
+          
+        });
+      }
+    }, false);
   },
-  
   //基本单位
   numberChange:function(e){
     this.setData({

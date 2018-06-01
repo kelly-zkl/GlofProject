@@ -8,7 +8,8 @@
             <view class="weui-label">名称</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入赛事名称" confirm-type="done" bindinput="inputName"/>
+            <input class="weui-input" placeholder="请输入赛事名称" confirm-type="done" 
+            bindinput="inputName" value='{{gameDetail.matchName}}'/>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -39,12 +40,13 @@
               <view class="weui-uploader__files" id="uploaderFiles">
                 <block wx:for="{{chooseMembers}}" wx:key="*this">
                   <view class="weui-uploader__file">
-                    <image class="weui-uploader__img"
-                     src="{{item.avatarUrl}}" mode="aspectFill"/>
+                    <image class="weui-uploader__img" src="{{item.avatarUrl}}" mode="aspectFill"
+                      style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
                   </view>
                 </block>
               </view>
-              <view class="weui-uploader__input-box" wx:if="{{chooseMembers.length<number1}}">
+              <view class="weui-uploader__input-box" wx:if="{{chooseMembers.length<number1}}"
+                style="width:{{upWidth}};height:{{upWidth}}">
                 <view class="weui-uploader__input" bindtap="togglePopup"></view>
               </view>
             </view>
@@ -61,8 +63,7 @@
           <view class="tui-picker-content">
             <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" 
               bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
-              <view class="tui-picker-detail">{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
-              </view>
+              <view class="tui-picker-detail">{{timeStr}}</view>
             </picker>
           </view>
         </view>
@@ -100,7 +101,9 @@
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
-      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='createGame'>创建比赛</button> 
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='createGame'>
+      {{gameId==1?'创建比赛':'确认修改'}}
+      </button> 
     </view>
   </view>
    <!--选择比赛队员-->

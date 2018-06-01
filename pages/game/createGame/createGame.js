@@ -11,8 +11,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    date: '2018-10-01',
-    time: '12:00',
     dateTimeArray: null,
     dateTime: null,
     startYear: 2018,
@@ -20,11 +18,12 @@ Page({
     number1: 4,
     disabled1: false,
     disabled2: false,
-    files: [],
     chooseMembers:[],
     showPopup: false,
     privacy:true,
-    showInput:false
+    showInput:false,
+    gameId:1,
+    gameDetail:{}
   },
 
   /**
@@ -37,12 +36,63 @@ Page({
     var lastArray = obj.dateTimeArray.pop();
     var lastTime = obj.dateTime.pop();
 
+    var dateTimeArray = obj.dateTimeArray;
+    var dateTime = obj.dateTime;
+
+    var timeStr = dateTimeArray[0][dateTime[0]]+'-'+dateTimeArray[1][dateTime[1]]+'-'+
+    dateTimeArray[2][dateTime[2]]+' '+dateTimeArray[3][dateTime[3]]+':'+dateTimeArray[4][dateTime[4]]
+
     this.setData({
       chooseMembers: [app.globalData.userInfo],
-      dateTimeArray: obj.dateTimeArray,
-      dateTime: obj.dateTime,
-      date: util.getNowDate()
+      dateTimeArray: dateTimeArray,
+      dateTime: dateTime,
+      timeStr: timeStr,
+      gameId: options.id
     });
+
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          imageWidth: ((res.windowWidth - 42) / 4) + 'px',
+          upWidth: (((res.windowWidth - 42) / 4) - 2) + 'px'
+        });
+        console.log(that.data.imageWidth);
+        console.log(that.data.upWidth);
+      }
+    });
+
+    wx.setNavigationBarTitle({
+      title: this.data.gameId == 1 ? "创建比赛" : "修改赛事信息"
+    })
+    if (this.data.gameId != 1) {
+      this.getGameDetail();
+    }
+  },
+  //获取赛事详情
+  getGameDetail: function (e) {
+    var that = this;
+    http.postRequest({
+      url: "match/detail",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      msg: "加载中...",
+      success: res => {
+        // wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
+        res.data.timeStr = util.formatTime(new Date(res.data.startTime), '-', true);
+        (res.data.players).map(function (item) {
+          item.id = item.userId
+        })
+        this.setData({
+          gameDetail: res.data,
+          number1: res.data.playerLimit,
+          gameName: res.data.matchName,
+          mainCourt: { courtId: res.data.courtId, frontCourt: res.data.frontCourt,
+          backCourt: res.data.backCourt, courtName:res.data.courtName},
+          chooseMembers: res.data.players,
+          timeStr: res.data.timeStr
+        });
+      }
+    }, false);
   },
   //比赛名称
   inputName:function(e){
@@ -118,13 +168,17 @@ Page({
     this.setData({ dateTime: e.detail.value });
   },
   changeDateTimeColumn(e) {
+  
     var arr = this.data.dateTime, dateArr = this.data.dateTimeArray;
 
     arr[e.detail.column] = e.detail.value;
     dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
 
+    var timeStr = dateArr[0][arr[0]] + '-' + dateArr[1][arr[1]] + '-' +
+      dateArr[2][arr[2]] + ' ' + dateArr[3][arr[3]] + ':' + dateArr[4][arr[4]]
     this.setData({
-      dateTimeArray: dateArr
+      dateTimeArray: dateArr,
+      timeStr: timeStr
     });
   },
   //手动录入球员
@@ -143,32 +197,49 @@ Page({
   createGame:function(e){
     var that = this;
     console.log(that.data.chooseMembers);
-    var playerPoles = [{userId: app.globalData.userInfo.id}];
+    var playerPoles = [];
     var add = true;
     (that.data.chooseMembers).map(function (item) {
-      playerPoles.push({ userId: item.id })
+      playerPoles.push({ userId: item.id})
     })
     var mainCourt = that.data.mainCourt;
     var minorCourt1 = that.data.minorCourt1;
     var minorCourt2 = that.data.minorCourt2;
-    if (!that.data.gameName || !that.data.dateTimeArray || !that.data.number1 || !that.data.files ||
-      !that.data.dateTime || !that.data.mainCourt) {
+    
+    if (!that.data.gameName || !that.data.timeStr || !that.data.number1 || !that.data.mainCourt) {
       wx.showToast({ title: '请完善赛事信息', icon: 'none', duration: 1500 });
       return;
     }
-    var timeStap = new Date(that.data.dateTimeArray[0][that.data.dateTime[0]] + '-' + that.data.dateTimeArray[1][that.data.dateTime[1]] + '-' + that.data.dateTimeArray[2][that.data.dateTime[2]] + ' ' + that.data.dateTimeArray[3][that.data.dateTime[3]] + ':' +that.data.dateTimeArray[4][that.data.dateTime[4]]).getTime();
-    http.postRequest({
-      url: "match/create",
-      params: {
-        playerLimit: that.data.number1, players: playerPoles, matchName: that.data.gameName, startTime: timeStap, 
-        courtId: mainCourt.courtId, frontCourt: mainCourt.frontCourt, icon: app.globalData.userInfo.avatarUrl,
-        backCourt: mainCourt.backCourt, uid: app.globalData.userInfo.id
-      },
-      msg: '创建中...',
-      success: res => {
-        wx.showToast({ title: '创建成功', icon: 'none', duration: 1500 })
-        wx.navigateBack()
-      }
-    }, true);
+    var timeStap = new Date(that.data.timeStr.replace(/-/g, '/')).getTime();//IOS系统不支持2017-01-01格式的时间
+    
+    if (that.data.gameId == 1) {
+      http.postRequest({
+        url: "match/create",
+        params: {
+          playerLimit: that.data.number1, players: playerPoles, matchName: that.data.gameName, startTime: timeStap,
+          courtId: mainCourt.courtId, frontCourt: mainCourt.frontCourt, icon: app.globalData.userInfo.avatarUrl,
+          backCourt: mainCourt.backCourt, uid: app.globalData.userInfo.id
+        },
+        msg: '创建中...',
+        success: res => {
+          wx.showToast({ title: '创建成功', icon: 'none', duration: 1500 })
+          wx.navigateBack()
+        }
+      }, true);
+    }else{
+      http.postRequest({
+        url: "match/update",
+        params: {
+          playerLimit: that.data.number1, players: playerPoles, matchName: that.data.gameName, startTime: timeStap,
+          courtId: mainCourt.courtId, frontCourt: mainCourt.frontCourt, icon: app.globalData.userInfo.avatarUrl,
+          backCourt: mainCourt.backCourt, uid: app.globalData.userInfo.id, matchId: that.data.gameId
+        },
+        msg: '修改中...',
+        success: res => {
+          wx.showToast({ title: '修改成功', icon: 'none', duration: 1500 })
+          wx.navigateBack()
+        }
+      }, true);
+    }
   }
 });

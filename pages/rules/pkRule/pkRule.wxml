@@ -5,21 +5,18 @@
         <view class="weui-cell weui-cell_access">
           <view class="weui-cell__bd weui-cell_primary">PK公开</view>
           <view class="weui-cell__ft">
-            <switch color="#66CC99" bindchange="pkSet" checked="{{pkPublic}}"></switch>
+            <switch color="#66CC99" bindchange="pkSet" checked="{{pkSet.open}}"></switch>
           </view>
         </view>
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active"
-          bindtap='togglePopup' data-title="埋地雷">
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='toggleBom'>
           <view class="weui-cell__bd weui-cell_primary">埋地雷</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" 
-          bindtap='togglePopup' data-title="让洞">
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='toggleJoin'>
           <view class="weui-cell__bd weui-cell_primary">让洞</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
-        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" 
-          bindtap='togglePopup' data-title="选择起始洞">
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='toggleStart'>
           <view class="weui-cell__bd weui-cell_primary">选择起始洞</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
@@ -33,60 +30,117 @@
         </view>
       </view>
     </view>
-    <view class="zan-popup {{showPopup ? 'zan-popup--show' : ''}}">
-      <view class="zan-popup__mask" bindtap="togglePopup"></view>
+    <!-- 埋地雷 -->
+    <view class="zan-popup {{showBom ? 'zan-popup--show' : ''}}">
+      <view class="zan-popup__mask" bindtap="toggleBom"></view>
       <view class="zan-popup__container">
         <view class="popup-width">
-          <view class='weui-grid__label' style='font-size:16px;color:#333'>{{title}}</view>
+          <view class='weui-grid__label' style='font-size:16px;color:#333'>埋地雷</view>
           <view class='weui-grid__label' style='text-align:left'>前9洞</view>
           <view class='weui-flex'>
-            <view class='weui-flex__item cell {{hole ==0?"active":""}}' 
-              bindtap='selecHole' data-id='0'>F1</view>
-            <view class='weui-flex__item cell {{hole ==1?"active":""}}'
-             bindtap='selecHole' data-id='1'>F2</view>
-            <view class='weui-flex__item cell {{hole ==2?"active":""}}' 
-              bindtap='selecHole' data-id='2'>F3</view>
-            <view class='weui-flex__item cell {{hole ==3?"active":""}}'
-              bindtap='selecHole' data-id='3'>F4</view>
-            <view class='weui-flex__item cell {{hole ==4?"active":""}}'
-               bindtap='selecHole' data-id='4'>F5</view>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.bomHold[indx]==2?"active":""}}' wx:if="{{indx<5}}"
+                style="{{cellStyle}}" bindtap='selecBom' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
           </view>
           <view class='weui-flex'>
-            <view class='weui-flex__item cell {{hole ==5?"active":""}}'
-               bindtap='selecHole' data-id='5'>F6</view>
-            <view class='weui-flex__item cell {{hole ==6?"active":""}}'
-               bindtap='selecHole' data-id='6'>F7</view>
-            <view class='weui-flex__item cell {{hole ==7?"active":""}}'
-               bindtap='selecHole' data-id='7'>F8</view>
-            <view class='weui-flex__item cell {{hole ==8?"active":""}}' 
-              bindtap='selecHole' data-id='8'>F9</view>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.bomHold[indx]==2?"active":""}}' wx:if="{{indx>4&&indx<9}}"
+                style="{{cellStyle}}" bindtap='selecBom' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
             <view class='weui-flex__item' style='margin: 10rpx 15rpx'></view>
           </view>
           <view class='weui-grid__label' style='text-align:left'>后9洞</view>
           <view class='weui-flex'>
-            <view class='weui-flex__item cell {{hole ==9?"active":""}}' 
-              bindtap='selecHole' data-id='9'>F1</view>
-            <view class='weui-flex__item cell {{hole ==10?"active":""}}'
-             bindtap='selecHole' data-id='10'>F2</view>
-            <view class='weui-flex__item cell {{hole ==11?"active":""}}' 
-              bindtap='selecHole' data-id='11'>F3</view>
-            <view class='weui-flex__item cell {{hole ==12?"active":""}}'
-              bindtap='selecHole' data-id='12'>F4</view>
-            <view class='weui-flex__item cell {{hole ==13?"active":""}}'
-              bindtap='selecHole' data-id='13'>F5</view>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.bomHold[indx]==2?"active":""}}' wx:if="{{indx>8&&indx<14}}"
+                style="{{cellStyle}}" bindtap='selecBom' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
           </view>
           <view class='weui-flex'>
-            <view class='weui-flex__item cell {{hole ==14?"active":""}}'
-               bindtap='selecHole' data-id='14'>F6</view>
-            <view class='weui-flex__item cell {{hole ==15?"active":""}}'
-               bindtap='selecHole' data-id='15'>F7</view>
-            <view class='weui-flex__item cell {{hole ==16?"active":""}}'
-               bindtap='selecHole' data-id='16'>F8</view>
-            <view class='weui-flex__item cell {{hole ==17?"active":""}}' 
-              bindtap='selecHole' data-id='17'>F9</view>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.bomHold[indx]==2?"active":""}}' wx:if="{{indx>13}}"
+                style="{{cellStyle}}" bindtap='selecBom' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
             <view class='weui-flex__item' style='margin: 10rpx 15rpx'></view>
           </view>
-          <button class="weui-button" bindtap='confirmChoose'> 确认选择</button>
+          <button class="weui-button" bindtap='confirmChoose'>确认选择</button>
+        </view>
+      </view>
+    </view>
+    <!-- 让洞 -->
+    <view class="zan-popup {{showJoin ? 'zan-popup--show' : ''}}">
+      <view class="zan-popup__mask" bindtap="toggleJoin"></view>
+      <view class="zan-popup__container">
+        <view class="popup-width">
+          <view class='weui-grid__label' style='font-size:16px;color:#333'>让洞</view>
+          <view class='weui-grid__label' style='text-align:left'>前9洞</view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.joinHold[indx]==0?"active":""}}' wx:if="{{indx<5}}"
+                style="{{cellStyle}}" bindtap='selecJoin' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+          </view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.joinHold[indx]==0?"active":""}}' wx:if="{{indx>4&&indx<9}}"
+                style="{{cellStyle}}" bindtap='selecJoin' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+            <view class='weui-flex__item' style='margin: 10rpx 15rpx'></view>
+          </view>
+          <view class='weui-grid__label' style='text-align:left'>后9洞</view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.joinHold[indx]==0?"active":""}}' wx:if="{{indx>8&&indx<14}}"
+                style="{{cellStyle}}" bindtap='selecJoin' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+          </view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.joinHold[indx]==0?"active":""}}' wx:if="{{indx>13}}"
+                style="{{cellStyle}}" bindtap='selecJoin' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+            <view class='weui-flex__item' style='margin: 10rpx 15rpx'></view>
+          </view>
+          <button class="weui-button" bindtap='confirmChoose'>确认选择</button>
+        </view>
+      </view>
+    </view>
+    <!-- 选择起始洞 -->
+    <view class="zan-popup {{showStart ? 'zan-popup--show' : ''}}">
+      <view class="zan-popup__mask" bindtap="toggleStart"></view>
+      <view class="zan-popup__container">
+        <view class="popup-width">
+          <view class='weui-grid__label' style='font-size:16px;color:#333'>起始洞</view>
+          <view class='weui-grid__label' style='text-align:left'>前9洞</view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.startPos==indx?"active":""}}'
+                style="{{cellStyle}}" bindtap='selecStart' data-id='{{indx}}' wx:if="{{indx<5}}">{{item.zname}}</view>
+            </block>
+          </view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.startPos==indx?"active":""}}' wx:if="{{indx>4&&indx<9}}"
+                style="{{cellStyle}}" bindtap='selecStart' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+            <view class='weui-flex__item' style='margin: 10rpx 15rpx'></view>
+          </view>
+          <view class='weui-grid__label' style='text-align:left'>后9洞</view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.startPos==indx?"active":""}}' wx:if="{{indx>8&&indx<14}}"
+                style="{{cellStyle}}" bindtap='selecStart' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+          </view>
+          <view class='weui-flex'>
+            <block wx:for="{{gameDetail.zones}}" wx:key="*this" wx:for-index="indx">
+              <view class='weui-flex__item cell {{pkSet.startPos==indx?"active":""}}' wx:if="{{indx>13}}"
+                style="{{cellStyle}}" bindtap='selecStart' data-id='{{indx}}'>{{item.zname}}</view>
+            </block>
+            <view class='weui-flex__item' style='margin: 10rpx 15rpx'></view>
+          </view>
+          <button class="weui-button" bindtap='confirmChoose'>确认选择</button>
         </view>
       </view>
     </view>

@@ -10,7 +10,7 @@
         <image class="weui-grid__icon img" src="../../../images/icon_code.png" />
         <view class="weui-grid__label" style="color:#fff">比赛编码</view>
       </navigator>
-      <navigator url="/pages/game/createGame/createGame" class="weui-flex__item" style='padding:30rpx 0px'>
+      <navigator url="/pages/game/createGame/createGame?id=1" class="weui-flex__item" style='padding:30rpx 0px'>
         <image class="weui-grid__icon img" src="../../../images/icon_create_game.png" />
         <view class="weui-grid__label" style="color:#fff">创建比赛</view>
       </navigator>
@@ -47,8 +47,8 @@
                 </view>
                 <view class="weui-cell__ft">
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : 'end'}}">
-                      {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : '结束'}}
+                    <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : item.stat == 4?'end':''}}">
+                      {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : item.stat == 4 ?'结束':''}}
                     </view>
                     <view class="weui-media-box__desc">
                       {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}
@@ -81,8 +81,8 @@
                 </view>
                 <view class="weui-cell__ft">
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : 'end'}}">
-                      {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : '结束'}}
+                    <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : item.stat == 4?'end':''}}">
+                      {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : item.stat == 4 ?'结束':''}}
                     </view>
                     <view class="weui-media-box__desc">
                       {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}

@@ -5,12 +5,11 @@ var util = require('../../../utils/util.js');
 
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
     showReply: false,
     showDelete: false,
     dynamics: [],
     imageWidth: '0px',
+    refresh: false,
     page: 1,
     size: 10
   },
@@ -44,12 +43,22 @@ Page({
       // msg: "加载中....",
       success: res => {
         // wx.showToast({title: '加载成功', icon: 'info', duration: 1500});
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.createTime), '-', true)
         })
-        this.setData({
-          dynamics: res.data.content
-        })
+        if (that.data.page <= 1) {
+          that.setData({
+            dynamics: res.data.content
+          })
+        } else {
+          that.setData({
+            dynamics: that.data.dynamics.concat(res.data.content)
+          })
+        }
       }
     }, false);
   },
@@ -207,5 +216,28 @@ Page({
         this.getDynamics();
       }
     }, false);
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true
+    });
+
+    this.setData({
+      page: 1
+    });
+    this.getDynamics();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getDynamics();
   }
 })

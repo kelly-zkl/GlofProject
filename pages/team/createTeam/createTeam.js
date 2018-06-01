@@ -47,9 +47,9 @@ Page({
       params: {
         groupId: that.data.groupId, uid: app.globalData.userInfo.id
       },
-      msg: "加载中....",
+      // msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         that.setData({
           team: res.data,
           groupName: res.data.groupName,
@@ -63,7 +63,7 @@ Page({
           allowSJoin: res.data.allowSJoin
         })
       }
-    }, true);
+    }, false);
   },
   onReady: function (e) {
     var that = this;

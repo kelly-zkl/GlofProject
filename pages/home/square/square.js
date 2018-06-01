@@ -42,7 +42,7 @@ Page({
     http.postRequest({
       url: "match/query",
       params: {
-        lng: that.data.longitude, lat: that.data.latitude, page: 1, size: 10, uid: app.globalData.userInfo.id
+        lng: that.data.longitude, lat: that.data.latitude, page: 1, size: 8, uid: app.globalData.userInfo.id
       },
       // msg: "加载中....",
       success: res => {

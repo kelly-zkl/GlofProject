@@ -86,9 +86,22 @@ Page({
       // msg: "加载中....",
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        this.setData({
-          dynamics: res.data.content
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.createTime), '-', true)
         })
+        if (that.data.page <= 1) {
+          that.setData({
+            dynamics: res.data.content
+          })
+        } else {
+          that.setData({
+            dynamics: that.data.dynamics.concat(res.data.content)
+          })
+        }
       }
     }, false);
   },
@@ -235,6 +248,10 @@ Page({
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         // res.data.createTime = util.formatTime(new Date(res.data.createTime*1000), '-');
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         that.setData({
           team: res.data
         })
@@ -442,10 +459,62 @@ Page({
         groupId: that.data.groupId
       },
       success: res => {
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         that.setData({
           members: res.data.content
         })
       }
     }, false);
+  },
+  //导入成员
+  addMembers:function(){
+    
+  },
+  //关联项目
+  addGames:function(){
+
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true
+    });
+    if (this.data.activeIndex == 0) {//动态
+      this.setData({
+        page: 1
+      });
+      this.getDynamics();
+    } else if (this.data.activeIndex == 1) {//成员
+      this.getMembers();
+    } else if (this.data.activeIndex == 2) {//队赛
+      this.setData({
+        myPage: 1
+      });
+      // this.getMyGames();
+    } else if (this.data.activeIndex == 3) {//资料
+      this.getGroupDetail();
+    }
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    if (this.data.activeIndex == 0) {//动态
+      this.setData({
+        page: this.data.page + 1
+      });
+      this.getDynamics();
+    } else if (this.data.activeIndex == 2) {//队赛
+      this.setData({
+        myPage: this.data.myPage + 1
+      });
+      // this.getMyGames();
+    }
   }
 });

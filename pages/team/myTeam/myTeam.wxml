@@ -236,11 +236,9 @@
     </view>
   </view>
   <button class="weui-btn send" bindtap="gotoPost" wx:if="{{activeIndex == 0}}">
-    <image src="../../../images/icon_photo.png" style="width:26px;height:26px;margin-right:10rpx"/>发动态
+    <image src="../../../images/icon_photo.png" style="width:24px;height:24px;margin-right:10rpx"/>发动态
   </button>
-  <button class="weui-btn send" bindtap="relationGame" wx:if="{{activeIndex == 2}}">
-    <image src="../../../images/icon_photo.png" style="width:26px;height:26px;margin-right:10rpx"/>关联比赛
-  </button>
+  <button class="weui-btn send" bindtap="relationGame" wx:if="{{activeIndex == 2}}">关联比赛</button>
   <!--管理-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>

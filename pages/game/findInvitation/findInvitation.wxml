@@ -1,10 +1,6 @@
 <view class="page">
   <view class="page__bd" style='margin-bottom:80px'>
     <view class="weui-search-bar" style="background:#66CC99">
-      <image src="../../../images/icon_intro.png" style="width:20px;height:20px;margin:8px 8px 8px 0"/>
-      <view style="color:#fff;font-size:14px;display:inline-block;height:36px;line-height:36px;text-align: center">
-        <view style="margin-right:30rpx">深圳</view>
-      </view>
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
@@ -50,8 +46,8 @@
               </view>
               <view class="weui-cell__ft">
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                  <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : 'end'}}">
-                    {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : '结束'}}
+                  <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : item.stat == 4?'end':''}}">
+                    {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : item.stat == 4 ?'结束':''}}
                   </view>
                   <view class="weui-media-box__desc">
                     {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}

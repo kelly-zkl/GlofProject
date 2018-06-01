@@ -2,6 +2,7 @@
 const app = getApp();
 var http = require("../../../http.js");
 var base64 = require("../../../images/base64");
+var util = require('../../../utils/util.js'); 
 
 Page({
 
@@ -43,12 +44,15 @@ Page({
       },
       msg: "加载中....",
       success: res => {
-        that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
+        // that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
+        })
         this.setData({
           games: res.data.content
         })
       }
-    }, that.data.show);
+    }, false);
   },
   //选择比赛
   bindCheckbox: function (e) {

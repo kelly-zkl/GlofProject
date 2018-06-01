@@ -49,9 +49,9 @@ Page({
   },
   managerChange: function (e) {
     if (e.currentTarget.id == 1) {//修改赛事
-      // wx.navigateTo({
-      //   url: '/pages/game/createGame/createGame?id=' + this.data.gameId,
-      // })
+      wx.navigateTo({
+        url: '/pages/game/createGame/createGame?id=' + this.data.gameId,
+      })
     } else if (e.currentTarget.id == 2) {//设置赛事权限
       // wx.navigateTo({
       //   url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,

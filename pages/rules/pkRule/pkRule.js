@@ -11,7 +11,10 @@ Page({
    */
   data: {
     pkPublic:false,
-    showPopup:false,
+    showJoin:false,//让洞
+    showBom:false,//地雷
+    showStart:false,//起始洞
+    page:1
   },
 
   /**
@@ -22,31 +25,86 @@ Page({
     that.setData({
       gameId: options.id
     });
+
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          imageWidth: ((res.windowWidth*0.8 - 90) / 5)+'px'
+        });
+        console.log(that.data.imageWidth);
+      }
+    });
+    that.setData({
+      cellStyle: 'width:' + that.data.imageWidth + ';height:' + that.data.imageWidth + ';line-height:' + that.data.imageWidth
+    });
   },
   onShow: function () {
     this.gameDetail();
     this.getRuleList();
+    this.getPkSet();
   },
-  //选择起始洞
-  togglePopup(e) {
+  //埋地雷
+  toggleBom() {
     this.setData({
-      showPopup: !this.data.showPopup,
-      title: e.currentTarget.dataset.title
+      showBom: !this.data.showBom
     });
   },
-  selecHole:function(e){
+  selecBom: function (e) {//2埋雷 1没有埋雷
+    var indx = e.currentTarget.dataset.id;
+    var arr = this.data.pkSet.bomHold;
+    var num = arr[indx];
+    if (num == 1) {
+      arr[indx] = 2;
+    } else {
+      arr[indx] = 1;
+    }
     this.setData({
-      hole: e.currentTarget.dataset.id
+      'pkSet.bomHold': arr
+    })
+  },
+  //让洞
+  toggleJoin() {
+    this.setData({
+      showJoin: !this.data.showJoin
+    });
+  },
+  selecJoin: function (e) {//1参与 0不参与
+    var indx = e.currentTarget.dataset.id;
+    var arr = this.data.pkSet.joinHold;
+    var num = arr[indx];
+    if (num==0){
+      arr[indx] = 1;
+    }else{
+      arr[indx] = 0;
+    }
+    this.setData({
+      'pkSet.joinHold': arr
+    })
+  },
+  //选择起始洞
+  toggleStart() {
+    this.setData({
+      showStart: !this.data.showStart
+    });
+  },
+  selecStart: function (e) {
+    this.setData({
+      'pkSet.startPos': e.currentTarget.dataset.id
     });
   },
   confirmChoose:function(e){
-    
+    this.setData({
+      showJoin: false,//让洞
+      showBom: false,//地雷
+      showStart: false//起始洞
+    });
+    this.saveSet();
   },
   //pk规则是否公开
   pkSet:function(e){
     var that = this;
     that.setData({
-      pkPublic: e.detail.value
+      'pkSet.open': e.detail.value
     });
     that.saveSet();
   },
@@ -55,19 +113,6 @@ Page({
     wx.navigateTo({
       url: '/pages/rules/setRule/setRule?id=' + this.data.gameId,
     })
-  },
-  //设置起始洞、地雷、让洞
-  saveSet:function(e){
-    var that = this;
-    var pk = { open: that.data.pkPublic, joinHold: [], bomHold: [], startPos:0}
-    http.postRequest({
-      url: "/match/pkRule",
-      params: {matchId: that.data.gameId, uid: app.globalData.userInfo.id,pk:pk },
-      msg: "设置中...",
-      success: res => {
-        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500})
-      }
-    }, true);
   },
   //比赛详情
   gameDetail: function (e) {
@@ -83,6 +128,32 @@ Page({
       }
     }, false);
   },
+  //设置pk通用设置=>起始洞、地雷、让洞
+  saveSet:function(e){
+    var that = this;
+    http.postRequest({
+      url: "match/updatePK",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, pk: that.data.pkSet },
+      msg: "设置中...",
+      success: res => {
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500})
+      }
+    }, true);
+  },
+  //获取pk通用设置
+  getPkSet:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/detailPK",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      msg: "加载中...",
+      success: res => {
+        that.setData({
+          pkSet: res.data
+        });
+      }
+    }, false);
+  },
   //获取规则列表
   getRuleList:function(){
     var that = this;
@@ -91,9 +162,19 @@ Page({
       params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
       msg: "加载中...",
       success: res => {
-        this.setData({
-          rules: res.data
-        });
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        if (that.data.page <= 1) {
+          that.setData({
+            rules: res.data
+          })
+        } else {
+          that.setData({
+            rules: that.data.rules.concat(res.data)
+          })
+        }
       }
     }, false);
   },
@@ -122,4 +203,26 @@ Page({
       }
     })
   },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.gameDetail();
+    this.getRuleList();
+    this.getPkSet();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getRuleList();
+  }
 })

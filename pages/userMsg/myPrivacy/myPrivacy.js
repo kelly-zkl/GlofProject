@@ -38,7 +38,11 @@ Page({
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
         this.setData({
-          userInfo: res.data
+          userInfo: res.data,
+          gradePublic: res.data.gradePublic,
+          phonePublic: res.data.phonePublic,
+          wxNamePublic: res.data.wxNamePublic,
+          namePublic: res.data.namePublic
         })
       }
     }, false);

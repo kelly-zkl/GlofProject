@@ -155,12 +155,12 @@
         <view class="weui-cell weui-cell_access line" id="1" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改赛事</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <!-- <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事权限</view>
-        </view>
-        <!-- <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事图片</view>
         </view> -->
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事图片</view>
+        </view> 
          <view class="weui-cell weui-cell_access line" id="4" bindtap="managerChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">成绩填写记录</view>
         </view> 
