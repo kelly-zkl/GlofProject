@@ -24,3 +24,15 @@
 .weui-icon-clear{padding:11px 8px}
 .weui-icon-search_in-box{top:11px}
 .line{border-top: 1rpx #e5e5e5 solid}
+
+button{
+  padding: 0;
+  margin: 0
+}
+.weui-cell.share{
+  background: transparent;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0
+}

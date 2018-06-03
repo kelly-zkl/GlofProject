@@ -15,7 +15,9 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      activeIndex:options.tab
+      activeIndex:options.tab,
+      userName: app.globalData.userInfo.name,
+      userId: app.globalData.userInfo.id
     });
     var that = this;
     wx.getSystemInfo({
@@ -101,4 +103,18 @@ Page({
       }
     })
   },
+  //分享页面
+  onShareAppMessage: function () {
+    return {
+      title: 'GLOF',
+      desc: this.data.userName + "的主页",
+      path: '/pages/home/glof/glof?userId=' + this.data.userId,
+      success: function (res) {// 转发成功
+        wx.showToast({ title: '分享成功', icon: 'info', duration: 1500 })
+      },
+      fail: function (res) {// 转发失败
+        wx.showToast({ title: '分享失败', icon: 'info', duration: 1500 })
+      }
+    }
+  }
 });

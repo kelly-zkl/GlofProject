@@ -32,7 +32,7 @@
         <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
           <view class="weui-panel weui-panel_access" wx:if="{{activeIndex == 0}}">
             <view class="weui-panel__bd" wx:for="{{users}}" wx:key="*this">
-              <navigator url="/pages/userMsg/personalPage/personalPage?tab=1&id={{item.id}}" 
+              <navigator url="/pages/userMsg/personalPage/personalPage?tab={{item.id==userId?0:1}}&id={{item.id}}"
                 class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                   <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
@@ -40,7 +40,6 @@
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
                 </view>
-                <!-- <view class="weui-cell__ft text-size-13">已关注</view> -->
               </navigator>
             </view>
           </view>
@@ -84,14 +83,16 @@
                 <view class="weui-cell__bd weui-cell_primary"><view>微信扫一扫</view></view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
               </view>
-              <navigator url="" class="weui-cell weui-cell_access"
+              <button open-type="share" class="weui-cell weui-cell_access share"
                 hover-class="weui-cell_active">
-                <view class="weui-cell__hd"><image src="../../../images/icon_intro.png" class="icon-size"/></view>
+                <view class="weui-cell__hd">
+                <image src="../../../images/icon_intro.png" class="icon-size" style='display: flex;align-items: center'/>
+                </view>
                 <view class="weui-cell__bd weui-cell_primary">邀请微信好友</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-              </navigator>
-              <navigator url="" class="weui-cell weui-cell_access"
-                hover-class="weui-cell_active">
+              </button>
+              <navigator url="/pages/search/historyMember/historyMember"
+               class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd"><image src="../../../images/icon_intro.png" class="icon-size"/></view>
                 <view class="weui-cell__bd weui-cell_primary">历史同组球友</view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>

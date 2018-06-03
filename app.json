@@ -67,7 +67,8 @@
     "pages/choose/gameMember/gameMember",
     "pages/choose/mulitGames/mulitGames",
     "pages/choose/teamMember/teamMember",
-    "pages/choose/chooseTeam/chooseTeam"
+    "pages/choose/chooseTeam/chooseTeam",
+    "pages/search/historyMember/historyMember"
   ],
   "window": {
     "backgroundTextStyle": "light",

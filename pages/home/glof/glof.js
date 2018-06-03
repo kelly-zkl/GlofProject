@@ -18,7 +18,7 @@ Page({
     totalPage:1,
     myTotalpage:2
   },
-  onLoad: function () {
+  onLoad: function (options) {
     wx.showTabBarRedDot({
       index: 2
     })
@@ -31,10 +31,27 @@ Page({
         });
       }
     });
+
+    if (options.userId) {
+      //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
+      wx.navigateTo({
+        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + options.userId,
+      })
+    }
+
+    if (options.gameId) {
+      //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
+      wx.navigateTo({
+        url: '/pages/game/gameDetail/gameDetail?id=' + options.gameId,
+      })
+    }
   },
   onShow:function(e){
     var that = this;
-
+    that.setData({
+      page: 1,
+      myPage: 1
+    });
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
@@ -140,7 +157,7 @@ Page({
     http.postRequest({
       url: "match/user/home",
       params: {
-        page: that.data.myPage, size: 10, uid: app.globalData.userInfo.id, lng: that.data.longitude, lat: that.data.latitude
+        uid: app.globalData.userInfo.id, lng: that.data.longitude, lat: that.data.latitude
       },
       // msg: "加载中....",
       success: res => {
@@ -178,9 +195,7 @@ Page({
       });
       this.getGames();
     } else if (this.data.activeIndex == 1) {//我的赛事
-      this.setData({
-        myPage: 1
-      });
+      
       this.getMyGames();
     }
   },
@@ -193,11 +208,6 @@ Page({
         page: this.data.page + 1
       });
       this.getGames();
-    } else if (this.data.activeIndex == 1) {//我的赛事
-      this.setData({
-        myPage: this.data.myPage + 1
-      });
-      this.getMyGames();
     }
   }
 });

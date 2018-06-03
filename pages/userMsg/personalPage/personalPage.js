@@ -49,6 +49,9 @@ Page({
     })
   },
   onShow:function(e){
+    this.setData({
+      page: 1
+    });
     this.getUserInfo();
     this.getDynamics();
   },
@@ -319,5 +322,19 @@ Page({
       page: this.data.page + 1
     });
     this.getDynamics();
+  },
+  //分享页面
+  onShareAppMessage: function () {
+    return {
+      title: 'GLOF',
+      desc: this.data.userInfo.name+"的主页",
+      path: '/pages/home/glof/glof?userId=' + this.data.userInfo.id,
+      success: function (res) {// 转发成功
+        wx.showToast({ title: '分享成功', icon: 'info', duration: 1500 })
+      },
+      fail: function (res) {// 转发失败
+        wx.showToast({ title: '分享失败', icon: 'info', duration: 1500 })
+      }
+    }
   }
 })

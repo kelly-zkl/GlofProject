@@ -2,8 +2,10 @@
   <view class="page__bd">
     <view class="weui-flex" style="background:#66CC99">
       <view style="padding-left:30rpx">
-        <image src="../../../images/icon_game_code.png" style="width:26px;height:26px"/>
-        <image src="../../../images/icon_game_share.png" style="width:26px;height:26px;padding-left:30rpx"/>
+        <image src="../../../images/icon_game_code.png" style="width:26px;height:26px;display:inline-block"/>
+        <button open-type="share" class='share-btn'>
+        <image src="../../../images/icon_game_share.png" style="display: flex;align-items: center;width:26px;height:26px"/>
+        </button>
       </view>
       <view class="weui-flex__item text-size-15">
         <view style="color:#fff;text-align:center">{{gameDetail.matchName}}</view>
@@ -163,7 +165,16 @@
         </view> 
          <view class="weui-cell weui-cell_access line" id="4" bindtap="managerChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">成绩填写记录</view>
-        </view> 
+        </view>
+        <view class="weui-cell weui-cell_access line" id="8" bindtap="managerChange" wx:if="{{gameDetail.followerId}}">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消关注</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="9" bindtap="managerChange" wx:else>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">关注比赛</view>
+        </view>
+        <view class="weui-cell weui-cell_access line" id="10" bindtap="managerChange" wx:if="{{gameDetail.joined!=1}}">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">加入比赛</view>
+        </view>
         <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">重新开赛</view>
         </view>

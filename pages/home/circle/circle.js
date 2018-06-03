@@ -27,10 +27,17 @@ Page({
     });
     that.setData({
       icon20: base64.icon20,
-      icon60: base64.icon60
+      icon60: base64.icon60,
+      userId: app.globalData.userInfo.id
     });
   },
   onShow:function(e){
+    this.setData({
+      teamPage: 1,
+      followPage: 1,
+      fanPage: 1,
+      gamePage: 1
+    });
     if (this.data.activeIndex == 0) {//球队
       this.getTeams();
     } else if (this.data.activeIndex == 1) {//我关注的人
@@ -62,7 +69,7 @@ Page({
     http.postRequest({
       url: "group/mine",
       params: {
-        page: 1, size:10,uid: app.globalData.userInfo.id
+        page: that.data.teamPage, size:10,uid: app.globalData.userInfo.id
       },
       // msg: "加载中....",
       success: res => {
@@ -91,7 +98,7 @@ Page({
     http.postRequest({
       url: "user/following",
       params: {
-        beFollowedType: "user", uid: app.globalData.userInfo.id
+        beFollowedType: "user", uid: app.globalData.userInfo.id, page: that.data.followPage,size:10
       },
       msg: "加载中....",
       success: res => {
@@ -121,7 +128,7 @@ Page({
     http.postRequest({
       url: "user/followers",
       params: {
-        uid: app.globalData.userInfo.id,page: 1,size: 10
+        uid: app.globalData.userInfo.id, page: that.data.fanPage,size: 10
       },
       // msg: "加载中....",
       success: res => {
@@ -148,7 +155,7 @@ Page({
     http.postRequest({
       url: "user/historyRival",
       params: {
-        page: 1, uid: app.globalData.userInfo.id, size:10
+        page: that.data.gamePage, uid: app.globalData.userInfo.id, size:10
       },
       // msg: "加载中....",
       success: res => {
@@ -221,7 +228,7 @@ Page({
     } else if (this.data.activeIndex == 3) {//同组同赛
       this.setData({
         gamePage: this.data.gamePage + 1
-      });
+      })
       this.getGameMembers();
     }
   }

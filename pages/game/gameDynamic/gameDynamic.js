@@ -29,6 +29,9 @@ Page({
     });
   },
   onShow: function (e) {
+    this.setData({
+      page: 1
+    });
     this.getDynamics();
   },
   //获取赛事动态

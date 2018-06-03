@@ -114,3 +114,19 @@
 }
 .view-join{color:#FF9900}
 .view-follow{color:#43CBB3}
+
+.share-btn{
+  width:26px;
+  height:26px;
+  padding-left:30rpx;
+  background:transparent;
+  display:inline-block;
+  padding: 0;
+  border: transparent;
+  margin: 0;
+  margin-left: 30rpx;
+}
+.share-btn::before,.share-btn::after{
+  border:transparent;
+  background:transparent;
+}

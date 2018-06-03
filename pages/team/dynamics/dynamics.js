@@ -26,6 +26,9 @@ Page({
     });
   },
   onShow: function (e) {
+    this.setData({
+      page: 1
+    });
     this.getUserInfo();
     this.getDynamics();
   },

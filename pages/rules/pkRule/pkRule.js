@@ -220,9 +220,9 @@ Page({
    * 页面上拉触底事件的处理函数 
    */
   onReachBottom: function () {
-    this.setData({
-      page: this.data.page + 1
-    });
-    this.getRuleList();
+    // this.setData({
+    //   page: this.data.page + 1
+    // });
+    // this.getRuleList();
   }
 })

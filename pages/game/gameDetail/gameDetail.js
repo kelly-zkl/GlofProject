@@ -67,6 +67,12 @@ Page({
       this.finishGame();
     } else if (e.currentTarget.id == 7) {//退出比赛
       this.quitGame();
+    } else if (e.currentTarget.id == 8) {//取消关注比赛
+      this.unFollowGame(); 
+    } else if (e.currentTarget.id == 9) {//关注比赛
+      this.followGame();
+    } else if (e.currentTarget.id == 10) {//加入比赛
+      this.joinGame();
     }
     this.setData({
       showManager: false
@@ -298,7 +304,7 @@ Page({
           http.postRequest({
             url: "user/cancelFollower",
             params: {
-              id: that.data.userInfo.followedId, uid: app.globalData.userInfo.id,
+              id: that.data.gameDetail.followedId, uid: app.globalData.userInfo.id,
               beFollowedType: "match"
             },
             msg: "加载中...",
@@ -398,5 +404,19 @@ Page({
         });
       }
     }, false);
+  },
+  //分享页面
+  onShareAppMessage: function () {
+    return {
+      title: 'GLOF',
+      desc: this.data.gameDetail.matchName,
+      path: '/pages/home/glof/glof?gameId=' + this.data.gameId,
+      success: function (res) {// 转发成功
+        wx.showToast({ title: '分享成功', icon: 'info', duration: 1500 })
+      },
+      fail: function (res) {// 转发失败
+        wx.showToast({ title: '分享失败', icon: 'info', duration: 1500 })
+    }
   }
+}
 });
