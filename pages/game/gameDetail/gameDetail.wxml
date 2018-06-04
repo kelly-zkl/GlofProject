@@ -83,9 +83,9 @@
         <view class="weui-flex__item" style='text-align:center'>
           <view class="tui-tabbar-group">
             <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">PK规则</view>
+              data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">PK规则</view>
             <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">. . .</view>
+              data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">. . .</view>
             <view class="tui-tabbar-cell {{radioType == 2 ? 'tui-active' : ''}}"
               data-id="2" bindtap="douChange">记分卡</view>
           </view>
@@ -216,16 +216,16 @@
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
         <view class="weui-cell weui-cell_access line" id="1" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">发红包</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">发红包</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="2" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">发动态</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">发动态</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="3" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">球童</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">球童</view>
         </view>
         <view class="weui-cell weui-cell_access line" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">取消</view>
         </view>
       </view>
     </view>

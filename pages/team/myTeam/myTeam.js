@@ -19,9 +19,13 @@ Page({
     dynamics: [],
     imageWidth: '0px',
     page: 1,
+    myPage:1,
+    memPage:1,
     size: 10,
     radioType: 0,
-    members:[]
+    members:[],
+    chooseGames:[],
+    chooseMembers:[]
   },
   onLoad: function (options) {
     var that = this;
@@ -44,7 +48,9 @@ Page({
    */
   onShow: function () {
     this.setData({
-      page: 1
+      page: 1,
+      myPage: 1,
+      memPage: 1
     });
     this.getGroupDetail();
     
@@ -53,7 +59,7 @@ Page({
     } else if (this.data.activeIndex == 1) {//成员
       this.getMembers();
     } else if (this.data.activeIndex == 2) {//队赛
-      // this.getFans();
+      this.getGames();
     }
   },
   tabClick: function (e) {
@@ -66,7 +72,7 @@ Page({
     } else if (e.currentTarget.id == 1) {//成员
       this.getMembers();
     } else if (e.currentTarget.id == 2) {//队赛
-      // this.getFans();
+      this.getGames();
     } else {//详情
       this.getGroupDetail();
     }
@@ -117,8 +123,56 @@ Page({
   //跳转到关联比赛页面
   relationGame: function () {
     wx.navigateTo({
-      url: '/pages/choose/mulitGames/mulitGames',
+      url: '/pages/choose/mulitGames/mulitGames?type=team',
     })
+  },
+  addGames:function(){//关联比赛
+    var that = this;
+    var matchIds = [];
+    (that.data.chooseGames).map(function (item,idx) {
+      matchIds[idx] = item.matchId
+    })
+    http.postRequest({
+      url: "group/relateMatches",
+      params: {
+        groupId: that.data.groupId, matchIds: matchIds, uid: app.globalData.userInfo.id
+      },
+      msg: "加载中....",
+      success: res => {
+        wx.showToast({ title: '关联成功', icon: 'info', duration: 1500 });
+        that.getGames();
+      }
+    }, true);
+  },
+  getGames:function(){//查询关联比赛
+    var that = this;
+    http.postRequest({
+      url: "match/group/relate",
+      params: {
+        groupId: that.data.groupId, page: that.data.myPage, size: that.data.size,
+        uid: app.globalData.userInfo.id
+      },
+      // msg: "加载中....",
+      success: res => {
+        // wx.showToast({ title: '关联成功', icon: 'info', duration: 1500 });
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
+        })
+        if (that.data.myPage <= 1) {
+          that.setData({
+            games: res.data.content
+          })
+        } else {
+          that.setData({
+            games: that.data.games.concat(res.data.content)
+          })
+        }
+      }
+    }, false);
   },
   //跳转到个人主页
   gotoPer: function (e) {
@@ -196,7 +250,7 @@ Page({
     var id = e.currentTarget.id;
     if (id == 1){//队员主页
       wx.navigateTo({
-        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + that.data.userId,
+        url: '/pages/userMsg/personalPage/personalPage?tab=' + app.globalData.userInfo.id == that.data.userId ? 0 : 1+'&id=' + that.data.userId,
       })
     } else if (id == 2) {//修改正式差点
 
@@ -223,10 +277,12 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1) {//邀请球友加入球队
-
+      wx.navigateTo({
+        url: '/pages/search/searchTeamMember/searchTeamMember'
+      })
     }else if (id == 2) {//导入比赛成员
       wx.navigateTo({
-        url: '/pages/choose/gameMember/gameMember',
+        url: '/pages/choose/gameMember/gameMember?type=team',
       })
     } else if (id == 3) {//群发消息
       wx.navigateTo({
@@ -459,27 +515,53 @@ Page({
     http.postRequest({
       url: "group/members",
       params: {
-        groupId: that.data.groupId
+        groupId: that.data.groupId, uid: app.globalData.userInfo.id, page: that.data.memPage, size: 10
       },
       success: res => {
         if (that.data.refresh) {
           wx.hideNavigationBarLoading(); //完成停止加载
           wx.stopPullDownRefresh(); //停止下拉刷新
         }
-        that.setData({
-          members: res.data.content
-        })
+        if (that.data.memPage <= 1) {
+          that.setData({
+            members: res.data.content
+          })
+        }else{
+          that.setData({
+            members: that.data.members.concat(res.data.content)
+          })
+        }
       }
     }, false);
   },
   //导入成员
-  addMembers:function(){
-    
+  addMembers: function () {
+    var that = this;
+    var userIds = [];
+    console.log(that.data.chooseMembers);
+    if (that.data.chooseMembers.length ==0){//未选择成员
+      wx.showToast({ title: '请选择导入的成员', icon: 'info', duration: 1500 });
+    }else{//选择成员
+      (that.data.chooseMembers).map(function (item, idx) {
+        userIds[idx] = item.id
+      })
+      http.postRequest({
+        url: "group/importMembers",
+        params: {
+          groupId: that.data.groupId, userIds: userIds, uid: app.globalData.userInfo.id
+        },
+        msg: "加载中....",
+        success: res => {
+          wx.showToast({ title: '导入成功', icon: 'info', duration: 1500 });
+          that.setData({
+            chooseMembers:[]
+          })
+          that.getMembers();
+        }
+      }, true);
+    }
   },
-  //关联项目
-  addGames:function(){
-
-  },
+  
   /**
    * 下拉刷新
    */
@@ -494,12 +576,15 @@ Page({
       });
       this.getDynamics();
     } else if (this.data.activeIndex == 1) {//成员
+      this.setData({
+        memPage: 1
+      });
       this.getMembers();
     } else if (this.data.activeIndex == 2) {//队赛
       this.setData({
         myPage: 1
       });
-      // this.getMyGames();
+      this.getGames();
     } else if (this.data.activeIndex == 3) {//资料
       this.getGroupDetail();
     }
@@ -513,11 +598,16 @@ Page({
         page: this.data.page + 1
       });
       this.getDynamics();
+    } else if (this.data.activeIndex == 1){//成员
+      this.setData({
+        memPage: this.data.memPage + 1
+      });
+      this.getMembers();
     } else if (this.data.activeIndex == 2) {//队赛
       this.setData({
         myPage: this.data.myPage + 1
       });
-      // this.getMyGames();
+      this.getGames();
     }
   }
 });

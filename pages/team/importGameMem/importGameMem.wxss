@@ -1,8 +1,0 @@
-/* pages/team/importGameMem/importGameMem.wxss */
-.my-sel{
-  width: 60px;
-  display: inline-block;
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 10px;
-}

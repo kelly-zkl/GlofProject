@@ -1,0 +1,44 @@
+<view class='page'>
+  <view class='page__bd' style='margin-bottom:80px'>
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd" wx:for="{{cadds}}" wx:key="*this">
+        <!-- <navigator url="/pages/userMsg/personalPage/personalPage?tab={{item.id==userId?0:1}}&id={{item.id}}" -->
+        <view class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
+          <view class="weui-panel__hd">已加入球童</view>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
+          </view>
+          <view class="weui-cell__ft text-size-14" style='color:#FF0000' bindtap='deleteCad' id="{{item.id}}">删除</view>
+        </view>  
+        <!-- </navigator> -->
+      </view>
+    </view>
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="addCad">添加球童</button>
+  </view>
+  <!--添加球童->页面二维码/分享页面-->
+  <view class="zan-popup {{showPage ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="addCad"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>添加球童</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          球童可通过小程序扫描下方二维码加入到当前赛事
+        </view>
+        <image src="../../../images/icon_user.png" style='width:{{scrowWidth}};height:{{scrowWidth}};margin-left:15%'/>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          也可分享给微信好友，点击分享链接，可作为球童加入到当前赛事
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item'>
+            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1' open-type="share">分享到微信好友</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

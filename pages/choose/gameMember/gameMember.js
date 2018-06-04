@@ -12,32 +12,48 @@ Page({
     activeIndex: 1,
     games: [],
     members: [],
-    selectedAllStatus: false
+    selectedAllStatus: false,
+    isTeam: false,
+    page:1,
+    refresh:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      isTeam: options.type ? options.type == 'team' ? true : false : false
+    })
     this.getGames();
   },
   //赛事列表
   getGames: function (e) {
     var that = this;
     http.postRequest({
-      url: "match/user/home",
+      url: "match/user/joined",
       params: {
-        page: 1, size: 10, uid: app.globalData.userInfo.id
+        page: that.data.page, size: 10, uid: app.globalData.userInfo.id
       },
       // msg: "加载中....",
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
-        that.setData({
-          games: res.data
-        })
+        if (that.data.page <= 1) {
+          that.setData({
+            games: res.data.content
+          })
+        } else {
+          that.setData({
+            games: that.data.games.concat(res.data.content)
+          })
+        }
       }
     }, false);
   },
@@ -129,6 +145,7 @@ Page({
     var memArr = [];
     (this.data.members).map(function (item) {
       if (item.selected) {
+        item.id = item.userId,
         memArr.push(item)
       }
     })
@@ -137,6 +154,37 @@ Page({
     prevPage.setData({
       chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
+    if (this.data.isTeam) {//球队导入比赛成员
+      prevPage.addMembers();
+    }
     wx.navigateBack()
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true
+    });
+    if (this.data.activeIndex == 1){//赛事列表
+      this.setData({
+        page: this.data.page + 1
+      });
+      this.getGames();
+    }else{//赛事成员
+      this.getMembers
+    }
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    if (this.data.activeIndex == 1){
+      this.setData({
+        page: this.data.page + 1
+      });
+      this.getGames();
+    }
   }
 })

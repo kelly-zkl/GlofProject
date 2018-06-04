@@ -1,19 +1,55 @@
           
 <view class='page'>
   <view class='page__bd'>
-    <view class="weui-panel weui-panel_access">
-    <view class="weui-panel__bd" wx:for="{{teamMembers}}" wx:key="*this">
-      <navigator url="/pages/userMsg/personalPage/personalPage?tab={{item.id==userId?0:1}}&id={{item.id}}" 
-        class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
-        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-          <image class="weui-media-box__thumb" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
+    <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd" wx:for='{{games}}' wx:key='*this'>
+          <view bindtap='changeIndex' id="2" data-id='{{item.matchId}}' class="weui-media-box weui-media-box_appmsg"
+            hover-class="weui-cell_active" style='border-bottom:1rpx #e5e5e5 solid'>
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
+              <image class="weui-media-box__thumb t" 
+              src="{{item.icon? item.icon:'../../../images/icon_game.png'}}"/>
+              <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':''}}">
+                {{item.joined==1?'已参赛':item.followerId?'已关注':''}}
+              </view>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+                {{item.matchName}}</view>
+              <view class="weui-media-box__desc text-size-13">{{item.courtName}}</view>
+              <view class="weui-media-box__info" style="color:#999">{{item.timeStr}}</view>
+            </view>
+            <view class="weui-cell__ft">
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title weui-media-box__title_in-text {{item.stat == 1 ? 'start-soon' : item.stat == 2 ? 'ing' : item.stat == 3 ? 'appointment' : item.stat == 4?'end':''}}">
+                  {{item.stat == 1 ? '即将开始' : item.stat == 2 ? '进行中' : item.stat == 3 ? '约球' : item.stat == 4 ?'结束':''}}
+                </view>
+                <view class="weui-media-box__desc">
+                  {{item.dis?item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km':' '}}
+                </view>
+                <view class="weui-media-box__info" style="color:#999">{{item.followerNum+'人关注'}}</view>
+              </view>
+            </view>
+          </view>
         </view>
-        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-          <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
-        </view>
-      </navigator>
+      </view>
     </view>
-  </view>
+    <view class="weui-tab__content" hidden="{{activeIndex != 2}}" style='margin-bottom:80px'>
+      <view bindtap='changeIndex' id="1" style='padding:20rpx 30rpx;font-size:14px'>选择比赛</view>
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd" wx:for="{{members}}" wx:key="*this">
+          <navigator url="/pages/userMsg/personalPage/personalPage?tab={{item.userId==userId?0:1}}&id={{item.userId}}" 
+            class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
           

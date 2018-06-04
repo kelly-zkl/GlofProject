@@ -11,7 +11,10 @@ Page({
    */
   data: {
     games: [],
-    selectedAllStatus: false
+    selectedAllStatus: false,
+    isTeam:false,
+    page: 1,
+    refresh: false
   },
 
   /**
@@ -19,38 +22,40 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        });
-        that.getGames();
-      },
-      fail: function () {
-        wx.showToast({ title: '定位失败', icon: 'info', duration: 1500 });
-        that.getGames();
-      }
+
+    that.setData({
+      isTeam: options.type ? options.type=='team'?true:false : false,
     })
+    
+    that.getGames();
   },
   //赛事列表
   getGames: function (e) {
     var that = this;
     http.postRequest({
-      url: "match/query",
+      url: "match/user/joined",
       params: {
-        lng: that.data.longitude, lat: that.data.latitude, page: 1, size: 10, uid: app.globalData.userInfo.id
+        page: that.data.page, size: 10, uid: app.globalData.userInfo.id
       },
       msg: "加载中....",
       success: res => {
         // that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
-        this.setData({
-          games: res.data.content
-        })
+        if (that.data.page <= 1) {
+          that.setData({
+            games: res.data.content
+          })
+        } else {
+          that.setData({
+            games: that.data.games.concat(res.data.content)
+          })
+        }
       }
     }, false);
   },
@@ -118,6 +123,29 @@ Page({
     prevPage.setData({
       chooseGames: prevPage.data.chooseGames.concat(memArr)
     })
+    if (this.data.isTeam){//球队关联比赛
+      prevPage.addGames();
+    }
     wx.navigateBack()
+  },
+  /**
+   * 下拉刷新
+   */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getGames();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getGames();
   }
 })

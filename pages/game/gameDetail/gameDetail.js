@@ -15,6 +15,7 @@ Page({
     showPic:false,
     disabled1: false,
     disabled2: false,
+    caddie:false,
     activeHole: 0,
     scrowWidth:0,
     uid:''
@@ -23,6 +24,7 @@ Page({
     var that = this;
     that.setData({
       gameId: options.id,
+      caddie: options.caddie ? options.caddie : that.data.caddie,
       uid: app.globalData.userInfo.id
     });
     wx.getSystemInfo({
@@ -39,7 +41,25 @@ Page({
     this.setData({
       radioType: 1
     })
-    this.gameDetail();
+    console.log(this.data.caddie);
+    if (this.data.caddie){
+      this.addCadd();
+    }else{
+      this.gameDetail();
+    }
+  },
+  //添加球童
+  addCadd:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/update",
+      params: { matchId: that.data.gameId, icon: that.data.thumbUrl, uid: app.globalData.userInfo.id },
+      msg: "操作中...",
+      success: res => {
+        // wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        that.gameDetail();
+      }
+    }, false);
   },
   //赛事设置管理
   toggleManager: function () {
@@ -113,6 +133,9 @@ Page({
         url: '/pages/game/gameDynamic/gameDynamic?id=' + this.data.gameId + '&gameName=' + this.data.gameDetail.matchName
       })
     } else if (e.currentTarget.id == 3){//球童
+      wx.navigateTo({
+        url: '/pages/game/gameCaddies/gameCaddies?id=' + this.data.gameId + '&gameName=' + this.data.gameDetail.matchName
+      })
     }
     this.setData({
       showMore: false
@@ -203,14 +226,14 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    if (this.data.gameDetail.joined == 1) {//参赛
+    if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
       this.setData({
         showPopup: !this.data.showPopup,
         activeHole: e.currentTarget.dataset.idx
       });
     } else {//未关注、未参赛
       this.setData({
-        showJoin: false
+        showJoin: true
       });
     }
   },
@@ -394,19 +417,22 @@ Page({
       success: res => {
         // wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
         res.data.timeStr = util.formatTime(new Date(res.data.startTime), '-', true);
-        if (res.data.joined == 1 || res.data.followerId){
-          this.setData({
-            showJoin: false
-          });
+        if (!that.data.caddie){
+          if (res.data.joined == 1 || res.data.followerId) {
+            this.setData({
+              showJoin: false
+            });
+          }
         }
         this.setData({
-          gameDetail: res.data
+          gameDetail: res.data,
+          caddie: res.data.joined == 2?true:false
         });
       }
     }, false);
   },
   //分享页面
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
     return {
       title: 'GLOF',
       desc: this.data.gameDetail.matchName,

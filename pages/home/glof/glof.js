@@ -14,7 +14,6 @@ Page({
     latitude:'',
     refresh:false,
     page:1,
-    myPage:1,
     totalPage:1,
     myTotalpage:2
   },
@@ -49,8 +48,7 @@ Page({
   onShow:function(e){
     var that = this;
     that.setData({
-      page: 1,
-      myPage: 1
+      page: 1
     });
     wx.getLocation({
       type: 'wgs84',
@@ -169,15 +167,9 @@ Page({
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
-        if (that.data.myPage <= 1){
-          that.setData({
-            myGames: res.data
-          })
-        }else{
-          that.setData({
-            myGames: that.data.myGames.concat(res.data)
-          })
-        }
+        that.setData({
+          myGames: res.data
+        })
       }
     }, false);
   },
@@ -195,7 +187,6 @@ Page({
       });
       this.getGames();
     } else if (this.data.activeIndex == 1) {//我的赛事
-      
       this.getMyGames();
     }
   },

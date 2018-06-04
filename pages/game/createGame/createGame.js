@@ -140,7 +140,7 @@ Page({
     var id = e.currentTarget.id;
     if (id == 1) {//同队球友
       wx.navigateTo({
-        url: '/pages/choose/chooseTeam/chooseTeam?type=2',
+        url: '/pages/choose/chooseTeam/chooseTeam?type=2'
       })
     } else if (id == 2) {//我关注的球友
       wx.navigateTo({
@@ -148,12 +148,11 @@ Page({
       })
     } else if (id == 3) {//历史同赛的队友
       wx.navigateTo({
-        // url: '/pages/choose/gameMember/gameMember',
-        url: '/pages/choose/followMember/followMember?type=3'
+        url: '/pages/choose/gameMember/gameMember'
       })
     } else if (id == 4) {//邀请通讯录
       wx.navigateTo({
-        url: '/pages/userMsg/chooseMember/chooseMember?id=4',
+        url: '/pages/userMsg/chooseMember/chooseMember?id=4'
       })
     } else if (id == 5) {//手动录入
       that.toggleInput();

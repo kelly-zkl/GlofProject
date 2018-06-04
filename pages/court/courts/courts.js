@@ -12,8 +12,9 @@ Page({
   data: {
     inputShowed: false,
     inputVal: "",
-    page:1,
-    size:10,
+    refresh: false,
+    page: 1,
+    size: 10,
     latitude:'',
     longitude:'',
     show:true
@@ -75,15 +76,45 @@ Page({
       url: "court/query",
       params: {
         page: that.data.page, size: that.data.size,
-        keyword: that.data.inputVal, lng: that.data.longitude, lat: that.data.latitude
+        keyword: '', lng: that.data.longitude, lat: that.data.latitude
       },
       msg: "加载中....",
       success: res => {
-        that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
-        this.setData({
-          courts: res.data.content
-        })
+        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 })
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        if (that.data.page <= 1) {
+          this.setData({
+            courts: res.data.content
+          })
+        } else {
+          this.setData({
+            courts: that.data.courts.concat(res.data.content)
+          })
+        }
       }
-    }, that.data.show);
+    }, false);
+  },
+  /**
+ * 下拉刷新
+ */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getCourts();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getCourts();
   }
 })

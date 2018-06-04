@@ -10,7 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    pageNum:2
+    pageNum:2,
+    page: 1,
+    refresh: false
   },
 
   /**
@@ -34,12 +36,23 @@ Page({
       msg: "加载中....",
       success: res => {
         wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        that.setData({
-          myteams: res.data.minesGroup,
-          joinsteams: res.data.joinsGroup
-        })
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        if (that.data.page <= 1) {
+          that.setData({
+            myteams: res.data.minesGroup,
+            joinsteams: res.data.joinsGroup
+          })
+        }else{
+          that.setData({
+            myteams: that.data.myteams.concat(res.data.minesGroup),
+            joinsteams: that.data.joinsteams.concat(res.data.joinsGroup)
+          })
+        }
       }
-    }, true);
+    }, false);
   },
   //选择球队/球友
   gotoNext:function(e){
@@ -59,5 +72,25 @@ Page({
         url: '/pages/choose/teamMember/teamMember?id=' + e.currentTarget.id
       })
     }
+  },
+  /**
+  * 下拉刷新
+  */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getTeams();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getTeams();
   }
 })

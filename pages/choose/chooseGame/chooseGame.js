@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    page: 1,
+    refresh: false
   },
 
   /**
@@ -25,19 +26,31 @@ Page({
   getGames: function (e) {
     var that = this;
     http.postRequest({
-      url: "match/list",
-      params: {creatorId: app.globalData.userInfo.id, uid: app.globalData.userInfo.id},
+      url: "match/user/joined",
+      params: {
+        page: that.data.page, size: 10, uid: app.globalData.userInfo.id
+      },
       msg: "加载中....",
       success: res => {
-        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        (res.data || []).map(function (item) {
+        // that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
-        that.setData({
-          games: res.data
-        })
+        if (that.data.page <= 1) {
+          that.setData({
+            games: res.data.content
+          })
+        } else {
+          that.setData({
+            games: that.data.games.concat(res.data.content)
+          })
+        }
       }
-    }, true);
+    }, false);
   },
   //选择比赛
   bindCheckbox: function (e) {
@@ -56,5 +69,25 @@ Page({
       chooseGames: item
     })
     wx.navigateBack()
+  },
+  /**
+  * 下拉刷新
+  */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getGames();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getGames();
   }
 })

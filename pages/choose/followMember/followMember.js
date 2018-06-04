@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    refresh: true,
+    page: 1,
     selectedAllStatus: false
   },
 
@@ -34,16 +36,26 @@ Page({
     http.postRequest({
       url: "user/following",
       params: {
-        beFollowedType: "user", uid: app.globalData.userInfo.id
+        beFollowedType: "user", uid: app.globalData.userInfo.id,page:that.data.page,size:10
       },
       msg: "加载中....",
       success: res => {
         wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        that.setData({
-          members: res.data.content
-        })
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        if (that.data.page <= 1) {
+          that.setData({
+            members: res.data.content
+          })
+        }else{
+          that.setData({
+            members: that.data.members.concat(res.data.content)
+          })
+        }
       }
-    }, true);
+    }, false);
   },
   //获取我的同赛球友
   getGameMems: function (e) {
@@ -126,5 +138,25 @@ Page({
       chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
     wx.navigateBack()
+  },
+  /**
+ * 下拉刷新
+ */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getFollows();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getFollows();
   }
 })

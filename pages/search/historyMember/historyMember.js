@@ -1,8 +1,8 @@
 
 var base64 = require("../../../images/base64");
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 var http = require("../../../http.js");
 const app = getApp();
+var util = require('../../../utils/util.js');
 
 Page({
 
@@ -11,8 +11,9 @@ Page({
    */
   data: {
     userId:'',
-    gamePage: 1,
-    refresh:false
+    page: 1,
+    refresh:false,
+    activeIndex:1
   },
 
   /**
@@ -22,16 +23,16 @@ Page({
     this.setData({
       userId: app.globalData.userInfo.id
     });
-    this.getGameMembers();
+    this.getGames();
   },
 
-  //获取我的同组同赛列表
-  getGameMembers: function (e) {
+  //赛事列表
+  getGames: function (e) {
     var that = this;
     http.postRequest({
-      url: "user/historyRival",
+      url: "match/user/joined",
       params: {
-        page: that.data.gamePage, uid: app.globalData.userInfo.id, size: 10
+        page: that.data.page, size: 10, uid: app.globalData.userInfo.id
       },
       // msg: "加载中....",
       success: res => {
@@ -40,38 +41,78 @@ Page({
           wx.hideNavigationBarLoading(); //完成停止加载
           wx.stopPullDownRefresh(); //停止下拉刷新
         }
-        if (that.data.gamePage <= 1) {
+        (res.data.content || []).map(function (item) {
+          item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
+        })
+        if (that.data.page <= 1) {
           that.setData({
-            teamMembers: res.data.content
+            games: res.data.content
           })
         } else {
           that.setData({
-            teamMembers: that.data.teamMembers.concat(res.data.content)
+            games: that.data.games.concat(res.data.content)
           })
         }
       }
     }, false);
+  },
+  //获取参赛选手
+  getMembers: function () {
+    var that = this;
+    http.postRequest({
+      url: "match/players",
+      params: {
+        uid: app.globalData.userInfo.id, matchId: that.data.matchId
+      },
+      // msg: "加载中....",
+      success: res => {
+        // that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
+        this.setData({
+          members: res.data
+        })
+      }
+    }, false);
+  },
+  //选择成员
+  changeIndex: function (e) {
+    this.setData({
+      activeIndex: e.currentTarget.id
+    });
+    wx.setNavigationBarTitle({
+      title: e.currentTarget.id == 1 ? "选择比赛" : "选择球员"
+    })
+    if (e.currentTarget.id == 2) {
+      this.setData({
+        matchId: e.currentTarget.dataset.id
+      });
+      this.getMembers();
+    }
   },
   /**
   * 下拉刷新
   */
   onPullDownRefresh() {
     wx.showNavigationBarLoading();
-    this.setData({
-      refresh: true,
-      gamePage: 1
-    });
     
-    this.getGameMembers();
+    if (this.data.activeIndex == 1) {
+      this.setData({
+        refresh: true,
+        page: 1
+      });
+      this.getGames();
+    }else{
+      this.getMembers();
+    }
   },
   /** 
    * 页面上拉触底事件的处理函数 
    */
   onReachBottom: function () {
-   
-    this.setData({
-      gamePage: this.data.gamePage + 1
-    })
-    this.getGameMembers();
+    if (this.data.activeIndex == 1){
+      this.setData({
+        page: this.data.page + 1
+      })
+      this.getGames();
+   }
   }
 })

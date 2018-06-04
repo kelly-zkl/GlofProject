@@ -241,12 +241,10 @@ Page({
   onPullDownRefresh() {
     wx.showNavigationBarLoading();
     this.setData({
-      refresh: true
-    });
-
-    this.setData({
+      refresh: true,
       page: 1
     });
+
     this.getDynamics();
     this.getUserInfo();
   },

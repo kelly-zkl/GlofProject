@@ -30,6 +30,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({
+      num: options.type
+    });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -39,9 +42,6 @@ Page({
       }
     });
     that.myLocation();
-    that.setData({
-      num: options.type
-    });
   },
   tabClick: function (e) {
     var that = this;
@@ -82,12 +82,22 @@ Page({
       },
       msg: "加载中....",
       success: res => {
-        that.data.show ? wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 }) : ''
-        this.setData({
-          courts: res.data.content
-        })
+        wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 })
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        if (that.data.page <= 1) {
+          this.setData({
+            courts: res.data.content
+          })
+        }else{
+          this.setData({
+            courts: that.data.courts.concat(res.data.content)
+          })
+        }
       }
-    }, that.data.show);
+    }, false);
   },
   //一周天气情况：
   toggleWeather:function(){
@@ -152,5 +162,25 @@ Page({
       front: -1,
       back: -1
     })
+  },
+  /**
+  * 下拉刷新
+  */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getCourts();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getCourts();
   }
 })

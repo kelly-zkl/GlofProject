@@ -7,13 +7,13 @@
       <view class='weui-flex__item title'>记杆</view>
       <view class='weui-flex__item title'>填写人</view>
     </view>
-    <block wx:for="012345" wx:key="*this" wx:for-index="idx">
+    <block wx:for="{{records}}" wx:key="*this" wx:for-index="idx">
       <view class='weui-flex' style='{{idx%2==0?"background:#fff":"background:#F6F6F6"}}'>
-        <view class='weui-flex__item content'>时间</view>
-        <view class='weui-flex__item content'>目标球手</view>
-        <view class='weui-flex__item content'>洞</view>
-        <view class='weui-flex__item content'>记杆</view>
-        <view class='weui-flex__item content'>填写人</view>
+        <view class='weui-flex__item content'>{{item.timeStr}}</view>
+        <view class='weui-flex__item content'>{{item.tuName}}</view>
+        <view class='weui-flex__item content'>{{item.poleIndex}}</view>
+        <view class='weui-flex__item content'>{{item.poleNum+'('+item.oldPoleNum+')'}}</view>
+        <view class='weui-flex__item content'>{{item.cuName}}</view>
       </view>
     </block>
   </view>

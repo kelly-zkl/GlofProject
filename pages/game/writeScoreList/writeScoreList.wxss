@@ -2,14 +2,14 @@
 page{
   background: #fff
 }
-.weui-flex__item.title{
+.title{
   height: 90rpx;
   line-height: 90rpx;
   font-size: 14px;
   color: #fff;
   text-align: center
 }
-.weui-flex__item.content{
+.content{
   height: 90rpx;
   line-height: 90rpx;
   font-size: 14px;

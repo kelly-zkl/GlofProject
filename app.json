@@ -49,9 +49,7 @@
     "pages/userMsg/feedBack/feedBack",
     "pages/team/systemMsg/systemMsg",
     "pages/team/teamMsg/teamMsg",
-    "pages/team/relationGame/relationGame",
     "pages/team/sendMsg/sendMsg",
-    "pages/team/importGameMem/importGameMem",
     "pages/game/setGroup/setGroup",
     "pages/game/createGroup/createGroup",
     "pages/game/redBlueGame/redBlueGame",
@@ -68,7 +66,9 @@
     "pages/choose/mulitGames/mulitGames",
     "pages/choose/teamMember/teamMember",
     "pages/choose/chooseTeam/chooseTeam",
-    "pages/search/historyMember/historyMember"
+    "pages/search/historyMember/historyMember",
+    "pages/game/gameCaddies/gameCaddies",
+    "pages/search/searchTeamMember/searchTeamMember"
   ],
   "window": {
     "backgroundTextStyle": "light",

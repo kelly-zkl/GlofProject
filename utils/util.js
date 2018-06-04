@@ -17,6 +17,25 @@ const formatTime = (date,formate,toMin,isDate) => {
   }
 }
 
+const formatDateTime = (date, formate, toMin) => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  if (toMin=='date') {
+    return [year, month, day].map(formatNumber).join(formate)
+  } else if (toMin == 'datetime'){
+    return [year, month, day].map(formatNumber).join(formate) + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  } else if (toMin == 'dateMin'){
+    return [year, month, day].map(formatNumber).join(formate) + ' ' + [hour, minute].map(formatNumber).join(':')
+  }else if (toMin == 'time') {
+    return [hour, minute].map(formatNumber).join(':')
+  }
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -56,6 +75,7 @@ function getNowTime() {
   return formatDate;
 } 
 module.exports = {
+  formatDateTime: formatDateTime,
   formatTime: formatTime,
   getNowDate: getNowDate,
   getNowTime: getNowTime

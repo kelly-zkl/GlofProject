@@ -6,7 +6,9 @@ Page({
    */
   data: {
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    page:1,
+    size:10
   },
 
   /**
@@ -34,6 +36,24 @@ Page({
   inputTyping: function (e) {
     this.setData({
       inputVal: e.detail.value
+    });
+  },
+  /**
+ * 下拉刷新
+ */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
     });
   }
 })
