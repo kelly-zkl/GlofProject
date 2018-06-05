@@ -1,17 +1,26 @@
 .view-card{
   width: 70%; 
-  height:280rpx;
-  line-height: 280rpx;
+  height:220rpx;
+  line-height: 220rpx;
   display: inline-block;
-  border:1px #CCCCCC solid;
+  border:1rpx #CCC solid;
   margin:20rpx 0 20rpx 20rpx;
   background: #fff;
-  border-radius: 30rpx;
-  text-align: center;
-  color: #ccc;
+  padding: 30rpx;
+  border-radius: 25rpx;
 }
 .view-card:last-child{
   margin-right: 20rpx
+}
+.tag{
+  display: block;
+  color: #66CC99;
+  font-size: 18px;
+  width: 40px;
+  height: 220rpx;
+  text-align: center;
+  white-space: pre-line;
+  line-height:55rpx
 }
 
 .weui-grid__icon.img{

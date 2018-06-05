@@ -1,6 +1,6 @@
 <view class='page'>
   <view class='page__bd'>
-    <view class="weui-tab">
+    <!-- <view class="weui-tab">
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}"
@@ -10,7 +10,7 @@
         </block>
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({  {sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
-    </view>
+    </view> -->
     <view class="weui-tab__panel">
       <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
         <view class="weui-panel__bd" wx:for="{{courts}}" wx:key='*this'>
@@ -26,10 +26,10 @@
             </view>
             <view class="weui-cell__ft text-size-13">
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                <view class="weui-media-box__title weui-media-box__title_in-text"
+                <!-- <view class="weui-media-box__title weui-media-box__title_in-text"
                   style='color:#66CC99' catchtap='toggleWeather'>
                   一周天气
-                </view>
+                </view> -->
                 <view class="weui-media-box__desc"></view>
                 <view class="weui-media-box__info" style="color:#999">
                   {{item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km'}}

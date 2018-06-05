@@ -108,7 +108,7 @@ Page({
   gotoPer:function(e){
     if (e.currentTarget.id != app.globalData.userInfo.id) {//本人的动态
       wx.navigateTo({
-        url: '/pages/userMsg/personalPage/personalPage?tab=0&id=' + e.currentTarget.id,
+        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + e.currentTarget.id,
       })
     }
   },
@@ -190,8 +190,11 @@ Page({
             },
             msg: "操作中...",
             success: res => {
-              that.getDynamics();
               wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.setData({
+                page: 1
+              });
+              that.getDynamics();
             }
           }, true);
         } else if (res.cancel) {
@@ -214,8 +217,11 @@ Page({
             },
             msg: "操作中...",
             success: res => {
-              that.getDynamics();
               wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.setData({
+                page: 1
+              });
+              that.getDynamics();
             }
           }, true);
         } else if (res.cancel) {
@@ -250,6 +256,9 @@ Page({
         },
         msg: "操作中...",
         success: res => {
+          that.setData({
+            page: 1
+          });
           that.getDynamics();
         }
       }, true);
@@ -295,6 +304,9 @@ Page({
         bbsId: e.currentTarget.id, uid: app.globalData.userInfo.id, voted: e.currentTarget.dataset.voted
       },
       success: res => {
+        this.setData({
+          page: 1
+        });
         this.getDynamics();
       }
     }, false);

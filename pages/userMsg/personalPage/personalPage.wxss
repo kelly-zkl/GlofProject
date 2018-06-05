@@ -56,7 +56,7 @@
   text-align: left;
 }
 .reply{
-  display: inline-block;
+  display: inline;
   box-sizing:border-box;
 }
 .weui-panel__ft.text-size-13{

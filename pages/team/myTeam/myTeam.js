@@ -1,7 +1,8 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 const app = getApp();
 var http = require("../../../http.js");
-var util = require('../../../utils/util.js'); 
+var util = require('../../../utils/util.js');
+var drawQrcode = require('../../../utils/qrcode.js');
 
 Page({
   data: {
@@ -16,6 +17,7 @@ Page({
     showModify:false,
     showRefer:false,
     showSync:false,
+    showPage:false,
     dynamics: [],
     imageWidth: '0px',
     page: 1,
@@ -25,7 +27,8 @@ Page({
     radioType: 0,
     members:[],
     chooseGames:[],
-    chooseMembers:[]
+    chooseMembers:[],
+    text:''
   },
   onLoad: function (options) {
     var that = this;
@@ -35,13 +38,19 @@ Page({
           imageWidth: ((res.windowWidth - 50) / 4) + 'px',//weui-cell的padding:10px 15px
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           imageWidth: ((res.windowWidth - 86) / 3) + 'px',
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
+          codeWidth: (res.windowWidth * 0.8 * 0.7)
         });
       }
     });
     that.setData({
       groupId: options.id
     });
+
+    this.setData({
+      text: '/pages/team/teamDetail/teamDetail?id=' + this.data.groupId +'&redirect=true'
+    })
+    this.createQrCode(this.data.text);
   },
   /**
    * 生命周期函数--监听页面显示
@@ -76,6 +85,25 @@ Page({
     } else {//详情
       this.getGroupDetail();
     }
+  },
+  togglePage: function () {
+    this.setData({
+      showPopup:false,
+      showPage: !this.data.showPage
+    });
+  },
+  //获取页面二维码
+  createQrCode: function (text) {
+    drawQrcode({
+      width: this.data.codeWidth,
+      height: this.data.codeWidth,
+      canvasId: 'myQrcode',
+      typeNumber: 10,
+      text: this.data.text,
+      callback(e) {
+        console.log('e: ', e)
+      }
+    })
   },
   //成员详情、成员头像
   douChange: function (e) {
@@ -176,11 +204,10 @@ Page({
   },
   //跳转到个人主页
   gotoPer: function (e) {
-    if (e.currentTarget.id != app.globalData.userInfo.id) {//本人的动态
-      wx.navigateTo({
-        url: '/pages/userMsg/personalPage/personalPage?tab=0&id=' + e.currentTarget.id,
-      })
-    }
+    var num = app.globalData.userInfo.id == e.currentTarget.id ? 0 : 1
+    wx.navigateTo({
+      url: '/pages/userMsg/personalPage/personalPage?tab=' + num + '&id=' + e.currentTarget.id,
+    })
   },
   //跳转到比赛详情页
   gotoGame: function (e) {
@@ -386,8 +413,11 @@ Page({
             },
             msg: "操作中...",
             success: res => {
-              that.getDynamics();
               wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.setData({
+                page: 1
+              });
+              that.getDynamics();
             }
           }, true);
         } else if (res.cancel) {
@@ -410,8 +440,11 @@ Page({
             },
             msg: "操作中...",
             success: res => {
-              that.getDynamics();
               wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.setData({
+                page: 1
+              });
+              that.getDynamics();
             }
           }, true);
         } else if (res.cancel) {
@@ -446,6 +479,9 @@ Page({
         },
         msg: "操作中...",
         success: res => {
+          that.setData({
+            page: 1
+          });
           that.getDynamics();
         }
       }, true);
@@ -491,6 +527,9 @@ Page({
         bbsId: e.currentTarget.id, uid: app.globalData.userInfo.id, voted: e.currentTarget.dataset.voted
       },
       success: res => {
+        this.setData({
+          page: 1
+        });
         this.getDynamics();
       }
     }, false);
@@ -608,6 +647,20 @@ Page({
         myPage: this.data.myPage + 1
       });
       this.getGames();
+    }
+  },
+  //分享页面
+  onShareAppMessage: function (e) {
+    return {
+      title: 'GLOF',
+      desc: this.data.team.groupName,
+      path: '/pages/home/glof/glof?groupId=' + this.data.groupId,
+      success: function (res) {// 转发成功
+        wx.showToast({ title: '分享成功', icon: 'info', duration: 1500 })
+      },
+      fail: function (res) {// 转发失败
+        wx.showToast({ title: '分享失败', icon: 'info', duration: 1500 })
+      }
     }
   }
 });

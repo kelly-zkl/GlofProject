@@ -30,18 +30,30 @@ Page({
         });
       }
     });
-
+    //球手主页
     if (options.userId) {
       //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
+      var num = app.globalData.userInfo.id == options.userId?0:1;
       wx.navigateTo({
-        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + options.userId,
+        url: '/pages/userMsg/personalPage/personalPage?tab=' + num+'&id=' + options.userId,
       })
     }
-
+    //赛事详情
     if (options.gameId) {
-      //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
+      if (options.caddie){
+        wx.navigateTo({
+          url: '/pages/game/gameDetail/gameDetail?id=' + options.gameId +'&caddie=true',
+        })
+      }else{
+        wx.navigateTo({
+          url: '/pages/game/gameDetail/gameDetail?id=' + options.gameId,
+        })
+      }
+    }
+    //球队主页
+    if (options.groupId) {
       wx.navigateTo({
-        url: '/pages/game/gameDetail/gameDetail?id=' + options.gameId,
+        url: '/pages/team/teamDetail/teamDetail?id=' + options.groupId + '&redirect=true',
       })
     }
   },
@@ -107,12 +119,17 @@ Page({
   //扫一扫
   scan: function (e) {
     wx.scanCode({
+      scanType: ['qrCode'],
       success: (res) => {
-        console.log("扫码结果" + res);
-
+        console.log(res);
+        wx.showToast({ title: '扫描成功', icon: 'info', duration: 1500 })
+        if (res.result && res.result.indexOf('/pages/')==0){
+          wx.navigateTo({url: res.result})
+        }
       },
       fail: (res) => {
-        console.log("扫码失败" + res);
+        console.log(res);
+        wx.showToast({ title: '扫描失败', icon: 'info', duration: 1500 })
       }
     })
   },

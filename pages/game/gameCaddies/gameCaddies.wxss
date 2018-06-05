@@ -14,3 +14,5 @@
   padding: 15rpx 0;
   background: transparent
 }
+
+.line{border-bottom:1rpx #E5E5E5 solid}

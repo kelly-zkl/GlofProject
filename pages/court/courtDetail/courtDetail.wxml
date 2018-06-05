@@ -64,11 +64,11 @@
         </view>
       </view>
     </view>
-    <view class="weui-footer weui-footer_fixed-bottom">
+    <!-- <view class="weui-footer weui-footer_fixed-bottom">
       <button class="weui-btn" type="primary" plain="true" bindtap='togglePopu'
       style="color:6c9;display:inline-block;margin-right:20px;width:30%">一周天气</button>
       <button class="weui-btn" type="primary" 
       style="background:#6C9;display:inline-block;width:60%" bindtap='createGame'>创建比赛</button>
-    </view>
+    </view> -->
   </view>
 </view>

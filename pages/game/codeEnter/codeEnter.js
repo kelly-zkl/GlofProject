@@ -1,11 +1,15 @@
-// pages/game/codeEnter/codeEnter.js
+
+const app = getApp();
+var http = require("../../../http.js");
+var util = require('../../../utils/util.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    inputValue:''
   },
 
   /**
@@ -15,52 +19,29 @@ Page({
   
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  //输入比赛编码
+  inputCode:function(e){
+    this.setData({
+      inputValue: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  //进入比赛
+  getGame:function(){
+    var that = this;
+    if (that.data.inputValue.length < 6) {
+      wx.showToast({title: '请输入6位比赛编码', icon: 'none', duration: 1500});
+      return;
+    }
+    http.postRequest({
+      url: "match/detailBySerial",
+      params: {serial: that.data.inputValue, uid: app.globalData.userInfo.id},
+      msg: "操作中...",
+      success: res => {
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        wx.navigateTo({
+          url: '/pages/game/gameDetail/gameDetail?id=' + res.data.matchId,
+        })
+      }
+    }, true);
   }
 })

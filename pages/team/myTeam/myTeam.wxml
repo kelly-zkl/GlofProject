@@ -46,7 +46,7 @@
                   </view>
                   <view class="weui-media-box__title weui-media-box__title_in-text d1"  style="margin-bottom:0">
                     <view class="weui-media-box__title text-size-14 d1">{{item.creatorName}}</view>
-                    <view class="weui-media-box__info text-size-12 d1" style="color:#999">{{item.createTime}}</view>
+                    <view class="weui-media-box__info text-size-12 d1" style="color:#999">{{item.timeStr}}</view>
                   </view>
                 </view>
               </view>
@@ -58,8 +58,7 @@
                     <view class="weui-uploader__bd">
                       <view class="weui-uploader__files" id="uploaderFiles">
                         <block wx:for="{{item.attach}}" wx:key="*this" wx:for-item="pic">
-                          <view class="weui-uploader__file" bindtap="previewImage" id="{{pic}}" 
-                          data-urls="{{item.attach}}">
+                          <view class="weui-uploader__file" bindtap="previewImage" id="{{pic}}" data-urls="{{item.attach}}">
                             <image class="weui-uploader__img" src="{{pic}}" mode="aspectFill" style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
                           </view>
                         </block>
@@ -72,9 +71,8 @@
                     <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.groupId}}"
                       bindtap="gotoTeam" id="{{item.groupId}}">{{"#"+item.groupName+"# "}}
                     </view>
-                    <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" 
-                      wx:if="{{item.relates.length>0}}"
-                      wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
+                    <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
+                      wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateType}}"
                       wx:key="*this">{{"#"+game.relateId+"# "}}
                     </view>
                   </view>
@@ -95,7 +93,7 @@
                       catchtap="gotoPer" id="{{reply.beReplyPostCreatorId}}">
                       {{reply.beReplyPostCreatorName}}
                     </view>
-                    <view class="text-size-13 reply">{{"： "+reply.content}}</view>
+                    <view class="text-size-13 reply">{{"："+reply.content}}</view>
                   </view>
                 </view>
                 <view class="weui-flex" style="background:#fff;padding-top:20rpx">
@@ -260,6 +258,9 @@
         <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange" wx:if="{{team.user.tag == 'leader'}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">卸任队长</view>
         </view>
+        <view class="weui-cell weui-cell_access line" bindtap="togglePage">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">分享球队</view>
+        </view>
         <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">退出球队</view>
         </view>
@@ -405,6 +406,28 @@
           </view>
           <view class='weui-flex__item'>
             <view class='weui-grid__label score' style='font-size:16px;color:#75B5F1'>同步</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--球队二维码-->
+  <view class="zan-popup {{showPage ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="togglePage"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>{{team.groupName}}</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          用户可通过该小程序扫描下方二维码加入到{{team.groupName}}
+        </view>
+        <canvas canvas-id='myQrcode' hidden='{{!showPage}}'
+        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          点击分享链接，也可将{{team.groupName}}分享给微信好友
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item'>
+            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1' open-type="share">分享到微信好友</button>
           </view>
         </view>
       </view>

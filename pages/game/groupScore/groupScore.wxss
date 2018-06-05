@@ -4,20 +4,21 @@ page{
 }
 
 .tag{
+  display: block;
   color: #fff;
   font-size: 14px;
   width: 40px;
+  height: 90px;
   text-align: center;
   white-space: pre-line;
-  line-height:15px;
 }
 .tag.hole{
   background: #66CC99;
-  padding-top: 7px
+  line-height:22.5px;
 }
 .tag.rar{
   background: #66CCFF;
-  padding-top: 15px
+  line-height:30px;
 }
 
 .cell{

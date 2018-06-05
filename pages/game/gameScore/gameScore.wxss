@@ -36,19 +36,22 @@ page{
 .weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto}
 
 .tag{
+  display: block;
   color: #fff;
   font-size: 14px;
   width: 40px;
+  height: 90px;
   text-align: center;
   white-space: pre-line;
-  line-height:15px;
 }
 .tag.hole{
   background: #66CC99;
-  padding-top: 7px
+  line-height:15px;
+  padding-top: 15px
 }
 .tag.rar{
   background: #66CCFF;
+  line-height:20px;
   padding-top: 15px
 }
 

@@ -1,13 +1,21 @@
 /* pages/game/codeEnter/codeEnter.wxss */
+
+page{
+  background: #fff
+}
+
 .page__bd{
   padding: 100rpx;
   font-size: 14px;
   text-align: center
 }
 .weui-input{
-  border: 1rpx #ccc solid;
-  border-radius: 10rpx;
+  border: 1rpx #ddd solid;
+  border-radius:5px;
   margin-top: 50rpx;
   margin-bottom: 30rpx;
-  height: 40px;
+  font-size: 18px;
+  background: #F2F2F2;
+  height: 45px;
+  word-spacing: 20px
 }

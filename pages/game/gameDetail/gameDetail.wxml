@@ -2,7 +2,8 @@
   <view class="page__bd">
     <view class="weui-flex" style="background:#66CC99">
       <view style="padding-left:30rpx">
-        <image src="../../../images/icon_game_code.png" style="width:26px;height:26px;display:inline-block"/>
+        <image src="../../../images/icon_game_code.png" style="width:26px;height:26px;display:inline-block"
+          bindtap='togglePage'/>
         <button open-type="share" class='share-btn'>
         <image src="../../../images/icon_game_share.png" style="display: flex;align-items: center;width:26px;height:26px"/>
         </button>
@@ -77,9 +78,10 @@
     <view class="weui-footer weui-footer_fixed-bottom" 
       style="padding:30rpx 30rpx 20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <view class='weui-flex'>
-        <navigator url='/pages/game/gameChat/gameChat'>
+        <!-- <navigator url='/pages/game/gameChat/gameChat'>
           <image src="../../../images/icon_game_chat.png" style="width:60rpx;height:60rpx"/>
-        </navigator>
+        </navigator> -->
+        <view style="width:60rpx;height:60rpx"></view>
         <view class="weui-flex__item" style='text-align:center'>
           <view class="tui-tabbar-group">
             <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
@@ -215,9 +217,9 @@
     <view class="zan-popup__mask" catchtap="toggleMore"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access line" id="1" bindtap="moreChange">
+        <!-- <view class="weui-cell weui-cell_access line" id="1" bindtap="moreChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">发红包</view>
-        </view>
+        </view> -->
         <view class="weui-cell weui-cell_access line" id="2" bindtap="moreChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">发动态</view>
         </view>
@@ -243,6 +245,29 @@
         </view>
         <view class="weui-cell weui-cell_access line" bindtap="picChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--赛事详情二维码-->
+  <view class="zan-popup {{showPage ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="togglePage"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>{{gameDetail.matchName}}</view>
+        <view class='weui-grid__label' style='font-size:14px;color:#333'>赛事编码：{{gameDetail.serial}}</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          用户可通过该小程序扫描下方二维码加入到当前赛事{{gameDetail.matchName}}
+        </view>
+        <canvas canvas-id='myQrcode' hidden='{{!showPage}}'
+        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          点击分享链接，也可将赛事{{gameDetail.matchName}}分享给微信好友
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item'>
+            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1' open-type="share">分享到微信好友</button>
+          </view>
         </view>
       </view>
     </view>

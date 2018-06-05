@@ -5,7 +5,7 @@ const app = getApp();
 
 Page({
   data: {
-    cards: [{ name: '今日比赛' }, { name: '总杆排名' }, { name: '赛事人气' }]
+    cards: [{ name: '今\n日\n比\n赛' }, { name: '总\n杆\n排\n名' }, { name: '赛\n事\n人\n气' }]
   },
   onLoad: function () {
     

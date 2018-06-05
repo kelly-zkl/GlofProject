@@ -1,17 +1,17 @@
 <view class='page'>
   <view class='page__bd' style='margin-bottom:80px'>
     <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">已加入球童</view>
       <view class="weui-panel__bd" wx:for="{{cadds}}" wx:key="*this">
         <!-- <navigator url="/pages/userMsg/personalPage/personalPage?tab={{item.id==userId?0:1}}&id={{item.id}}" -->
         <view class="weui-media-box weui-media-box_appmsg line" hover-class="weui-cell_active">
-          <view class="weui-panel__hd">已加入球童</view>
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.name}}</view>
           </view>
-          <view class="weui-cell__ft text-size-14" style='color:#FF0000' bindtap='deleteCad' id="{{item.id}}">删除</view>
+          <!-- <view class="weui-cell__ft text-size-14" style='color:#FF0000' bindtap='deleteCad' id="{{item.id}}">删除</view> -->
         </view>  
         <!-- </navigator> -->
       </view>
@@ -29,7 +29,8 @@
         <view style='font-size:14px;color:#999;padding:30rpx'>
           球童可通过小程序扫描下方二维码加入到当前赛事
         </view>
-        <image src="../../../images/icon_user.png" style='width:{{scrowWidth}};height:{{scrowWidth}};margin-left:15%'/>
+        <canvas bindtap="previewImg" canvas-id='myQrcode' hidden="{{!showPage}}"
+         style='width:{{scrowWidth}}px;height:{{scrowWidth}}px;margin-left:15%'></canvas>
         <view style='font-size:14px;color:#999;padding:30rpx'>
           也可分享给微信好友，点击分享链接，可作为球童加入到当前赛事
         </view>

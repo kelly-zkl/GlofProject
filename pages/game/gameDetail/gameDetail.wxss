@@ -130,3 +130,20 @@
   border:transparent;
   background:transparent;
 }
+
+/**二维码*/
+.popup-example--center {
+  border-radius: 4px;
+  width: 80%;
+}
+.popup-width{
+  padding-top: 20rpx
+}
+.weui-flex.score{
+  border-radius:0 0 4px 4px;
+}
+.weui-grid__label.score{
+  margin-top: 0;
+  padding: 15rpx 0;
+  background: transparent
+}

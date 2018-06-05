@@ -2,7 +2,12 @@
   <view class="page__bd">
     <scroll-view scroll-x style="white-space: nowrap;width:100%;height:324rpx">
       <block wx:for='{{cards}}' wx:key="*this">
-        <view class='view-card'>{{item.name}}
+        <view class='view-card'>
+          <text class="tag" space='ensp'>{{item.name}}</text>
+          <view style='height:44rpx;background:#ff00ff;display:inline'>
+            <view style="display:inline;color:#4190F7;font-size:14px">比赛球手</view>
+            <view style="display:inline;color:#F70D13;font-size:14px">23人</view>
+          </view>
         </view>
       </block>
     </scroll-view>

@@ -48,7 +48,7 @@
                 bindtap="gotoTeam" id="{{item.groupId}}">{{"#"+item.groupName+"# "}}
               </view>
               <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
-                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
+                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateType}}"
                 wx:key="*this">{{"#"+game.relateId+"# "}}
               </view>
             </view>
@@ -59,7 +59,8 @@
           </view>
           <view class="weui-panel__ft text-size-13 d1" wx:show="{{item.replyPosts.length > 0}}">
             <view class="weui-cell__bd re" wx:for="{{item.replyPosts}}" wx:key="*this" wx:for-item="reply"
-              id="{{item.id}}" data-reply-Id="{{reply.replyPostId}}" data-uid="{{item.creatorId}}" catchtap="pressReply">
+              id="{{item.id}}" data-reply-Id="{{reply.replyPostId}}" data-uid="{{item.creatorId}}" 
+              catchtap="pressReply">
               <view catchtap="gotoPer" class="text-size-13 text-blue reply" id="{{reply.creatorId}}">
                 {{reply.creatorName}}
               </view>
@@ -68,7 +69,7 @@
                 catchtap="gotoPer" id="{{reply.beReplyPostCreatorId}}">
                 {{reply.beReplyPostCreatorName}}
               </view>
-              <view class="text-size-13 reply">{{"： "+reply.content}}</view>
+              <view class="text-size-13 reply">{{"："+reply.content}}</view>
             </view>
           </view>
           <view class="weui-flex" style="background:#fff;padding-top:20rpx">

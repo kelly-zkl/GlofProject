@@ -94,12 +94,17 @@ Page({
   //扫一扫
   scan: function (e) {
     wx.scanCode({
+      scanType: ['qrCode'],
       success: (res) => {
-        console.log("扫码结果" + res);
-
+        console.log(res);
+        wx.showToast({ title: '扫描成功', icon: 'info', duration: 1500 })
+        if (res.result && res.result.indexOf('/pages/') == 0) {
+          wx.navigateTo({ url: res.result })
+        }
       },
       fail: (res) => {
-        console.log("扫码失败" + res);
+        console.log(res);
+        wx.showToast({ title: '扫描失败', icon: 'info', duration: 1500 })
       }
     })
   },

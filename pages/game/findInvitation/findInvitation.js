@@ -128,8 +128,8 @@ Page({
     }, false);
   },
   /**
-* 下拉刷新
-*/
+  * 下拉刷新
+  */
   onPullDownRefresh() {
     wx.showNavigationBarLoading();
     this.setData({

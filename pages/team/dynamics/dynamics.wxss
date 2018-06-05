@@ -36,7 +36,7 @@
 }
 .text-blue{color:#2C7AD6}
 .reply{
-  display: inline-block;
+  display: inline;
   box-sizing:border-box;
 }
 .weui-panel__ft.text-size-13{

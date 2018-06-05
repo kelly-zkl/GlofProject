@@ -11,7 +11,10 @@ Page({
     sliderLeft: 0,
     inputShowed: false,
     inputVal: "",
-    stat:2
+    stat:2,
+    stat: 2,
+    refresh: true,
+    page: 1
   },
   onLoad: function (options) {
     this.setData({
@@ -104,13 +107,43 @@ Page({
       // msg: "加载中....",
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
         (res.data.content || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
-        that.setData({
-          games: res.data.content
-        })
+        if (that.data.page <= 1) {
+          that.setData({
+            games: res.data.content
+          })
+        } else {
+          that.setData({
+            games: that.data.games.concat(res.data.content)
+          })
+        }
       }
     }, false);
+  },
+  /**
+  * 下拉刷新
+  */
+  onPullDownRefresh() {
+    wx.showNavigationBarLoading();
+    this.setData({
+      refresh: true,
+      page: 1
+    });
+    this.getGames();
+  },
+  /** 
+   * 页面上拉触底事件的处理函数 
+   */
+  onReachBottom: function () {
+    this.setData({
+      page: this.data.page + 1
+    });
+    this.getGames();
   }
 });

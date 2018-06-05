@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd">
+  <view class="page__bd" style='margin-bottom:80px'>
     <view class="weui-panel weui-panel_access" style="background:#66CC99">
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_appmsg">
@@ -23,14 +23,37 @@
     <view class="team-info">组成成员：{{team.memberNumber}}</view>
     <view class="team-info">球队二维码：
       <view class="weui-flex">
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/icon_intro.png"/>
+        <view class="weui-flex__item" bindtap='togglePage'>
+          <canvas canvas-id='myQrcode' style='width:{{imageWidth}}px;height:{{imageWidth}}px;margin-left:30%'></canvas>
           <view class="weui-grid__label btn">转发页面</view>
         </view>
       </view>
     </view>
-    <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx">
+    <view class="weui-footer weui-footer_fixed-bottom" 
+      style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="joinTeam">申请加入</button>
+    </view>
+  </view>
+  <!--球队二维码-->
+  <view class="zan-popup {{showPage ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="togglePage"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>{{team.groupName}}</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          用户可通过该小程序扫描下方二维码加入到{{team.groupName}}
+        </view>
+        <canvas canvas-id='qrcode' hidden='{{!showPage}}'
+        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          点击分享链接，也可将{{team.groupName}}分享给微信好友
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item'>
+            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1' open-type="share">分享到微信好友</button>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

@@ -95,8 +95,9 @@ Page({
   },
   //跳转到个人主页
   gotoPer: function (e) {
+    var num = app.globalData.userInfo.id == e.currentTarget.id ? 0 : 1
     wx.navigateTo({
-      url: '/pages/userMsg/personalPage/personalPage?tab=0&id=' + e.currentTarget.id,
+      url: '/pages/userMsg/personalPage/personalPage?tab=' + num + '&id=' + e.currentTarget.id,
     })
   },
   //跳转到比赛详情页
@@ -126,8 +127,11 @@ Page({
             },
             msg: "操作中...",
             success: res => {
-              that.getDynamics();
               wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.setData({
+                page: 1
+              });
+              that.getDynamics();
             }
           }, true);
         } else if (res.cancel) {
@@ -150,8 +154,11 @@ Page({
             },
             msg: "操作中...",
             success: res => {
-              that.getDynamics();
               wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.setData({
+                page: 1
+              });
+              that.getDynamics();
             }
           }, true);
         } else if (res.cancel) {
@@ -186,6 +193,9 @@ Page({
         },
         msg: "操作中...",
         success: res => {
+          that.setData({
+            page: 1
+          });
           that.getDynamics();
         }
       }, true);
@@ -231,6 +241,9 @@ Page({
         bbsId: e.currentTarget.id, uid: app.globalData.userInfo.id, voted: e.currentTarget.dataset.voted
       },
       success: res => {
+        this.setData({
+          page: 1
+        });
         this.getDynamics();
       }
     }, false);

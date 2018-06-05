@@ -16,7 +16,8 @@
             <view class="weui-media-box__desc">{{userInfo.province}} {{userInfo.city}}</view>
           </view>
           <view class="weui-cell__ft">
-            <image src="../../../images/icon_edit.png" style='width:30px;height:30px' />
+            <image src="../../../images/icon_qrcode.png" style='width:30px;height:30px' catchtap='togglePage'/>
+            <image src="../../../images/icon_edit.png" style='width:30px;height:30px;margin-left:10px'/>
           </view>
         </navigator>
       </view>
@@ -53,14 +54,14 @@
     </view>
     <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="/pages/game/gameResult/gameResult" hover-class="weui-cell_active"
+        <!-- <navigator url="/pages/game/gameResult/gameResult" hover-class="weui-cell_active"
           class="weui-cell weui-cell_access">
           <view class="weui-cell__hd">
             <image src="../../../images/icon_my_score.png" class="icon-size"/>
           </view>
           <view class="weui-cell__bd weui-cell_primary">我的赛绩</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
+        </navigator> -->
         <navigator url="/pages/game/gameRecords/gameRecords" class="weui-cell weui-cell_access"
           hover-class="weui-cell_active">
           <view class="weui-cell__hd">
@@ -101,7 +102,7 @@
           <view class="weui-cell__bd weui-cell_primary"><view>隐私设置</view></view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
-        <navigator url="/pages/userMsg/helpDoc/helpDoc" class="weui-cell weui-cell_access"
+        <!-- <navigator url="/pages/userMsg/helpDoc/helpDoc" class="weui-cell weui-cell_access"
           hover-class="weui-cell_active">
           <view class="weui-cell__hd">
             <image src="../../../images/icon_help.png" class="icon-size"/>
@@ -116,7 +117,21 @@
           </view>
           <view class="weui-cell__bd weui-cell_primary">关于GLOF</view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </navigator>
+        </navigator> -->
+      </view>
+    </view>
+  </view>
+  <!--球队二维码-->
+  <view class="zan-popup {{showPage ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="togglePage"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>{{userInfo.name}}</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          用户可通过该小程序扫描下方二维码，进入球手主页添加关注
+        </view>
+        <canvas canvas-id='myQrcode' hidden='{{!showPage}}'
+        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
       </view>
     </view>
   </view>
