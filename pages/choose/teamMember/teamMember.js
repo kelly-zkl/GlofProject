@@ -108,7 +108,7 @@ Page({
     var memArr = [];
     
     (this.data.members).map(function (item) {
-      if (item.selected){
+      if (item.selected && item.user){
        memArr.push(item.user)
       }
     })
@@ -117,6 +117,7 @@ Page({
     prevPage.setData({
       chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
+    prevPage.addMembers();
     wx.navigateBack({
       delta: 2
     })

@@ -14,7 +14,7 @@ Page({
     showPage:false,
     imagePath:'',
     text:'',
-    cadds: [{ name: '12' }, { name: '12' }, { name: '12' }]
+    cadds: []
   },
 
   /**
@@ -116,14 +116,10 @@ Page({
           wx.stopPullDownRefresh(); //停止下拉刷新
         }
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
-        (res.data.content || []).map(function (item) {
-          item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
-        })
 
         that.setData({
           cadds: res.data
         })
-        
       }
     }, false);
   },

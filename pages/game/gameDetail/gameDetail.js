@@ -355,17 +355,13 @@ Page({
           http.postRequest({
             url: "user/cancelFollower",
             params: {
-              id: that.data.gameDetail.followedId, uid: app.globalData.userInfo.id,
+              id: that.data.gameDetail.followerId, uid: app.globalData.userInfo.id,
               beFollowedType: "match"
             },
             msg: "加载中...",
             success: res => {
               wx.showToast({ title: '已取消关注', icon: 'info', duration: 1500 })
-              setTimeout(function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }, 1500)
+              that.gameDetail();
             }
           }, true);
         } else if (res.cancel) {

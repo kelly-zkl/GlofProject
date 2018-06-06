@@ -1,12 +1,10 @@
 .view-card{
-  width: 70%; 
-  height:220rpx;
-  line-height: 220rpx;
   display: inline-block;
+  width: 70%; 
+  height:280rpx;
   border:1rpx #CCC solid;
   margin:20rpx 0 20rpx 20rpx;
   background: #fff;
-  padding: 30rpx;
   border-radius: 25rpx;
 }
 .view-card:last-child{
@@ -21,6 +19,27 @@
   text-align: center;
   white-space: pre-line;
   line-height:55rpx
+}
+.rank-img{
+  width:72rpx;
+  height:72rpx;
+  border-radius: 10rpx;
+}
+.weui-flex__item.today{
+  height:44rpx;
+  font-size:14px;
+  color:#408CF5;
+  text-align:left
+}
+.weui-flex.list{
+  margin-bottom: 16rpx
+}
+.weui-flex__item.list{
+  height:72rpx;
+  font-size:14px;
+  color:#408CF5;
+  text-align:right;
+  line-height: 72rpx
 }
 
 .weui-grid__icon.img{

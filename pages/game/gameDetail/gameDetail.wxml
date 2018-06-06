@@ -255,7 +255,7 @@
     <view class="zan-popup__container popup-example--center">
       <view class="popup-width">
         <view class='weui-grid__label' style='font-size:16px;color:#333'>{{gameDetail.matchName}}</view>
-        <view class='weui-grid__label' style='font-size:14px;color:#333'>赛事编码：{{gameDetail.serial}}</view>
+        <view class='weui-grid__label' style='font-size:15px;color:#333'>赛事编码：{{gameDetail.serial}}</view>
         <view style='font-size:14px;color:#999;padding:30rpx'>
           用户可通过该小程序扫描下方二维码加入到当前赛事{{gameDetail.matchName}}
         </view>

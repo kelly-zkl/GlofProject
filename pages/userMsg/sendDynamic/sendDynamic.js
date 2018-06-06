@@ -137,6 +137,23 @@ Page({
       content: e.detail.value
     })
   },
+  //选择关联的比赛
+  addGames: function () {
+    var arr = this.data.chooseGames;
+    var newArr = [];
+    for (let i = 0, len = arr.length; i < len; i++) {
+      for (let j = i + 1; j < len; j++) {
+        // 如果重复，则i向前推进，但不管重复项
+        if (arr[i].matchId == arr[j].matchId) j = ++i
+      }
+      // 将没有重复项的推入到新数组
+      newArr.push(arr[i])
+    }
+    this.setData({
+      chooseGames: newArr
+    })
+    // console.log(newArr);
+  },
   //发表动态
   postDynamic:function(e){
     var that = this;
@@ -145,7 +162,7 @@ Page({
     if (that.data.chooseGames && that.data.chooseGames.length > 0){
       (that.data.chooseGames).map(function (item) {
         if (item.selected) {
-          relates.push({ relateId: item.matchId, relateType: "match" })
+          relates.push({relateId: item.matchId, relateType: "match"})
         }
       });
     }

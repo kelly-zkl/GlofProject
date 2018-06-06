@@ -151,7 +151,7 @@ Page({
   //跳转到关联比赛页面
   relationGame: function () {
     wx.navigateTo({
-      url: '/pages/choose/mulitGames/mulitGames?type=team',
+      url: '/pages/choose/mulitGames/mulitGames',
     })
   },
   addGames:function(){//关联比赛
@@ -309,7 +309,7 @@ Page({
       })
     }else if (id == 2) {//导入比赛成员
       wx.navigateTo({
-        url: '/pages/choose/gameMember/gameMember?type=team',
+        url: '/pages/choose/gameMember/gameMember',
       })
     } else if (id == 3) {//群发消息
       wx.navigateTo({
@@ -496,7 +496,7 @@ Page({
     });
   },
   pressReply: function (e) {
-    console.log(e);
+    // console.log(e);
     if (e.currentTarget.dataset.replyId) {//有评论id
       if (e.currentTarget.dataset.uid == app.globalData.userInfo.id) {//本人的动态
         this.setData({
@@ -577,7 +577,7 @@ Page({
   addMembers: function () {
     var that = this;
     var userIds = [];
-    console.log(that.data.chooseMembers);
+    // console.log(that.data.chooseMembers);
     if (that.data.chooseMembers.length ==0){//未选择成员
       wx.showToast({ title: '请选择导入的成员', icon: 'info', duration: 1500 });
     }else{//选择成员

@@ -1,19 +1,62 @@
 <view class="page">
   <view class="page__bd">
     <scroll-view scroll-x style="white-space: nowrap;width:100%;height:324rpx">
+      <view class='view-card'>
+        <view class='weui-flex' style='height:220rpx;padding: 30rpx'>
+          <view style='width:40px;height:220rpx'>
+            <text class="tag" space='ensp'>今\n日\n赛\n事</text>
+          </view>
+          <view class='weui-flex__item' style='height:220rpx;margin-left:30rpx'>
+            <view class='weui-flex'>
+              <view class='weui-flex__item today'>比赛球手：</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>23人</view>
+            </view>
+            <view class='weui-flex'>
+              <view class='weui-flex__item today'>关注人数：</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>23人</view>
+            </view>
+            <view class='weui-flex'>
+              <view class='weui-flex__item today'>一杆进洞：</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>23个</view>
+            </view>
+            <view class='weui-flex'>
+              <view class='weui-flex__item today'>老鹰数量：</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>23个</view>
+            </view>
+            <view class='weui-flex'>
+              <view class='weui-flex__item today'>小鸟数量：</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>23个</view>
+            </view>
+          </view>
+        </view>
+      </view>
       <block wx:for='{{cards}}' wx:key="*this">
         <view class='view-card'>
-          <text class="tag" space='ensp'>{{item.name}}</text>
-          <view style='height:44rpx;background:#ff00ff;display:inline'>
-            <view style="display:inline;color:#4190F7;font-size:14px">比赛球手</view>
-            <view style="display:inline;color:#F70D13;font-size:14px">23人</view>
+          <view class='weui-flex' style='height:280rpx'>
+            <view style='width:40px;height:220rpx;margin:30rpx 0 30rpx 30rpx'>
+              <text class="tag" space='ensp'>{{item.name}}</text>
+            </view>
+            <view class='weui-flex__item' style='height:264rpx;margin:16rpx 30rpx 0 0'>
+              <block wx:for="123" wx:key="*this">
+                <view class='weui-flex list'>
+                  <view style='height:72rpx;text-align:center'>
+                    <image src="{{index==0?one:index==1?two:three}}" style='width:40rpx;height:40rpx'/>
+                  </view>
+                  <view class='weui-flex__item' style='height:72rpx;text-align:center'>
+                    <image class="rank-img" src="../../../images/icon_user.png"/>
+                  </view>
+                  <view class='weui-flex__item list' style='text-align:left'>成都市财</view>
+                  <view class='weui-flex__item list' style='color:#FF0000'>+11</view>
+                </view>
+              </block>
+            </view>
           </view>
         </view>
       </block>
     </scroll-view>
     <view class="weui-flex" style="background:#fff">
       <navigator url="/pages/game/findGame/findGame?tab=0" class="weui-flex__item" style='padding:30rpx 0px'>
-        <image class="weui-grid__icon img" src="../../../images/icon_today_game.png" />
+        <image class="weui-grid__icon img" src="../../../images/icon_today_game.png"/>
         <view class="weui-grid__label" style="color:#333">今日赛事</view>
       </navigator>
       <navigator url="/pages/game/findInvitation/findInvitation?tab=0" 

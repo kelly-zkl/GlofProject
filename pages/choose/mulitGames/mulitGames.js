@@ -123,9 +123,8 @@ Page({
     prevPage.setData({
       chooseGames: prevPage.data.chooseGames.concat(memArr)
     })
-    if (this.data.isTeam){//球队关联比赛
-      prevPage.addGames();
-    }
+
+    prevPage.addGames();
     wx.navigateBack()
   },
   /**

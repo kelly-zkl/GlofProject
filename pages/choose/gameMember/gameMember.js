@@ -13,7 +13,6 @@ Page({
     games: [],
     members: [],
     selectedAllStatus: false,
-    isTeam: false,
     page:1,
     refresh:false
   },
@@ -22,9 +21,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      isTeam: options.type ? options.type == 'team' ? true : false : false
-    })
     this.getGames();
   },
   //赛事列表
@@ -154,9 +150,7 @@ Page({
     prevPage.setData({
       chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
-    if (this.data.isTeam) {//球队导入比赛成员
-      prevPage.addMembers();
-    }
+    prevPage.addMembers();
     wx.navigateBack()
   },
   /**

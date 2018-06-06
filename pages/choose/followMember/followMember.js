@@ -137,6 +137,7 @@ Page({
     prevPage.setData({
       chooseMembers: prevPage.data.chooseMembers.concat(memArr)
     })
+    prevPage.addMembers();
     wx.navigateBack()
   },
   /**

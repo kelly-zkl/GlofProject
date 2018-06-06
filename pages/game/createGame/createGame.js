@@ -57,8 +57,8 @@ Page({
           imageWidth: ((res.windowWidth - 42) / 4) + 'px',
           upWidth: (((res.windowWidth - 42) / 4) - 2) + 'px'
         });
-        console.log(that.data.imageWidth);
-        console.log(that.data.upWidth);
+        // console.log(that.data.imageWidth);
+        // console.log(that.data.upWidth);
       }
     });
 
@@ -192,10 +192,27 @@ Page({
       privacy:e.detail.value
     });
   },
+  //选择参赛成员
+  addMembers:function(){
+    var arr = this.data.chooseMembers;
+    var newArr = [];
+    for (let i = 0, len = arr.length; i < len; i++) {
+      for (let j = i + 1; j < len; j++) {
+        // 如果重复，则i向前推进，但不管重复项
+        if (arr[i].id == arr[j].id) j = ++i
+      }
+      // 将没有重复项的推入到新数组
+      newArr.push(arr[i])
+    }
+    this.setData({
+      chooseMembers: newArr
+    })
+    // console.log(newArr);
+  },
   //创建比赛
   createGame:function(e){
     var that = this;
-    console.log(that.data.chooseMembers);
+    // console.log(that.data.chooseMembers);
     var playerPoles = [];
     var add = true;
     (that.data.chooseMembers).map(function (item) {

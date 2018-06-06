@@ -5,10 +5,14 @@ const app = getApp();
 
 Page({
   data: {
-    cards: [{ name: '今\n日\n比\n赛' }, { name: '总\n杆\n排\n名' }, { name: '赛\n事\n人\n气' }]
+    cards: [{ name: '总\n杆\n排\n名' }, { name: '老\n鹰\n排\n名' }, { name: '小\n鸟\n排\n名' }]
   },
   onLoad: function () {
-    
+    this.setData({
+      one: '../../../images/icon_score_first.png',
+      two: '../../../images/icon_score_second.png',
+      three:'../../../images/icon_score_third.png',
+    });
   },
   onShow: function (e) {
     var that = this;
