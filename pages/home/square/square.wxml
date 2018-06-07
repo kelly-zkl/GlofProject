@@ -9,44 +9,44 @@
           <view class='weui-flex__item' style='height:220rpx;margin-left:30rpx'>
             <view class='weui-flex'>
               <view class='weui-flex__item today'>比赛球手：</view>
-              <view class='weui-flex__item today' style='color:#FF0000'>23人</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>{{rankCount.playerNum}}人</view>
             </view>
             <view class='weui-flex'>
               <view class='weui-flex__item today'>关注人数：</view>
-              <view class='weui-flex__item today' style='color:#FF0000'>23人</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>{{rankCount.followerNum}}人</view>
             </view>
             <view class='weui-flex'>
               <view class='weui-flex__item today'>一杆进洞：</view>
-              <view class='weui-flex__item today' style='color:#FF0000'>23个</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>{{rankCount.onePoleNum}}个</view>
             </view>
             <view class='weui-flex'>
               <view class='weui-flex__item today'>老鹰数量：</view>
-              <view class='weui-flex__item today' style='color:#FF0000'>23个</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>{{rankCount.eagleNum}}个</view>
             </view>
             <view class='weui-flex'>
               <view class='weui-flex__item today'>小鸟数量：</view>
-              <view class='weui-flex__item today' style='color:#FF0000'>23个</view>
+              <view class='weui-flex__item today' style='color:#FF0000'>{{rankCount.birdNumber}}个</view>
             </view>
           </view>
         </view>
       </view>
-      <block wx:for='{{cards}}' wx:key="*this">
+      <block wx:for='{{cards}}' wx:key="*this" wx:for-index='idx'>
         <view class='view-card'>
           <view class='weui-flex' style='height:280rpx'>
             <view style='width:40px;height:220rpx;margin:30rpx 0 30rpx 30rpx'>
               <text class="tag" space='ensp'>{{item.name}}</text>
             </view>
             <view class='weui-flex__item' style='height:264rpx;margin:16rpx 30rpx 0 0'>
-              <block wx:for="123" wx:key="*this">
+              <block wx:for="{{ranks[idx]}}" wx:key="*this">
                 <view class='weui-flex list'>
                   <view style='height:72rpx;text-align:center'>
                     <image src="{{index==0?one:index==1?two:three}}" style='width:40rpx;height:40rpx'/>
                   </view>
                   <view class='weui-flex__item' style='height:72rpx;text-align:center'>
-                    <image class="rank-img" src="../../../images/icon_user.png"/>
+                    <image class="rank-img" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
                   </view>
-                  <view class='weui-flex__item list' style='text-align:left'>成都市财</view>
-                  <view class='weui-flex__item list' style='color:#FF0000'>+11</view>
+                  <view class='weui-flex__item list' style='text-align:left'>{{item.name}}</view>
+                  <view class='weui-flex__item list' style='color:#FF0000'>+{{item.poleNum}}</view>
                 </view>
               </block>
             </view>

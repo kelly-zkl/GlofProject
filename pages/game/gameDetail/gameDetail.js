@@ -28,24 +28,20 @@ Page({
     that.setData({
       gameId: options.id,
       caddie: options.caddie ? options.caddie : that.data.caddie,
-      uid: app.globalData.userInfo.id
+      uid: app.globalData.userInfo.id,
+      text: '/pages/game/gameDetail/gameDetail?id=' + options.id
     });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          scrowWidth: ((res.windowWidth - 121)*100 / res.windowWidth)+'%',
-          codeWidth: (res.windowWidth * 0.8 * 0.7)
+          scrowWidth: ((res.windowWidth - 121)*100 / res.windowWidth)+'%'
         });
         // console.log(res.windowHeight);
         // console.log(that.data.scrowWidth);
       }
     });
 
-    this.setData({
-      text: '/pages/game/gameDetail/gameDetail?id=' + this.data.gameId
-    })
     this.createQrCode(this.data.text);
-
   },
   onShow:function(){
     this.setData({
@@ -66,14 +62,10 @@ Page({
   //获取页面二维码
   createQrCode: function (text) {
     drawQrcode({
-      width: this.data.codeWidth,
-      height: this.data.codeWidth,
+      width: 200,
+      height: 200,
       canvasId: 'myQrcode',
-      typeNumber: 10,
-      text: this.data.text,
-      callback(e) {
-        console.log('e: ', e)
-      }
+      text: this.data.text
     })
   },
   //添加球童
@@ -127,21 +119,23 @@ Page({
     })
   },
   //修改球手信息
-  toggleModify: function () {
+  toggleModify: function (e) {
     this.setData({
-      showModify: !this.data.showModify
+      showModify: !this.data.showModify,
+      userId: e.currentTarget.id
     });
   },
-  modifyChange: function () {
-    if (e.currentTarget.dataset.id == 1) {//修改TEE台
+  modifyChange: function (e) {
+    if (e.currentTarget.id == 1) {//修改TEE台
       wx.navigateTo({
         url: '/pages/game/modifyTee/modifyTee?id=' + this.data.gameId,
       })
-    } else if (e.currentTarget.dataset.id == 2) {//查看球手主页
+    } else if (e.currentTarget.id == 2) {//查看球手主页
+      var num = app.globalData.userInfo.id == this.data.userId ? 0 : 1
       wx.navigateTo({
-        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + this.data.gameId,
+        url: '/pages/userMsg/personalPage/personalPage?tab=' + num + '&id=' + this.data.userId
       })
-    } else if (e.currentTarget.dataset.id == 3) {//踢出赛事
+    } else if (e.currentTarget.id == 3) {//踢出赛事
     }
     this.setData({
       showModify: false
@@ -259,11 +253,12 @@ Page({
         showPopup: !this.data.showPopup,
         activeHole: e.currentTarget.dataset.idx
       });
-    } else {//未关注、未参赛
-      this.setData({
-        showJoin: true
-      });
-    }
+    } 
+    // else {//未关注、未参赛
+    //   this.setData({
+    //     showJoin: true
+    //   });
+    // }
   },
   popuChange: function (e) {
     var that = this;

@@ -44,7 +44,7 @@
           <view class="weui-grid__label">球杆</view>
         </view>
         <block wx:for='{{gameDetail.players}}' wx:key='*this'>
-          <view style="height: 60px;background:#fff;text-align:center" bindtap='toggleModify'>
+          <view style="height: 60px;background:#fff;text-align:center" bindtap='toggleModify' id="{{item.userId}}">
             <image class="weui-grid__icon s" src="{{item.avatarUrl}}"/>
             <view class="text-size-12" style='color:#888'>{{item.name}}</view> 
           </view>
@@ -177,13 +177,14 @@
         <view class="weui-cell weui-cell_access line" id="10" bindtap="managerChange" wx:if="{{gameDetail.joined!=1}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">加入比赛</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <!-- <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">重新开赛</view>
-        </view>
+        </view> -->
         <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">结束赛事</view>
         </view> 
-        <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange" wx:if="{{uid!=gameDetail.creatorId}}">
+        <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange" 
+          wx:if="{{uid!=gameDetail.creatorId && gameDetail.joined==1}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出比赛</view>
         </view>
         <view class="weui-cell weui-cell_access line" bindtap="managerChange">
@@ -197,15 +198,15 @@
     <view class="zan-popup__mask" catchtap="toggleModify"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access line" id="1" bindtap="modifyChange">
+        <!-- <view class="weui-cell weui-cell_access line" id="1" bindtap="modifyChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改TEE台</view>
-        </view>
+        </view> -->
         <view class="weui-cell weui-cell_access line" id="2" bindtap="modifyChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">查看球手主页</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="3" bindtap="modifyChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <!-- <view class="weui-cell weui-cell_access line" id="3" bindtap="modifyChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">踢出赛事</view>
-        </view>
+        </view> -->
         <view class="weui-cell weui-cell_access line" bindtap="modifyChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>
@@ -260,7 +261,7 @@
           用户可通过该小程序扫描下方二维码加入到当前赛事{{gameDetail.matchName}}
         </view>
         <canvas canvas-id='myQrcode' hidden='{{!showPage}}'
-        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
+          style='width:200px;height:200px;z-index:1;margin:0 auto'></canvas>
         <view style='font-size:14px;color:#999;padding:30rpx'>
           点击分享链接，也可将赛事{{gameDetail.matchName}}分享给微信好友
         </view>

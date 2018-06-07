@@ -26,14 +26,6 @@ Page({
       gameId: options.id,
       gameName: options.gameName
     })
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          scrowWidth: (res.windowWidth*0.8*0.7)
-        });
-      }
-    });
-
     this.setData({
       text: '/pages/game/gameDetail/gameDetail?id=' + this.data.gameId + '&caddie=true'
     })
@@ -51,14 +43,10 @@ Page({
   //获取页面二维码
   createQrCode: function (text) {
     drawQrcode({
-      width: this.data.scrowWidth,
-      height: this.data.scrowWidth,
+      width: 200,
+      height: 200,
       canvasId: 'myQrcode',
-      typeNumber: 10,
-      text: this.data.text,
-      callback(e) {
-        console.log('e: ', e)
-      }
+      text: this.data.text
     })
   },
   

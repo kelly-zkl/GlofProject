@@ -25,6 +25,7 @@ Page({
     console.log(options);
     that.setData({
       belongType: options.type,
+      belongId: app.globalData.userInfo.id
     });
     wx.getSystemInfo({
       success: function (res) {
@@ -37,11 +38,13 @@ Page({
     });
     if (options.type == 'match'){
       that.setData({
-        chooseGames: [{matchId: options.relateId, matchName: options.gameName}]
+        chooseGames: [{matchId: options.relateId, matchName: options.gameName}],
+        belongId: options.relateId
       });
     } else if (options.type == 'group'){
       that.setData({
-        chooseTeam: {groupId: options.teamId, groupName: options.teanName}
+        chooseTeam: {groupId: options.teamId, groupName: options.teanName},
+        belongId: options.teamId
       });
     }
   },
@@ -161,9 +164,7 @@ Page({
     
     if (that.data.chooseGames && that.data.chooseGames.length > 0){
       (that.data.chooseGames).map(function (item) {
-        if (item.selected) {
-          relates.push({relateId: item.matchId, relateType: "match"})
-        }
+        relates.push({relateId: item.matchId, relateType: "match"})
       });
     }
     var syncGroupId='';
@@ -181,7 +182,7 @@ Page({
       params: {
         content: that.data.content, relates: relates, attach: that.data.attach,
         syncGroupId: syncGroupId, hidden: that.data.check, uid: app.globalData.userInfo.id,
-        belongType: that.data.belongType},
+        belongType: that.data.belongType, belongId: that.data.belongId},
       msg: "发表中....",
       success: res => {
         wx.showToast({title: '创建成功',icon: 'info',duration: 1500});

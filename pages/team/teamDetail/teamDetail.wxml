@@ -24,7 +24,8 @@
     <view class="team-info">球队二维码：
       <view class="weui-flex">
         <view class="weui-flex__item" bindtap='togglePage'>
-          <canvas canvas-id='myQrcode' style='width:{{imageWidth}}px;height:{{imageWidth}}px;margin-left:30%'></canvas>
+          <canvas canvas-id='myQrcode' hidden='{{showPage}}'
+          style='width:{{imageWidth}}px;height:{{imageWidth}}px;margin-left:30%;z-index:1'></canvas>
           <view class="weui-grid__label btn">转发页面</view>
         </view>
       </view>
@@ -44,7 +45,7 @@
           用户可通过该小程序扫描下方二维码加入到{{team.groupName}}
         </view>
         <canvas canvas-id='qrcode' hidden='{{!showPage}}'
-        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
+          style='width:200px;height:200px;z-index:1;margin:0 auto'></canvas>
         <view style='font-size:14px;color:#999;padding:30rpx'>
           点击分享链接，也可将{{team.groupName}}分享给微信好友
         </view>

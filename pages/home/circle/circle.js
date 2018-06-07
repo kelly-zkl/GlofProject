@@ -10,7 +10,6 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     refresh:false,
-    teamPage:1,
     followPage: 1,
     fanPage: 1,
     gamePage: 1
@@ -33,7 +32,6 @@ Page({
   },
   onShow:function(e){
     this.setData({
-      teamPage: 1,
       followPage: 1,
       fanPage: 1,
       gamePage: 1
@@ -69,7 +67,7 @@ Page({
     http.postRequest({
       url: "group/mine",
       params: {
-        page: that.data.teamPage, size:10,uid: app.globalData.userInfo.id
+        uid: app.globalData.userInfo.id
       },
       // msg: "加载中....",
       success: res => {
@@ -78,17 +76,10 @@ Page({
           wx.hideNavigationBarLoading(); //完成停止加载
           wx.stopPullDownRefresh(); //停止下拉刷新
         }
-        if (that.data.teamPage <= 1) {
-          that.setData({
-            myteams: res.data.minesGroup,
-            joinsteams: res.data.joinsGroup
-          })
-        } else {
-          that.setData({
-            myteams: that.data.myteams.concat(res.data.minesGroup),
-            joinsteams: that.data.joinsteams.concat(res.data.joinsGroup)
-          })
-        }
+        that.setData({
+          myteams: res.data.minesGroup,
+          joinsteams: res.data.joinsGroup
+        })
       }
     }, false);
   },
@@ -185,9 +176,6 @@ Page({
       refresh: true
     });
     if (this.data.activeIndex == 0) {//球队
-      this.setData({
-        teamPage: 1
-      });
       this.getTeams();
     } else if (this.data.activeIndex == 1) {//我的关注
       this.setData({
@@ -210,12 +198,7 @@ Page({
    * 页面上拉触底事件的处理函数 
    */
   onReachBottom: function () {
-    if (this.data.activeIndex == 0) {//球队
-      this.setData({
-        teamPage: this.data.teamPage + 1
-      });
-      this.getTeams();
-    } else if (this.data.activeIndex == 1) {//我的关注
+     if (this.data.activeIndex == 1) {//我的关注
       this.setData({
         followPage: this.data.followPage + 1
       });

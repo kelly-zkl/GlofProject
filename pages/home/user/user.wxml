@@ -131,7 +131,7 @@
           用户可通过该小程序扫描下方二维码，进入球手主页添加关注
         </view>
         <canvas canvas-id='myQrcode' hidden='{{!showPage}}'
-        style='width:{{codeWidth}}px;height:{{codeWidth}}px;margin-left:15%'></canvas>
+         style='width:200px;height:200px;z-index:1;margin:0 auto'></canvas>
       </view>
     </view>
   </view>

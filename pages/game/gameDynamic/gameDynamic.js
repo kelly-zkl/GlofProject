@@ -18,7 +18,8 @@ Page({
 
     that.setData({
       gameId: options.id,
-      gameName: options.gameName
+      gameName: options.gameName,
+      userId: app.globalData.userInfo.id
     })
     wx.getSystemInfo({
       success: function (res) {
@@ -38,7 +39,7 @@ Page({
   getDynamics: function (e) {
     var that = this;
     http.postRequest({
-      url: "userPost/followingPage",
+      url: "userPost/query",
       params: {
         page: that.data.page, size: that.data.size, belongId: that.data.gameId,
         belongType: "match", uid: app.globalData.userInfo.id

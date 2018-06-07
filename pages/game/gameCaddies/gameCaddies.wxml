@@ -29,8 +29,8 @@
         <view style='font-size:14px;color:#999;padding:30rpx'>
           球童可通过小程序扫描下方二维码加入到当前赛事
         </view>
-        <canvas bindtap="previewImg" canvas-id='myQrcode' hidden="{{!showPage}}"
-         style='width:{{scrowWidth}}px;height:{{scrowWidth}}px;margin-left:15%'></canvas>
+        <canvas bindtap="previewImg" canvas-id='myQrcode' hidden='{{!showPage}}'
+         style='width:200px;height:200px;z-index:1;margin:0 auto'></canvas>
         <view style='font-size:14px;color:#999;padding:30rpx'>
           也可分享给微信好友，点击分享链接，可作为球童加入到当前赛事
         </view>

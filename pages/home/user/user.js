@@ -15,13 +15,6 @@ Page({
       male: '../../../images/icon_male.png',
       female: '../../../images/icon_female.png'
     });
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          codeWidth: (res.windowWidth * 0.8 * 0.7)
-        });
-      }
-    });
     
     this.setData({
       text: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + app.globalData.userInfo.id
@@ -51,14 +44,10 @@ Page({
   //获取页面二维码
   createQrCode: function (text) {
     drawQrcode({
-      width: this.data.codeWidth,
-      height: this.data.codeWidth,
+      width: 200,
+      height: 200,
       canvasId: 'myQrcode',
-      typeNumber: 10,
-      text: this.data.text,
-      callback(e) {
-        console.log('e: ', e)
-      }
+      text: this.data.text
     })
   }
 })

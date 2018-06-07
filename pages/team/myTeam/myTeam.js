@@ -35,16 +35,16 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          imageWidth: ((res.windowWidth - 50) / 4) + 'px',//weui-cell的padding:10px 15px
+          userWidth: ((res.windowWidth - 42) / 4) + 'px',//weui-cell的padding:10px 15px
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           imageWidth: ((res.windowWidth - 86) / 3) + 'px',
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
-          codeWidth: (res.windowWidth * 0.8 * 0.7)
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
     });
     that.setData({
-      groupId: options.id
+      groupId: options.id,
+      userId: app.globalData.userInfo.id
     });
 
     this.setData({
@@ -95,14 +95,10 @@ Page({
   //获取页面二维码
   createQrCode: function (text) {
     drawQrcode({
-      width: this.data.codeWidth,
-      height: this.data.codeWidth,
+      width: 200,
+      height: 200,
       canvasId: 'myQrcode',
-      typeNumber: 10,
-      text: this.data.text,
-      callback(e) {
-        console.log('e: ', e)
-      }
+      text: this.data.text
     })
   },
   //成员详情、成员头像
@@ -111,11 +107,11 @@ Page({
       radioType: e.currentTarget.dataset.id
     })
   },
-  //获取动态列表
+  //获取球队动态列表
   getDynamics: function (e) {
     var that = this;
     http.postRequest({
-      url: "userPost/homePage",
+      url: "userPost/query",
       params: {
         belongId: that.data.groupId, page: that.data.page, size: that.data.size,
         belongType: "group", uid: app.globalData.userInfo.id
@@ -276,8 +272,9 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
     if (id == 1){//队员主页
+      var num = app.globalData.userInfo.id == that.data.userId ? 0 : 1;
       wx.navigateTo({
-        url: '/pages/userMsg/personalPage/personalPage?tab=' + app.globalData.userInfo.id == that.data.userId ? 0 : 1+'&id=' + that.data.userId,
+        url: '/pages/userMsg/personalPage/personalPage?tab=' + num+'&id=' + that.data.userId,
       })
     } else if (id == 2) {//修改正式差点
 

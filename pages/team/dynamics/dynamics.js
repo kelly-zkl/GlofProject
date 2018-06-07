@@ -24,6 +24,9 @@ Page({
         });
       }
     });
+    that.setData({
+      userId: app.globalData.userInfo.id
+    })
   },
   onShow: function (e) {
     this.setData({

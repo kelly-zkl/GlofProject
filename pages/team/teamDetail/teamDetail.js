@@ -29,7 +29,6 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          codeWidth: (res.windowWidth * 0.8 * 0.7),
           imageWidth: (res.windowWidth * 0.4)
         });
       }
@@ -49,14 +48,10 @@ Page({
   //获取页面二维码
   createQrCode: function (text) {
     drawQrcode({
-      width: this.data.codeWidth,
-      height: this.data.codeWidth,
+      width: 200,
+      height: 200,
       canvasId: 'qrcode',
-      typeNumber: 10,
-      text: this.data.text,
-      callback(e) {
-        console.log('e: ', e)
-      }
+      text: this.data.text
     })
   },
   createsCode: function (text) {
@@ -64,11 +59,7 @@ Page({
       width: this.data.imageWidth,
       height: this.data.imageWidth,
       canvasId: 'myQrcode',
-      typeNumber: 10,
-      text: this.data.text,
-      callback(e) {
-        console.log('e: ', e)
-      }
+      text: this.data.text
     })
   },
 
