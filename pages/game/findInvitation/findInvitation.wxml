@@ -41,8 +41,14 @@
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                 <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
                   {{item.matchName}}</view>
-                <view class="weui-media-box__desc text-size-13">{{item.courtName}}</view>
-                <view class="weui-media-box__info" style="color:#999">{{item.timeStr}}</view>
+                <view class="weui-media-box__desc text-size-13" style='display: flex;align-items: center'>
+                    <image src="../../../images/icon_location.png" style='display:inline-block;width:15px;height:15px;margin-right:2px'/>
+                    <view style='display:inline-block'>{{item.courtName}}</view>
+                  </view>
+                  <view class="weui-media-box__info" style='display: flex;align-items: center'>
+                    <image src="../../../images/icon_date.png" style='display:inline-block;width:15px;height:15px;margin-right:2px'/>
+                    <view style='display:inline-block;color:#999'>{{item.timeStr}}</view>
+                  </view>
               </view>
               <view class="weui-cell__ft">
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">

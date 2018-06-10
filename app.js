@@ -5,6 +5,11 @@ var http = require("http.js");
 App({
   onLaunch: function () {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.globalData.sliderLeft = ((res.windowWidth / 2 - 96) / 2);
+      }
+    });
     //获取用户信息
     wx.getStorage({
       key: 'user',
@@ -18,6 +23,7 @@ App({
     })
   },
   globalData: {
-    userInfo: {}
+    userInfo: {},
+    sliderLeft:0
   }
 })

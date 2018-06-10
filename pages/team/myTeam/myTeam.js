@@ -279,6 +279,7 @@ Page({
     } else if (id == 2) {//修改正式差点
 
     } else if (id == 3) {//设为队长
+      console.log(that.data.showMember);
       that.setPosition(true,'leader');
     } else if (id == 4) {//设为秘书
       that.setPosition(true, 'secretary');
@@ -357,7 +358,7 @@ Page({
             msg: "操作中...",
             success: res => {
               wx.showToast({ title: '操作成功', icon: 'info', duration: 1500 })
-              this.getMembers();
+              that.getMembers();
             }
           }, true);
         } else if (res.cancel) {
@@ -533,6 +534,7 @@ Page({
   },
   //群主设置成员职位
   setPosition: function (admin, tag){
+    var that = this;
     http.postRequest({
       url: "group/appoint",
       params: {//标签 群主:admin 队长:leader 秘书:secretary 成员:member 临时成员:snap
@@ -541,7 +543,8 @@ Page({
       },
       msg: "操作中...",
       success: res => {
-        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 })
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        that.getMembers();
       }
     }, true);
   },
@@ -648,6 +651,9 @@ Page({
   },
   //分享页面
   onShareAppMessage: function (e) {
+    this.setData({
+      showPage: false
+    })
     return {
       title: 'GLOF',
       desc: this.data.team.groupName,

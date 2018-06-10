@@ -36,9 +36,22 @@
 .tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}
 .tui-tabbar-cell.tui-active{background-color: #66CC99;color: #fff;}
 
-.weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto}
-.weui-grid__icon.s{display:block;width:30px;height:30px;margin:0 auto;padding-top: 5px}
+.weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto;border-radius: 4px}
+.weui-grid__icon.s{display:block;width:30px;height:30px;margin:0 auto;padding-top: 5px;border-radius: 0}
 .text-size-12{font-size: 12px;color: #888;text-align: center;margin: 0;padding:0}
+
+/**球童*/
+.view-cadd{
+  margin: 40px;
+  background: #fff;
+  border: 1px #66CC99 solid;
+  height: 100rpx;
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content:center;
+}
 
 /**分数框*/
 .tui-gallery-list{

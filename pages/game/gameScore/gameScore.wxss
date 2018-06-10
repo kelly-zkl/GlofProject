@@ -33,7 +33,7 @@ page{
   width: 50px;
 }
 
-.weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto}
+.weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto;border-radius: 4px}
 
 .tag{
   display: block;

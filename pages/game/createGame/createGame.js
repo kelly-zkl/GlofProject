@@ -47,15 +47,16 @@ Page({
       dateTimeArray: dateTimeArray,
       dateTime: dateTime,
       timeStr: timeStr,
-      gameId: options.id
+      gameId: options.id ? options.id:1,
+      userId: app.globalData.userInfo.id
     });
 
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          imageWidth: ((res.windowWidth - 42) / 4) + 'px',
-          upWidth: (((res.windowWidth - 42) / 4) - 2) + 'px'
+          imageWidth: ((res.windowWidth - 62) / 4) + 'px',
+          upWidth: (((res.windowWidth - 62) / 4) - 2) + 'px'
         });
         // console.log(that.data.imageWidth);
         // console.log(that.data.upWidth);
@@ -126,6 +127,15 @@ Page({
     this.setData({
       disabled1: this.data.number1 !== 1 ? false : true,
       disabled2: this.data.number1 !== 4 ? false : true
+    });
+  },
+  //删除成员
+  deleteMember:function(e){
+    var index = e.currentTarget.id;
+    var arr = this.data.chooseMembers;
+    arr.splice(index,1);
+    this.setData({
+      chooseMembers:arr
     });
   },
 
@@ -224,6 +234,10 @@ Page({
     
     if (!that.data.gameName || !that.data.timeStr || !that.data.number1 || !that.data.mainCourt) {
       wx.showToast({ title: '请完善赛事信息', icon: 'none', duration: 1500 });
+      return;
+    }
+    if (that.data.chooseMembers.length > that.data.number1){
+      wx.showToast({ title: '赛事人数不能超过' + that.data.number1+'人', icon: 'none', duration: 1500 });
       return;
     }
     var timeStap = new Date(that.data.timeStr.replace(/-/g, '/')).getTime();//IOS系统不支持2017-01-01格式的时间

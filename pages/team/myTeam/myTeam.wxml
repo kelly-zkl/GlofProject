@@ -5,14 +5,21 @@
         <view class="weui-media-box weui-media-box_appmsg">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
             <image class="weui-media-box__thumb t" src="{{team.thumbUrl}}"/>
-            <view class="tip-join">{{team.memberNumber+"人"}}</view>
+            <view class="tip-join">
+              <image src="../../../images/icon_follow_white.png"
+              style='display:inline-block;width:16px;height:16px;margin-right:2px'/>
+              <view style='display:inline-block'>{{team.memberNumber+"人"}}</view>
+            </view>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="color:#fff">
             <view class="weui-media-box__title weui-media-box__title_in-text text-size-15">
             {{team.groupName}}</view>
-            <view class="weui-media-box__desc text-size-13" style="color:#fff">
-            {{"地区："+team.province+"-"+team.city}}</view>
-            <view class="weui-media-box__info text-size-13" style="color:#fff;margin-top:5px">
+            <view class="weui-media-box__desc text-size-13" 
+            style='display: flex;align-items: center;color:#fff;margin-top:10px'>
+              <image src="../../../images/icon_location_white.png" 
+              style='display:inline-block;width:14px;height:14px;margin-right:2px'/>
+            {{team.province+"-"+team.city}}</view>
+            <view class="weui-media-box__info text-size-13" style="color:#fff;margin-top:10px">
             {{"球队口号："+team.slogan}}</view>
           </view>
           <view class="weui-cell__ft">
@@ -97,9 +104,9 @@
                   </view>
                 </view>
                 <view class="weui-flex" style="background:#fff;padding-top:20rpx">
-                  <view class="weui-flex__item">
+                  <!-- <view class="weui-flex__item">
                     <view class="weui-grid__label" style="color:#999">打赏</view>
-                  </view>
+                  </view> -->
                   <view class="weui-flex__item">
                     <view class="weui-grid__label" style="color:#999" id="{{item.id}}"
                       data-uid="{{item.creatorId}}" catchtap="pressReply">
@@ -175,7 +182,7 @@
                           <view class="weui-uploader__file" bindtap='toggleMember'
                           id="{{item.user.id}}" data-name="{{item.user.name}}">
                             <image class="weui-uploader__img" src="{{item.user.avatarUrl}}" 
-                              style="display:block;width:{{userWidth}};height:{{userWidth}}"/>
+                              style="display:block;width:{{userWidth}};height:{{userWidth}};border-radius:4px"/>
                           </view>
                         </block>
                       </view>
@@ -202,8 +209,14 @@
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                   <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
                     {{item.matchName}}</view>
-                  <view class="weui-media-box__desc text-size-13">{{item.courtName}}</view>
-                  <view class="weui-media-box__info" style="color:#999">{{item.timeStr}}</view>
+                  <view class="weui-media-box__desc text-size-13" style='display: flex;align-items: center'>
+                    <image src="../../../images/icon_location.png" style='display:inline-block;width:15px;height:15px;margin-right:2px'/>
+                    <view style='display:inline-block'>{{item.courtName}}</view>
+                  </view>
+                  <view class="weui-media-box__info" style='display: flex;align-items: center'>
+                    <image src="../../../images/icon_date.png" style='display:inline-block;width:15px;height:15px;margin-right:2px'/>
+                    <view style='display:inline-block;color:#999'>{{item.timeStr}}</view>
+                  </view>
                 </view>
                 <view class="weui-cell__ft">
                   <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">

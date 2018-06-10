@@ -22,14 +22,11 @@ Page({
       index: 2
     })
     var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        });
-      }
+    that.setData({
+      sliderLeft: app.globalData.sliderLeft,
+      sliderOffset:0
     });
+    console.log(that.data.sliderLeft);
     //球手主页
     if (options.userId) {
       //这个pageId的值存在则证明首页的开启来源于用户点击来首页,同时可以通过获取到的pageId的值跳转导航到对应的详情页
@@ -181,7 +178,7 @@ Page({
           wx.hideNavigationBarLoading(); //完成停止加载
           wx.stopPullDownRefresh(); //停止下拉刷新
         }
-        (res.data.content || []).map(function (item) {
+        (res.data || []).map(function (item) {
           item.timeStr = util.formatTime(new Date(item.startTime), '-', true)
         })
         that.setData({

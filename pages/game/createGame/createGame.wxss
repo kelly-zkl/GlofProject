@@ -43,9 +43,14 @@
   border-right: 1rpx solid #bbb;
 }
 
-.weui-uploader__file{float:left;margin-right:4px;margin-bottom:4px}
+.weui-uploader__file{float:left;margin-right:0;margin-bottom:0;position:relative;padding-right: 10px;padding-top: 10px}
 .weui-uploader__img{display:block;width:84px;height:84px}
-.weui-uploader__input-box{margin-right:4px;margin-bottom:4px;width:82px;height:82px;}
+.weui-uploader__input-box{margin-right:10px;margin-bottom:0;margin-top:10px;width:82px;height:82px}
+.weui-delete{
+  position: absolute;
+  top: 0px;
+  right: 3px
+}
 
 .popup-example--center {
   border-radius: 4px;

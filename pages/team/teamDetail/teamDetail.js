@@ -122,6 +122,9 @@ Page({
   },
   //分享页面
   onShareAppMessage: function (e) {
+    this.setData({
+      showPage: false
+    })
     return {
       title: 'GLOF',
       desc: this.data.team.groupName,

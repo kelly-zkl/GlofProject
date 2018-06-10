@@ -30,6 +30,9 @@ Page({
       person:options.tab,
       createId:options.id
     });
+    that.setData({
+      person: options.id == app.globalData.userInfo.id?0:1
+    });
     wx.setNavigationBarTitle({
       title: that.data.person == 0 ? "我的主页" :"球友主页"
     })

@@ -68,12 +68,14 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
-      this.setData({
-        showPopup: !this.data.showPopup,
-        activeHole: e.currentTarget.dataset.idx
-      });
-    }
+    // if (this.data.gameDetail.stat == 2) {
+      if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
+        this.setData({
+          showPopup: !this.data.showPopup,
+          activeHole: e.currentTarget.dataset.idx
+        });
+      }
+    // }
   },
   popuChange: function (e) {
     var that = this;

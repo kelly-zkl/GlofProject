@@ -7,7 +7,7 @@ var drawQrcode = require('../../../utils/qrcode.js');
 Page({
   data: {
     radioType:1,
-    showJoin: true,
+    showJoin: false,
     gameId:'',
     showPopup: false,
     showManager:false,
@@ -15,6 +15,7 @@ Page({
     showMore:false,
     showPic:false,
     showPage:false,//页面二维码
+    showCadd:false,
     disabled1: false,
     disabled2: false,
     caddie:false,
@@ -42,6 +43,7 @@ Page({
     });
 
     this.createQrCode(this.data.text);
+    this.caddQrCode(this.data.text);
   },
   onShow:function(){
     this.setData({
@@ -53,6 +55,7 @@ Page({
     }else{
       this.gameDetail();
     }
+    this.getCadds();
   },
   togglePage:function(){
     this.setData({
@@ -78,6 +81,66 @@ Page({
       success: res => {
         // wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
         that.gameDetail();
+      }
+    }, false);
+  },
+  //获取球童二维码
+  caddQrCode: function (text) {
+    drawQrcode({
+      width: 200,
+      height: 200,
+      canvasId: 'qrcode',
+      text: this.data.text + '&caddie=true'
+    })
+  },
+  //添加球童弹框
+  toggleCadd: function () {
+    this.setData({
+      showCadd: !this.data.showCadd
+    })
+  },
+  //删除球童
+  deleteCad: function (e) {
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该球童？',
+      success: function (res) {
+        if (res.confirm) {
+          http.postRequest({
+            url: "user/cancelFollower",
+            params: {
+              id: e.currentTarget.id, uid: app.globalData.userInfo.id,
+              beFollowedType: "match"
+            },
+            msg: "操作中...",
+            success: res => {
+              wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 })
+              that.getCadds();
+            }
+          }, true);
+        } else if (res.cancel) {
+        }
+      }
+    })
+  },
+  //获取球童列表
+  getCadds: function () {
+    var that = this;
+    http.postRequest({
+      url: "match/caddie/list",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      // msg: "加载中....",
+      success: res => {
+        if (that.data.refresh) {
+          wx.hideNavigationBarLoading(); //完成停止加载
+          wx.stopPullDownRefresh(); //停止下拉刷新
+        }
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+
+        that.setData({
+          cadds: res.data
+        })
       }
     }, false);
   },
@@ -141,20 +204,20 @@ Page({
       showModify: false
     })
   },
-  //发红包/动态
-  toggleMore: function () {
+  //球童/删除球童
+  toggleMore: function (e) {
+    console.log(e);
     this.setData({
-      showMore: !this.data.showMore
+      showMore: !this.data.showMore,
+      item: e.currentTarget.dataset.id
     });
   },
   moreChange: function (e) {
-    if (e.currentTarget.id == 1) {//发红包
-      
-    } else if (e.currentTarget.id == 2) {//发动态
+    if (e.currentTarget.id == 2) {//球童主页
       wx.navigateTo({
-        url: '/pages/game/gameDynamic/gameDynamic?id=' + this.data.gameId + '&gameName=' + this.data.gameDetail.matchName
+        url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + this.data.item.id
       })
-    } else if (e.currentTarget.id == 3){//球童
+    } else if (e.currentTarget.id == 3){//删除球童
       wx.navigateTo({
         url: '/pages/game/gameCaddies/gameCaddies?id=' + this.data.gameId + '&gameName=' + this.data.gameDetail.matchName
       })
@@ -235,9 +298,10 @@ Page({
       wx.navigateTo({
         url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,
       })
-    }else{
-      this.toggleMore();
     }
+    // else{
+    //   this.toggleMore();
+    // }
   },
   //选择洞
   holeChange: function (e) {
@@ -248,12 +312,14 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
-      this.setData({
-        showPopup: !this.data.showPopup,
-        activeHole: e.currentTarget.dataset.idx
-      });
-    } 
+    // if (this.data.gameDetail.stat == 2){
+      if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
+        this.setData({
+          showPopup: !this.data.showPopup,
+          activeHole: e.currentTarget.dataset.idx
+        });
+      }
+    // }
     // else {//未关注、未参赛
     //   this.setData({
     //     showJoin: true
@@ -437,11 +503,9 @@ Page({
         // wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
         res.data.timeStr = util.formatTime(new Date(res.data.startTime), '-', true);
         if (!that.data.caddie){
-          if (res.data.joined == 1 || res.data.followerId) {
-            this.setData({
-              showJoin: false
-            });
-          }
+          this.setData({
+            showJoin: res.data.joined == 1 || res.data.followerId?false:true
+          });
         }
         this.setData({
           gameDetail: res.data,
@@ -452,10 +516,27 @@ Page({
   },
   //分享页面
   onShareAppMessage: function (e) {
+    this.setData({
+      showPage: false,//页面二维码
+      showCadd: false
+    });
+    console.log(e);
+    var cadd = false;
+    if (e.target){
+      cadd = e.target.id&&e.target.id=='true'?true:false;
+    }
+    
+    var text = '';
+    if (cadd){
+      text = '/pages/home/glof/glof?gameId=' + this.data.gameId + '&caddie=true';
+    }else{
+      text = '/pages/home/glof/glof?gameId=' + this.data.gameId;
+    }
+    console.log(text);
     return {
       title: 'GLOF',
       desc: this.data.gameDetail.matchName,
-      path: '/pages/home/glof/glof?gameId=' + this.data.gameId,
+      path: text,
       success: function (res) {// 转发成功
         wx.showToast({ title: '分享成功', icon: 'info', duration: 1500 })
       },

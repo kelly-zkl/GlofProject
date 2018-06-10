@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd">
+  <view class="page__bd" style='margin-bottom:80px'>
     <view class="weui-flex" style="background:#66CC99">
       <view style="padding-left:30rpx">
         <image src="../../../images/icon_game_code.png" style="width:26px;height:26px;display:inline-block"
@@ -24,10 +24,21 @@
             src="{{gameDetail.icon?gameDetail.icon:'../../../images/icon_game.png'}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" style="color:#fff">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-14"
+               style='display: flex;align-items: center'>
+              <image src="../../../images/icon_location_white.png" 
+              style='display:inline-block;width:18px;height:18px;margin-right:2px'/>
               {{gameDetail.courtName}}</view>
-            <view class="weui-media-box__desc text-size-13" style="color:#fff">{{gameDetail.timeStr}}</view>
-            <view class="weui-media-box__info" style="color:#fff">天气</view>
+            <view class="weui-media-box__desc text-size-14" 
+            style='display: flex;align-items: center;color:#fff;margin-top:10px'>
+              <image src="../../../images/icon_date_white.png" 
+              style='display:inline-block;width:18px;height:18px;margin-right:2px'/>
+            {{gameDetail.timeStr}}</view>
+            <view class="weui-media-box__info text-size-14" style='display: flex;align-items: center;color:#fff;margin-top:10px'>
+              <image src="../../../images/icon_weather_white.png"
+              style='display:inline-block;width:18px;height:18px;margin-right:2px'/>
+              天气
+            </view>
           </view>
           <view class='weui-cell__ft'>
             <view class="weui-media-box__title view-status {{gameDetail.followerId?'view-follow':gameDetail.joined==1?'view-join':''}}">
@@ -73,6 +84,18 @@
         <block wx:for='{{gameDetail.userTPoles}}' wx:key='*this'>
           <view class="weui-grid__label label" style='background:#fff'>{{item}}</view>
         </block>
+      </view>
+    </view>
+    <view class='weui-flex view-cadd' wx:if="{{gameDetail.joined==1}}">
+      <view class='weui-flex__item' style='color:#66CC99;font-size:16px;text-align:center'>球童</view>
+      <block wx:for="{{cadds}}" wx:key="*this">
+        <view class='weui-flex__item' bindtap='toggleMore' data-id='{{item}}'>
+          <image src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"
+            style='height:80rpx;width:80rpx;border-radius:50%;margin-top:10rpx'/>
+        </view>
+      </block>
+      <view class='weui-flex__item' bindtap='toggleCadd' wx:if="{{cadds.length<gameDetail.playerLimit}}">
+      <view style='height:80rpx;width:80rpx;border-radius:40rpx;background:#66CC99;font-size:14px;color:#fff;text-align:center;line-height:80rpx'>添加</view>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" 
@@ -156,13 +179,15 @@
     <view class="zan-popup__mask" catchtap="toggleManager"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <view class="weui-cell weui-cell_access line" id="1" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <view class="weui-cell weui-cell_access line" id="1" bindtap="managerChange"
+         wx:if="{{uid==gameDetail.creatorId&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改赛事</view>
         </view>
         <!-- <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事权限</view>
         </view> -->
-        <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange"
+         wx:if="{{uid==gameDetail.creatorId&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事图片</view>
         </view> 
          <view class="weui-cell weui-cell_access line" id="4" bindtap="managerChange">
@@ -174,17 +199,19 @@
         <view class="weui-cell weui-cell_access line" id="9" bindtap="managerChange" wx:else>
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">关注比赛</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="10" bindtap="managerChange" wx:if="{{gameDetail.joined!=1}}">
+        <view class="weui-cell weui-cell_access line" id="10" bindtap="managerChange"
+         wx:if="{{gameDetail.joined!=1&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">加入比赛</view>
         </view>
         <!-- <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">重新开赛</view>
         </view> -->
-        <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange"
+         wx:if="{{uid==gameDetail.creatorId&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">结束赛事</view>
         </view> 
         <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange" 
-          wx:if="{{uid!=gameDetail.creatorId && gameDetail.joined==1}}">
+          wx:if="{{uid!=gameDetail.creatorId && gameDetail.joined==1&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">退出比赛</view>
         </view>
         <view class="weui-cell weui-cell_access line" bindtap="managerChange">
@@ -213,20 +240,21 @@
       </view>
     </view>
   </view>
-  <!--发红包/动态-->
+  <!--球童/删除球童-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{showMore ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleMore"></view>
     <view class="zan-popup__container">
       <view class="weui-cells weui-cells_after-title text-size-14">
-        <!-- <view class="weui-cell weui-cell_access line" id="1" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">发红包</view>
-        </view> -->
         <view class="weui-cell weui-cell_access line" id="2" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">发动态</view>
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx;display: flex;align-items: center;flex-direction: row;justify-content:center">
+            <image src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"
+            style='display:inline-block;height:80rpx;width:80rpx;margin-right:10px'/>
+            <view style='display:inline-block;font-size:14px'>{{item.name}}</view>
+          </view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="3" bindtap="moreChange">
-          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">球童</view>
-        </view>
+        <!-- <view class="weui-cell weui-cell_access line" id="3" bindtap="moreChange">
+          <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">删除</view>
+        </view> -->
         <view class="weui-cell weui-cell_access line" bindtap="moreChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">取消</view>
         </view>
@@ -267,7 +295,31 @@
         </view>
         <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
           <view class='weui-flex__item'>
-            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1' open-type="share">分享到微信好友</button>
+            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1'
+             open-type="share" id="false">分享到微信好友</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--添加球童->页面二维码/分享页面-->
+  <view class="zan-popup {{showCadd ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleCadd"></view>
+    <view class="zan-popup__container popup-example--center">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>添加球童</view>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          球童可通过小程序扫描下方二维码加入到当前赛事
+        </view>
+        <canvas bindtap="previewImg" canvas-id='qrcode' hidden='{{!showCadd}}'
+         style='width:200px;height:200px;z-index:1;margin:0 auto'></canvas>
+        <view style='font-size:14px;color:#999;padding:30rpx'>
+          也可分享给微信好友，点击分享链接，可作为球童加入到当前赛事
+        </view>
+        <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item'>
+            <button class='weui-grid__label score' style='font-size:16px;color:#75B5F1'
+             open-type="share" id="true">分享到微信好友</button>
           </view>
         </view>
       </view>

@@ -92,7 +92,7 @@ Page({
   //新建比赛
   createGame:function(e){
     wx.navigateTo({
-      url: '/pages/game/createGame/createGame',
+      url: '/pages/game/createGame/createGame?id=1',
     })
   },
   //获取赛事列表

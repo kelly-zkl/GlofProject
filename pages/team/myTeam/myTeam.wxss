@@ -64,6 +64,10 @@ page{
 }
 .tip-join{
   width: 80px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content:center;
 }
 
 .text-manager{
@@ -95,7 +99,8 @@ page{
 .weui-grid__icon.s{
   width: 60rpx;
   height: 60rpx;
-  margin-top: 10rpx
+  margin-top: 10rpx;
+  border-radius: 2px
 }
 .weui-flex__item.title{
   height: 70rpx;

@@ -73,9 +73,9 @@
             </view>
           </view>
           <view class="weui-flex" style="background:#fff;padding-top:20rpx">
-            <view class="weui-flex__item">
+            <!-- <view class="weui-flex__item">
               <view class="weui-grid__label" style="color:#999">打赏</view>
-            </view>
+            </view> -->
             <view class="weui-flex__item">
               <view class="weui-grid__label" style="color:#999" id="{{item.id}}"
                 data-uid="{{item.creatorId}}" catchtap="pressReply">
