@@ -62,12 +62,12 @@
 .weui-panel__ft.text-size-13{
   margin: 0
 }
-.zan-tag.zan-tag--primary.zan-tag--plain.green{color:#43CBB3}
-.green.zan-tag--primary::after{border-color:#43CBB3}
-.zan-tag.zan-tag--primary.zan-tag--plain.yellow{color:#F48484}
-.yellow.zan-tag--primary::after{border-color:#F48484}
-.zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#5C80CB}
-.blue.zan-tag--primary::after{border-color:#5C80CB}
+.zan-tag.zan-tag--primary.zan-tag--plain.green{color:#6C9}
+.green.zan-tag--primary::after{border-color:#6C9}
+.zan-tag.zan-tag--primary.zan-tag--plain.yellow{color:#FF8000}
+.yellow.zan-tag--primary::after{border-color:#FF8000}
+.zan-tag.zan-tag--primary.zan-tag--plain.blue{color:#6699FF}
+.blue.zan-tag--primary::after{border-color:#6699FF}
 
 /**教练的类型等级*/
 .view-amateur{

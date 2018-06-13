@@ -213,7 +213,11 @@ Page({
     });
   },
   moreChange: function (e) {
-    if (e.currentTarget.id == 2) {//球童主页
+    if (e.currentTarget.id == 1){//赛事动态
+      wx.navigateTo({
+        url: '/pages/game/gameDynamic/gameDynamic?gameName=' + this.data.gameDetail.matchName + '&id=' + this.data.gameId
+      })
+    }else if (e.currentTarget.id == 2) {//球童主页
       wx.navigateTo({
         url: '/pages/userMsg/personalPage/personalPage?tab=1&id=' + this.data.item.id
       })
@@ -485,6 +489,7 @@ Page({
             msg: "操作中...",
             success: res => {
               wx.showToast({ title: '比赛已结束', icon: 'info', duration: 1500 })
+              that.gameDetail();
             }
           }, true);
         } else if (res.cancel) {

@@ -1,4 +1,18 @@
 <view class='page'>
-  <view class='page__bd'>
+  <view class='page__bd' style='margin-bottom:15px'>
+    <block wx:for="{{msg}}" wx:key="*this">
+      <view class='weui-flex view-head'>
+        <view class='weui-flex__item view-title' style='text-align:left'>消息</view>
+        <view class='weui-flex__item'></view>
+        <view class='weui-flex__item text-size-13' style='text-align:right;color:#999'>{{item.timeStr}}</view>
+      </view>
+      <view style='padding:0 30rpx 30rpx 30rpx;background:#fff' class='text-size-14'>
+        {{item.content}}
+      </view>
+      <!-- <view class='weui-flex view-group' wx:if="{{index!=0}}">
+        <view class='weui-flex__item view-refuse' bindtap='refuse'>拒绝</view>
+        <view class='weui-flex__item view-confirm' bindtap='confirm'>同意</view>
+      </view> -->
+    </block>
   </view>
 </view>

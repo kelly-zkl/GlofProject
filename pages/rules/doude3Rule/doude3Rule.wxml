@@ -24,34 +24,40 @@
           </view>
         </view>
       </view>
-      <view class="weui-cell text-size-14">
-        <view class="weui-cell__bd">打手</view>
-        <view class="weui-cell__ft">
-          <switch color='#66CC99' bindchange="beatSet" checked="{{beat}}"></switch>
+      <view class="weui-cell text-size-14" bindtap='toggleDou'>
+        <view class="weui-cell__bd">地主设置</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style='color:#333'>
+          <image class="weui-grid__icon s" src="{{douName.avatarUrl}}"/>
+          <view class="weui-grid__label" style='display:inline-block'>{{douName.name}}</view>
         </view>
       </view>
-      <radio-group bindchange="radioChange" class="weui-flex" style="padding:30rpx 0px" wx:if="{{beat}}">
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户1</view>
-          <radio class="weui-check" color="#66CC99" checked='true'/>
+      <!-- <radio-group class="weui-flex" style="padding:30rpx 0px" bindchange="chooseDou">
+        <block wx:for="{{players}}" wx:key="*this" wx:for-index="idx">
+          <view class="weui-flex__item" bindtap="bindCheckbox">
+            <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+            <view class="weui-grid__label">{{item.name}}</view>
+            <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
+             checked='{{idx==lanIndx}}' disabled="{{idx==beIndx}}"/>
+          </view>
+        </block>
+      </radio-group> -->
+      <view class="weui-cell text-size-14" bindtap='toggleBeat'>
+        <view class="weui-cell__bd">打手设置</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style='color:#333'>
+         <image class="weui-grid__icon s" src="{{beatNa.avatarUrl}}"/>
+        <view class="weui-grid__label" style='display:inline-block'>{{beatNa.name}}</view>
         </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户2</view>
-          <radio class="weui-check" color="#66CC99"/>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户3</view>
-          <radio class="weui-check" color="#66CC99"/>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户4</view>
-          <radio class="weui-check" color="#66CC99"/>
-        </view>
-      </radio-group>
+      </view>
+      <!-- <radio-group class="weui-flex" style="padding:30rpx 0px" bindchange="chooseBeat">
+        <block wx:for="{{players}}" wx:key="*this" wx:for-index="idx">
+          <view class="weui-flex__item" bindtap="bindCheckbox">
+            <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+            <view class="weui-grid__label">{{item.name}}</view>
+            <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
+             checked='{{idx==beIndx}}' disabled="{{idx==lanIndx}}"/>
+          </view>
+        </block>
+      </radio-group> -->
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">顶洞</view>
         <view class="weui-cell__ft">
@@ -91,12 +97,52 @@
       </view>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">避开地雷</view>
-        <view class="weui-cell__ft"><switch color='#66CC99'></switch></view>
+        <view class="weui-cell__ft">
+          <switch color='#66CC99' bindchange="avoidSet" checked="{{avoid}}"></switch>
+        </view>
       </view>
     </view>
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" 
     style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
     <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='saveSet'>保存设置</button>
+  </view>
+  <!-- 地主 -->
+  <view class="zan-popup {{showDou ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleDou"></view>
+    <view class="zan-popup__container">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>选择地主</view>
+        <radio-group class="weui-flex" style="padding:30px 0px" bindchange="chooseDou">
+          <block wx:for="{{players}}" wx:key="*this" wx:for-index="idx">
+            <view class="weui-flex__item" bindtap="bindCheckbox">
+              <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+              <view class="weui-grid__label text-size-13">{{item.name}}</view>
+              <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
+              checked='{{idx==lanIndx}}' disabled="{{idx==beIndx}}"/>
+            </view>
+          </block>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+  <!-- 打手 -->
+  <view class="zan-popup {{showBeat ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleBeat"></view>
+    <view class="zan-popup__container">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>选择打手</view>
+        <radio-group class="weui-flex" style="padding:30px 0px" bindchange="chooseBeat">
+          <block wx:for="{{players}}" wx:key="*this" wx:for-index="idx">
+            <view class="weui-flex__item" bindtap="bindCheckbox">
+              <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+              <view class="weui-grid__label text-size-13">{{item.name}}</view>
+              <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
+              checked='{{idx==beIndx}}' disabled="{{idx==lanIndx}}"/>
+            </view>
+          </block>
+        </radio-group>
+      </view>
+    </view>
   </view>
 </view>

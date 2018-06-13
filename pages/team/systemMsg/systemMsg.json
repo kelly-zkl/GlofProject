@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "系统通知"
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "我的消息"
 }

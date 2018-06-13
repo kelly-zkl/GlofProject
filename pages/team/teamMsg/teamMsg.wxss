@@ -1,1 +1,27 @@
-/* pages/team/teamMsg/teamMsg.wxss */
+
+.view-head{
+  margin-top:10px;
+  padding:20rpx 30rpx;
+  background:#fff;
+}
+.view-title{
+  text-align:left;
+  font-size: 16px;
+  font-weight: 700
+}
+.view-group{
+  border-top:1rpx #e5e5e5 solid;
+  background:#fff;
+}
+.view-refuse{
+  border-right:1rpx #e5e5e5 solid;
+  text-align:center;
+  font-size: 16px;
+  padding: 25rpx 0
+}
+.view-confirm{
+  text-align:center;
+  color:#6699CC;
+  font-size: 16px;
+  padding: 25rpx 0
+}

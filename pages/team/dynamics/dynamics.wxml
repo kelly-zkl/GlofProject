@@ -50,7 +50,7 @@
               <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
                 wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
                 wx:key="*this">{{"#"+game.relateName+"# "}}
-              </view>aazz
+              </view>
             </view>
             <view class="weui-flex__item" wx:if="{{item.creatorId == userId}}">
               <view class="weui-grid__label" style="color:#2C7AD6;text-align:right" id="{{item.id}}"

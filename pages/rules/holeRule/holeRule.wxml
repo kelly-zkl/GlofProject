@@ -69,11 +69,11 @@
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioDing == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="dingChange" >顶洞过</text>
+              data-id="0" bindtap="dingChange">顶洞过</text>
             <text class="tui-tabbar-cell {{radioDing == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="dingChange" >顶洞+1</text>
+              data-id="1" bindtap="dingChange">下洞+1</text>
               <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
-              data-id="2" bindtap="dingChange" >顶洞翻倍</text>
+              data-id="2" bindtap="dingChange">顶洞翻倍</text>
           </view>
         </view>
       </view>
@@ -82,9 +82,9 @@
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioShou == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="shouChange" >赢洞全收</text>
+              data-id="0" bindtap="shouChange">赢洞全收</text>
             <text class="tui-tabbar-cell {{radioShou == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="shouChange" >帕鸟鹰全收</text>
+              data-id="1" bindtap="shouChange">帕鸟鹰全收</text>
           </view>
         </view>
       </view>

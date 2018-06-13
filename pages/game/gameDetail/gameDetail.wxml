@@ -94,8 +94,8 @@
             style='height:80rpx;width:80rpx;border-radius:50%;margin-top:10rpx'/>
         </view>
       </block>
-      <view class='weui-flex__item' bindtap='toggleCadd' wx:if="{{cadds.length<gameDetail.playerLimit}}">
-      <view style='height:80rpx;width:80rpx;border-radius:40rpx;background:#66CC99;font-size:14px;color:#fff;text-align:center;line-height:80rpx'>添加</view>
+      <view class='weui-flex__item' bindtap='toggleCadd' wx:if="{{cadds.length<gameDetail.playerLimit&&gameDetail.stat!=4}}">
+        <view style='height:80rpx;width:80rpx;border-radius:40rpx;background:#66CC99;font-size:14px;color:#fff;text-align:center;line-height:80rpx'>添加</view>
       </view>
     </view>
     <view class="weui-footer weui-footer_fixed-bottom" 
@@ -105,7 +105,7 @@
           <image src="../../../images/icon_game_chat.png" style="width:60rpx;height:60rpx"/>
         </navigator> -->
         <view style="width:60rpx;height:60rpx"></view>
-        <view class="weui-flex__item" style='text-align:center'>
+        <view class="weui-flex__item" style="display: flex;align-items: center;flex-direction: row;justify-content:center">
           <view class="tui-tabbar-group">
             <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
               data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">PK规则</view>
@@ -115,7 +115,7 @@
               data-id="2" bindtap="douChange">记分卡</view>
           </view>
         </view>
-        <view bindtap='moreChange' id="2" hover-class="weui-cell_active">
+        <view bindtap='moreChange' id="1" hover-class="weui-cell_active">
           <image src="../../../images/icon_game_dynamic.png" style="width:60rpx;height:60rpx"/>
         </view>
       </view>

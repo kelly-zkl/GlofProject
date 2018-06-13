@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd">
+  <view class="page__bd" style='margin-bottom:20px'>
     <view class="weui-tab">
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
@@ -12,10 +12,122 @@
       </view>
       <view class="weui-tab__panel">
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          
+          <view class='view-chart'>
+            <view class='chart-title'>总杆波动图</view>
+            <canvas canvas-id='totalCanvas' style='width:100%;height:200px;margin:0 auto'></canvas>
+            <view class='weui-flex'>
+              <view class='weui-flex__item' style='height:40px'>
+                <view class="weui-grid__label text-size-13" style="color:#333">最前一场</view>
+              </view>
+              <view class='weui-flex__item' style='height:40px'></view>
+              <view class='weui-flex__item' style='height:40px'>
+                <view class="weui-grid__label text-size-13" style="color:#333">最近一场</view>
+              </view>
+            </view>
+          </view>
+          <view class='view-chart'>
+            <view class='chart-title'>各项成绩指标</view>
+            <view style="display: flex;align-items: center;flex-direction: row;justify-content:center">
+              <view class="view-radio-btn {{scoreType == 0 ? 'tui-active' : ''}}"
+                id="0" bindtap="typeChange">老鹰(-2)</view>
+              <view class="view-radio-btn {{scoreType == 1 ? 'tui-active' : ''}}"
+                id="1" bindtap="typeChange">小鸟(-1)</view>
+              <view class="view-radio-btn {{scoreType == 2 ? 'tui-active' : ''}}"
+                id="2" bindtap="typeChange">标准杆(0)</view>
+            </view>
+            <view style="display: flex;align-items: center;flex-direction: row;justify-content:center;margin-bottom:10px">
+              <view class="view-radio-btn {{scoreType == 3 ? 'tui-active' : ''}}"
+                id="3" bindtap="typeChange">博忌(+1)</view>
+              <view class="view-radio-btn {{scoreType == 4 ? 'tui-active' : ''}}"
+                id="4" bindtap="typeChange">双博忌(+2)</view>
+              <view class="view-radio-btn {{scoreType == 5 ? 'tui-active' : ''}}"
+                id="5" bindtap="typeChange">+3</view>
+              <view class="view-radio-btn {{scoreType == 6 ? 'tui-active' : ''}}"
+                id="6" bindtap="typeChange">+4</view>
+            </view>
+            <canvas canvas-id='typeCanvas' style='width:100%;height:200px;margin:0 auto'></canvas>
+            <view class='weui-flex'>
+              <view class='weui-flex__item' style='height:40px'>
+                <view class="weui-grid__label text-size-13" style="color:#333">最前一场</view>
+              </view>
+              <view class='weui-flex__item' style='height:40px'></view>
+              <view class='weui-flex__item' style='height:40px'>
+                <view class="weui-grid__label text-size-13" style="color:#333">最近一场</view>
+              </view>
+            </view>
+          </view>
+          <view class='view-chart'>
+            <view class='chart-title'>{{holeTitle}}</view>
+            <view style="display: flex;align-items: center;flex-direction: row;justify-content:center">
+              <view class="tui-tabbar-group">
+                <text class="tui-tabbar-cell {{holeType == 0 ? 'tui-active' : ''}}"
+                  data-id="0" bindtap="holeChange">三杆洞</text>
+                <text class="tui-tabbar-cell {{holeType == 1 ? 'tui-active' : ''}}"
+                  data-id="1" bindtap="holeChange">四杆洞</text>
+                <text class="tui-tabbar-cell {{holeType == 2 ? 'tui-active' : ''}}"
+                  data-id="2" bindtap="holeChange">五杆洞</text>
+              </view>
+            </view>
+            <canvas canvas-id='holeCanvas' style='width:100%;height:200px;margin:0 auto'></canvas>
+            <view class='weui-flex'>
+              <view class='weui-flex__item' style='height:40px'>
+                <view class="weui-grid__label text-size-13" style="color:#333">最前一场</view>
+              </view>
+              <view class='weui-flex__item' style='height:40px'></view>
+              <view class='weui-flex__item' style='height:40px'>
+                <view class="weui-grid__label text-size-13" style="color:#333">最近一场</view>
+              </view>
+            </view>
+          </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          
+          <block wx:for="{{yearData}}" wx:key="*this">
+            <view class='view-chart'>
+              <view class='chart-title' style='text-align:left;padding-left:15px'>{{item.year}}年度，共 {{item.count}} 场球</view>
+              <view class='weui-flex'>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#333">平均：</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#1403CE;text-align:left">{{item.aver}}杆</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#333">打鸟：</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#1403CE;text-align:left">{{item.bird}}个</view>
+                </view>
+              </view>
+              <view class='weui-flex'>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#333">最好：</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#1403CE;text-align:left">{{item.best}}杆</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#333">老鹰：</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#1403CE;text-align:left">{{item.eagle}}个</view>
+                </view>
+              </view>
+              <view class='weui-flex' style='margin-bottom:15px'>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#333">最差：</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#1403CE;text-align:left">{{item.worst}}杆</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#333">双鹰：</view>
+                </view>
+                <view class='weui-flex__item'>
+                  <view class="weui-grid__label text-size-14" style="color:#1403CE;text-align:left">{{item.eaglePair}}个</view>
+                </view>
+              </view>
+            </view>
+          </block>
         </view>
       </view>
     </view>

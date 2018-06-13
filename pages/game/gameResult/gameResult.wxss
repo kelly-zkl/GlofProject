@@ -1,1 +1,28 @@
-/* pages/game/gameResult/gameResult.wxss */
+
+
+/**图表格式*/
+.view-chart{
+  border: 1px #66CC99 solid;
+  border-radius: 15px;
+  margin: 0 10px 15px 10px;
+  background: #fff
+}
+.view-chart:first-child{
+  margin-top: 20px
+}
+/**图表标题*/
+.chart-title{
+  background: #66CC99;
+  border-radius: 14px 14px 0 0;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 15px;
+}
+/**单选按钮*/
+.tui-tabbar-group{
+  border-radius: 30rpx;
+  text-align: center;
+}

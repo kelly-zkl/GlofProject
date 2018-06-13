@@ -6,7 +6,7 @@
 
 .weui-check{
   position: absolute;
-  top: -12%;
+  top: -15%;
   left: 10%
 }
 
@@ -15,6 +15,7 @@
   min-height:30px;
   line-height:30px
 }
+.weui-grid__icon.s{display:inline-block;width:30px;height:30px;margin:auto 5px}
 
 .tui-gallery-list{
   position: relative;
@@ -47,4 +48,14 @@
   text-align: center;
   line-height: 30px;
   min-height: 30px;
+}
+
+.zan-popup__container{
+  border-radius: 8px;
+  width: 90%;
+}
+.popup-width {
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
 }

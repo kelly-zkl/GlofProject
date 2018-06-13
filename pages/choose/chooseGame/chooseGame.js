@@ -28,7 +28,7 @@ Page({
     http.postRequest({
       url: "match/user/joined",
       params: {
-        page: that.data.page, size: 10, uid: app.globalData.userInfo.id,notOver:true
+        page: that.data.page, size: 10, uid: app.globalData.userInfo.id, pact:true
       },
       msg: "加载中....",
       success: res => {

@@ -15,9 +15,9 @@
             <view class="weui-media-box__title weui-media-box__title_in-text text-size-15">
             {{team.groupName}}</view>
             <view class="weui-media-box__desc text-size-13" 
-            style='display: flex;align-items: center;color:#fff;margin-top:10px'>
+                style='display: flex;align-items: center;color:#fff;margin-top:10px'>
               <image src="../../../images/icon_location_white.png" 
-              style='display:inline-block;width:14px;height:14px;margin-right:2px'/>
+                style='display:inline-block;width:14px;height:14px;margin-right:2px'/>
             {{team.province+"-"+team.city}}</view>
             <view class="weui-media-box__info text-size-13" style="color:#fff;margin-top:10px">
             {{"球队口号："+team.slogan}}</view>
@@ -49,7 +49,7 @@
               <view class="weui-panel__bd d1">
                 <view class="weui-media-box weui-media-box_appmsg d1"  style="padding:0">
                   <view class="weui-media-box__hd weui-media-box__hd_in-appmsg d1">
-                    <image class="weui-media-box__thumb d1" src="{{item.creatorAvatar}}"/>
+                    <image class="weui-media-box__thumb d1" src="{{item.creatorAvatar?item.creatorAvatar:'../../../images/icon_user.png'}}"/>
                   </view>
                   <view class="weui-media-box__title weui-media-box__title_in-text d1"  style="margin-bottom:0">
                     <view class="weui-media-box__title text-size-14 d1">{{item.creatorName}}</view>
@@ -131,7 +131,7 @@
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <view class='weui-flex' style='margin-top:20rpx'>
             <view class='text-manager'></view>
-            <view class='weui-flex__item' style='text-align:center'>
+            <view class='weui-flex__item' style="display: flex;align-items: center;flex-direction: row;justify-content:center">
               <view class="tui-tabbar-group">
                 <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
                   data-id="0" bindtap="douChange">成员详情</view>
@@ -152,7 +152,7 @@
             <view wx:for="{{members}}" wx:key="*this" style='border-bottom:1rpx solid #e5e5e5'>
               <view class='weui-flex' bindtap='toggleMember' id="{{item.user.id}}" data-name="{{item.user.name}}">
                 <view class='weui-flex__item'>
-                  <image class="weui-grid__icon s" src="{{item.user.avatarUrl}}"/>
+                  <image class="weui-grid__icon s" src="{{item.user.avatarUrl?item.user.avatarUrl:'../../../images/icon_user.png'}}"/>
                   <view class="text-size-12" style='color:#888;text-align:center'>{{item.user.name}}</view>
                 </view>
                 <view class='weui-flex__item content'>
@@ -181,7 +181,7 @@
                         <block wx:for="{{members}}" wx:key="*this">
                           <view class="weui-uploader__file" bindtap='toggleMember'
                           id="{{item.user.id}}" data-name="{{item.user.name}}">
-                            <image class="weui-uploader__img" src="{{item.user.avatarUrl}}" 
+                            <image class="weui-uploader__img" src="{{item.user.avatarUrl?item.user.avatarUrl:'../../../images/icon_user.png'}}" 
                               style="display:block;width:{{userWidth}};height:{{userWidth}};border-radius:4px"/>
                           </view>
                         </block>

@@ -46,7 +46,7 @@
                     <image class="rank-img" src="{{item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
                   </view>
                   <view class='weui-flex__item list' style='text-align:left'>{{item.name}}</view>
-                  <view class='weui-flex__item list' style='color:#FF0000'>+{{item.poleNum}}</view>
+                  <view class='weui-flex__item list' style='color:#FF0000'>{{idx==0?'+'+item.poleNum:item.poleNum+'个'}}</view>
                 </view>
               </block>
             </view>

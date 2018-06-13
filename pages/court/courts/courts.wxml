@@ -32,7 +32,7 @@
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
             <view class="weui-media-box__title weui-media-box__title_in-text text-size-14">{{item.courtName}}</view>
-            <view class="weui-media-box__desc text-size-14">果岭速度7</view>
+            <view class="weui-media-box__desc text-size-14">果岭速度{{item.speed}}</view>
             <view class="weui-media-box__info" style="color:#999">地区：{{item.province+'-'+item.city}}</view>
           </view>
           <view class="weui-cell__ft text-size-13">

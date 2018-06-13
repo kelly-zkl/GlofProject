@@ -7,6 +7,7 @@ Page({
    */
   data: {
     files: [],
+    images:[],
     attach:[],
     showPopup:false,
     check:false,
@@ -94,13 +95,19 @@ Page({
   chooseImage: function (e) {
     var that = this;
     wx.chooseImage({
+      count: (9 - that.data.files.length),
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: that.data.picType, // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
+        var arry = [];
+        tempFilePaths.map(function(item){
+          arry.push({ type: 0, url: item})
+        })
         that.setData({
-          files: that.data.files.concat(tempFilePaths)
+          files: that.data.files.concat(tempFilePaths),
+          images: that.data.images.concat(arry)
         });
 
         for (var i in tempFilePaths){
@@ -126,14 +133,26 @@ Page({
     var that = this
     wx.chooseVideo({
       sourceType: that.data.picType,
-      maxDuration: 60,
+      maxDuration: 30,
       camera: 'back',
       success: function (res) {
+        console.log(res);
         that.setData({
-          files: that.data.files.concat(res.tempFilePath)
+          files: that.data.files.push(res.tempFilePath),
+          images: that.data.images.push({ type: 1, url: res.tempFilePath})
+        })
+       
+        http.uploadFile(res.tempFilePath, {
+          success: function (res) {
+            that.setData({
+              attach: that.data.attach.push(res.data)
+            });
+          }
         })
       }
     })
+    console.log(that.data.files);
+    console.log(that.data.images);
   },
   bindChange: function (e) {
     this.setData({

@@ -10,10 +10,12 @@
           <view class="weui-uploader">
             <view class="weui-uploader__bd">
               <view class="weui-uploader__files" id="uploaderFiles">
-                <block wx:for="{{files}}" wx:key="*this">
+                <block wx:for="{{images}}" wx:key="*this">
                   <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" 
+                    <image class="weui-uploader__img" src="{{item.url}}" mode="aspectFill" wx:if="item.type==0"
                       style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
+                    <video class="weui-uploader__img" src="{{item.url}}" loop="true" wx:if="item.type==1"
+                      style="display:block;width:{{imageWidth}};height:{{imageWidth}}"></video>
                     <!-- <view class="weui-uploader__file-content">
                       <icon type="warn" size="23" color="#F43530"></icon>
                     </view>
@@ -67,12 +69,12 @@
         <view class="weui-cell weui-cell_access line" id="2" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄图片</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
+        <!-- <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">从相册选择视频</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">拍摄视频</view>
-        </view>
+        </view> -->
       </view>
     </view>
   </view>

@@ -57,7 +57,7 @@
               data-id="0" bindtap="dingChange" >顶洞过</text>
             <text class="tui-tabbar-cell {{radioDing == 1 ? 'tui-active' : ''}}"
               data-id="1" bindtap="dingChange" >顶洞+1</text>
-              <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
+            <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
               data-id="2" bindtap="dingChange" >顶洞翻倍</text>
           </view>
         </view>

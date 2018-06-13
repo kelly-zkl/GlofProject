@@ -64,7 +64,7 @@ button::after{
   border-radius: 0;
 }
 
-/**单选button*/
+/**单选button group形式*/
 .tui-tabbar-group{
   border: 1rpx #66CC99 solid;
   border-radius: 3px;
@@ -72,6 +72,7 @@ button::after{
   display: table;
   table-layout: fixed;
   color: #66CC99;
+  text-align: center;
 }
 .tui-tabbar-cell{
   display: table-cell;
@@ -84,6 +85,22 @@ button::after{
 }
 .tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}
 .tui-tabbar-cell.tui-active{background-color: #66CC99;color: #fff;}
+
+/**单选button形式*/
+.view-radio-btn{
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  text-align: center;
+  border: 1rpx solid #66CC99;
+  border-radius: 3px;
+  color: #66CC99
+}
+.view-radio-btn.tui-active{background-color: #66CC99;color: #fff;}
 
 /**checkbox样式*/
 .tui-tabbar-group.box{
@@ -133,7 +150,10 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
    transform:translate(-50%, -50%) scale(1);
    -webkit-transform:translate(-50%, -50%) scale(1);
 }
-
+/* radio 未选中的 背景样式 */
+radio .wx-radio-input{
+  border: 1px #66CC99 solid;
+}
 .icon-size{
   width: 20px;
   height: 20px;

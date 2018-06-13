@@ -17,24 +17,10 @@
   margin-top: 50rpx;
 }
 
-.tui-tabbar-group{
-  border: 1rpx #66CC99 solid;
-  border-radius: 3px;
-  overflow: hidden;
-  display: inline-block;
-  color: #66CC99;
-}
 .tui-tabbar-cell{
-  display: inline-block;
-  height: 60rpx;
-  line-height: 60rpx;
-  font-size: 14px;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  text-align: center;
 }
-.tui-tabbar-cell:not(:last-child){border-right: 1rpx solid #66CC99;}
-.tui-tabbar-cell.tui-active{background-color: #66CC99;color: #fff;}
 
 .weui-grid__icon{display:block;width:50px;height:50px;margin:0 auto;border-radius: 4px}
 .weui-grid__icon.s{display:block;width:30px;height:30px;margin:0 auto;padding-top: 5px;border-radius: 0}
@@ -42,7 +28,7 @@
 
 /**球童*/
 .view-cadd{
-  margin: 40px;
+  margin: 20px 30px 30px 30px;
   background: #fff;
   border: 1px #66CC99 solid;
   height: 100rpx;

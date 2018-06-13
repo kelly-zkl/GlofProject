@@ -2,7 +2,7 @@
   <view class='page__bd'>
     <view class='weui-flex' style='padding:15px 10px 7px 10px'>
       <view style="width:50px"></view> 
-      <view class="weui-flex__item" style='text-align:center'>
+      <view class="weui-flex__item" style="display: flex;align-items: center;flex-direction: row;justify-content:center">
         <view class="tui-tabbar-group">
           <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
             data-id="0" bindtap="douChange">记分卡</view>
