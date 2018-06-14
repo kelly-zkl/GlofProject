@@ -21,7 +21,7 @@
     <view class="team-info">球队口号：{{team.slogan}}</view>
     <view class="team-info">球队介绍：{{team.intro}}</view>
     <view class="team-info">组成成员：{{team.memberNumber}}</view>
-    <view class="team-info">球队二维码：
+    <!-- <view class="team-info">球队二维码：
       <view class="weui-flex">
         <view class="weui-flex__item" bindtap='togglePage'>
           <canvas canvas-id='myQrcode' hidden='{{showPage}}'
@@ -29,7 +29,7 @@
           <view class="weui-grid__label btn">转发页面</view>
         </view>
       </view>
-    </view>
+    </view> -->
     <view class="weui-footer weui-footer_fixed-bottom" 
       style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <button class="weui-btn" type="primary" style="background:#66CC99" bindtap="joinTeam">申请加入</button>
