@@ -38,7 +38,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          scrowHeight: res.windowHeight -155,
+          scrowHeight: res.windowHeight -145,
           scoreHeight: res.windowHeight - 215
         });
         console.log(res.windowHeight);
@@ -68,42 +68,52 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    // if (this.data.gameDetail.stat == 2) {
+    if (this.data.gameDetail.stat == 2) {
       if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
         this.setData({
           showPopup: !this.data.showPopup,
           activeHole: e.currentTarget.dataset.idx
         });
       }
-    // }
+    }
   },
   popuChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
   },
   //分数
-  prevNum(e) {//+1
+  prevNum(e) {//加1
     var num = e.currentTarget.dataset.num;
     var idx = e.currentTarget.dataset.idx;
-    num = num + 1;
+    num = (num >= 100 ? num : num + 1);
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
-      gameDetail: this.data.gameDetail
+      gameDetail: this.data.gameDetail,
+      disabled1: num !== 0 ? false : true,
+      disabled2: num !== 100 ? false : true
     });
   },
-  nextNum(e) {//-1
+  nextNum(e) {//减1
     var num = e.currentTarget.dataset.num;
     var idx = e.currentTarget.dataset.idx;
-    num = num - 1;
+    num = (num <= 0 ? num : num - 1);
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
-      gameDetail: this.data.gameDetail
+      gameDetail: this.data.gameDetail,
+      disabled1: num !== 0 ? false : true,
+      disabled2: num !== 100 ? false : true
     });
   },
   numberChange: function (e) {//输入框
     var num = e.detail.value;
     var idx = e.currentTarget.dataset.idx;
+    num = (parseInt(num) >= 100 ? 100 : parseInt(num) <= 0 ? 0 : parseInt(num));
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
+    this.setData({
+      gameDetail: this.data.gameDetail,
+      disabled1: num !== 0 ? false : true,
+      disabled2: num !== 100 ? false : true
+    });
   },
   //保存设置的分数
   saveScore:function(e){
@@ -197,6 +207,9 @@ Page({
   //比赛成绩查询
   getGameScore:function(){
     var that = this;
+    that.setData({
+      score: {}
+    });
     http.postRequest({
       url: "match/grade",
       params: {
@@ -205,8 +218,8 @@ Page({
       },
       // msg: "操作中...",
       success: res => {
-        // wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 });
-        this.setData({
+        // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        that.setData({
           score: res.data
         });
       }

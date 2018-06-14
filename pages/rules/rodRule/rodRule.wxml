@@ -24,16 +24,17 @@
         <block wx:for="{{players}}" wx:key="*this">
           <view class="weui-flex__item">
             <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
-            <view class="weui-grid__label">{{item.name}}</view>
+            <view class="weui-grid__label text-size-13">{{item.name}}</view>
           </view>
         </block>
       </view>
-      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
-        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
+      <view class="weui-flex" style="padding:0 0 30rpx 0" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='color:#888;height:60rpx;line-height:60rpx;text-align:center'>
+          让总分</view>
         <block wx:for="{{players}}" wx:key="*this">
-          <view class="weui-flex__item">
+          <view class="weui-flex__item" style='height:60rpx;line-height:60rpx'>
             <input class='weui-input score' type="number" bindinput='scoreChange' id="{{index}}"
-            maxlength='5' value="{{item.score}}"></input>
+              maxlength='5' value="{{item.score}}"></input>
           </view>
         </block>
       </view>

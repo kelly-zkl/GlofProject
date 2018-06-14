@@ -55,7 +55,7 @@
             </view>
             <view class="weui-flex">
               <view class="placeholder">球洞总数</view>
-              <view class="weui-flex__item">{{court.courtAcre}}</view>
+              <view class="weui-flex__item">{{court.holeNumber}}</view>
             </view>
             <view class="weui-flex">
               <view class="placeholder">标准杆</view>

@@ -1,6 +1,6 @@
 <view class='page'>
   <view class='page__bd'>
-    <view class='weui-flex' style='padding:15px 10px 7px 10px'>
+    <view class='weui-flex' style='padding:15px 10px 10px 10px'>
       <view style="width:50px"></view> 
       <view class="weui-flex__item" style="display: flex;align-items: center;flex-direction: row;justify-content:center">
         <view class="tui-tabbar-group">
@@ -28,7 +28,7 @@
             </view>
           </block>
         </view>
-        <!-- top:140px -->
+        <!-- top:140px 145-->
         <scroll-view scroll-y class="score-y" style="height: {{scrowHeight}}">
           <view style="background:#fff;border-top:1rpx #e5e5e5 solid" 
             wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx">
@@ -76,7 +76,7 @@
             </view>
           </block>
         </scroll-view>
-        <view class='weui-flex' style='height:90px' wx:if="{{rules.length>0}}">
+        <view class='weui-flex' style='height:90px' wx:if="{{rules.length>0&&score.players.length>0}}">
           <text class='tag hole' space='ensp'>H\nO\nL\nE</text>
           <block wx:for='{{score.players}}' wx:key='*this'>
             <view class="weui-flex__item">
@@ -85,7 +85,7 @@
             </view>
           </block>
         </view>
-        <!-- top:210px -->
+        <!-- top:210px 215-->
         <scroll-view scroll-y class="score-y" style="height: {{scrowHeight}}" wx:if="{{rules.length>0}}">
           <view style="background:#fff;border-top:1rpx #e5e5e5 solid" 
             wx:for='{{score.zones}}' wx:key="*this" wx:for-index="idx">
@@ -97,8 +97,8 @@
             </view>
           </view>
         </scroll-view>
-        <view class="weui-footer weui-footer_fixed-bottom" wx:if="{{rules.length>0}}"
-        style="height:40px;background:#66CC99;border-top:1rpx #fff solid">
+        <view class="weui-footer weui-footer_fixed-bottom" wx:if="{{rules.length>0&&score.utScores.length>0}}"
+          style="height:40px;background:#66CC99;border-top:1rpx #fff solid">
           <view class='weui-flex' style='height:40px;line-height:40px'>
             <view class='cell' style='width:40px'>总分</view>
             <block wx:for='{{score.utScores}}' wx:key='*this'>
@@ -109,6 +109,7 @@
       </view>
     </view>
   </view>
+  <!-- 设置杆数-->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">

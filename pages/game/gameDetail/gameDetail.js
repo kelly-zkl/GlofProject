@@ -132,14 +132,25 @@ Page({
       params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
       // msg: "加载中....",
       success: res => {
-        if (that.data.refresh) {
-          wx.hideNavigationBarLoading(); //完成停止加载
-          wx.stopPullDownRefresh(); //停止下拉刷新
-        }
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
 
         that.setData({
           cadds: res.data
+        })
+      }
+    }, false);
+  },
+  //查询天气
+  queryWeather:function(){
+    var that = this;
+    http.postRequest({
+      url: "weather/detail",
+      params: { city: this.data.gameDetail.city},
+      // msg: "加载中....",
+      success: res => {
+        var str = res.data.forecast[0].type + ' ' + res.data.forecast[0].low + '~' + res.data.forecast[0].high + ' ' + res.data.forecast[0].fengli
+        that.setData({
+          weather: str
         })
       }
     }, false);
@@ -316,14 +327,14 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    // if (this.data.gameDetail.stat == 2){
+    if (this.data.gameDetail.stat == 2){
       if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
         this.setData({
           showPopup: !this.data.showPopup,
           activeHole: e.currentTarget.dataset.idx
         });
       }
-    // }
+    }
     // else {//未关注、未参赛
     //   this.setData({
     //     showJoin: true
@@ -338,37 +349,35 @@ Page({
   prevNum(e) {//加1
     var num = e.currentTarget.dataset.num;
     var idx = e.currentTarget.dataset.idx;
-    num = num +1;
+    num = (num >= 100 ? num : num +1);
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
-      gameDetail: this.data.gameDetail
+      gameDetail: this.data.gameDetail,
+      disabled1: num !== 0 ? false : true,
+      disabled2: num !== 100 ? false : true
     });
-    // this.setData({
-    //   disabled1: num !== 1 ? false : true,
-    //   disabled2: num !== 100 ? false : true
-    // });
   },
   nextNum(e) {//减1
     var num = e.currentTarget.dataset.num;
     var idx = e.currentTarget.dataset.idx;
-    num = num -1;
+    num = (num <= 0 ? num : num -1);
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
-      gameDetail: this.data.gameDetail
+      gameDetail: this.data.gameDetail,
+      disabled1: num !== 0 ? false : true,
+      disabled2: num !== 100 ? false : true
     });
-    // this.setData({
-    //   disabled1: num !== 1 ? false : true,
-    //   disabled2: num !== 100 ? false : true
-    // });
   },
-  numberChange: function (e) {
+  numberChange: function (e) {//输入框
     var num = e.detail.value;
     var idx = e.currentTarget.dataset.idx;
+    num = (parseInt(num) >= 100 ? 100 : parseInt(num) <= 0 ? 0 : parseInt(num));
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
-    // this.setData({
-    //   disabled1: num !== 1 ? false : true,
-    //   disabled2: num !== 100 ? false : true
-    // });
+    this.setData({
+      gameDetail: this.data.gameDetail,
+      disabled1: num !== 0 ? false : true,
+      disabled2: num !== 100 ? false : true
+    });
   },
   //保存设置的分数
   saveScore: function (e) {
@@ -508,14 +517,15 @@ Page({
         // wx.showToast({ title: '已加入', icon: 'info', duration: 1500 })
         res.data.timeStr = util.formatTime(new Date(res.data.startTime), '-', true);
         if (!that.data.caddie){
-          this.setData({
+          that.setData({
             showJoin: res.data.joined == 1 || res.data.followerId?false:true
           });
         }
-        this.setData({
+        that.setData({
           gameDetail: res.data,
           caddie: res.data.joined == 2?true:false
         });
+        that.queryWeather();
       }
     }, false);
   },

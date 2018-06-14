@@ -127,7 +127,7 @@ Page({
         wx.getSystemInfo({
           success: function (res) {
             that.setData({
-              leftPosition: 50 - (3800 / (res.windowWidth / (that.data.gameDetail.players.length)))+'%'
+              leftPosition: 50 - (3600 / (res.windowWidth / (that.data.gameDetail.players.length)))+'%'
             });
           }
         });

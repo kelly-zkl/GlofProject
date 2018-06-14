@@ -6,10 +6,9 @@ page{
 .weui-flex__item{
   position: relative
 }
-
 .weui-check{
   position: absolute;
-  top: -18%;
+  top: -20%;
   left: 10%
 }
 

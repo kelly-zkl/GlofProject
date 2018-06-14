@@ -39,8 +39,11 @@
   line-height: 30px;
   min-height: 30px;
 }
-
+/**让分*/
 .weui-input.score{
+  height:60rpx;
+  line-height:60rpx;
+  min-height: 60rpx;
   font-size: 14px;
   text-align: center
 }

@@ -26,10 +26,9 @@
             </view>
             <view class="weui-cell__ft text-size-13">
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                <!-- <view class="weui-media-box__title weui-media-box__title_in-text"
-                  style='color:#66CC99' catchtap='toggleWeather'>
-                  一周天气
-                </view> -->
+                 <view class="weui-media-box__title weui-media-box__title_in-text"
+                  style='color:#66CC99' catchtap='toggleWeather' id="{{item.city}}">一周天气
+                </view> 
                 <view class="weui-media-box__desc"></view>
                 <view class="weui-media-box__info" style="color:#999">
                   {{item.dis /1000.0 < 1 ? item.dis +'m' : item.dis/1000.0 +'Km'}}
@@ -44,7 +43,7 @@
   </view>
   <!--选择上下半场-->
   <view class="zan-popup {{showCourt ? 'zan-popup--show' : ''}}">
-    <view class="zan-popup__mask" bindtap="toggleCourt"></view>
+    <view class="zan-popup__mask"></view>
     <view class="zan-popup__container popup-example--center">
       <view class="popup-width">
         <view class='weui-grid__label' style='font-size:16px;color:#333'>{{courtName}}</view>
@@ -82,8 +81,19 @@
     <view class="zan-popup__mask" bindtap="toggleWeather"></view>
     <view class="zan-popup__container popup-example--center">
       <view class="popup-width">
-        <view class='weui-grid__label' style='font-size:16px;color:#333'>一周天气</view>
-        
+        <view class='weui-grid__label' style='font-size:16px;color:#333;margin-bottom:40rpx'>一周天气</view>
+        <scroll-view scroll-x style='white-space: nowrap;height:80%' class='score-x'>
+          <block wx:for="{{weathers}}" wx:key="*this">
+            <view class='weather-content'>
+              <view class='weui-grid__label text-size-16' style='text-align:left;margin-top:0'>{{item.date}}</view>
+              <view class='weui-grid__label text-size-14' style='text-align:left'>{{'天气： '+item.type}}</view>
+              <view class='weui-grid__label text-size-14' style='text-align:left'>
+                {{'温度： '+item.low+'~'+item.high}}</view>
+              <view class='weui-grid__label text-size-14' style='text-align:left'>{{'风力： '+item.fengli}}</view>
+              <view class='weui-grid__label text-size-14' style='text-align:left'>{{'风向： '+item.fengxiang}}</view>
+            </view>
+          </block>
+        </scroll-view>
       </view>
     </view>
   </view>

@@ -4,6 +4,7 @@ var http = require("http.js");
 //app.js
 App({
   onLaunch: function () {
+    // wx.clearStorage();
     var that = this;
     wx.getSystemInfo({
       success: function (res) {

@@ -44,7 +44,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          leftPosition: 50 - (3500 / ((res.windowWidth*0.9 - 30) / (that.data.players.length))) + '%'
+          leftPosition: 50 - (3600 / ((res.windowWidth*0.9 - 30) / (that.data.players.length))) + '%'
         });
       }
     });

@@ -71,6 +71,20 @@ Page({
       }
     })
   },
+  //查询天气
+  queryWeather: function () {
+    var that = this;
+    http.postRequest({
+      url: "weather/detail",
+      params: { city: this.data.city },
+      // msg: "加载中....",
+      success: res => {
+        that.setData({
+          weathers: res.data.forecast
+        })
+      }
+    }, false);
+  },
   //球场列表
   getCourts: function (e) {
     var that = this;
@@ -100,10 +114,14 @@ Page({
     }, false);
   },
   //一周天气情况：
-  toggleWeather:function(){
+  toggleWeather:function(e){
     this.setData({
-      showWeather: !this.data.showWeather
-    })
+      showWeather: !this.data.showWeather,
+      city: e.currentTarget.id
+    });
+    if (this.data.showWeather){
+      this.queryWeather();
+    }
   },
   //场地弹框
   toggleCourt:function(e){

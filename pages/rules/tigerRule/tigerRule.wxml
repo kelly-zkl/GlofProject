@@ -16,36 +16,23 @@
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">设置老虎</view>
       </view>
-      <radio-group bindchange="radioChange" class="weui-flex" style="padding:30rpx 0px">
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户1</view>
-          <radio class="weui-check" color="#66CC99" checked='true'/>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户2</view>
-          <radio class="weui-check" color="#66CC99"/>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户3</view>
-          <radio class="weui-check" color="#66CC99"/>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户4</view>
-          <radio class="weui-check" color="#66CC99"/>
-        </view>
+      <radio-group class="weui-flex" style="padding:30rpx 0px" bindchange="changeTiger">
+        <block wx:for="{{players}}" wx:key="*this" wx:for-index="idx">
+          <view class="weui-flex__item">
+            <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+            <view class="weui-grid__label text-size-13">{{item.name}}</view>
+            <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'/>
+          </view>
+        </block>
       </radio-group>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">分类</view>
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
-            <text class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="douChange" >比洞</text>
-            <text class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="douChange" >比杆</text>
+            <text class="tui-tabbar-cell {{radioType == 5 ? 'tui-active' : ''}}"
+              data-id="5" bindtap="douChange">比洞</text>
+            <text class="tui-tabbar-cell {{radioType == 6 ? 'tui-active' : ''}}"
+              data-id="6" bindtap="douChange">比杆</text>
           </view>
         </view>
       </view>
@@ -54,11 +41,11 @@
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioDing == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="dingChange" >顶洞过</text>
+              data-id="0" bindtap="dingChange">顶洞过</text>
             <text class="tui-tabbar-cell {{radioDing == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="dingChange" >顶洞+1</text>
+              data-id="1" bindtap="dingChange">下洞+1</text>
             <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
-              data-id="2" bindtap="dingChange" >顶洞翻倍</text>
+              data-id="2" bindtap="dingChange">顶洞翻倍</text>
           </view>
         </view>
       </view>
@@ -67,15 +54,17 @@
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioShou == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="shouChange" >赢洞全收</text>
+              data-id="0" bindtap="shouChange">赢洞全收</text>
             <text class="tui-tabbar-cell {{radioShou == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="shouChange" >帕鸟鹰全收</text>
+              data-id="1" bindtap="shouChange">帕1鸟2鹰全收</text>
           </view>
         </view>
       </view>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">避开地雷</view>
-        <view class="weui-cell__ft"><switch color='#66CC99'></switch></view>
+        <view class="weui-cell__ft">
+          <switch color='#66CC99' bindchange="avoidSet" checked="{{avoid}}"></switch>
+        </view>
       </view>
     </view>
   </view>

@@ -5,7 +5,7 @@
       <block wx:for="{{gameDetail.players}}" wx:key="*this" wx:for-index="idx">
         <view class="weui-flex__item">
           <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
-          <view class="weui-grid__label">{{item.name}}</view>
+          <view class="weui-grid__label text-size-13">{{item.name}}</view>
           <checkbox class="weui-check" checked='true' style='left:{{leftPosition}}' value="{{idx}}"/>
         </view>
       </block>

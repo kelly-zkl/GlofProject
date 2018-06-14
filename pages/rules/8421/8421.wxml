@@ -17,30 +17,32 @@
         <view class="weui-cell__bd">分组</view>
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
-            <text class="tui-tabbar-cell {{radioGroup == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="groupChange" >固拉</text>
-            <text class="tui-tabbar-cell {{radioGroup == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="groupChange" >乱拉</text>
+            <text class="tui-tabbar-cell {{radioGroup == 3 ? 'tui-active' : ''}}"
+              data-id="3" bindtap="groupChange">固拉</text>
+            <text class="tui-tabbar-cell {{radioGroup == 4 ? 'tui-active' : ''}}"
+              data-id="4" bindtap="groupChange">乱拉</text>
           </view>
         </view>
       </view>
-      <view class="weui-label text-size-12" style="padding-left:30rpx;color:#aaa">拖动头像进行分组</view>
-      <view class="weui-flex" style="padding:30rpx 0px">
+      <!-- <view class="weui-label text-size-12" style="padding-left:30rpx;color:#aaa">拖动头像进行分组</view> -->
+      <view class="weui-flex" style="padding:30rpx 0px" bindtap='toggleGroup'>
         <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户1</view>
+          <image class="weui-grid__icon" src="{{groupA1.avatarUrl}}"/>
+          <view class="weui-grid__label text-size-13">{{groupA1.name}}</view>
+        </view>
+        <view class="weui-grid__label text-size-12">A组</view>
+        <view class="weui-flex__item">
+          <image class="weui-grid__icon" src="{{groupA2.avatarUrl}}"/>
+          <view class="weui-grid__label text-size-13">{{groupA2.name}}</view>
         </view>
         <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户2</view>
+          <image class="weui-grid__icon" src="{{groupB1.avatarUrl}}"/>
+          <view class="weui-grid__label text-size-13">{{groupB1.name}}</view>
         </view>
+        <view class="weui-grid__label text-size-12">B组</view>
         <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户3</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户4</view>
+          <image class="weui-grid__icon" src="{{groupB2.avatarUrl}}"/>
+          <view class="weui-grid__label text-size-13">{{groupB2.name}}</view>
         </view>
       </view>
       <view class="weui-cell text-size-14">
@@ -62,48 +64,33 @@
       </view>
       <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
         <view class="weui-flex__item"></view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户1</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户2</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户3</view>
-        </view>
-        <view class="weui-flex__item">
-          <image class="weui-grid__icon" src="../../../images/pic_160.png" />
-          <view class="weui-grid__label">用户4</view>
-        </view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item">
+            <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+            <view class="weui-grid__label text-size-13">{{item.name}}</view>
+          </view>
+        </block>
       </view>
-      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
-        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="weui-grid__label">0</view>
-        </view>
+      <view class="weui-flex" style="padding:0 0 30rpx 0" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='color:#888;height:60rpx;line-height:60rpx;text-align:center'>
+          让总分</view>
+        <block wx:for="{{players}}" wx:key="*this">
+          <view class="weui-flex__item" style='height:60rpx;line-height:60rpx'>
+            <input class='weui-input score' type="number" bindinput='scoreChange' id="{{index}}"
+              maxlength='5' value="{{item.score}}"></input>
+          </view>
+        </block>
       </view>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">顶洞</view>
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioDing == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="dingChange" >顶洞过</text>
+              data-id="0" bindtap="dingChange">顶洞过</text>
             <text class="tui-tabbar-cell {{radioDing == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="dingChange" >顶洞+1</text>
+              data-id="1" bindtap="dingChange">下洞+1</text>
               <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
-              data-id="2" bindtap="dingChange" >顶洞翻倍</text>
+              data-id="2" bindtap="dingChange">顶洞翻倍</text>
           </view>
         </view>
       </view>
@@ -112,9 +99,9 @@
         <view class="weui-cell__ft">
           <view class="tui-tabbar-group">
             <text class="tui-tabbar-cell {{radioShou == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="shouChange" >赢洞全收</text>
+              data-id="0" bindtap="shouChange">赢洞全收</text>
             <text class="tui-tabbar-cell {{radioShou == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="shouChange" >帕鸟鹰全收</text>
+              data-id="1" bindtap="shouChange">帕1鸟2鹰全收</text>
           </view>
         </view>
       </view>
@@ -142,5 +129,24 @@
   <view class="weui-footer weui-footer_fixed-bottom" 
     style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
     <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='saveSet'>保存设置</button>
+  </view>
+  <!-- 分组 -->
+  <view class="zan-popup {{showGroup ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleGroup"></view>
+    <view class="zan-popup__container">
+      <view class="popup-width">
+        <view class='weui-grid__label' style='font-size:16px;color:#333'>选择分组</view>
+        <checkbox-group class="weui-flex" style="padding:30px 0px" bindchange="chooseGroup">
+          <block wx:for="{{players}}" wx:key="*this" wx:for-index="idx">
+            <view class="weui-flex__item s">
+              <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
+              <view class="weui-grid__label text-size-13">{{item.name}}</view>
+              <checkbox class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
+                checked='{{item.checked}}'/>
+            </view>
+          </block>
+        </checkbox-group>
+      </view>
+    </view>
   </view>
 </view>

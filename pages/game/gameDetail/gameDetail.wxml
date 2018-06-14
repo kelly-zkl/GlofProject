@@ -37,7 +37,7 @@
             <view class="weui-media-box__info text-size-14" style='display: flex;align-items: center;color:#fff;margin-top:10px'>
               <image src="../../../images/icon_weather_white.png"
               style='display:inline-block;width:18px;height:18px;margin-right:2px'/>
-              天气
+              {{weather}}
             </view>
           </view>
           <view class='weui-cell__ft'>
@@ -133,7 +133,7 @@
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="togglePopup"></view>
     <view class="zan-popup__container">
-      <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex;padding:20rpx 0 0 0" >
+      <scroll-view scroll-x="true" style="white-space: nowrap; display: flex;padding:20rpx 0 0 0" >
         <view style="width: 120rpx; height: 120rpx; display: inline-block"
           wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx" data-id='{{idx}}' bindtap='holeChange'
           class="{{activeHole == idx ? 'hole-on' : 'hole-off'}}">
@@ -156,9 +156,9 @@
                 <view class="tui-gallery-list">
                   <view class="tui-number-group">
                     <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'
-                    data-num='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'>-</view>
+                      data-num='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'>-</view>
                     <input class="tui-number-cell in" type="number" bindblur='numberChange'
-                    value='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'></input>
+                      value='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'></input>
                     <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'
                       data-num='{{gameDetail.userEPoles[activeHole][index]}}' data-idx='{{index}}'>+</view>
                   </view>

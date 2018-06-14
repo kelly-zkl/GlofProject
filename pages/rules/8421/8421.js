@@ -1,4 +1,8 @@
 
+var http = require("../../../http.js");
+var util = require('../../../utils/util.js');
+const app = getApp();
+
 Page({
 
   /**
@@ -8,11 +12,16 @@ Page({
     number1: 1,
     radioDing: 0,
     radioShou: 0,
-    radioGroup: 0,
+    radioGroup: 3,
     radioBao: 0,
     radioDeduct:0,
+    showGroup:false,
     handicap: true,
-    avoid: true
+    avoid: true,
+    groupA1:{},
+    groupA2:{},
+    groupB1:{},
+    groupB2:{}
   },
 
   /**
@@ -21,6 +30,10 @@ Page({
   onLoad: function (options) {
     var that = this;
     var arr = JSON.parse(options.player);
+    (arr).map(function (item) {
+      item.score = 0;
+      item.checked = false;
+    })
     that.setData({
       gameId: options.id,
       // ruleId: options.ruleId,
@@ -37,20 +50,66 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          leftPosition: 50 - (3500 / ((res.windowWidth * 0.9 - 30) / (that.data.players.length))) + '%'
+          leftPosition: 50 - (3600 / ((res.windowWidth * 0.9 - 30) / (that.data.players.length))) + '%'
         });
       }
     });
+    that.setData({
+      groupA1: arr[0],
+      groupA2: arr[1],
+      groupB1: arr[2],
+      groupB2: arr[3]
+    })
   },
-  //保存设置
-  saveSet: function () {
-
+  //让总分
+  scoreChange: function (e) {
+    var arr = this.data.players;
+    arr[e.currentTarget.id].score = e.detail.value;
+    this.setData({
+      players: arr
+    })
   },
   //分组
   groupChange: function (e) {
     this.setData({
       radioGroup: e.currentTarget.dataset.id
     })
+  },
+  //选择分组的人数
+  toggleGroup:function(){
+    if (this.data.radioGroup == 4) {//乱拉
+      var arry = this.data.players;
+      (arry).map(function (item) {
+        item.checked = false;
+      })
+      this.setData({
+        players: arry,
+        showGroup: !this.data.showGroup
+      })
+    }
+  },
+  chooseGroup: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    var len = e.detail.value.length;
+    var arry = this.data.players;
+
+    if (len == 2) {
+      this.setData({
+        groupA1: arry[e.detail.value[0]],
+        groupA2: arry[e.detail.value[1]]
+      })
+      var newArr = [];
+      for (let i = 0, len = arry.length; i < len; i++) {
+        if (arry[i].userId != this.data.groupA1.userId && arry[i].userId != this.data.groupA2.userId){
+          newArr.push(arry[i])
+        }
+      }
+      this.setData({
+        groupB1: newArr[0],
+        groupB2: newArr[1],
+        showGroup: false
+      })
+    }
   },
   //扣分方式
   deductChange:function(e){
@@ -87,5 +146,39 @@ Page({
     this.setData({
       avoid: e.detail.value
     })
+  },
+  //保存设置
+  saveSet: function () {
+    var that = this;
+    var spread = {};
+    var pkPlayers = [];
+    (that.data.players).map(function (item, idx) {
+      spread[item.userId] = item.score;
+      pkPlayers[idx] = item.userId;
+    })
+
+    if (!that.data.number1) {
+      wx.showToast({ title: '请输入基本单位', icon: 'none', duration: 1500 });
+      return;
+    }
+    http.postRequest({
+      url: "match/pkRuleAdd",
+      params: {
+        matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleDTL: {
+          modeName: '8421', thgMode: that.data.radioShou, spread: spread, mode: 31,
+          graUnit: that.data.number1, ups: that.data.avoid, hasSpread: that.data.handicap,
+          thMode: that.data.radioDing, bhMode: that.data.radioBao, deduct: that.data.radioDeduct,
+          pkPlayers: pkPlayers, classify: that.data.radioGroup, g1u1: that.data.groupA1.userId,
+          g1u2: that.data.groupA2.userId, g2u1: that.data.groupB1.userId, g2u2: that.data.groupB2.userId
+        }
+      },
+      msg: "加载中...",
+      success: res => {
+        wx.showToast({ title: '设置成功', icon: 'info', duration: 1000 })
+        setTimeout(function () {
+          wx.navigateBack()
+        }, 1000)
+      }
+    }, true);
   }
 })

@@ -24,43 +24,43 @@
         <block wx:for="{{players}}" wx:key="*this">
           <view class="weui-flex__item">
             <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
-            <view class="weui-grid__label">{{item.name}}</view>
+            <view class="weui-grid__label text-size-13">{{item.name}}</view>
           </view>
         </block>
       </view>
-      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
-        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>让总分</view>
+      <view class="weui-flex" style="padding:0 0 30rpx 0" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='color:#888;height:60rpx;line-height:60rpx;text-align:center'>让总分</view>
         <block wx:for="{{players}}" wx:key="*this">
-          <view class="weui-flex__item">
+          <view class="weui-flex__item" style='height:60rpx;line-height:60rpx;text-align:center'>
             <input class='weui-input score' type="number" bindinput='scoreChange'
-             maxlength='5' id="{{index}}" value="{{item.score}}"></input>
+              maxlength='5' id="{{index}}" value="{{item.score}}"></input>
           </view>
         </block>
       </view>
-      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
-        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>三杆洞</view>
+      <view class="weui-flex" style="padding:0 0 30rpx 0" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='color:#888;height:60rpx;line-height:60rpx;text-align:center'>三杆洞</view>
         <block wx:for="{{players}}" wx:key="*this">
-          <view class="weui-flex__item">
+          <view class="weui-flex__item" style='height:60rpx;line-height:60rpx'>
             <input class='weui-input score' type="number" bindinput='threeChange'
-             maxlength='5' id="{{index}}" value="{{item.three}}"></input>
+              maxlength='5' id="{{index}}" value="{{item.three}}"></input>
           </view>
         </block>
       </view>
-      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
-        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>四杆洞</view>
+      <view class="weui-flex" style="padding:0 0 30rpx 0" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='color:#888;height:60rpx;line-height:60rpx;text-align:center'>四杆洞</view>
         <block wx:for="{{players}}" wx:key="*this">
-          <view class="weui-flex__item">
+          <view class="weui-flex__item" style='height:60rpx;line-height:60rpx'>
             <input class='weui-input score' type="number" bindinput='fourChange' 
-            maxlength='5' id="{{index}}" value="{{item.four}}"></input>
+              maxlength='5' id="{{index}}" value="{{item.four}}"></input>
           </view>
         </block>
       </view>
-      <view class="weui-flex" style="padding:30rpx 0px" wx:if="{{handicap}}">
-        <view class="weui-flex__item text-size-13" style='text-align:center;color:#888'>五杆洞</view>
+      <view class="weui-flex" style="padding:0 0 30rpx 0" wx:if="{{handicap}}">
+        <view class="weui-flex__item text-size-13" style='color:#888;height:60rpx;line-height:60rpx;text-align:center'>五杆洞</view>
         <block wx:for="{{players}}" wx:key="*this">
-          <view class="weui-flex__item">
+          <view class="weui-flex__item" style='height:60rpx;line-height:60rpx'>
             <input class='weui-input score' type="number" bindinput='fiveChange'
-             maxlength='5' id="{{index}}" value="{{item.five}}"></input>
+              maxlength='5' id="{{index}}" value="{{item.five}}"></input>
           </view>
         </block>
       </view>
@@ -72,7 +72,7 @@
               data-id="0" bindtap="dingChange">顶洞过</text>
             <text class="tui-tabbar-cell {{radioDing == 1 ? 'tui-active' : ''}}"
               data-id="1" bindtap="dingChange">下洞+1</text>
-              <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
+            <text class="tui-tabbar-cell {{radioDing == 2 ? 'tui-active' : ''}}"
               data-id="2" bindtap="dingChange">顶洞翻倍</text>
           </view>
         </view>
@@ -84,7 +84,7 @@
             <text class="tui-tabbar-cell {{radioShou == 0 ? 'tui-active' : ''}}"
               data-id="0" bindtap="shouChange">赢洞全收</text>
             <text class="tui-tabbar-cell {{radioShou == 1 ? 'tui-active' : ''}}"
-              data-id="1" bindtap="shouChange">帕鸟鹰全收</text>
+              data-id="1" bindtap="shouChange">帕1鸟2鹰全收</text>
           </view>
         </view>
       </view>

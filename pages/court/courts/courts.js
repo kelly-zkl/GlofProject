@@ -70,6 +70,21 @@ Page({
       this.getCourts();
     }
   },
+  //查询天气
+  queryWeather: function () {
+    var that = this;
+    http.postRequest({
+      url: "weather/detail",
+      params: { city: this.data.gameDetail.city },
+      // msg: "加载中....",
+      success: res => {
+        that.setData({
+          weathers: res.data.forecast
+        })
+      }
+    }, false);
+  },
+  //获取球场列表
   getCourts:function(e){
     var that = this;
     http.postRequest({

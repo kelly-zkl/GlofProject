@@ -4,7 +4,7 @@
 }
 .popup-example--center {
   border-radius: 4px;
-  width: 80%;
+  width: 90%;
 }
 .popup-width{
   padding-top: 20rpx
@@ -42,4 +42,23 @@
 }
 .weui-flex__item.c:last-child{
    margin-right: 0;
+}
+
+/**天气*/
+.weather-content{
+  display: inline-block;
+  width: 56%;
+  border: 1rpx #e5e5e5 solid;
+  border-radius: 5px;
+  padding:20rpx 30rpx;
+  margin: 0 30rpx 40rpx 0
+}
+.weather-content:first-child{
+  margin: 0 30rpx 40rpx 30rpx
+}
+.score-x{
+  -webkit-overflow-scrolling: touch;width: 100%
+}
+.weui-grid__label.text-size-14{
+  margin-left: 20rpx
 }
