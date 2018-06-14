@@ -44,7 +44,7 @@ Page({
     });
     that.setData({
       groupId: options.id,
-      userId: app.globalData.userInfo.id
+      creatorId: app.globalData.userInfo.id
     });
 
     this.setData({

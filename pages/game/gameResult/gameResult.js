@@ -19,8 +19,7 @@ Page({
     otherData:[],
     otherArr:{},
     poleTime:[],
-    poleData:[],
-    poleArr:{}
+    poleData:[]
   },
   onLoad: function () {
     var that = this;
@@ -60,20 +59,22 @@ Page({
     if (num == 0){
       this.setData({
         holeTitle: '三杆洞单场平均杆',
-        poleData: this.data.poleArr.x3
+        poleData: this.poleArr.x3
       })
     } else if (num == 1){
       this.setData({
         holeTitle: '四杆洞单场平均杆',
-        poleData: this.data.poleArr.x4
+        poleData: this.poleArr.x4
       })
     }else{
       this.setData({
         holeTitle: '五杆洞单场平均杆',
-        poleData: this.data.poleArr.x5
+        poleData: this.poleArr.x5
       })
     }
-    this.holeCharts();
+    if (this.data.poleTime.length > 0) {
+      this.holeCharts();
+    }
   },
   //各类成绩指标
   typeChange:function(e){
@@ -84,7 +85,9 @@ Page({
     this.setData({
       otherData: this.data.otherArr[num]
     })
-    this.typesCharts();
+    if (this.data.otherTime.length > 0) {
+      this.typesCharts();
+    }
   },
   //总杆
   totalCharts:function(){

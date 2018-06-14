@@ -14,8 +14,8 @@
                   <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
                     <image class="weui-uploader__img" src="{{item.url}}" mode="aspectFill" wx:if="item.type==0"
                       style="display:block;width:{{imageWidth}};height:{{imageWidth}}"/>
-                    <video class="weui-uploader__img" src="{{item.url}}" loop="true" wx:if="item.type==1"
-                      style="display:block;width:{{imageWidth}};height:{{imageWidth}}"></video>
+                    <!-- <video class="weui-uploader__img" src="{{item.url}}" loop="true" wx:if="item.type==1"
+                      style="display:block;width:{{imageWidth}};height:{{imageWidth}}"></video> -->
                     <!-- <view class="weui-uploader__file-content">
                       <icon type="warn" size="23" color="#F43530"></icon>
                     </view>
@@ -44,7 +44,7 @@
         </view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd weui-cell_primary">隐私设置</view>
+        <view class="weui-cell__bd weui-cell_primary">私密</view>
         <view class="weui-cell__ft"><switch color="#66CC99" bindchange="privacySet" checked="{{check}}"></switch></view>
       </view>
       <navigator url='/pages/choose/chooseTeam/chooseTeam?type=1'
