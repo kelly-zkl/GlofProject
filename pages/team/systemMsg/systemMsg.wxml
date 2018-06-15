@@ -1,18 +1,36 @@
 <view class='page'>
-  <view class='page__bd' style='margin-bottom:15px'>
-    <block wx:for="{{msg}}" wx:key="*this">
+  <view class='page__bd'>
+    <view class="weui-panel weui-panel_access" wx:if="{{msg.length > 0}}">
+      <view class="weui-panel__bd" wx:for="{{msg}}" wx:key="*this">
+        <view class="weui-media-box weui-media-box_appmsg" style='border-bottom: 10px #e5e5e5 solid'>
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{item.sender==10000?'../../../images/icon_system.png':item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title weui-media-box__title_in-text text-size-15">
+              <view class='weui-flex' style='margin-top:0'>
+                <view class='weui-flex__item'>{{item.senderName?item.senderName:'消息'}}</view>
+                <view style='display:inline-block;text-align:right;font-size:13px' style='color:#999'>{{item.timeStr}}</view>
+              </view>
+            </view>
+            <view class="weui-media-box__desc text-size-13" style='color:#333'>{{item.content}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <block wx:for="{{msg}}" wx:key="*this">
       <view class='weui-flex view-head'>
-        <view class='weui-flex__item view-title' style='text-align:left'>消息</view>
+        <view class='weui-flex__item view-title' style='text-align:left'>{{item.senderName?item.senderName:'消息'}}</view>
         <view class='weui-flex__item'></view>
         <view class='weui-flex__item text-size-13' style='text-align:right;color:#999'>{{item.timeStr}}</view>
       </view>
       <view style='padding:0 30rpx 30rpx 30rpx;background:#fff' class='text-size-14'>
         {{item.content}}
       </view>
-      <!-- <view class='weui-flex view-group' wx:if="{{index!=0}}">
+       <view class='weui-flex view-group' wx:if="{{index!=0}}">
         <view class='weui-flex__item view-refuse' bindtap='refuse'>拒绝</view>
         <view class='weui-flex__item view-confirm' bindtap='confirm'>同意</view>
-      </view> -->
-    </block>
+      </view> 
+    </block> -->
   </view>
 </view>

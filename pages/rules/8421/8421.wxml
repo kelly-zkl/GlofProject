@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd' style='margin-bottom:90px'>
+  <view class='page__bd' style='padding-bottom:90px'>
     <view class="weui-cell" style='background:#fff;padding: 30rpx'>
       <view class="weui-cell__bd" style='color:#66CC99'>8421</view>
       <view class="weui-cell__ft" style='text-align:right'>
@@ -127,7 +127,7 @@
     </view>
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" 
-    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid;z-index:99999">
     <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='saveSet'>保存设置</button>
   </view>
   <!-- 分组 -->

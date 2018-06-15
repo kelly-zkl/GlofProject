@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd" style="margin-bottom:100px">
+  <view class="page__bd" style='padding-bottom:90px'>
     <view class="text-area">
       <textarea placeholder="请输入您的意见与建议" auto-focus style="height:100%;width:100%" maxlength="200" 
         bindinput="bindChange" bindconfirm="bindChange"/>

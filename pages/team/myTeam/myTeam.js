@@ -28,7 +28,8 @@ Page({
     members:[],
     chooseGames:[],
     chooseMembers:[],
-    text:''
+    text:'',
+    zsScore:''
   },
   onLoad: function (options) {
     var that = this;
@@ -265,7 +266,8 @@ Page({
     this.setData({
       showMember: !this.data.showMember,
       userId: e.currentTarget.id,
-      userName:e.currentTarget.dataset.name
+      userName:e.currentTarget.dataset.name,
+      userGroupId: e.currentTarget.dataset.us
     });
   },
   memberChange: function (e) {
@@ -311,7 +313,7 @@ Page({
       })
     } else if (id == 3) {//群发消息
       wx.navigateTo({
-        url: '/pages/team/sendMsg/sendMsg',
+        url: '/pages/team/sendMsg/sendMsg?id=' + that.data.groupId,
       })
     } else if (id == 6) {//退出球队
       that.quitTeam();
@@ -319,6 +321,41 @@ Page({
     that.setData({
       showManager: false
     });
+  },
+  //成员修改正式差点
+  saveScore:function(e){
+    if (e.currentTarget.id == 1){
+      if (this.data.zsScore.length==0){
+        wx.showToast({ title: '请输入正式差点', icon: 'info', duration: 1500 });
+      }else{
+        this.modifyScore();
+      }
+    }
+    this.setData({
+      showModify:false
+    })
+  },
+  inputScore:function(e){
+    this.setData({
+      zsScore: e.detail.value
+    });
+  },
+  modifyScore:function(){
+    var that = this;
+    http.postRequest({
+      url: "group/member/update",
+      params: {
+        userGroupId: that.data.userGroupId, uid: app.globalData.userInfo.id, golfHandicap: that.data.zsScore
+      },
+      msg: "修改中....",
+      success: res => {
+        wx.showToast({ title: '修改成功', icon: 'info', duration: 1500 });
+        that.setData({
+          zsScore:''
+        });
+        that.getMembers();
+      }
+    }, true);
   },
   //获取球队详情
   getGroupDetail:function(e){

@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd" style="margin-bottom:100px">
+  <view class="page__bd" style='padding-bottom:90px'>
     <view class="text-area">
       <textarea placeholder="想说点什么？" style="height:100%;width:100%" maxlength="200" 
         bindinput="bindChange" bindconfirm="bindChange"/>
@@ -34,7 +34,7 @@
     </view>
     <view class="weui-cells weui-cells_after-title text-size-14">
       <navigator url='/pages/choose/mulitGames/mulitGames'
-      hover-class="weui-cell_active" class="weui-cell weui-cell_access">
+      hover-class="weui-cell_active" class="weui-cell weui-cell_access s">
         <view class="weui-cell__bd weui-cell_primary">关联赛事</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
@@ -43,17 +43,21 @@
           class="zan-tag zan-tag--primary zan-tag--plain blue">{{'#'+item.matchName+'#'}}
         </view>
       </view>
-      <view class="weui-cell">
+      <view class="weui-cell s">
         <view class="weui-cell__bd weui-cell_primary">私密</view>
         <view class="weui-cell__ft"><switch color="#66CC99" bindchange="privacySet" checked="{{check}}"></switch></view>
       </view>
-      <navigator url='/pages/choose/chooseTeam/chooseTeam?type=1'
-      hover-class="weui-cell_active" class="weui-cell weui-cell_access">
+      <navigator url='/pages/choose/chooseTeam/chooseTeam?type=1' wx:if="{{isShow}}"
+      hover-class="weui-cell_active" class="weui-cell weui-cell_access s">
         <view class="weui-cell__bd weui-cell_primary">同步到球队主页</view>
         <view class="weui-cell__ft weui-cell__ft_in-access text-size-14"
           style='color:#007AFF'>
         {{chooseTeam.groupName}}</view>
       </navigator>
+      <view class="weui-cell s" wx:else>
+        <view class="weui-cell__bd weui-cell_primary">同步到球队主页</view>
+        <view class="weui-cell__ft text-size-14" style='color:#007AFF'>{{chooseTeam.groupName}}</view>
+      </view>
     </view>
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx;background:#fff">

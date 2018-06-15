@@ -16,3 +16,9 @@
 .zan-tag::after{
   border: none
 }
+
+.weui-cell.s{
+  height:30px;
+  min-height:30px;
+  line-height:30px
+}

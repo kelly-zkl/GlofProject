@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__pd">
+  <view class="page__pd" style='padding-bottom:90px'>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
         <view class="weui-cell weui-cell_access">
@@ -10,21 +10,22 @@
         </view>
         <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='toggleBom'>
           <view class="weui-cell__bd weui-cell_primary">埋地雷</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{boom}}</view>
         </view>
         <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='toggleJoin'>
           <view class="weui-cell__bd weui-cell_primary">让洞</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{rang}}</view>
         </view>
         <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='toggleStart'>
           <view class="weui-cell__bd weui-cell_primary">选择起始洞</view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{start}}</view>
         </view>
       </view>
     </view>
-    <view class="weui-panel weui-panel_access" style='margin-bottom:80px'>
+    <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd" wx:for="{{rules}}" wx:key="*this">
-        <view class="weui-media-box weui-media-box_text" bindlongtap='deleteRule' id="{{item.pkRuleId}}">
+        <view class="weui-media-box weui-media-box_text" bindlongtap='deleteRule'
+           id="{{item.pkRuleId}}" bindtap='modifyRule' data-name="{{item.modeName}}">
           <view class="weui-media-box__title  text-size-14">{{item.modeName}}</view>
           <view class="weui-media-box__desc">{{item.tagDes}}</view>
         </view>

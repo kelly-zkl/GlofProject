@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd" style='margin-bottom:80px'>
+  <view class="page__bd" style='padding-bottom:90px'>
     <view class="weui-cells weui-cells_after-title" style="margin-top:30rpx">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
         <view class="weui-cell weui-cell_input">
@@ -127,7 +127,7 @@
         <!-- <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">手动录入</view>
         </view>  -->
-        <view class="weui-cell weui-cell_access line" id="5" bindtap="popuChange">
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="popuChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
         </view>
       </view>

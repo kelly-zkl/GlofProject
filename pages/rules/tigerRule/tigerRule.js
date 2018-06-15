@@ -21,19 +21,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var arr = JSON.parse(options.player);
+    var arr = [];
+    if (options.player){
+      arr = JSON.parse(options.player);
+    }
     that.setData({
       gameId: options.id,
-      // ruleId: options.ruleId,
+      ruleId: options.ruleId ? options.ruleId:1,
       players: arr
     })
-
-    // wx.setNavigationBarTitle({
-    //   title: this.data.ruleId == 1 ? "比杆" : "修改规则"
-    // })
-    // if (this.data.ruleId != 1) {
-    //   this.getPkDetail();
-    // }
 
     wx.getSystemInfo({
       success: function (res) {
@@ -42,6 +38,43 @@ Page({
         });
       }
     });
+
+    wx.setNavigationBarTitle({
+      title: this.data.ruleId == 1 ? "打老虎" : "修改规则"
+    })
+    if (this.data.ruleId != 1) {
+      this.getPkDetail();
+    }
+  },
+  //pk详情
+  getPkDetail: function () {
+    var that = this;
+    http.postRequest({
+      url: "match/pkRuleDetail",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleId: that.data.ruleId },
+      msg: "加载中...",
+      success: res => {
+        that.setData({
+          pkDetail: res.data,
+          number1: res.data.pkRuleDTL.graUnit,
+          radioType: res.data.pkRuleDTL.classify,
+          handicap: res.data.pkRuleDTL.hasSpread,
+          radioDing: res.data.pkRuleDTL.thMode,
+          radioShou: res.data.pkRuleDTL.thgMode,
+          avoid: res.data.pkRuleDTL.ups,
+          players: res.data.pkRuleDTL.uspread,
+          ulandlord: res.data.pkRuleDTL.ulandlord,
+          tiger: res.data.pkRuleDTL.ulandlord.userId
+        });
+        wx.getSystemInfo({
+          success: function (res) {
+            that.setData({
+              leftPosition: 50 - (3600 / ((res.windowWidth - 30) / (that.data.players.length))) + '%'
+            });
+          }
+        });
+      }
+    }, false);
   },
   //设置老虎
   changeTiger:function(e){
@@ -98,22 +131,42 @@ Page({
       wx.showToast({ title: '请选择老虎', icon: 'none', duration: 1500 });
       return;
     }
-    http.postRequest({
-      url: "match/pkRuleAdd",
-      params: {
-        matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleDTL: {
-          modeName: '打老虎', thgMode: that.data.radioShou, landlord: that.data.tiger,
-          mode: 40, graUnit: that.data.number1, ups: that.data.avoid, classify: that.data.radioType,
-          pkPlayers: pkPlayers, thMode: that.data.radioDing
+    if (this.data.ruleId == 1) {//添加规则
+      http.postRequest({
+        url: "match/pkRuleAdd",
+        params: {
+          matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleDTL: {
+            modeName: '打老虎', thgMode: that.data.radioShou, landlord: that.data.tiger,
+            mode: 40, graUnit: that.data.number1, ups: that.data.avoid, classify: that.data.radioType,
+            pkPlayers: pkPlayers, thMode: that.data.radioDing
+          }
+        },
+        msg: "加载中...",
+        success: res => {
+          wx.showToast({ title: '设置成功', icon: 'info', duration: 1000 })
+          setTimeout(function () {
+            wx.navigateBack({ delta: 2 })
+          }, 1000)
         }
-      },
-      msg: "加载中...",
-      success: res => {
-        wx.showToast({ title: '设置成功', icon: 'info', duration: 1000 })
-        setTimeout(function () {
-          wx.navigateBack()
-        }, 1000)
-      }
-    }, true);
+      }, true);
+    } else {//修改规则
+      http.postRequest({
+        url: "match/pkRuleUpdate",
+        params: {
+          matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleDTL: {
+            modeName: '打老虎', thgMode: that.data.radioShou, landlord: that.data.tiger,
+            mode: 40, graUnit: that.data.number1, ups: that.data.avoid, classify: that.data.radioType,
+            pkPlayers: pkPlayers, thMode: that.data.radioDing, pkRuleId: that.data.pkDetail.pkRuleDTL.pkRuleId
+          }
+        },
+        msg: "修改中...",
+        success: res => {
+          wx.showToast({ title: '修改成功', icon: 'info', duration: 1000 })
+          setTimeout(function () {
+            wx.navigateBack()
+          }, 1000)
+        }
+      }, true);
+    }
   }
 })

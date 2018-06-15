@@ -35,8 +35,8 @@
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg t">
                   <image class="weui-media-box__thumb t" 
                   src="{{item.icon? item.icon:'../../../images/icon_game.png'}}"/>
-                  <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':''}}">
-                    {{item.joined==1?'已参赛':item.followerId?'已关注':''}}
+                  <view class="{{item.joined==1?'tip-join':item.followerId?'tip-follow':item.joined==2?'tip-follow':''}}">
+                    {{item.joined==1?'已参赛':item.followerId?'已关注':item.joined==2?'球童':''}}
                   </view>
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">

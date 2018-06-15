@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd' style='margin-bottom:90px'>
+  <view class='page__bd' style='padding-bottom:90px'>
     <view class="weui-cell" style='background:#fff;padding: 30rpx'>
       <view class="weui-cell__bd" style='color:#66CC99'>斗地主（3+1）</view>
       <view class="weui-cell__ft" style='text-align:right'>
@@ -119,7 +119,7 @@
               <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
               <view class="weui-grid__label text-size-13">{{item.name}}</view>
               <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
-              checked='{{idx==lanIndx}}' disabled="{{idx==beIndx}}"/>
+              checked='{{item.userId==landlord}}' disabled="{{item.userId==hatchet}}"/>
             </view>
           </block>
         </radio-group>
@@ -138,7 +138,7 @@
               <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
               <view class="weui-grid__label text-size-13">{{item.name}}</view>
               <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'
-                checked='{{idx==beIndx}}' disabled="{{idx==lanIndx}}"/>
+                checked='{{item.userId==hatchet}}' disabled="{{item.userId==landlord}}"/>
             </view>
           </block>
         </radio-group>

@@ -7,10 +7,12 @@ Page({
    */
   data: {
     files: [],
+    content:'',
     images:[],
     attach:[],
     showPopup:false,
     check:false,
+    isShow:true,
     picType:[],
     belongType:"",
     imageWidth:'0px',
@@ -45,7 +47,8 @@ Page({
     } else if (options.type == 'group'){
       that.setData({
         chooseTeam: {groupId: options.teamId, groupName: options.teanName},
-        belongId: options.teamId
+        belongId: options.teamId,
+        isShow:false
       });
     }
   },
@@ -191,8 +194,8 @@ Page({
       syncGroupId = that.data.chooseTeam.groupId;
     }
     
-    if (!that.data.content && !that.data.files) {
-      wx.showToast({title: '请输入动态',icon: 'none',duration: 1500});
+    if (that.data.content.length == 0 && that.data.files.length == 0) {
+      wx.showToast({title: '动态不能为空',icon: 'none',duration: 1500});
       return;
     }
     

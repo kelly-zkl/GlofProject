@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd'>
+  <view class='page__bd' style='{{activeIndex == 2?"padding-bottom:90px":""}}'>
     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
       <view class="weui-panel weui-panel_access">
         <view class="weui-panel__bd" wx:for='{{games}}' wx:key='*this'>

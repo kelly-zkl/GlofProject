@@ -1,4 +1,8 @@
-// pages/game/gameAuthority/gameAuthority.js
+
+const app = getApp();
+var http = require("../../../http.js");
+var util = require('../../../utils/util.js');
+
 Page({
 
   /**
@@ -44,5 +48,37 @@ Page({
     that.setData({
       talk: e.detail.value
     })
+  },
+  //获取设置详情
+  getSetData:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/caddie/join",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      msg: "操作中...",
+      success: res => {
+        // wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        this.setData({
+          userInfo: res.data,
+          gradePublic: res.data.gradePublic,
+          phonePublic: res.data.phonePublic,
+          wxNamePublic: res.data.wxNamePublic,
+          namePublic: res.data.namePublic
+        })
+      }
+    }, false);
+  },
+  //设置权限
+  setGame:function(){
+    var that = this;
+    http.postRequest({
+      url: "match/caddie/join",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      msg: "操作中...",
+      success: res => {
+        // wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        that.gameDetail();
+      }
+    }, false);
   }
 })

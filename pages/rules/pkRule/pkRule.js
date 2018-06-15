@@ -41,7 +41,7 @@ Page({
   onShow: function () {
     this.gameDetail();
     this.getRuleList();
-    this.getPkSet();
+    // this.getPkSet();
   },
   //埋地雷
   toggleBom() {
@@ -114,6 +114,44 @@ Page({
       url: '/pages/rules/setRule/setRule?id=' + this.data.gameId,
     })
   },
+  //跳转详情页
+  modifyRule:function(e){
+    var name = e.currentTarget.dataset.name;
+    var id = e.currentTarget.id;
+    if (name =='比杆'){
+      wx.navigateTo({
+        url: '/pages/rules/rodRule/rodRule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name =='比洞'){
+      wx.navigateTo({
+        url: '/pages/rules/holeRule/holeRule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name == '斗地主'){
+      wx.navigateTo({
+        url: '/pages/rules/doudeRule/doudeRule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name == '斗地主(3+1)') {
+      wx.navigateTo({
+        url: '/pages/rules/doude3Rule/doude3Rule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name == '拉斯') {
+      wx.navigateTo({
+        url: '/pages/rules/lassRule/lassRule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name == '8421') {
+      wx.navigateTo({
+        url: '/pages/rules/8421/8421?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name == '2分头尾肉') {
+      wx.navigateTo({
+        url: '/pages/rules/divideRule/divideRule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    } else if (name == '打老虎') {
+      wx.navigateTo({
+        url: '/pages/rules/tigerRule/tigerRule?id=' + this.data.gameId + '&ruleId=' + id,
+      })
+    }
+  },
   //比赛详情
   gameDetail: function (e) {
     var that = this;
@@ -125,6 +163,7 @@ Page({
         this.setData({
           gameDetail: res.data
         });
+        that.getPkSet();
       }
     }, false);
   },
@@ -137,6 +176,7 @@ Page({
       msg: "设置中...",
       success: res => {
         wx.showToast({ title: '设置成功', icon: 'info', duration: 1500})
+        that.getPkSet();
       }
     }, true);
   },
@@ -151,8 +191,32 @@ Page({
         that.setData({
           pkSet: res.data
         });
+        that.getIntro();
       }
     }, false);
+  },
+  //获取让洞/地雷/起始洞
+  getIntro:function(e){
+    var that = this;
+    var rang = '';
+    var boom = '';
+    var start = that.data.gameDetail.zones[that.data.pkSet.startPos].zname;
+    that.data.pkSet.bomHold.map(function(item,index){//地雷
+      if (item == 2){
+        boom = boom + that.data.gameDetail.zones[index].zname + ','
+      }
+    })
+    that.data.pkSet.joinHold.map(function (item, index) {//地雷
+      if (item == 0) {
+        rang = rang + that.data.gameDetail.zones[index].zname + ','
+      }
+    })
+
+    that.setData({
+      rang: rang.slice(0, rang.length-1),
+      boom: boom.slice(0, boom.length-1),
+      start: start
+    })
   },
   //获取规则列表
   getRuleList:function(){
@@ -214,7 +278,7 @@ Page({
     });
     this.gameDetail();
     this.getRuleList();
-    this.getPkSet();
+    // this.getPkSet();
   },
   /** 
    * 页面上拉触底事件的处理函数 

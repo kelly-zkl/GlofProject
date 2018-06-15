@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd'>
+  <view class='page__bd' style='padding-bottom:90px'>
     <view class="weui-cell" style='background:#fff;padding: 30rpx'>
       <view class="weui-cell__bd" style='color:#66CC99'>打老虎</view>
       <view class="weui-cell__ft" style='text-align:right'>
@@ -21,7 +21,8 @@
           <view class="weui-flex__item">
             <image class="weui-grid__icon" src="{{item.avatarUrl}}"/>
             <view class="weui-grid__label text-size-13">{{item.name}}</view>
-            <radio class="weui-check" color="#66CC99" value="{{idx}}" style='left:{{leftPosition}}'/>
+            <radio class="weui-check" color="#66CC99" value="{{idx}}"
+             style='left:{{leftPosition}}' checked='{{item.userId==tiger}}'/>
           </view>
         </block>
       </radio-group>

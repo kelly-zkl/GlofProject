@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd' style='margin-bottom:80px'>
+  <view class='page__bd' style='padding-bottom:90px'>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell text-size-14" style='margin-top:30rpx'>
         <view class="weui-cell__bd">教练类型</view>

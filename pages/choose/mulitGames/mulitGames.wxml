@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd' style='margin-bottom:80px'>
+  <view class='page__bd' style='padding-bottom:90px'>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd" wx:for='{{games}}' wx:key='*this'>
         <view class="weui-media-box weui-media-box_appmsg" bindtap="bindCheckbox" data-index="{{index}}"

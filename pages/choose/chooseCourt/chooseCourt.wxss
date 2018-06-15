@@ -14,7 +14,7 @@
 }
 .weui-grid__label.score{
   margin-top: 0;
-  padding: 20rpx 0
+  padding: 25rpx 0
 }
 
 .view-normal{

@@ -21,7 +21,7 @@ Page({
     size: 10,
     latitude: '',
     longitude: '',
-    zoneNames: ['A区', 'B区', 'C区', 'D区'],
+    zoneNames: [],
     courts: []
   },
 
@@ -153,6 +153,11 @@ Page({
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];   //当前页面
       var prevPage = pages[pages.length - 2];  //上1个页面
+
+      if (!this.data.front || !this.data.back || this.data.front < 0 || this.data.back<0){
+        wx.showToast({ title: '选择上/下半场', icon: 'none', duration: 1500 });
+        return
+      }
 
       var param = { courtId: this.data.courts[this.data.index].courtId,
         frontCourt: this.data.courts[this.data.index].zoneNames[this.data.front],

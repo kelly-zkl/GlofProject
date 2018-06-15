@@ -150,7 +150,8 @@
               <view class='weui-flex__item title'>备注</view>
             </view>
             <view wx:for="{{members}}" wx:key="*this" style='border-bottom:1rpx solid #e5e5e5'>
-              <view class='weui-flex' bindtap='toggleMember' id="{{item.user.id}}" data-name="{{item.user.name}}">
+              <view class='weui-flex' bindtap='toggleMember' id="{{item.user.id}}" data-name="{{item.user.name}}"
+                data-us="{{item.userGroupId}}">
                 <view class='weui-flex__item'>
                   <image class="weui-grid__icon s" src="{{item.user.avatarUrl?item.user.avatarUrl:'../../../images/icon_user.png'}}"/>
                   <view class="text-size-12" style='color:#888;text-align:center'>{{item.user.name}}</view>
@@ -274,7 +275,7 @@
         <view class="weui-cell weui-cell_access line" bindtap="togglePage">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">分享球队</view>
         </view>
-        <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange" wx:if="{{team.user.userId!=userId}}">
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="popuChange" wx:if="{{team.user.userId!=creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">退出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="4" bindtap="popuChange">
@@ -291,9 +292,10 @@
         <view class="weui-cell weui-cell_access line" id="1" bindtap="memberChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:left;padding:15rpx">{{userName}}</view>
         </view>
-        <!-- <view class="weui-cell weui-cell_access line" id="2" bindtap="toggleModify" wx:if="{{team.user.admin}}">
+        <view class="weui-cell weui-cell_access line" id="2" bindtap="toggleModify"
+          wx:if="{{team.user.admin||team.user.userId==creatorId||userId==creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">修改正式差点</view>
-        </view> -->
+        </view> 
         <view class="weui-cell weui-cell_access line" id="3" bindtap="memberChange" wx:if="{{team.user.admin}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">设为队长</view>
         </view>
@@ -324,17 +326,17 @@
         <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">导入比赛成员</view>
         </view>
-        <!-- <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange">
+        <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">群发消息</view>
         </view>
-        <view class="weui-cell weui-cell_access line" bindtap="toggleRefer">
+        <!-- <view class="weui-cell weui-cell_access line" bindtap="toggleRefer">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">计算参考差点</view>
         </view>
         <view class="weui-cell weui-cell_access line"bindtap="toggleSync">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">
           同步参考差点-正式差点</view>
-        </view> -->
-        <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange" wx:if="{{team.user.userId!=userId}}">
+        </view>  -->
+        <view class="weui-cell weui-cell_access line" id="6" bindtap="managerChange" wx:if="{{team.user.userId!=creatorId}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:15rpx">退出球队</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="7" bindtap="managerChange">
@@ -376,12 +378,12 @@
     <view class="zan-popup__container popup-example--center">
       <view class="popup-width">
         <view class='weui-grid__label' style='font-size:16px;color:#333'>修改正式差点</view>
-        <input class='weui-input score' type="number" maxlength="3"></input>
+        <input class='weui-input score' type="number" maxlength="5" bindinput="inputScore" style='text-align:center'></input>
         <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
-          <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid'>
+          <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid' bindtap='saveScore' id="0">
             <view class='weui-grid__label score' style='font-size:16px;color:#333'>取消</view>
           </view>
-          <view class='weui-flex__item'>
+          <view class='weui-flex__item' bindtap='saveScore' id="1">
             <view class='weui-grid__label score' style='font-size:16px;color:#75B5F1'>保存</view>
           </view>
         </view>

@@ -54,8 +54,8 @@ Page({
       this.addCadd();
     }else{
       this.gameDetail();
+      this.getCadds();
     }
-    this.getCadds();
   },
   togglePage:function(){
     this.setData({
@@ -81,6 +81,7 @@ Page({
       success: res => {
         // wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
         that.gameDetail();
+        that.getCadds();
       }
     }, false);
   },
@@ -167,9 +168,9 @@ Page({
         url: '/pages/game/createGame/createGame?id=' + this.data.gameId,
       })
     } else if (e.currentTarget.id == 2) {//设置赛事权限
-      // wx.navigateTo({
-      //   url: '/pages/game/gameScore/gameScore?id=' + this.data.gameId,
-      // })
+      wx.navigateTo({
+        url: '/pages/game/gameAuthority/gameAuthority?id=' + this.data.gameId,
+      })
     } else if (e.currentTarget.id == 3) {//设置赛事图片
       this.togglePic();
     } else if (e.currentTarget.id == 4) {//成绩填写记录

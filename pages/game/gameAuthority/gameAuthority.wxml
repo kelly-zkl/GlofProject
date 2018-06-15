@@ -19,12 +19,12 @@
           <switch color="#66CC99" bindchange="forbidFollowSet" checked="{{forbidFollow}}"></switch>
         </view>
       </view>
-      <view class="weui-cell">
+      <!-- <view class="weui-cell">
         <view class="weui-cell__bd">允许关注者发讨论区</view>
         <view class="weui-cell__ft">
           <switch color="#66CC99" bindchange="talkSet" checked="{{talk}}"></switch>
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
 </view>

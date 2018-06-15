@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd">
+  <view class="page__bd" style='padding-bottom:90px'>
     <view style="background:#fff;padding:20rpx;text-align:center">
       <image src="{{thumbUrl}}" mode="aspectFill" bindtap="togglePopup" class="team-icon"></image>
     </view>

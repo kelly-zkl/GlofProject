@@ -41,12 +41,14 @@
 }
 /**让分*/
 .weui-input.score{
+  /* position:absolute; */
   height:60rpx;
   line-height:60rpx;
   min-height: 60rpx;
   font-size: 14px;
   text-align: center;
-  z-index:1
+  z-index: 0;
+  /* display: flex;align-items: center;flex-direction: row;justify-content:center; */
 }
 /**多选*/
 .weui-flex__item.s{

@@ -1,5 +1,5 @@
 <view class='page'>
-  <view class='page__bd' style='margin-bottom:90px'>
+  <view class='page__bd' style='padding-bottom:90px'>
     <view class="weui-cell" style='background:#fff;padding: 30rpx'>
       <view class="weui-cell__bd" style='color:#66CC99'>拉斯</view>
       <view class="weui-cell__ft" style='text-align:right'>
@@ -47,7 +47,7 @@
       </view>
       <view class="weui-cell text-size-14">
         <view class="weui-cell__bd">PK计分方式</view>
-        <view class="weui-cell__ft">{{count}}分</view>
+        <!-- <view class="weui-cell__ft">{{count}}分</view> -->
       </view>
       <view class="tui-tabbar-group box" style='width:100%;text-align:center'>
         <text class="tui-tabbar-cell box {{good ? 'tui-active' : ''}}"
@@ -154,7 +154,7 @@
     </view>
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" 
-    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid;z-index:99999">
     <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='saveSet'>保存设置</button>
   </view>
   <!-- 分组 -->

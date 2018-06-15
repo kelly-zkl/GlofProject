@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd" style='margin-bottom:80px'>
+  <view class="page__bd" style='padding-bottom:90px'>
     <view class="weui-flex" style="background:#66CC99">
       <view style="padding-left:30rpx">
         <image src="../../../images/icon_game_code.png" style="width:26px;height:26px;display:inline-block"
@@ -98,17 +98,19 @@
         <view style='height:80rpx;width:80rpx;border-radius:40rpx;background:#66CC99;font-size:14px;color:#fff;text-align:center;line-height:80rpx'>添加</view>
       </view>
     </view>
-    <view class="weui-footer weui-footer_fixed-bottom" 
-      style="padding:30rpx 30rpx 20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom" 
+    style="padding:30rpx 30rpx 20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <view class='weui-flex'>
         <!-- <navigator url='/pages/game/gameChat/gameChat'>
-          <image src="../../../images/icon_game_chat.png" style="width:60rpx;height:60rpx"/>
+          <image src="../../../images/icon_game_chat.png" style="width:70rpx;height:70rpx"/>
         </navigator> -->
         <view style="width:60rpx;height:60rpx"></view>
         <view class="weui-flex__item" style="display: flex;align-items: center;flex-direction: row;justify-content:center">
           <view class="tui-tabbar-group">
             <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
-              data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">PK规则</view>
+              data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">PK</view>
             <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
               data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">. . .</view>
             <view class="tui-tabbar-cell {{radioType == 2 ? 'tui-active' : ''}}"
@@ -116,17 +118,17 @@
           </view>
         </view>
         <view bindtap='moreChange' id="1" hover-class="weui-cell_active">
-          <image src="../../../images/icon_game_dynamic.png" style="width:60rpx;height:60rpx"/>
+          <image src="../../../images/icon_game_dynamic.png" style="width:70rpx;height:70rpx"/>
         </view>
       </view>
     </view>
-  </view>
   <!--加入/关注比赛-->
   <view class="zan-popup {{showJoin ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask"></view>
     <view class="zan-popup__container" style="background:none">
       <button class="btn follow" bindtap="followGame">关注赛事</button>
-      <button class="btn join" bindtap="joinGame">加入比赛</button>
+      <button class="btn join" bindtap="joinGame" 
+        wx:if="{{gameDetail.players.length<gameDetail.playerLimit&&gameDetail.stat!=4}}">加入比赛</button>
     </view>
   </view>
   <!--记分-->
@@ -183,9 +185,9 @@
          wx:if="{{uid==gameDetail.creatorId&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">修改赛事</view>
         </view>
-        <!-- <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">
+        <!-- <view class="weui-cell weui-cell_access line" id="2" bindtap="managerChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事权限</view>
-        </view> -->
+        </view>  -->
         <view class="weui-cell weui-cell_access line" id="3" bindtap="managerChange"
          wx:if="{{uid==gameDetail.creatorId&&gameDetail.stat!=4}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">设置赛事图片</view>
@@ -200,7 +202,7 @@
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">关注比赛</view>
         </view>
         <view class="weui-cell weui-cell_access line" id="10" bindtap="managerChange"
-         wx:if="{{gameDetail.joined!=1&&gameDetail.stat!=4}}">
+         wx:if="{{gameDetail.joined!=1&&gameDetail.stat!=4&&gameDetail.players.length<gameDetail.playerLimit}}">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">加入比赛</view>
         </view>
         <!-- <view class="weui-cell weui-cell_access line" id="5" bindtap="managerChange" wx:if="{{uid==gameDetail.creatorId}}">

@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd" style='magin-bottom:90px'>
+  <view class="page__bd" style='padding-bottom:90px'>
     <view class="weui-cells weui-cells_after-title text-size-14" style="margin-top:30rpx">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">

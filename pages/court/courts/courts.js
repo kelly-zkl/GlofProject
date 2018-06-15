@@ -90,8 +90,8 @@ Page({
     http.postRequest({
       url: "court/query",
       params: {
-        page: that.data.page, size: that.data.size,
-        keyword: '', lng: that.data.longitude, lat: that.data.latitude
+        page: that.data.page, size: that.data.size, keyword: that.data.inputVal,
+        lng: that.data.longitude, lat: that.data.latitude
       },
       msg: "加载中....",
       success: res => {
