@@ -130,7 +130,7 @@
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <view class='weui-flex' style='margin-top:20rpx'>
-            <view class='text-manager'></view>
+            <view class='text-manager' wx:if="{{team.user.admin}}"></view>
             <view class='weui-flex__item' style="display: flex;align-items: center;flex-direction: row;justify-content:center">
               <view class="tui-tabbar-group">
                 <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
@@ -139,7 +139,7 @@
                   data-id="1" bindtap="douChange">成员头像</view>
               </view>
             </view>
-            <view class='text-manager' bindtap='toggleManager'>管理成员</view>
+            <view class='text-manager' bindtap='toggleManager' wx:if="{{team.user.admin}}">管理成员</view>
           </view>
           <view wx:if="{{radioType == 0}}">
             <view class='weui-flex' style='border:1rpx solid #e5e5e5;background:#EEE'>
@@ -181,7 +181,7 @@
                       <view class="weui-uploader__files">
                         <block wx:for="{{members}}" wx:key="*this">
                           <view class="weui-uploader__file" bindtap='toggleMember'
-                          id="{{item.user.id}}" data-name="{{item.user.name}}">
+                          id="{{item.user.id}}" data-name="{{item.user.name}}" data-us="{{item.userGroupId}}">
                             <image class="weui-uploader__img" src="{{item.user.avatarUrl?item.user.avatarUrl:'../../../images/icon_user.png'}}" 
                               style="display:block;width:{{userWidth}};height:{{userWidth}};border-radius:4px"/>
                           </view>
@@ -378,7 +378,8 @@
     <view class="zan-popup__container popup-example--center">
       <view class="popup-width">
         <view class='weui-grid__label' style='font-size:16px;color:#333'>修改正式差点</view>
-        <input class='weui-input score' type="number" maxlength="5" bindinput="inputScore" style='text-align:center'></input>
+        <input class='weui-input score' type="number" maxlength="5" bindinput="inputScore"
+           style='text-align:center' value='{{zsScore}}'></input>
         <view class='weui-flex score' style='border-top:1rpx #e5e5e5 solid'>
           <view class='weui-flex__item' style='border-right:1rpx #e5e5e5 solid' bindtap='saveScore' id="0">
             <view class='weui-grid__label score' style='font-size:16px;color:#333'>取消</view>

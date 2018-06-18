@@ -23,7 +23,8 @@
   border: 2rpx solid #66CC99;
   color: #66CC99;
   border-radius: 8rpx;
-  vertical-align:middle
+  vertical-align:middle;
+  margin:0
 }
 
 .zan-tag{display:inline-block;position:relative;box-sizing:border-box;line-height: 60rpx;border-radius: 30rpx;padding:0 30rpx;font-size:14px;background:#c9c9c9;text-align:center;color:#fff;vertical-align:middle}

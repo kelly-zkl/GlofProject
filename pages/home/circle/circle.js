@@ -98,9 +98,6 @@ Page({
           wx.hideNavigationBarLoading(); //完成停止加载
           wx.stopPullDownRefresh(); //停止下拉刷新
         }
-        that.setData({
-          follows: res.data.content
-        })
         if (that.data.followPage <= 1) {
           that.setData({
             follows: res.data.content

@@ -7,37 +7,28 @@
   line-height:30px
 }
 
-.tui-gallery-list{
-  position: relative;
-  height:30px;
-  line-height: 30px;
-  text-align: center;
-}
 .tui-number-group{
-  display: table;
-  table-layout: fixed;
-  height:30px;
-  line-height: 30px;
-  text-align: center;
-  width: 140px;
-  border-radius: 17px;
-  border: 1px solid #66CC99;
-  overflow: hidden;
-  color: #66CC99
+  border: 1rpx #6c9 solid;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 36rpx;
+  padding: 0 30rpx;
 }
 .tui-number-cell{
-  display: table-cell;
-  height:30px;
-  text-align: center;
-  line-height: 30px;
-  border-radius: 0;
+  display: inline-block;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #6c9;
   font-size: 14px;
+  vertical-align:middle
 }
-.tui-number-cell.in{
-  height:30px;
-  text-align: center;
-  line-height: 30px;
-  min-height: 30px;
+.weui-input.in{
+  height: 70rpx;
+  line-height: 70rpx;
+  min-height: 70rpx;
+  text-align: left;
+  margin-left: 30rpx;
+  width: 50px
 }
 /**让分*/
 .weui-input.score{

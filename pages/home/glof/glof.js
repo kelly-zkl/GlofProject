@@ -14,8 +14,7 @@ Page({
     latitude:'',
     refresh:false,
     page:1,
-    totalPage:1,
-    myTotalpage:2
+    totalPage:1
   },
   onLoad: function (options) {
     wx.showTabBarRedDot({
@@ -209,8 +208,9 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.activeIndex == 0) {//附近赛事
+      var num = (this.data.page <= this.data.totalPage ? this.data.page + 1 : this.data.page);
       this.setData({
-        page: this.data.page + 1
+        page: num
       });
       this.getGames();
     }

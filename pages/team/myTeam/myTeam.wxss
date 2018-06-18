@@ -78,10 +78,15 @@ page{
   font-size:14px;
   color:#66CC99;
 }
-
 .tui-tabbar-group{
   border-radius: 30rpx;
+  text-align: center;
   margin-bottom: 10px
+}
+.tui-tabbar-cell{
+  padding-left: 0;
+  padding-right: 0;
+  width: 180rpx
 }
 .weui-grid__icon.s{
   width: 60rpx;

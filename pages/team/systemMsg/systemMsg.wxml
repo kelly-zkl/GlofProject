@@ -7,10 +7,10 @@
             <image class="weui-media-box__thumb" src="{{item.sender==10000?'../../../images/icon_system.png':item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title weui-media-box__title_in-text text-size-15">
+            <view class="weui-media-box__title weui-media-box__title_in-text">
               <view class='weui-flex' style='margin-top:0'>
-                <view class='weui-flex__item'>{{item.senderName?item.senderName:'消息'}}</view>
-                <view style='display:inline-block;text-align:right;font-size:13px' style='color:#999'>{{item.timeStr}}</view>
+                <view class='weui-flex__item text-size-15'>{{item.senderName?item.senderName:'消息'}}</view>
+                <view style='display:inline-block;text-align:right;font-size:13px;color:#999'>{{item.timeStr}}</view>
               </view>
             </view>
             <view class="weui-media-box__desc text-size-13" style='color:#333'>{{item.content}}</view>

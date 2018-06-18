@@ -85,12 +85,12 @@
         <scroll-view scroll-x style='white-space: nowrap;height:80%' class='score-x'>
           <block wx:for="{{weathers}}" wx:key="*this">
             <view class='weather-content'>
-              <view class='weui-grid__label text-size-16' style='text-align:left;margin-top:0'>{{item.date}}</view>
-              <view class='weui-grid__label text-size-14' style='text-align:left'>{{'天气： '+item.type}}</view>
-              <view class='weui-grid__label text-size-14' style='text-align:left'>
+              <view class='weui-grid__label text-size-16'>{{item.date}}</view>
+              <view class='weui-grid__label text-size-14'>{{'天气： '+item.type}}</view>
+              <view class='weui-grid__label text-size-14'>
                 {{'温度： '+item.low+'~'+item.high}}</view>
-              <view class='weui-grid__label text-size-14' style='text-align:left'>{{'风力： '+item.fengli}}</view>
-              <view class='weui-grid__label text-size-14' style='text-align:left'>{{'风向： '+item.fengxiang}}</view>
+              <view class='weui-grid__label text-size-14'>{{'风力： '+item.fengli}}</view>
+              <view class='weui-grid__label text-size-14'>{{'风向： '+item.fengxiang}}</view>
             </view>
           </block>
         </scroll-view>

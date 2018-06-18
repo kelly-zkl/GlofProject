@@ -60,5 +60,12 @@
   -webkit-overflow-scrolling: touch;width: 100%
 }
 .weui-grid__label.text-size-14{
+  text-align:left;
   margin-left: 20rpx
+}
+.weui-grid__label.text-size-16{
+  font-size: 16px;
+  text-align:left;
+  margin-top:0;
+  color:#6c9
 }

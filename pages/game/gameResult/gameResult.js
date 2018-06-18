@@ -12,6 +12,7 @@ Page({
     sliderLeft: 0,
     scoreType:0,
     holeType:0,
+    titles: ['三杆洞单场平均杆', '四杆洞单场平均杆', '五杆洞单场平均杆'],
     holeTitle:'三杆洞单场平均杆',
     totalTime:[],
     totalData:[],
@@ -54,25 +55,24 @@ Page({
   holeChange:function(e){
     var num = e.currentTarget.dataset.id;
     this.setData({
-      holeType: e.currentTarget.dataset.id
+      holeType: e.currentTarget.dataset.id,
+      holeTitle:this.data.titles[num]
     })
-    if (num == 0){
-      this.setData({
-        holeTitle: '三杆洞单场平均杆',
-        poleData: this.poleArr.x3
-      })
-    } else if (num == 1){
-      this.setData({
-        holeTitle: '四杆洞单场平均杆',
-        poleData: this.poleArr.x4
-      })
-    }else{
-      this.setData({
-        holeTitle: '五杆洞单场平均杆',
-        poleData: this.poleArr.x5
-      })
-    }
-    if (this.data.poleTime.length > 0) {
+  
+    if (this.data.poleTime.length > 0) {//有数据现实折线图
+      if (num == 0) {
+        this.setData({
+          poleData: this.poleArr.x3
+        })
+      } else if (num == 1) {
+        this.setData({
+          poleData: this.poleArr.x4
+        })
+      } else {
+        this.setData({
+          poleData: this.poleArr.x5
+        })
+      }
       this.holeCharts();
     }
   },

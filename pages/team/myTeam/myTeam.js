@@ -353,6 +353,7 @@ Page({
         that.setData({
           zsScore:''
         });
+        that.getGroupDetail();
         that.getMembers();
       }
     }, true);
@@ -581,6 +582,7 @@ Page({
       msg: "操作中...",
       success: res => {
         wx.showToast({ title: '设置成功', icon: 'info', duration: 1500 });
+        that.getGroupDetail();
         that.getMembers();
       }
     }, true);

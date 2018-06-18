@@ -101,25 +101,23 @@
     
   </view>
   <view class="weui-footer weui-footer_fixed-bottom" 
-    style="padding:30rpx 30rpx 20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
+    style="padding:20rpx 30rpx;background:#fff;border-top:1rpx #e5e5e5 solid">
       <view class='weui-flex'>
         <!-- <navigator url='/pages/game/gameChat/gameChat'>
-          <image src="../../../images/icon_game_chat.png" style="width:70rpx;height:70rpx"/>
+          <image src="../../../images/icon_game_chat.png" style="width:60rpx;height:60rpx"/>
         </navigator> -->
         <view style="width:60rpx;height:60rpx"></view>
         <view class="weui-flex__item" style="display: flex;align-items: center;flex-direction: row;justify-content:center">
           <view class="tui-tabbar-group">
             <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
               data-id="0" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">PK</view>
-            <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
+            <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}" style='font-weight:700;font-size:16px'
               data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1||caddie}}">. . .</view>
             <view class="tui-tabbar-cell {{radioType == 2 ? 'tui-active' : ''}}"
               data-id="2" bindtap="douChange">记分卡</view>
           </view>
         </view>
-        <view bindtap='moreChange' id="1" hover-class="weui-cell_active">
-          <image src="../../../images/icon_game_dynamic.png" style="width:70rpx;height:70rpx"/>
-        </view>
+        <image src="../../../images/icon_game_dynamic.png" style="width:60rpx;height:60rpx" bindtap='moreChange' id="1"/>
       </view>
     </view>
   <!--加入/关注比赛-->
