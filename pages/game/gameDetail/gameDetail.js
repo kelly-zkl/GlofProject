@@ -22,7 +22,8 @@ Page({
     activeHole: 0,
     scrowWidth:0,
     uid:'',
-    text:''
+    text:'',
+    parType:0
   },
   onLoad: function (options) {
     var that = this;
@@ -61,6 +62,18 @@ Page({
     this.setData({
       showPage: !this.data.showPage
     });
+  },
+  //切换分数类型
+  changeType: function () {
+    if (this.data.parType == 0) {
+      this.setData({
+        parType: 1
+      })
+    } else {
+      this.setData({
+        parType: 0
+      })
+    }
   },
   //获取页面二维码
   createQrCode: function (text) {
@@ -328,11 +341,13 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    if (this.data.gameDetail.stat == 2){
+    console.log(e);
+    var index = e.currentTarget.dataset.idx;
+    if (this.data.gameDetail.stat == 2 && index % 10 != 9){
       if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
         this.setData({
           showPopup: !this.data.showPopup,
-          activeHole: e.currentTarget.dataset.idx
+          activeHole: index
         });
       }
     }

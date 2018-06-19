@@ -1,20 +1,20 @@
 <view class='page'>
   <view class='page__bd'>
     <view class='weui-flex' style='padding:15px 10px 10px 10px'>
-      <view style="width:50px"></view> 
+      <view class="view-par" hidden='{{radioType == 1}}' bindtap='changeType'>{{parType==0?'总杆':'差杆'}}</view>
+      <view style="width:50px" wx:if="{{radioType == 1 && gameDetail.joined == 1}}"></view>
       <view class="weui-flex__item" style="display: flex;align-items: center;flex-direction: row;justify-content:center">
         <view class="tui-tabbar-group">
           <view class="tui-tabbar-cell {{radioType == 0 ? 'tui-active' : ''}}"
             data-id="0" bindtap="douChange">记分卡</view>
           <view class="tui-tabbar-cell {{radioType == 1 ? 'tui-active' : ''}}"
-            data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined == 1}}">PK成绩单</view>
+            data-id="1" bindtap="douChange" wx:if="{{gameDetail.joined==1||gameDetail.pkOpen}}">PK成绩单</view>
         </view>
       </view>
-      <navigator url='/pages/rules/pkRule/pkRule?id={{gameDetail.matchId}}' hidden='{{radioType == 0}}'
-       wx:if="{{gameDetail.joined == 1}}">
+      <view style="width:50px" wx:if="{{radioType == 0}}"></view>
+      <navigator url='/pages/rules/pkRule/pkRule?id={{gameDetail.matchId}}' wx:if="{{radioType == 1 && gameDetail.joined == 1}}">
         <view class="pk-rule">+PK</view>
       </navigator> 
-       <view style="width:50px" hidden='{{radioType == 1}}'></view> 
     </view>
     <view class="weui-tab__panel" style='padding-top:0'>
       <view class="weui-tab__content" hidden="{{radioType != 0}}">
@@ -30,15 +30,15 @@
         </view>
         <!-- top:140px 145-->
         <scroll-view scroll-y class="score-y" style="height: {{scrowHeight}}">
-          <view style="background:#fff;border-top:1rpx #e5e5e5 solid" 
-            wx:for='{{gameDetail.zones}}' wx:key="*this" wx:for-index="idx">
+          <view style="background:#fff;border-top:1rpx #e5e5e5 solid" wx:for-item="item"
+            wx:for='{{gameDetail.zones1}}' wx:key="*this" wx:for-index="idx">
             <view class='weui-flex' style='height:40px;line-height:40px'>
               <view class='cell' style='background:#66CC99;width:40px'>{{item.zname}}</view>
               <view class='cell' style='background:#66CCFF;width:40px'>{{item.par}}</view>
-              <block wx:for='{{gameDetail.userEPoles[idx]}}' wx:key='*this'>
-                <view class="weui-flex__item cell" bindtap='togglePopup' data-idx='{{idx}}'
-                  style='color:#343434'>
-                  {{item}}
+              <block wx:for='{{gameDetail.userEPoles[idx]}}' wx:key='*this' wx:for-item="score">
+                <view class="weui-flex__item cell" bindtap='togglePopup' data-idx='{{idx}}'>
+                  <view class='par-score' style="{{score-item.par<=-3?'background:#f60':score-item.par==-2?'background:#f90':score-item.par==-1?'background:#fc0':score-item.par==1?'background:#6CF':score-item.par==2?'background:#69F':score-item.par>=3?'background:#66F':''}}">
+                  {{parType==0?score:score-item.par}}</view>
                 </view>
               </block>
             </view>
@@ -54,7 +54,7 @@
           </view>
         </view>
       </view>
-      <view class="weui-tab__content" hidden="{{radioType != 1}}" wx:if="{{gameDetail.joined == 1}}">
+      <view class="weui-tab__content" hidden="{{radioType != 1}}" wx:if="{{gameDetail.joined==1||gameDetail.pkOpen}}">
         <scroll-view scroll-x class='ball-scrow'>
           <block wx:for='{{rules}}' wx:key="*this">
             <view class="weui-panel weui-panel_access ball-card {{ruleIdx==index?'ball-card-active':''}}" 
@@ -68,7 +68,7 @@
                     {{item.tagDes}}
                     </view>
                   </view>
-                  <view class="weui-cell__ft" wx:if="{{ruleIdx==index}}" bindtap='deleteRule' id="{{index}}">
+                  <view class="weui-cell__ft" wx:if="{{ruleIdx==index&&gameDetail.joined==1}}" bindtap='deleteRule' id="{{index}}">
                     <icon type="cancel" size="25" color="#fff"/>
                   </view>
                 </view>
@@ -92,7 +92,7 @@
             <view class='weui-flex' style='height:40px;line-height:40px'>
               <view class='cell' style='background:#66CC99;width:40px'>{{item.zname}}</view>
               <block wx:for='{{score.ueScores[idx]}}' wx:key='*this'>
-                <view class="weui-flex__item cell"style='color:#343434'>{{item}}</view>
+                <view class="weui-flex__item cell" style="{{item<0?'color:#F00':item>0?'color:#6c9':'color:#343434'}}">{{item}}</view>
               </block>
             </view>
           </view>

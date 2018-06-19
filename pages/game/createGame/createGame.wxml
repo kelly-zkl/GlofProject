@@ -42,11 +42,11 @@
                     <image class="weui-uploader__img" src="{{item.avatarUrl}}" mode="aspectFill"
                       style="display:block;width:{{imageWidth}};height:{{imageWidth}};border-radius:4px"/>
                     <icon class="weui-delete" type="clear" size="25" color="#66CC99" 
-                      bindtap='deleteMember' id="{{index}}" wx-if="{{item.id!=userId}}"/>
+                      bindtap='deleteMember' id="{{index}}" wx:if="{{item.id!=userId && gameId == 1}}"/>
                   </view>
                 </block>
               </view>
-              <view class="weui-uploader__input-box" wx:if="{{chooseMembers.length<number1}}"
+              <view class="weui-uploader__input-box" wx:if="{{chooseMembers.length < number1 && gameId == 1}}"
                 style="width:{{upWidth}};height:{{upWidth}}">
                 <view class="weui-uploader__input" bindtap="togglePopup"></view>
               </view>

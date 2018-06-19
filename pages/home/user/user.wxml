@@ -94,7 +94,7 @@
     </view> -->
     <view class="weui-cells weui-cells_after-title" style="margin:30rpx 0">
       <view class="weui-cells weui-cells_in-small-appmsg text-size-14">
-        <navigator url="/pages/userMsg/myPrivacy/myPrivacy?&id={{userInfo.id}}"
+        <navigator url="/pages/userMsg/myPrivacy/myPrivacy?id={{userInfo.id}}"
           hover-class="weui-cell_active"  class="weui-cell weui-cell_access">
           <view class="weui-cell__hd">
             <image src="../../../images/icon_setting.png" class="icon-size"/>

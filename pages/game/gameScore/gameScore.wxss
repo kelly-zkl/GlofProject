@@ -2,13 +2,28 @@
 page{
   background: #fff
 }
+.view-par{
+  color: #66CC99;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  width: 50px;
+}
+.view-par::after{
+  content: '';
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #66CC99; 
+  border-left: 10px solid transparent;
+}
 
 .pk-rule{
   color:#FF9900;
   border:1px #FF9900 solid;
   text-align: center;
-  height: 30px;
-  line-height: 30px;
+  margin-top: 2px;
+  height: 26px;
+  line-height: 26px;
   border-radius: 4px;
   font-size: 14px;
   width: 50px;
@@ -121,6 +136,16 @@ page{
   background: #F2F2F2;
   margin: 0 0 0 10px
 }
+/* .ball-card::after{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid red;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+} */
 .ball-card-active{
   background: #66CC99;
   color:#fff
@@ -141,4 +166,17 @@ page{
 /**position:fixed;left:0;bottom:40px;right:0 position:absolute;left:0;bottom:40px;right:0*/
 .score-y{
   margin-bottom: 40px;-webkit-overflow-scrolling: touch;width: 100%
+}
+
+/** 老鹰、小鸟、柏忌*/
+.par-score{
+  width: 70%;
+  height: 24px;
+  line-height: 24px;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  background: #ccc;
+  margin: 8px 15%;
+  font-size: 14px
 }

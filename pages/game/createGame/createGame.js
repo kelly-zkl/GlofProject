@@ -103,31 +103,37 @@ Page({
   },
   //人数
   prevNum() {
-    this.setData({
-      number1: this.data.number1 >= 4 ? 4 : this.data.number1 + 1
-    });
-    this.setData({
-      disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 4 ? false : true
-    });
+    if (this.data.gameId == 1) {//不能修改
+      this.setData({
+        number1: this.data.number1 >= 4 ? 4 : this.data.number1 + 1
+      });
+      this.setData({
+        disabled1: this.data.number1 !== 1 ? false : true,
+        disabled2: this.data.number1 !== 4 ? false : true
+      });
+    }
   },
   nextNum() {
-    this.setData({
-      number1: this.data.number1 <= 1 ? 1 : this.data.number1 - 1
-    });
-    this.setData({
-      disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 4 ? false : true
-    });
+    if (this.data.gameId == 1) {//不能修改
+      this.setData({
+        number1: this.data.number1 <= 1 ? 1 : this.data.number1 - 1
+      });
+      this.setData({
+        disabled1: this.data.number1 !== 1 ? false : true,
+        disabled2: this.data.number1 !== 4 ? false : true
+      });
+    }
   },
   numberChange:function(e){
-    this.setData({
-      number1: parseInt(e.detail.value) >= 4 ? 4 : parseInt(e.detail.value) <= 1 ? 1 : parseInt(e.detail.value)
-    });
-    this.setData({
-      disabled1: this.data.number1 !== 1 ? false : true,
-      disabled2: this.data.number1 !== 4 ? false : true
-    });
+    if (this.data.gameId == 1) {//不能修改
+      this.setData({
+        number1: parseInt(e.detail.value) >= 4 ? 4 : parseInt(e.detail.value) <= 1 ? 1 : parseInt(e.detail.value)
+      });
+      this.setData({
+        disabled1: this.data.number1 !== 1 ? false : true,
+        disabled2: this.data.number1 !== 4 ? false : true
+      });
+    }
   },
   //删除成员
   deleteMember:function(e){

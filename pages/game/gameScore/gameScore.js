@@ -24,7 +24,8 @@ Page({
     activeHole:0,
     scrowHeight:0,
     ruleIdx:0,
-    rules:[]
+    rules:[],
+    parType:0
   },
 
   /**
@@ -51,6 +52,18 @@ Page({
     this.gameDetail();
     this.getRuleList();
   },
+  //切换分数类型
+  changeType:function(){
+    if (this.data.parType == 0){
+      this.setData({
+        parType:1
+      })
+    }else{
+      this.setData({
+        parType: 0
+      })
+    }
+  },
   //PK规则、积分卡
   douChange: function (e) {
     this.setData({
@@ -68,11 +81,12 @@ Page({
   },
   //设置分数
   togglePopup(e) {
-    if (this.data.gameDetail.stat == 2) {
+    var index = e.currentTarget.dataset.idx;
+    if (this.data.gameDetail.stat == 2 && index % 9 != 0) {
       if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
         this.setData({
           showPopup: !this.data.showPopup,
-          activeHole: e.currentTarget.dataset.idx
+          activeHole: index
         });
       }
     }
