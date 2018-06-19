@@ -79,7 +79,7 @@
       </scroll-view>
       <view style="width: 60px; display: inline-block;text-align:center;position: absolute;right: 0">
         <view style='height: 120rpx;text-align:center'>
-          <view class="weui-grid__label" bindtap='changeType'>{{parType==0?'总分':'差分'}}</view>
+          <view class="weui-grid__label" bindtap='changeType'>{{parType==0?'总杆':'差杆'}}</view>
           <view class="weui-grid__label">{{parType==0?gameDetail.totalPole:''}}</view>
         </view>
         <block wx:for='{{gameDetail.userTPoles}}' wx:key='*this'>
