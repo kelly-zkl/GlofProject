@@ -3,6 +3,7 @@ page{
   background: #fff
 }
 .view-par{
+  position: relative;
   color: #66CC99;
   height: 30px;
   line-height: 30px;
@@ -10,6 +11,9 @@ page{
   width: 50px;
 }
 .view-par::after{
+  position: absolute;
+  bottom: 5px;
+  right: 0;
   content: '';
   width: 0;
   height: 0;
