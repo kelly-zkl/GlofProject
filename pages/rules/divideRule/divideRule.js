@@ -81,8 +81,8 @@ Page({
           number1: res.data.pkRuleDTL.graUnit,
           radioGroup: res.data.pkRuleDTL.classify,
           handicap: res.data.pkRuleDTL.hasSpread,
-          radioDing: res.data.pkRuleDTL.phMode,
-          radioShou: res.data.pkRuleDTL.phgMode,
+          radioDing: res.data.pkRuleDTL.thMode,
+          radioShou: res.data.pkRuleDTL.thgMode,
           radioBao: res.data.pkRuleDTL.bhMode,
           avoid: res.data.pkRuleDTL.ups,
           players: res.data.pkRuleDTL.uspread,
@@ -117,16 +117,14 @@ Page({
   },
   //选择分组的人数
   toggleGroup: function () {
-    if (this.data.radioGroup == 4) {//乱拉
-      var arry = this.data.players;
-      (arry).map(function (item) {
-        item.checked = false;
-      })
-      this.setData({
-        players: arry,
-        showGroup: !this.data.showGroup
-      })
-    }
+    var arry = this.data.players;
+    (arry).map(function (item) {
+      item.checked = false;
+    })
+    this.setData({
+      players: arry,
+      showGroup: !this.data.showGroup
+    })
   },
   chooseGroup: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
@@ -233,14 +231,18 @@ Page({
       wx.showToast({ title: '请输入基本单位', icon: 'none', duration: 1500 });
       return;
     }
+    if (that.data.count == 0) {
+      wx.showToast({ title: '请选择PK计分方式', icon: 'none', duration: 1500 });
+      return;
+    }
     if (this.data.ruleId == 1) {//添加规则
       http.postRequest({
         url: "match/pkRuleAdd",
         params: {
           matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleDTL: {
-            modeName: '2分头尾肉', phgMode: that.data.radioShou, spread: spread, mode: 32,
+            modeName: '2分头尾肉', thgMode: that.data.radioShou, spread: spread, mode: 32,
             graUnit: that.data.number1, ups: that.data.avoid, hasSpread: that.data.handicap,
-            phMode: that.data.radioDing, bhMode: that.data.radioBao, g2u2: that.data.groupB2.userId,
+            thMode: that.data.radioDing, bhMode: that.data.radioBao, g2u2: that.data.groupB2.userId,
             pkPlayers: pkPlayers, classify: that.data.radioGroup, g1u1: that.data.groupA1.userId,
             g1u2: that.data.groupA2.userId, g2u1: that.data.groupB1.userId,
             gradeG: that.data.good, gradeB: that.data.poor
@@ -259,9 +261,9 @@ Page({
         url: "match/pkRuleUpdate",
         params: {
           matchId: that.data.gameId, uid: app.globalData.userInfo.id, pkRuleDTL: {
-            modeName: '2分头尾肉', phgMode: that.data.radioShou, spread: spread, mode: 32,
+            modeName: '2分头尾肉', thgMode: that.data.radioShou, spread: spread, mode: 32,
             graUnit: that.data.number1, ups: that.data.avoid, hasSpread: that.data.handicap,
-            phMode: that.data.radioDing, bhMode: that.data.radioBao, g2u2: that.data.groupB2.userId,
+            thMode: that.data.radioDing, bhMode: that.data.radioBao, g2u2: that.data.groupB2.userId,
             pkPlayers: pkPlayers, classify: that.data.radioGroup, g1u1: that.data.groupA1.userId,
             g1u2: that.data.groupA2.userId, g2u1: that.data.groupB1.userId,
             gradeG: that.data.good, gradeB: that.data.poor, pkRuleId: that.data.pkDetail.pkRuleDTL.pkRuleId

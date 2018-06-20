@@ -57,6 +57,33 @@ Page({
   confirm:function(){
 
   },
+  //删除消息
+  deleteMsg:function(e){
+    var that = this;
+    var msgId = e.currentTarget.id;
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除该消息？',
+      success: function (res) {
+        if (res.confirm) {
+          http.postRequest({
+            url: "message/delete",
+            params: {
+              messageId: msgId, uid: app.globalData.userInfo.id
+            },
+            msg: "操作中...",
+            success: res => {
+              wx.showToast({ title: '删除成功', icon: 'info', duration: 1500 });
+              that.setData({
+                page: 1
+              });
+              that.getMsgList();
+            }
+          }, true);
+        }
+      }
+    })
+  },
   /**
    * 下拉刷新
    */

@@ -116,16 +116,14 @@ Page({
   },
   //选择分组的人数
   toggleGroup: function () {
-    if (this.data.radioGroup == 4) {//乱拉
-      var arry = this.data.players;
-      (arry).map(function (item) {
-        item.checked = false;
-      })
-      this.setData({
-        players: arry,
-        showGroup: !this.data.showGroup
-      })
-    }
+    var arry = this.data.players;
+    (arry).map(function (item) {
+      item.checked = false;
+    })
+    this.setData({
+      players: arry,
+      showGroup: !this.data.showGroup
+    })
   },
   chooseGroup: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
@@ -279,6 +277,10 @@ Page({
 
     if (!that.data.number1) {
       wx.showToast({ title: '请输入基本单位', icon: 'none', duration: 1500 });
+      return;
+    }
+    if (that.data.count == 0) {
+      wx.showToast({ title: '请选择PK计分方式', icon: 'none', duration: 1500 });
       return;
     }
     if (this.data.ruleId == 1) {//添加规则

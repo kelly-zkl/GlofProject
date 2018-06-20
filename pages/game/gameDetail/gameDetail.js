@@ -347,7 +347,7 @@ Page({
       if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
         this.setData({
           showPopup: !this.data.showPopup,
-          activeHole: index < 9 ? index : index - 1
+          activeHole: index
         });
       }
     }
@@ -398,6 +398,7 @@ Page({
   //保存设置的分数
   saveScore: function (e) {
     var that = this;
+    var holeIndx = that.data.activeHole < 9 ? that.data.activeHole : that.data.activeHole-1;
     var user = [];
     that.data.gameDetail.players.map(function (item,index) {
       var num = { userId: item.userId, pole: that.data.gameDetail.userEPoles[that.data.activeHole][index]};
@@ -406,7 +407,7 @@ Page({
     http.postRequest({
       url: "match/updatePole",
       params: {
-        matchId: that.data.gameId, index: that.data.activeHole, uid: app.globalData.userInfo.id,
+        matchId: that.data.gameId, index: holeIndx, uid: app.globalData.userInfo.id,
         players: user},
       msg: "加载中...",
       success: res => {

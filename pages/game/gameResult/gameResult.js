@@ -58,21 +58,21 @@ Page({
       holeType: e.currentTarget.dataset.id,
       holeTitle:this.data.titles[num]
     })
-  
+    if (num == 0) {//三杆洞
+      this.setData({
+        poleData: this.data.poleArr.x3
+      })
+    } else if (num == 1) {//四杆洞
+      this.setData({
+        poleData: this.data.poleArr.x4
+      })
+    } else {//五杆洞
+      this.setData({
+        poleData: this.data.poleArr.x5
+      })
+    }
+    
     if (this.data.poleTime.length > 0) {//有数据现实折线图
-      if (num == 0) {
-        this.setData({
-          poleData: this.poleArr.x3
-        })
-      } else if (num == 1) {
-        this.setData({
-          poleData: this.poleArr.x4
-        })
-      } else {
-        this.setData({
-          poleData: this.poleArr.x5
-        })
-      }
       this.holeCharts();
     }
   },

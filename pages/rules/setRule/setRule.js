@@ -33,7 +33,7 @@ Page({
       },
       {
         url: '../../../images/pic_160.png', name: '斗地主',
-        path: '/pages/rules/doudeRule/doudeRule?id=' + that.data.gameId, show: true
+        path: '/pages/rules/doudeRule/doudeRule?id=' + that.data.gameId, show: false
       },
       {
         url: '../../../images/pic_160.png', name: '斗地主（3+1）',
@@ -100,9 +100,13 @@ Page({
           item.show = false;
         }
       })
-    } else if (len == 4) {//4人可以选择全部
-      (arry).map(function (item) {
-        item.show = true;
+    } else if (len == 4) {//4人可以选择比杆、比洞、斗地主(3+1)、打老虎、拉斯、头尾肉、8421
+      (arry).map(function (item, index) {
+        if (index == 2){
+          item.show = false;
+        }else{
+          item.show = true;
+        }
       })
     }
 

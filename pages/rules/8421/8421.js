@@ -122,16 +122,14 @@ Page({
   },
   //选择分组的人数
   toggleGroup:function(){
-    if (this.data.radioGroup == 4) {//乱拉
-      var arry = this.data.players;
-      (arry).map(function (item) {
-        item.checked = false;
-      })
-      this.setData({
-        players: arry,
-        showGroup: !this.data.showGroup
-      })
-    }
+    var arry = this.data.players;
+    (arry).map(function (item) {
+      item.checked = false;
+    })
+    this.setData({
+      players: arry,
+      showGroup: !this.data.showGroup
+    })
   },
   chooseGroup: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)

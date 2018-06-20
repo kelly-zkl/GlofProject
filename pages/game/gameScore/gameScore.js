@@ -22,7 +22,6 @@ Page({
     disabled2: false,
     caddie:false,
     activeHole:0,
-    activScore: 0,
     scrowHeight:0,
     ruleIdx:0,
     rules:[],
@@ -43,15 +42,14 @@ Page({
           scrowHeight: res.windowHeight -145,
           scoreHeight: res.windowHeight - 215
         });
-        console.log(res.windowHeight);
-        console.log(that.data.scrowHeight);
-        console.log(that.data.scoreHeight);
+        // console.log(res.windowHeight);
+        // console.log(that.data.scrowHeight);
+        // console.log(that.data.scoreHeight);
       }
     }); 
   },
   onShow:function(){
     this.gameDetail();
-    this.getRuleList();
   },
   //切换分数类型
   changeType:function(){
@@ -70,29 +68,36 @@ Page({
     this.setData({
       radioType: e.currentTarget.dataset.id
     })
-    this.gameDetail();
-    this.getRuleList();
+    if (e.currentTarget.dataset.id == 0){
+      this.gameDetail();
+    }else{
+      this.getRuleList();
+    }
   },
   //选择洞
-  holeChange:function(e){
-    var num = e.currentTarget.dataset.id;
+  holeChange: function (e) {
+    console.log(e);
     this.setData({
-      activeHole: num,
-      activScore: num < 9 ? num : num + 1
+      activeHole: e.currentTarget.dataset.id
     });
   },
   //设置分数
   togglePopup(e) {
+    console.log(e);
     var index = e.currentTarget.dataset.idx;
-    if (this.data.gameDetail.stat == 2 && index % 9 != 0) {
+    if (this.data.gameDetail.stat == 2 && index % 10 != 9) {
       if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
         this.setData({
           showPopup: !this.data.showPopup,
-          activeHole: index < 9 ? index : index - 1,
-          activScore: index
+          activeHole: index
         });
       }
     }
+    // else {//未关注、未参赛
+    //   this.setData({
+    //     showJoin: true
+    //   });
+    // }
   },
   popuChange: function (e) {
     var that = this;
@@ -103,7 +108,7 @@ Page({
     var num = e.currentTarget.dataset.num;
     var idx = e.currentTarget.dataset.idx;
     num = (num >= 100 ? num : num + 1);
-    this.data.gameDetail.userEPoles[this.data.activScore][idx] = num;
+    this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
       gameDetail: this.data.gameDetail,
       disabled1: num !== 0 ? false : true,
@@ -114,7 +119,7 @@ Page({
     var num = e.currentTarget.dataset.num;
     var idx = e.currentTarget.dataset.idx;
     num = (num <= 0 ? num : num - 1);
-    this.data.gameDetail.userEPoles[this.data.activScore][idx] = num;
+    this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
       gameDetail: this.data.gameDetail,
       disabled1: num !== 0 ? false : true,
@@ -125,7 +130,7 @@ Page({
     var num = e.detail.value;
     var idx = e.currentTarget.dataset.idx;
     num = (parseInt(num) >= 100 ? 100 : parseInt(num) <= 0 ? 0 : parseInt(num));
-    this.data.gameDetail.userEPoles[this.data.activScore][idx] = num;
+    this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
       gameDetail: this.data.gameDetail,
       disabled1: num !== 0 ? false : true,
@@ -133,17 +138,18 @@ Page({
     });
   },
   //保存设置的分数
-  saveScore:function(e){
+  saveScore: function (e) {
     var that = this;
+    var holeIndx = that.data.activeHole < 9 ? that.data.activeHole : that.data.activeHole - 1;
     var user = [];
     that.data.gameDetail.players.map(function (item, index) {
-      var num = { userId: item.userId, pole: that.data.gameDetail.userEPoles[that.data.activScore][index] };
+      var num = { userId: item.userId, pole: that.data.gameDetail.userEPoles[that.data.activeHole][index] };
       user.push(num);
     })
     http.postRequest({
       url: "match/updatePole",
       params: {
-        matchId: that.data.gameId, index: that.data.activScore, uid: app.globalData.userInfo.id,
+        matchId: that.data.gameId, index: holeIndx, uid: app.globalData.userInfo.id,
         players: user
       },
       msg: "加载中...",
@@ -193,7 +199,10 @@ Page({
           rules: res.data
         });
         if (that.data.rules.length>0){
-          this.getGameScore();
+          that.setData({
+            ruleIdx:0
+          })
+          that.getGameScore();
         }
       }
     }, false);
