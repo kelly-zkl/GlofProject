@@ -20,7 +20,7 @@
               <view class="tui-number-group">
                 <view class="tui-number-cell" bindtap="nextNum" disabled='{{disabled1}}'>-</view>
                 <input class="tui-number-cell in" type="number" value='{{number1}}' bindblur='numberChange'
-                  data-min="1" data-max="100"></input>
+                  data-min="1" data-max="100" disabled="{{gameId!=1}}"></input>
                 <view class="tui-number-cell" bindtap="prevNum" disabled='{{disabled2}}'>+</view>
               </view>
             </view>

@@ -71,7 +71,7 @@
           </view>
           <block wx:for='{{gameDetail.userEPoles[idx]}}' wx:key='*this' wx:for-item="score">
             <view class="weui-grid__label label" style='background:#fff' bindtap='togglePopup' data-idx='{{idx}}'>
-              <view class='par-score' style="{{idx%10!=9?score-item.par<=-3?'background:#f60':score-item.par==-2?'background:#f90':score-item.par==-1?'background:#fc0':score-item.par==1?'background:#6CF':score-item.par==2?'background:#69F':score-item.par>=3?'background:#66F':'':'background: #fff;color:#333'}}">
+              <view class="bogey-score {{idx%10!=9?score!=0?score-item.par<=-2?'eagle-score':score-item.par==-1?'bird-score':score-item.par==0?'zero-score':score-item.par>=2?'dbogey-score':'':'zero-score':'hole-9'}}">
                   {{parType==0?score:score-item.par}}</view>
             </view>
           </block>

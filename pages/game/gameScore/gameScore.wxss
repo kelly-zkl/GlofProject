@@ -173,14 +173,30 @@ page{
 }
 
 /** 老鹰、小鸟、柏忌*/
-.par-score{
+.bogey-score{
   width: 70%;
   height: 24px;
   line-height: 24px;
   color: #fff;
   text-align: center;
   border-radius: 4px;
-  background: #ccc;
+  background: #0070AD;
   margin: 8px 15%;
   font-size: 14px
+}
+.eagle-score{
+  background: #D89B02
+}
+.bird-score{
+  background: #B3291F
+}
+.dbogey-score{
+  background: #101614
+}
+.hole-9{
+  background: transparent;
+}
+.zero-score{
+  background: transparent;
+  color: #333
 }
