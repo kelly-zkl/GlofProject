@@ -17,9 +17,9 @@ Page({
     totalPage:1
   },
   onLoad: function (options) {
-    wx.showTabBarRedDot({
-      index: 2
-    })
+    // wx.showTabBarRedDot({
+    //   index: 2
+    // })
     var that = this;
     that.setData({
       sliderLeft: app.globalData.sliderLeft,

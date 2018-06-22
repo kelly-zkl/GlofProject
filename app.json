@@ -45,7 +45,7 @@
     "pages/court/courtRecords/courtRecords",
     "pages/court/courtDetail/courtDetail",
     "pages/coach/coachs/coachs",
-	  "pages/coach/coachApply/coachApply",
+	"pages/coach/coachApply/coachApply",
     "pages/userMsg/feedBack/feedBack",
     "pages/team/systemMsg/systemMsg",
     "pages/team/teamMsg/teamMsg",
