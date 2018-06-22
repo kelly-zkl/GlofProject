@@ -180,15 +180,15 @@ page{
   color: #fff;
   text-align: center;
   border-radius: 4px;
-  background: #0070AD;
+  background: #006EAB;
   margin: 8px 15%;
   font-size: 14px
 }
 .eagle-score{
-  background: #D89B02
+  background: #F39B3A
 }
 .bird-score{
-  background: #B3291F
+  background: #CD3029
 }
 .dbogey-score{
   background: #101614

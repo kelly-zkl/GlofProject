@@ -157,21 +157,22 @@
   color: #fff;
   text-align: center;
   border-radius: 4px;
-  background: #0070AD;
+  background: #006EAB;
   margin: 18px 15%;
   font-size: 14px
 }
 .eagle-score{
-  background: #D89B02
+  background: #F39B3A
 }
 .bird-score{
-  background: #B3291F
+  background: #CD3029
 }
 .dbogey-score{
   background: #101614
 }
 .hole-9{
   background: transparent;
+  color: #333
 }
 .zero-score{
   background: transparent;
