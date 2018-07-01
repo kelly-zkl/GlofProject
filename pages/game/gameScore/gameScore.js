@@ -25,7 +25,7 @@ Page({
     scrowHeight:0,
     ruleIdx:0,
     rules:[],
-    parType:0
+    parType:1
   },
 
   /**
@@ -77,20 +77,28 @@ Page({
   //选择洞
   holeChange: function (e) {
     console.log(e);
+    var index = e.currentTarget.dataset.id;
+    var num = this.data.gameDetail.zones1[index].par;
     this.setData({
-      activeHole: e.currentTarget.dataset.id
+      activeHole: index,
+      parNum: num
     });
   },
   //设置分数
   togglePopup(e) {
-    console.log(e);
     var index = e.currentTarget.dataset.idx;
-    if (this.data.gameDetail.stat == 2 && index % 10 != 9) {
-      if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
-        this.setData({
-          showPopup: !this.data.showPopup,
-          activeHole: index
-        });
+    this.setData({
+      showPopup: index % 10 != 9?!this.data.showPopup:false
+    })
+    if (this.data.showPopup && index % 10 != 9){
+      var num = this.data.gameDetail.zones1[index].par;
+      if (this.data.gameDetail.stat == 2 && index % 10 != 9) {
+        if (this.data.gameDetail.joined == 1 || this.data.caddie) {//参赛this.data.gameDetail.stat==2&&
+          this.setData({
+            activeHole: index,
+            parNum: num
+          });
+        }
       }
     }
     // else {//未关注、未参赛
@@ -103,38 +111,56 @@ Page({
     var that = this;
     var id = e.currentTarget.id;
   },
+  //前一洞
+  preHole:function(){
+    var holeIndx = this.data.activeHole != 0 ? this.data.activeHole == 10 ? this.data.activeHole - 2 : this.data.activeHole - 1 : this.data.activeHole;
+    var num = this.data.gameDetail.zones1[holeIndx].par;
+    this.setData({
+      activeHole: holeIndx,
+      parNum: num
+    });
+  },
+  //后一洞
+  nextHole:function(){
+    var holeIndx = this.data.activeHole < 18 ? this.data.activeHole == 8 ? this.data.activeHole + 2 : this.data.activeHole + 1 : this.data.activeHole;
+    var num = this.data.gameDetail.zones1[holeIndx].par;
+    this.setData({
+      activeHole: holeIndx,
+      parNum: num
+    });
+  },
   //分数
   prevNum(e) {//加1
-    var num = e.currentTarget.dataset.num;
+    var num = (e.currentTarget.dataset.num + this.data.parNum);
     var idx = e.currentTarget.dataset.idx;
     num = (num >= 100 ? num : num + 1);
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
       gameDetail: this.data.gameDetail,
-      disabled1: num !== 0 ? false : true,
-      disabled2: num !== 100 ? false : true
+      disabled1: num >0 ? false : true,
+      disabled2: num < 100 ? false : true
     });
   },
   nextNum(e) {//减1
-    var num = e.currentTarget.dataset.num;
+    var num = (e.currentTarget.dataset.num + this.data.parNum);
     var idx = e.currentTarget.dataset.idx;
     num = (num <= 0 ? num : num - 1);
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
       gameDetail: this.data.gameDetail,
-      disabled1: num !== 0 ? false : true,
-      disabled2: num !== 100 ? false : true
+      disabled1: num > 0 ? false : true,
+      disabled2: num < 100 ? false : true
     });
   },
   numberChange: function (e) {//输入框
-    var num = e.detail.value;
+    var num = (parseInt(e.detail.value) + this.data.parNum);
     var idx = e.currentTarget.dataset.idx;
     num = (parseInt(num) >= 100 ? 100 : parseInt(num) <= 0 ? 0 : parseInt(num));
     this.data.gameDetail.userEPoles[this.data.activeHole][idx] = num;
     this.setData({
       gameDetail: this.data.gameDetail,
-      disabled1: num !== 0 ? false : true,
-      disabled2: num !== 100 ? false : true
+      disabled1: num > 0 ? false : true,
+      disabled2: num < 100 ? false : true
     });
   },
   //保存设置的分数
@@ -143,7 +169,7 @@ Page({
     var holeIndx = that.data.activeHole < 9 ? that.data.activeHole : that.data.activeHole - 1;
     var user = [];
     that.data.gameDetail.players.map(function (item, index) {
-      var num = { userId: item.userId, pole: that.data.gameDetail.userEPoles[that.data.activeHole][index] };
+      var num = {userId: item.userId, pole: that.data.gameDetail.userEPoles[that.data.activeHole][index]};
       user.push(num);
     })
     http.postRequest({

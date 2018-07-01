@@ -250,11 +250,14 @@ Page({
   //创建回复
   createReply:function(e){
     var that = this;
+    that.setData({
+      content: e.detail.value
+    })
     if (e.detail.value.length > 0){
       http.postRequest({
         url: "replyPost/create",
         params: {
-          userPostId: that.data.userPostId, uid: app.globalData.userInfo.id, content: e.detail.value,
+          userPostId: that.data.userPostId, uid: app.globalData.userInfo.id, content: that.data.content,
           beReplyPostId: that.data.beReplyPostId
         },
         msg: "操作中...",
@@ -267,11 +270,13 @@ Page({
       }, true);
     }
     that.setData({
+      content: "",
       showReply: false
     });
   },
   toggleReply() {
     this.setData({
+      content: "",
       showReply: !this.data.showReply
     });
   },

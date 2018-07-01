@@ -351,7 +351,8 @@
     <view class="zan-popup__container">
       <view class="weui-cell weui-cell_input text-size-14">
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入回复内容" bindconfirm="createReply"/>
+          <input class="weui-input" placeholder="请输入回复内容" bindconfirm="createReply" value='{{content}}'
+          confirm-type="send"/>
         </view>
       </view>
     </view>

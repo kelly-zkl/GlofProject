@@ -3,7 +3,7 @@
     <view class="weui-panel weui-panel_access" wx:if="{{msg.length > 0}}">
       <view class="weui-panel__bd" wx:for="{{msg}}" wx:key="*this">
         <view class="weui-media-box weui-media-box_appmsg" style='border-bottom: 10px #e5e5e5 solid'
-           bindlongtap='deleteMsg' id="{{item.messageId}}">
+           bindtap='deleteMsg' id="{{item.messageId}}">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.sender==10000?'../../../images/icon_system.png':item.avatarUrl?item.avatarUrl:'../../../images/icon_user.png'}}"/>
           </view>

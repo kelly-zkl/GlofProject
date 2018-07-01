@@ -27,6 +27,25 @@
 .weui-grid__icon.s{display:block;width:30px;height:30px;margin:0 auto;padding-top: 5px;border-radius: 0}
 .text-size-12{font-size: 12px;color: #888;text-align: center;margin: 0;padding:0}
 
+/**记分标题*/
+.par-title{
+  height: 85rpx;
+  line-height: 85rpx;
+  background: #66CC99;
+  border-radius: 0 0 85rpx 85rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #fff;
+}
+.left.weui-cell__ft_in-access,.right.weui-cell__ft_in-access{
+  padding: 0;
+  width: 50px;
+}
+.weui-cell__ft_in-access:after{content:" ";display:inline-block;height:12px;width:12px;border-width:0 0 2px 2px;border-color:#c8c8cd;border-style:solid;-webkit-transform:matrix(.71,.71,-.71,.71,0,0);transform:matrix(.71,.71,-.71,.71,0,0);position:relative;top:-2px;position:absolute;top:50%;margin-top:-4px;left:50%;margin-left:-4px}
+.right.weui-cell__ft_in-access:after{
+  border-width:2px 2px 0 0
+}
+
 /**球童*/
 .view-cadd{
   margin: 20px 30px 30px 30px;

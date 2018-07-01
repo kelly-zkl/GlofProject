@@ -25,3 +25,12 @@
   font-size: 16px;
   padding: 25rpx 0
 }
+
+.weui-media-box__desc{
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+}
