@@ -24,35 +24,35 @@ Page({
     });
     that.setData({
       rules: [{
-        url: '../../../images/pic_160.png', name: '比杆',
+        url: '../../../images/icon_rod.png', name: '比杆',
         path: '/pages/rules/rodRule/rodRule?id=' + that.data.gameId, show: true
       },
       {
-        url: '../../../images/pic_160.png', name: '比洞',
+        url: '../../../images/icon_hole.png', name: '比洞',
         path: '/pages/rules/holeRule/holeRule?id=' + that.data.gameId, show: true
       },
       {
-        url: '../../../images/pic_160.png', name: '斗地主',
+        url: '../../../images/icon_landlord.png', name: '斗地主',
         path: '/pages/rules/doudeRule/doudeRule?id=' + that.data.gameId, show: false
       },
       {
-        url: '../../../images/pic_160.png', name: '斗地主（3+1）',
+        url: '../../../images/icon_landlord4.png', name: '斗地主（3+1）',
         path: '/pages/rules/doude3Rule/doude3Rule?id=' + that.data.gameId, show: true
       },
       {
-        url: '../../../images/pic_160.png', name: '拉斯',
+        url: '../../../images/icon_lass.png', name: '拉斯',
         path: '/pages/rules/lassRule/lassRule?id=' + that.data.gameId, show: true
       },
       {
-        url: '../../../images/pic_160.png', name: '8421',
+        url: '../../../images/icon_8421.png', name: '8421',
         path: '/pages/rules/8421/8421?id=' + that.data.gameId, show: true
       },
       {
-        url: '../../../images/pic_160.png', name: '2分头尾肉',
+        url: '../../../images/icon_head.png', name: '2分头尾肉',
         path: '/pages/rules/divideRule/divideRule?id=' + that.data.gameId, show: true
       },
       {
-        url: '../../../images/pic_160.png', name: '打老虎',
+        url: '../../../images/icon_tiger.png', name: '打老虎',
         path: '/pages/rules/tigerRule/tigerRule?id=' + that.data.gameId, show: true
       }]
     });
