@@ -22,7 +22,8 @@ Page({
     refresh:false,
     page:1,
     size:10,
-    idx:1
+    idx:1,
+    showScore:true
   },
   onLoad: function (options) {
     var that = this;
@@ -39,7 +40,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          imageWidth: ((res.windowWidth - 86) / 3) + 'px',
+          imageWidth: ((res.windowWidth - 86) / 3) + 'px'
         });
       }
     });
@@ -118,7 +119,7 @@ Page({
   //跳转到比赛详情页
   gotoGame: function (e) {
     wx.navigateTo({
-      url: '/pages/game/gameDetail/gameDetail?id=' + e.currentTarget.id,
+      url: '/pages/game/gameDetail/gameDetail?id=' + that.data.gameId,
     })
   },
   //跳转到球队主页
@@ -354,5 +355,29 @@ Page({
         wx.showToast({ title: '分享失败', icon: 'info', duration: 1500 })
       }
     }
-  }
+  },
+
+  // 展示比赛分数
+  toggleScore:function(e){
+    this.setData({
+      showScore: !this.data.showScore,
+      gameId: e.currentTarget.id
+    })
+    if (this.data.showScore){
+      this.gameDetail();
+    }
+  },
+  //比赛详情
+  gameDetail: function () {
+    var that = this;
+    http.postRequest({
+      url: "match/detail",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      success: res => {
+        that.setData({
+          gameDetail: res.data
+        });
+      }
+    }, false);
+  },
 })

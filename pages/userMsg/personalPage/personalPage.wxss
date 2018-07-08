@@ -110,3 +110,43 @@
   padding-right: 10rpx;
   margin-left: 20rpx;
 }
+
+.zan-popup__container{
+  border-radius: 8px;
+  width: 95%;
+  background: #F0EFF4
+}
+.score-img{
+  width:180rpx;
+  height:180rpx;
+  border:10rpx #F0EFF4 solid;
+  margin-top:-100rpx;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/** 老鹰、小鸟、柏忌*/
+.bogey-score{
+  width: 86%;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 6rpx;
+  background: #006EAB;
+  margin: 5rpx 7%;
+  font-size: 14px
+}
+.eagle-score{
+  background: #F39B3A
+}
+.bird-score{
+  background: #CD3029
+}
+.dbogey-score{
+  background: #101614
+}
+.zero-score{
+  background: transparent;
+  color: #333
+}

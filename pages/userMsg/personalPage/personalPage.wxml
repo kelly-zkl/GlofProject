@@ -90,7 +90,7 @@
                 bindtap="gotoTeam" id="{{item.groupId}}">{{"#"+item.groupName+"# "}}
               </view>
               <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
-                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
+                wx:for="{{item.relates}}" wx:for-item="game" bindtap="toggleScore" id="{{game.relateId}}"
                 wx:key="*this">{{"#"+game.relateName+"# "}}
               </view>
             </view>
@@ -139,6 +139,7 @@
       </view>
     </view>
   </view>
+  <!--评论  -->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showReply ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleReply"></view>
     <view class="zan-popup__container">
@@ -150,6 +151,7 @@
       </view>
     </view>
   </view>
+  <!--删除评论  -->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showDelete ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleDelete"></view>
     <view class="zan-popup__container">
@@ -161,6 +163,38 @@
         </view>
         <view class="weui-cell weui-cell_access" id="2" bindtap="deleteChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 展示分数 -->
+  <view class="zan-popup {{showScore ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleScore"></view>
+    <view class="zan-popup__container">
+      <view class='weui-flex'>
+        <view class='weui-grid__label' style='color:#FFBB00;font-size:16px;padding-left:20rpx'>总杆：120</view>
+        <view class='weui-flex__item' style='display:flex;justify-conent:center;align-items:center'>
+          <image src="../../../images/icon_user.png" class='score-img'></image>
+        </view>
+        <view class='weui-grid__label' style='color:#0078D7;font-size:16px;padding-right:20rpx'
+          bindtap='gotoGame'>进入比赛</view>
+      </view>
+      <view class='weui-flex' style='background:#fff;padding:15rpx 0;margin-top:20rpx'>
+        <view class='weui-flex__item' wx:for="012345678" wx:key="*this">
+          <view class='weui-grid__label' style='height:50rpx;margin-top:0'>{{item}}</view>
+          <view class='weui-grid__label' style='color:#999;height:50rpx;margin-top:0'>{{item}}</view>
+          <view class='weui-grid__label' style='color:#569CD6;height:60rpx;margin-top:0'>
+            <view class="bogey-score {{score!=0?score-item.par<=-2?'eagle-score':score-item.par==-1?'bird-score':score-item.par==0?'zero-score':score-item.par>=2?'dbogey-score':'':'zero-score'}}">{{item}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='weui-flex' style='background:#fff;margin:30rpx 0;padding:15rpx 0'>
+        <view class='weui-flex__item' wx:for="012345678" wx:key="*this">
+          <view class='weui-grid__label' style='height:50rpx;margin-top:0'>{{item}}</view>
+          <view class='weui-grid__label' style='color:#999;height:50rpx;margin-top:0'>{{item}}</view>
+          <view class='weui-grid__label' style='color:#569CD6;height:60rpx;margin-top:0'>
+            <view class="bogey-score {{score!=0?score-item.par<=-2?'eagle-score':score-item.par==-1?'bird-score':score-item.par==0?'zero-score':score-item.par>=2?'dbogey-score':'':'zero-score'}}">{{item}}</view>
+          </view>
         </view>
       </view>
     </view>

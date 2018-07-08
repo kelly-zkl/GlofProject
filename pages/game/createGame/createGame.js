@@ -154,17 +154,18 @@ Page({
   popuChange: function (e) {
     var that = this;
     var id = e.currentTarget.id;
+    var num = (that.data.number1 - that.data.chooseMembers.length);
     if (id == 1) {//同队球友
       wx.navigateTo({
-        url: '/pages/choose/chooseTeam/chooseTeam?type=2'
+        url: '/pages/choose/chooseTeam/chooseTeam?type=2&num=' + num
       })
     } else if (id == 2) {//我关注的球友
       wx.navigateTo({
-        url: '/pages/choose/followMember/followMember?type=2'
+        url: '/pages/choose/followMember/followMember?type=2&num=' + num
       })
     } else if (id == 3) {//历史同赛的队友
       wx.navigateTo({
-        url: '/pages/choose/gameMember/gameMember'
+        url: '/pages/choose/gameMember/gameMember?num=' + num
       })
     } else if (id == 4) {//邀请通讯录
       wx.navigateTo({

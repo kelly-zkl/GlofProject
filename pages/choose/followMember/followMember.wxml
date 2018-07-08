@@ -3,7 +3,7 @@
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd" wx:for="{{members}}" wx:key="*this">
         <view class="weui-media-box weui-media-box_appmsg line" bindtap="bindCheckbox" data-index="{{index}}"
-          style='background:#fff;border-bottom:1rpx solid #e5e5e5'>
+          style='background:#fff;border-bottom:1rpx solid #e5e5e5' wx:if="{{uid!=item.id}}">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="{{item.avatarUrl}}"/>
           </view>

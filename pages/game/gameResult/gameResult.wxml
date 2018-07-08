@@ -1,5 +1,5 @@
 <view class="page">
-  <view class="page__bd" style='margin-bottom:20px'>
+  <view class="page__bd" style="{{activeIndex==0?'padding-bottom:80px':'padding-bottom:20px'}}">
     <view class="weui-tab">
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
@@ -130,6 +130,10 @@
           </block>
         </view>
       </view>
+    </view>
+    <view class="weui-footer weui-footer_fixed-bottom" style="padding:30rpx;background:#fff;border-top:1rpx #e5e5e5 solid"
+      wx:if="{{activeIndex==0}}">
+      <button class="weui-btn" type="primary" style="background:#66CC99" bindtap='gotoMembers'>+球友对比</button>
     </view>
   </view>
 </view>

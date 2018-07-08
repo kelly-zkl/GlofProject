@@ -14,13 +14,18 @@ Page({
     members: [],
     selectedAllStatus: false,
     page:1,
-    refresh:false
+    refresh:false,
+    uid: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({ 
+      uid: app.globalData.userInfo.id,
+      num: options.num
+    });
     this.getGames();
   },
   //赛事列表
@@ -147,11 +152,15 @@ Page({
     })
 
     //直接调用上2个页面的setData()方法，把数据存到上2个页面中去
-    prevPage.setData({
-      chooseMembers: prevPage.data.chooseMembers.concat(memArr)
-    })
-    prevPage.addMembers();
-    wx.navigateBack()
+    if (memArr.length <= this.data.num) {
+      prevPage.setData({
+        chooseMembers: prevPage.data.chooseMembers.concat(memArr)
+      })
+      prevPage.addMembers();
+      wx.navigateBack()
+    } else {
+      wx.showToast({ title: '不能超过' + this.data.num+'个人', icon: 'none', duration: 1500 });
+    }
   },
   /**
    * 下拉刷新

@@ -21,7 +21,8 @@ Page({
   onLoad: function (options) {
     this.getTeams();
     this.setData({
-      pageNum: options.type
+      pageNum: options.type,
+      num: options.num
     })
   },
 
@@ -69,7 +70,7 @@ Page({
       wx.navigateBack()
     }else{//球友
       wx:wx.navigateTo({
-        url: '/pages/choose/teamMember/teamMember?id=' + e.currentTarget.id
+        url: '/pages/choose/teamMember/teamMember?id=' + e.currentTarget.id + "&num=" + this.data.num
       })
     }
   },

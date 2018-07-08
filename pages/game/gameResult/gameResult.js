@@ -20,7 +20,8 @@ Page({
     otherData:[],
     otherArr:{},
     poleTime:[],
-    poleData:[]
+    poleData:[],
+    chooseMembers: []
   },
   onLoad: function () {
     var that = this;
@@ -33,6 +34,10 @@ Page({
         });
       }
     });
+
+    that.setData({
+      chooseMembers: [app.globalData.userInfo]
+    })
 
     that.getTotalData();
     that.getOtherData();
@@ -260,4 +265,27 @@ Page({
       }
     }, false);
   },
+  //选择对比成员
+  addMembers: function () {
+    var arr = this.data.chooseMembers;
+    var newArr = [];
+    for (let i = 0, len = arr.length; i < len; i++) {
+      for (let j = i + 1; j < len; j++) {
+        // 如果重复，则i向前推进，但不管重复项
+        if (arr[i].id == arr[j].id) j = ++i
+      }
+      // 将没有重复项的推入到新数组
+      newArr.push(arr[i])
+    }
+    this.setData({
+      chooseMembers: newArr
+    })
+    console.log(this.data.chooseMembers);
+  },
+  // 添加我关注的球友对比成绩
+  gotoMembers:function(){
+    wx.navigateTo({
+      url: '/pages/choose/followMember/followMember?type=2&num=3'
+    })
+  }
 });
