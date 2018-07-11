@@ -150,3 +150,11 @@
   background: transparent;
   color: #333
 }
+
+/*  */
+.weui-grid__label.game{
+  color:#2C7AD6;
+  text-align:left;
+  display: inline-block;
+  width: auto
+}

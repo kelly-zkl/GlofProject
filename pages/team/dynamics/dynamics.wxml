@@ -14,7 +14,7 @@
       </view>
     </view>
     <view wx:for="{{dynamics}}" wx:key="*this" wx:for-item="item">
-      <view class="weui-panel weui-panel_access d1" style="padding:30rpx;margin-top:1rpx">
+      <view class="weui-panel weui-panel_access d1" style="padding:30rpx;padding-bottom:1rpx">
         <view class="weui-panel__bd d1">
           <view class="weui-media-box weui-media-box_appmsg d1"  style="padding:0">
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg d1">
@@ -47,8 +47,8 @@
               <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.groupId}}"
                 bindtap="gotoTeam" id="{{item.groupId}}">{{"#"+item.groupName+"# "}}
               </view>
-              <view class="weui-grid__label" style="color:#2C7AD6;text-align:left" wx:if="{{item.relates.length>0}}"
-                wx:for="{{item.relates}}" wx:for-item="game" bindtap="gotoGame" id="{{game.relateId}}"
+              <view class="weui-grid__label game" wx:if="{{item.relates.length>0}}" wx:for="{{item.relates}}"
+                wx:for-item="game" bindtap="toggleScore" id="{{game.relateId}}" data-uid="{{item.creatorId}}"
                 wx:key="*this">{{"#"+game.relateName+"# "}}
               </view>
             </view>
@@ -69,7 +69,7 @@
                 catchtap="gotoPer" id="{{reply.beReplyPostCreatorId}}">
                 {{reply.beReplyPostCreatorName}}
               </view>
-              <view class="text-size-13 reply">{{"："+reply.content}}</view>
+              <view class="text-size-13 reply">{{"： "+reply.content}}</view>
             </view>
           </view>
           <view class="weui-flex" style="background:#fff;padding-top:20rpx">
@@ -97,16 +97,19 @@
       </view>
     </view>
   </view>
+  <!--评论  -->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showReply ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleReply"></view>
     <view class="zan-popup__container">
       <view class="weui-cell weui-cell_input text-size-14">
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入回复内容" bindconfirm="createReply" value='{{content}}'/>
+          <input class="weui-input" placeholder="请输入回复内容" confirm-type="send" value='{{content}}'
+          bindconfirm="createReply"/>
         </view>
       </view>
     </view>
   </view>
+  <!--删除评论  -->
   <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showDelete ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleDelete"></view>
     <view class="zan-popup__container">
@@ -118,6 +121,39 @@
         </view>
         <view class="weui-cell weui-cell_access" id="2" bindtap="deleteChange">
           <view class="weui-cell__bd weui-cell_primary" style="text-align:center;padding:20rpx">取消</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 展示分数 -->
+  <view class="zan-popup {{showScore ? 'zan-popup--show' : ''}}">
+    <view class="zan-popup__mask" bindtap="toggleScore"></view>
+    <view class="zan-popup__container">
+      <view class='weui-flex'>
+        <view class='weui-grid__label' style='color:#FFBB00;font-size:16px;padding-left:20rpx'>总杆：{{gameDetail.tPole}}</view>
+        <view class='weui-flex__item' style='display:flex;justify-conent:center;align-items:center'>
+          <image src="{{gameDetail.avatarUrl?gameDetail.avatarUrl:'../../../images/icon_user.png'}}" class='score-img'></image>
+        </view>
+        <view class='weui-grid__label' style='color:#0078D7;font-size:16px;padding-right:20rpx'
+          bindtap='gotoGame' id="{{gameDetail.matchId}}">进入比赛</view>
+      </view>
+      <view class='weui-grid__label'>{{gameDetail.name}}</view>
+      <view class='weui-flex' style='background:#fff;padding:15rpx 0;margin-top:20rpx'>
+        <view class='weui-flex__item' wx:for="{{gameDetail.userEPoles}}" wx:key="*this" wx:if="{{index<9}}">
+          <view class='weui-grid__label' style='height:50rpx;margin-top:0'>{{index+1}}</view>
+          <view class='weui-grid__label' style='color:#999;height:50rpx;margin-top:0'>{{item.par}}</view>
+          <view class='weui-grid__label' style='color:#569CD6;height:60rpx;margin-top:0'>
+            <view class="bogey-score {{item.pole!=0?item.pole-item.par<=-2?'eagle-score':item.pole-item.par==-1?'bird-score':item.pole-item.par==0?'zero-score':item.pole-item.par>=2?'dbogey-score':'':'zero-score'}}">{{item.pole!=0?item.pole-item.par:item.pole}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='weui-flex' style='background:#fff;margin:30rpx 0;padding:15rpx 0'>
+        <view class='weui-flex__item' wx:for="{{gameDetail.userEPoles}}" wx:key="*this" wx:if="{{index>8}}">
+          <view class='weui-grid__label' style='height:50rpx;margin-top:0'>{{index-8}}</view>
+          <view class='weui-grid__label' style='color:#999;height:50rpx;margin-top:0'>{{item.par}}</view>
+          <view class='weui-grid__label' style='color:#569CD6;height:60rpx;margin-top:0'>
+            <view class="bogey-score {{item.pole!=0?item.pole-item.par<=-2?'eagle-score':item.pole-item.par==-1?'bird-score':item.pole-item.par==0?'zero-score':item.pole-item.par>=2?'dbogey-score':'':'zero-score'}}">{{item.pole!=0?item.pole-item.par:item.pole}}</view>
+          </view>
         </view>
       </view>
     </view>

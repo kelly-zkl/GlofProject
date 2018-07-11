@@ -7,6 +7,7 @@ Page({
   data: {
     showReply: false,
     showDelete: false,
+	showScore:false,
     dynamics: [],
     imageWidth: '0px',
     refresh: false,
@@ -88,10 +89,14 @@ Page({
   },
   //跳转到比赛详情页
   gotoGame: function (e) {
+    this.setData({
+      showScore: false
+    })
     wx.navigateTo({
       url: '/pages/game/gameDetail/gameDetail?id=' + e.currentTarget.id,
     })
   },
+  
   //跳转到球队主页
   gotoTeam: function (e) {
     wx.navigateTo({
@@ -236,6 +241,30 @@ Page({
           page: 1
         });
         this.getDynamics();
+      }
+    }, false);
+  },
+  // 展示比赛分数
+  toggleScore:function(e){
+    this.setData({
+      showScore: !this.data.showScore,
+      gameId: e.currentTarget.id,
+      guserId:e.currentTarget.dataset.uid
+    })
+    if (this.data.showScore){
+      this.gameDetail();
+    }
+  },
+  //比赛详情
+  gameDetail: function () {
+    var that = this;
+    http.postRequest({
+      url: "userMatch/gradle",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, userId: this.data.guserId },
+      success: res => {
+        that.setData({
+          gameDetail: res.data
+        });
       }
     }, false);
   },

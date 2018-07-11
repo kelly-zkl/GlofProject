@@ -59,21 +59,31 @@ Page({
   //三/四/五杆洞
   holeChange:function(e){
     var num = e.currentTarget.dataset.id;
+    var data = [];
     this.setData({
       holeType: e.currentTarget.dataset.id,
       holeTitle:this.data.titles[num]
     })
     if (num == 0) {//三杆洞
+      (this.data.poleArr).map(function (item) {
+        data.push({ name: item.name, data: item.x3})
+      });
       this.setData({
-        poleData: this.data.poleArr.x3
+        poleData: data
       })
     } else if (num == 1) {//四杆洞
+      (this.data.poleArr).map(function (item) {
+        data.push({ name: item.name, data: item.x4})
+      });
       this.setData({
-        poleData: this.data.poleArr.x4
+        poleData: data
       })
     } else {//五杆洞
+      (this.data.poleArr).map(function (item) {
+        data.push({ name: item.name, data: item.x5})
+      });
       this.setData({
-        poleData: this.data.poleArr.x5
+        poleData: data
       })
     }
     
@@ -87,8 +97,12 @@ Page({
       scoreType: e.currentTarget.id
     })
     var num = ''+(e.currentTarget.id-2)+'';
+    var data = [];
+    (this.data.otherArr).map(function (item) {
+      data.push({ name: item.name, data: item[num]})
+    });
     this.setData({
-      otherData: this.data.otherArr[num]
+      otherData: data
     })
     if (this.data.otherTime.length > 0) {
       this.typesCharts();
@@ -99,29 +113,21 @@ Page({
     var that = this;
     new wxCharts({
       canvasId: 'totalCanvas',
-      legend:false,
       type: 'line',
       extra: {
         lineStyle: 'curve'
       },
       categories: that.data.totalTime,
-      series: [{
-        name: ' ',
-        color: '#66CC99',
-        data: that.data.totalData,
-        format: function (val) {
-          return val.toFixed(2);
-        }
-      }],
+      series: that.data.totalData,
       yAxis: {
         format: function (val) {
           return val.toFixed(2);
         },
         min: 0
       },
-      // xAxis:{
-      //   disableGrid: true,
-      // },
+      xAxis:{
+        disableGrid: true,
+      },
       width: this.data.chartWidth,
       height: 200
     });
@@ -132,29 +138,21 @@ Page({
     var that = this;
     new wxCharts({
       canvasId: 'typeCanvas',
-      legend: false,
       type: 'line',
       extra: {
         lineStyle: 'curve'
       },
       categories: that.data.otherTime,
-      series: [{
-        name: ' ',
-        color: '#66CC99',
-        data: that.data.otherData,
-        format: function (val) {
-          return val.toFixed(2);
-        }
-      }],
+      series: that.data.otherData,
       yAxis: {
         format: function (val) {
           return val.toFixed(2);
         },
         min: 0
       },
-      // xAxis: {
-      //   disableGrid: true,
-      // },
+      xAxis: {
+        disableGrid: true,
+      },
       width: this.data.chartWidth,
       height: 200
     });
@@ -164,29 +162,21 @@ Page({
     var that = this;
     new wxCharts({
       canvasId: 'holeCanvas',
-      legend: false,
       type: 'line',
       extra: {
         lineStyle: 'curve'
       },
       categories: that.data.poleTime,
-      series: [{
-        name: ' ',
-        color: '#66CC99',
-        data: that.data.poleData,
-        format: function (val) {
-          return val.toFixed(2);
-        }
-      }],
+      series: that.data.poleData,
       yAxis: {
         format: function (val) {
           return val.toFixed(2);
         },
         min: 0
       },
-      // xAxis: {
-      //   disableGrid: true,
-      // },
+      xAxis: {
+        disableGrid: true,
+      },
       width: this.data.chartWidth,
       height: 200
     });
@@ -209,15 +199,24 @@ Page({
   //总杆数据
   getTotalData:function(){
     var that = this;
+    var playerPoles = [];
+    (that.data.chooseMembers).map(function (item, idx) {
+      playerPoles[idx] = item.id;
+    })
     http.postRequest({
       url: "userMatch/gradle/total",
-      params: {uid: app.globalData.userInfo.id},
+      params: { uid: app.globalData.userInfo.id, userIds: playerPoles},
       msg: "加载中....",
       success: res => {
         wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        var data = [];
+        (res.data).map(function (item) {
+          data.push({ name: item.name, data: item.pole})
+        });
+
         that.setData({
-          totalTime:res.data.time,
-          totalData: res.data.pole
+          totalTime:res.data[0].time,
+          totalData: data
         })
         if (that.data.totalTime.length >0){
           that.totalCharts();
@@ -228,15 +227,23 @@ Page({
   //各项指标
   getOtherData: function () {
     var that = this;
+    var playerPoles = [];
+    (that.data.chooseMembers).map(function (item, idx) {
+      playerPoles[idx] = item.id;
+    })
     http.postRequest({
       url: "userMatch/gradle/various",
-      params: { uid: app.globalData.userInfo.id },
+      params: { uid: app.globalData.userInfo.id, userIds: playerPoles },
       msg: "加载中....",
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        var data = [];
+        (res.data).map(function (item) {
+          data.push({ name: item.name, data: item['-2']})
+        });
         that.setData({
-          otherTime: res.data.time,
-          otherData: res.data['-2'],
+          otherTime: res.data[0].time,
+          otherData: data,
           otherArr:res.data
         })
         if (that.data.otherTime.length > 0) {
@@ -248,15 +255,23 @@ Page({
   //三/四/五杆
   getPoleData: function () {
     var that = this;
+    var playerPoles = [];
+    (that.data.chooseMembers).map(function (item, idx) {
+      playerPoles[idx] = item.id;
+    })
     http.postRequest({
       url: "userMatch/gradle/pole",
-      params: { uid: app.globalData.userInfo.id },
+      params: { uid: app.globalData.userInfo.id, userIds: playerPoles },
       msg: "加载中....",
       success: res => {
         // wx.showToast({ title: '加载成功', icon: 'info', duration: 1500 });
+        var data = [];
+        (res.data).map(function (item) {
+          data.push({ name: item.name, data: item.x3})
+        });
         that.setData({
-          poleTime: res.data.time,
-          poleData: res.data.x3,
+          poleTime: res.data[0].time,
+          poleData: data,
           poleArr: res.data
         })
         if (that.data.poleTime.length > 0) {
@@ -280,12 +295,17 @@ Page({
     this.setData({
       chooseMembers: newArr
     })
-    console.log(this.data.chooseMembers);
+    this.getTotalData();
+    this.getOtherData();
+    this.getPoleData();
   },
   // 添加我关注的球友对比成绩
   gotoMembers:function(){
+    this.setData({
+      chooseMembers: [app.globalData.userInfo]
+    })
     wx.navigateTo({
-      url: '/pages/choose/followMember/followMember?type=2&num=3'
+      url: '/pages/choose/followMember/followMember?type=2&num=' + (4-this.data.chooseMembers.length)
     })
   }
 });

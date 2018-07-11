@@ -18,6 +18,7 @@ Page({
     showRefer:false,
     showSync:false,
     showPage:false,
+	showScore:false,
     dynamics: [],
     imageWidth: '0px',
     page: 1,
@@ -141,6 +142,9 @@ Page({
   },
   //跳转到发动态页面
   gotoPost: function () {
+    this.setData({
+      showScore: false
+    })
     wx.navigateTo({
       url: '/pages/userMsg/sendDynamic/sendDynamic?type=group&teamId=' + this.data.team.groupId + '&teanName=' + this.data.team.groupName,
     })
@@ -644,6 +648,30 @@ Page({
         }
       }, true);
     }
+  },
+   // 展示比赛分数
+  toggleScore:function(e){
+    this.setData({
+      showScore: !this.data.showScore,
+      gameId: e.currentTarget.id,
+      guserId:e.currentTarget.dataset.uid
+    })
+    if (this.data.showScore){
+      this.gameDetail();
+    }
+  },
+  //比赛详情
+  gameDetail: function () {
+    var that = this;
+    http.postRequest({
+      url: "userMatch/gradle",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, userId: this.data.guserId },
+      success: res => {
+        that.setData({
+          gameDetail: res.data
+        });
+      }
+    }, false);
   },
   
   /**

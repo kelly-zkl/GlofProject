@@ -23,7 +23,7 @@ Page({
     page:1,
     size:10,
     idx:1,
-    showScore:true
+    showScore:false
   },
   onLoad: function (options) {
     var that = this;
@@ -118,8 +118,11 @@ Page({
   },
   //跳转到比赛详情页
   gotoGame: function (e) {
+    this.setData({
+      showScore: false
+    })
     wx.navigateTo({
-      url: '/pages/game/gameDetail/gameDetail?id=' + that.data.gameId,
+      url: '/pages/game/gameDetail/gameDetail?id=' + e.currentTarget.id,
     })
   },
   //跳转到球队主页
@@ -361,7 +364,8 @@ Page({
   toggleScore:function(e){
     this.setData({
       showScore: !this.data.showScore,
-      gameId: e.currentTarget.id
+      gameId: e.currentTarget.id,
+      guserId:e.currentTarget.dataset.uid
     })
     if (this.data.showScore){
       this.gameDetail();
@@ -371,13 +375,13 @@ Page({
   gameDetail: function () {
     var that = this;
     http.postRequest({
-      url: "match/detail",
-      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id },
+      url: "userMatch/gradle",
+      params: { matchId: that.data.gameId, uid: app.globalData.userInfo.id, userId: this.data.guserId },
       success: res => {
         that.setData({
           gameDetail: res.data
         });
       }
     }, false);
-  },
+  }
 })
