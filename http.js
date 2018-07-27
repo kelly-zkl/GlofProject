@@ -1,8 +1,8 @@
 /**
  * http请求
  * */
-const baseUrl = "https://www.yaojia.com/GlofApi/";
-// const baseUrl = "http://192.168.31.57:8080/GlofApi/";
+// const baseUrl = "https://www.yaojia.com/GlofApi/";
+const baseUrl = "http://192.168.31.57:8080/GlofApi/";
 var requestHandler = {
   url:"",
   params: {},
